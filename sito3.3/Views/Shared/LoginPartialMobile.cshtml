@@ -1,0 +1,14 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <li data-icon="false"><a data-theme="c" href="@Url.Action("Manage", "Account")"      >@User.Identity.Name </a></li>
+    <li data-icon="false"><a data-theme="c" href="@Url.Action("LogOff", "Account")"      >Log Off  </a></li>
+}
+else
+{
+     <li data-icon="false"><a data-theme="c" href="@Url.Action("Register", "Account")"   >Registrazione</a></li>
+     <li data-icon="false"><a data-theme="c" href="@Url.Action("Login", "Account")"      >Login</a></li>
+}
+
+
+
+

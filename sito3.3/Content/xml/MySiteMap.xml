@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+  Autorizzazioni:
+  0 = * = accesso pagine pubbliche
+  1 = ? = accesso pagine che necessitano di autenticazione
+-->
+
+<root >
+  <siteMap url="~/Home" title="Home" authorization="0"  hide="false">
+    <siteMapNode controller="Home"  action="Index"     url="~/Home" title="Home" authorization="0" hide="true"/>
+    <siteMapNode controller="Home"  action="Faq"       url="~/Home/Faq" title="F.A.Q." authorization="0" hide="false"/>
+    <siteMapNode controller="Home"  action="Contatti"  url="~/Home/Contatti" title="Contatti" authorization="0" hide="false"/>
+    <siteMapNode controller="Home"  action="Donazione" url="~/Home/Donazione" title="Donazione" authorization="0" hide="false"/>
+  </siteMap>
+
+
+
+
+  <siteMap DescriptionMenuTop="Immobiliare" url="~/Immobiliare" title="Ricerca" authorization="0"  hide="false">
+    <siteMapNode controller="Immobiliare" action="Index"          url="~/Immobiliare"               title="Ricerca" authorization="1" hide="true"/>
+    <siteMapNode controller="Immobiliare" action="Create"         url="~/Immobiliare/Create"        title="Nuovo annuncio" authorization="1" hide="false"/>
+    <siteMapNode controller="Immobiliare" action="MyAnnunci"      url="~/Immobiliare/MyAnnunci"     title="I miei annunci" authorization="1" hide="false"/>
+    <siteMapNode controller="Immobiliare" action="MyTrattative"   url="~/Immobiliare/MyTrattative"  title="Le mie trattative" authorization="1" hide="false"/>
+    <siteMapNode controller="Home"        action="Faq"            url="~/Home/Faq"                  title="F.A.Q." authorization="0" hide="false"/>
+    <siteMapNode controller="Home"        action="Donazione" url="~/Home/Donazione" title="Donazione" authorization="0" hide="false"/>
+    
+    <!-- 
+    
+    <siteMapNode controller="Home"        action="Donazione"      url="~/Home/Donazione"            title="Donazione" authorization="0" hide="false"/> 
+  <siteMapNode url="~/immobiliare/affitto.aspx" title="Affitto" authorization="0" hide="false"/>
+      <siteMapNode url="~/immobiliare/acquisto_vendita.aspx" title="Acquisto e vendita" authorization="0" hide="false"/>
+      <siteMapNode controller="Immobiliare" action="Index"     url="~/Immobiliare" title="Ricerca" authorization="1" hide="false"/>
+      -->
+    
+    
+    
+    <!-- -->
+    <!--
+     <siteMapNode url="~/immobiliare/ricercaAvanzata.aspx" title="Ricerca avanzata" authorization="0" hide="false"/>
+
+    <siteMapNode url="~/Immobiliare/ricercaGoogleMaps.aspx" title="Ricerca Google Maps" authorization="0" hide="false"/>
+    
+    <siteMapNode url="~/Immobiliare/reply.aspx" title="Rispondi" authorization="1" hide="true"/>
+    <siteMapNode url="~/Immobiliare/trattativa.aspx" title="Trattativa" authorization="1" hide="true"/>
+    <siteMapNode url="~/Immobiliare/NotAuthorized.aspx" title="Not Auhorized" authorization="0" hide="true"/>
+    <siteMapNode url="~/Immobiliare/NotAvailable.aspx" title="Not Available" authorization="0" hide="true"/>
+    <siteMapNode url="~/Immobiliare/confirmDelete.aspx" title="Conferma cancellazione" authorization="1" hide="true"/>
+    
+-->
+  </siteMap>
+
+
+  <!--
+    <siteMapNode DescriptionMenuTop="Top 10 province" url="~/immobiliare/province/default.aspx" title="Top 10 province" authorization="0"  hide="false">
+      <siteMapNode url="~/immobiliare/province/provincia.aspx" title="Top 10 province" authorization="0" hide="true"/>
+
+      <siteMapNode url="~/immobiliare/province/provincia.aspx?id=BG" title="Bergamo" authorization="0" hide="false"/>
+      <siteMapNode url="~/immobiliare/province/provincia.aspx?id=CA" title="Cagliari" authorization="0" hide="false"/>
+      <siteMapNode url="~/immobiliare/province/provincia.aspx?id=FI" title="Firenze" authorization="0" hide="false"/>
+      <siteMapNode url="~/immobiliare/province/provincia.aspx?id=IM" title="Imperia" authorization="0" hide="false"/>
+      <siteMapNode url="~/immobiliare/province/provincia.aspx?id=MI" title="Milano" authorization="0" hide="false"/>
+      <siteMapNode url="~/immobiliare/province/provincia.aspx?id=NA" title="Napoli" authorization="0" hide="false"/>
+      <siteMapNode url="~/immobiliare/province/provincia.aspx?id=PG" title="Perugia" authorization="0" hide="false"/>
+      <siteMapNode url="~/immobiliare/province/provincia.aspx?id=PI" title="Pisa" authorization="0" hide="false"/>
+      <siteMapNode url="~/immobiliare/province/provincia.aspx?id=RM" title="Roma" authorization="0" hide="false"/>
+      <siteMapNode url="~/immobiliare/province/provincia.aspx?id=TO" title="Torino" authorization="0" hide="false"/>
+      <siteMapNode url="~/immobiliare/province/provincia.aspx?id=TN" title="Trento" authorization="0" hide="false"/>
+
+
+    </siteMapNode>
+-->
+
+  <!-- 
+    <siteMapNode DescriptionMenuTop="Last 5 per categoria" url="~/immobiliare/categorie/default.aspx" title="Last 5" authorization="0"  hide="false">
+      <siteMapNode url="~/immobiliare/categorie/appartamento.aspx" title="Appartamento" authorization="0" hide="false"/>
+      <siteMapNode url="~/immobiliare/categorie/monolocale.aspx" title="Monolocale" authorization="0" hide="false"/>
+      <siteMapNode url="~/immobiliare/categorie/attico.aspx" title="Attico" authorization="0" hide="false"/>
+     </siteMapNode>
+
+-->
+
+  <!--
+    <siteMapNode DescriptionMenuTop="Forum"  url="~/forum/default.aspx"  title="Forum" authorization="0"  hide="False">
+        <siteMapNode url="~/forum/Acquisto.aspx" title="Acquisto" authorization="0" hide="false"/>
+      <siteMapNode url="~/forum/Affitto.aspx" title="Affitto" authorization="0" hide="false"/>
+      <siteMapNode url="~/forum/Vendita.aspx" title="Vendita" authorization="0" hide="false"/>
+   <siteMapNode url="~/forum/Supporto.aspx" title="Supporto" authorization="0" hide="false"/>
+      
+      <siteMapNode url="~/forum/reply.aspx" title="Reply" authorization="1" hide="true"/>
+      <siteMapNode url="~/forum/threadList.aspx" title="Thread List" authorization="0" hide="true"/>
+      <siteMapNode url="~/forum/thread.aspx" title="Thread" authorization="0" hide="true"/>
+    </siteMapNode>-->
+
+  <!--
+    <siteMapNode DescriptionMenuTop="Reports" url="~/reports/default.aspx"  title="Reports"   authorization="0"  hide="false">
+      <siteMapNode url="~/reports/test.aspx" title="Test" authorization="0" hide="false"/>
+      <siteMapNode url="~/reports/testIndicatori.aspx" title="Test Indicatori" authorization="0" hide="false"/>
+    </siteMapNode>
+    -->
+
+  <siteMap DescriptionMenuTop="Utente"  url="~/Account"  title="Utente" authorization="0"  hide="false">
+   
+    <siteMapNode  controller="Account"  action="Register"         url="~/Account/Register" title="Registrazione" authorization="0" hide="false"/>
+    <siteMapNode  controller="Account"  action="ChangePassword"   url="~/Account/ChangePassword" title="Modifica password" authorization="1" hide="false"/>
+    <siteMapNode  controller="Account"  action="Manage"           url="~/Account/Manage" title="Modifica profilo" authorization="1" hide="false"/>
+    <siteMapNode  controller="Account"  action="ResetPassword"    url="~/Account/ResetPassword" title="Reset password" authorization="0" hide="false"/>
+
+
+
+
+    <!--
+    <siteMapNode url="~/Utente/isStrongPassword" title="Verifica password" authorization="0" hide="true"/>
+    <siteMapNode  controller="Account"  action="Index"  url="~/Account" title="Account" authorization="0" hide="true"/>
+    <siteMapNode  controller="Account"  action="Login"  url="~/Account/Login" title="Login" authorization="0" hide="true"/>
+
+    <siteMapNode url="~/utenti/notAuthenticated.aspx" title="Login" authorization="0" hide="true"/>
+    <siteMapNode url="~/utenti/notAuthorized.aspx" title="Page not found" authorization="0" hide="true"/>
+    <siteMapNode url="~/utenti/activeAccount.aspx" title="Attivazione account" authorization="0" hide="true"/>
+    <siteMapNode url="~/utenti/confermaEmail.aspx" title="Conferma email" authorization="0" hide="true"/>
+    -->
+  </siteMap>
+
+
+
+
+
+</root>

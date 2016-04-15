@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Cerco Vendo Casa: Cerco, affitto, vendo, scambio, case, appartamenti, villa, stanza";
+    ViewBag.Description = "Cerco-vendo-casa offre la possibilità di vendere, comprare, affittare e scambiare case, ville, stanze, appartamenti, box, cantine, solo a privati ed anche ad agenzie immobiliari";
+    ViewBag.Keywords = "vendo casa, vendo appartamento, vendo immobile, cerco casa, cerco appartamento";
+
+    Layout = "~/Views/Shared/MasterPageMobile.cshtml";
+}
+
+
+<div style="float: right;">
+    <g:plusone size="medium" align="right"></g:plusone>
+</div>
+
+<h1>Benvenuto su Cerco-Vendo-Casa</h1>
+
+<div style="float: left">
+    <img src="@Url.Content("~/Content/Images/single-brick.gif")" height="150" alt="" />
+</div>
+
+<p><b>Cerco-Vendo-Casa</b> offre, a privati ed agenzie immobiliari, la possibilità di inserire annunci di vendita, affitto, acquisto e scambio di immobili in modo rapido nel pieno rispetto della tutela dei dati presentati.</p>
+
+<p>E' possibile cercare tra gli annunci e trovare l'immobile di maggior interesse utlizzando la <a href="@Url.Action("Index", "Immobiliare")">pagina di ricerca</a>.</p>
+<p>L'archivio mette a disposizione annunci provenienti da tutta Italia facilmente filtrabili per categorie, area geografica tipologia di immobile.</p>
+<p>
+    Ad ogni annuncio può essere associata una o più <b>immagini</b>
+    <img src="@Url.Content("~/Content/Images/foto.jpg")" height="40" border="0" alt="photo"/>, la geolocalizzazione su google maps
+    <img src="@Url.Content("~/Content/Images/Shared/Google-Maps.png")" height="30" border="0" alt="photo"/>
+    dell'immobile in offerta e la sua piantina per fornire agli utenti tutti gli elementi per una ricerca accurata e dettagliata.   
+</p>
+
+<br />
+<p>
+    Completando la <b><a href="@Url.Action("Register", "Account")">procedura di registrazione</a></b> gratuita si ha la possibilità di 
+inserire i propri annunci seguendo semplici istruzioni.
+</p>
+
+<p>Clicca per inserire un <a href="@Url.Action("Create", "Immobiliare")">nuovo annuncio</a>. </p>
+
+
+<p>
+    Ricerca un immobile utilizzando le potenzialià di  <a href="@Url.Action("Index", "Immobiliare")">Google Maps </a>
+    <a href="@Url.Action("Index", "Immobiliare")">
+        <img height="80" style="float: left" src="@Url.Content("~/Content/Images/Shared/Google-Maps.png")" alt="Google Maps" />
+    </a>
+</p>
+
+
+<p style="clear: both; float: none">I servizi rimangono sempre senza la presenza di intermediari.</p>
+
+
+<p>Speriamo che il servizio sia di vostro gradimento.</p>
+
+
+<p>
+    Per qualsisi segnalazione e/o consiglio vi pregiamo di scriverci al seguente indirizzo: 
+    <a href="mailto:@System.Configuration.ConfigurationManager.AppSettings["mail.webmaster"]">@System.Configuration.ConfigurationManager.AppSettings["mail.webmaster"]</a>
+</p>
+
+
+<div style="background-color: #f6e5ca; color: #e5b0af; text-align: center; word-spacing: 30px;">
+    <p>COMPRO VENDO ACQUISTO AFFITTO CERCO CASA APPARTAMENTI VILLA ATTICO STANZA</p>
+</div>
+
+
+<!-- Inserisci questo tag dopo l'ultimo tag di pulsante +1. -->
+<script type="text/javascript">
+    window.___gcfg = { lang: 'it' };
+
+    (function () {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/platform.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+</script>

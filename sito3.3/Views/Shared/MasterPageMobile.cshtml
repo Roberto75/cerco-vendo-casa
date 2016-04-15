@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta name="Description"  content="@ViewBag.Description"/>
+    <meta name="Keywords"     content="@ViewBag.Keywords"/>
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="Content-Type" content="text/html" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Pragma" content="no-cache" />
+
+    <meta http-equiv="Content-Language" content="it" />
+    <meta name="language" content="italian" />
+
+    <meta content="index,follow" name="robots" />
+
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile.structure-1.4.3.min.css" />
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/Style/themes/MyTheme.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/Style/Site.css")" />
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+    <script>
+        $(document).on("pageinit", function () {
+            $.mobile.ajaxEnabled = false;
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-18792002-2']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+</head>
+
+<body>
+    <div data-role="page" data-theme="a" class="ui-responsive-panel">
+        <div data-role="header" data-position="fixed" data-theme="none" style="background-color: white; min-height: 120px; overflow: hidden;">
+            <span>
+                <a href="@Url.Action("Index", "Home")" class="ui-btn-left" >
+                    <img  src ="@Url.Content("~/Content/Images/logo_cerco-vendo-casa.gif")"  >
+                </a>
+            </span>
+            <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+
+            <div data-role="navbar" style="padding-top: 85px" >
+                <ul>
+                    <li><a data-theme="c" href="@Url.Action("Index", "Immobiliare")"         >Ricerca</a></li>
+                    <li><a data-theme="c" href="@Url.Action("MyAnnunci", "Immobiliare")"      >I miei annunci</a></li>
+                    <li><a data-theme="c" href="@Url.Action("MyTrattative", "Immobiliare")"  >Le mie trattative</a></li>
+                    @Html.Partial("LoginPartialMobile")
+                </ul>
+            </div>
+        </div>
+        <!-- Header -->
+
+
+        <div data-role="main" class="ui-content jqm-content jqm-fullwidth" style="background-color: white;">
+            @RenderBody()
+        </div>
+        <!-- /main -->
+
+
+        <!-- panel -->
+        <div data-role="panel" data-position-fixed="true" data-display="push" data-theme="b" id="nav-panel">
+            <ul data-role="listview">
+                <li data-icon="delete"><a href="#" data-rel="close">Close menu</a></li>
+                <li data-icon="false"><a href="@Url.Action("Index", "Immobiliare")"         >Ricerca</a></li>
+                <li data-icon="false"><a href="@Url.Action("MyAnnunci", "Immobiliare")"      >I miei annunci</a></li>
+                <li data-icon="false"><a href="@Url.Action("MyTrattative", "Immobiliare")"    >Le mie trattative</a></li>
+
+                <li data-icon="false"><a href="@Url.Action("Contatti", "Home")"         >Contatti</a></li>
+                <li data-icon="false"><a href="@Url.Action("Faq", "Home")"              >F.A.Q.</a></li>
+
+                <!-- <a href="@Url.Action("Index", "Test")"               data-role="button">Test</a>-->
+                @Html.Partial("LoginPartialMobile")
+            </ul>
+        </div>
+        <!-- /panel -->
+
+
+        <div data-role="footer">
+            <div data-role="navbar">
+
+
+                @{
+                    string controller = ViewContext.RouteData.GetRequiredString("controller");
+                    string action = ViewContext.RouteData.GetRequiredString("action");
+
+                    String paginaRichiesta = Request.AppRelativeCurrentExecutionFilePath;
+
+                    if (paginaRichiesta == "~/")
+                    {
+                        paginaRichiesta = "~/Home";
+                    }
+
+
+                    String contesto = Request.ApplicationPath;
+                    if (contesto == "/")
+                    {
+                        contesto = "";
+                    }
+
+
+                    System.IO.MemoryStream risultatoMemoryStream;
+                    risultatoMemoryStream = new MemoryStream();
+
+                    System.Xml.Xsl.XslCompiledTransform xslt;
+                    xslt = new System.Xml.Xsl.XslCompiledTransform();
+                    //System.Xml.XmlReader reader = System.Xml.XmlReader.Create(System.IO.File.ReadAllText(Server.MapPath("~/Content/xsl/menuTop.xsl")));
+                    //xslt.Load(reader);
+
+                    xslt.Load(Server.MapPath("~/Content/xsl/menuLeftMySiteMap.xsl"));
+
+                    System.Xml.Xsl.XsltArgumentList args = new System.Xml.Xsl.XsltArgumentList();
+                    args.AddParam("urlCorrente", "", paginaRichiesta);
+                    args.AddParam("roles", "", "");
+                    args.AddParam("contesto", "", contesto);
+                    args.AddParam("controller", "", controller);
+                    args.AddParam("action", "", action);
+
+                    xslt.Transform(Server.MapPath("~/Content/xml/MySiteMap.xml"), args, risultatoMemoryStream);
+                    risultatoMemoryStream.Flush();
+
+
+                    string risultato;
+
+                    System.Text.Encoding encoding = System.Text.Encoding.UTF8;
+                    risultato = encoding.GetString(risultatoMemoryStream.ToArray());
+
+                    if (risultato == "<ul />")
+                    {
+                        risultato = "";
+                    }
+
+                    HtmlString risultatoHTML = new HtmlString(risultato);   
+                }
+
+                @risultatoHTML
+
+            </div>
+        </div>
+        <!-- /footer -->
+
+    </div>
+    <!-- /page -->
+</body>
+</html>

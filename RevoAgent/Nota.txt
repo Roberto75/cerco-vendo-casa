@@ -1,0 +1,13 @@
+﻿FILE XML DEMO PER IMPLEMENTAZIONE PORTALE
+http://revo1.revoagent.com/portali/revoagent.xml
+ELENCO CONTRATTI
+http://www.revoagent.com/apps/revo.aspx?tipo=contratti
+ELENCO CATEGORIE
+http://www.revoagent.com/apps/revo.aspx?tipo=categorie
+ELENCO SCHEDE DINAMICHE E RELATIVI VALORI
+http://www.revoagent.com/apps/revo.aspx?tipo=schede
+•	ponete delle limitazioni per la pubblicazione degli annunci (es: se manca la classe energetica non pubblicate o se l'immobile non ha le foto fate lo stesso)
+Al momento non ci sono limitazioni 
+•	il vs portale è gratuito o a pagamento? che tipo di contrattualizzazione proponete ai clienti?
+Il servizio è a pagamento e a tal proposito abbiamo pubblicato una pagina dedicata al servizio:
+http://www.cerco-vendo-casa.it/immobiliare/RevoAgent.aspx
