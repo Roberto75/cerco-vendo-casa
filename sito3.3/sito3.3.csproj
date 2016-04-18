@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
-  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -43,10 +41,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -57,6 +51,30 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -66,26 +84,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.Web.Razor">
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Webpages">
-      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Webpages.Deployment">
-      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Webpages.Razor">
-      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Helpers">
-      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc">
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -329,6 +329,383 @@
     <Content Include="Content\Images\sfPremi9.jpg" />
     <Content Include="Content\Images\sfPremiDx.jpg" />
     <Content Include="Content\Images\sfPremiSx.jpg" />
+    <Content Include="Content\Images\Shared\1dot.gif" />
+    <Content Include="Content\Images\Shared\3puntini.gif" />
+    <Content Include="Content\Images\Shared\4puntini.gif" />
+    <Content Include="Content\Images\Shared\account.gif" />
+    <Content Include="Content\Images\Shared\aggiorna_16x16.gif" />
+    <Content Include="Content\Images\Shared\alert.gif" />
+    <Content Include="Content\Images\Shared\alert1_16x16.gif" />
+    <Content Include="Content\Images\Shared\alert1_32x32.gif" />
+    <Content Include="Content\Images\Shared\alert1_48x48.gif" />
+    <Content Include="Content\Images\Shared\alto.gif" />
+    <Content Include="Content\Images\Shared\alto_1.gif" />
+    <Content Include="Content\Images\Shared\amber_128x128.png" />
+    <Content Include="Content\Images\Shared\amber_16x16.png" />
+    <Content Include="Content\Images\Shared\angolino_1.gif" />
+    <Content Include="Content\Images\Shared\angolino_2.gif" />
+    <Content Include="Content\Images\Shared\angolino_3.gif" />
+    <Content Include="Content\Images\Shared\angolino_4.gif" />
+    <Content Include="Content\Images\Shared\angolino_lilla.gif" />
+    <Content Include="Content\Images\Shared\angolodxdwn.gif" />
+    <Content Include="Content\Images\Shared\angolosxup.gif" />
+    <Content Include="Content\Images\Shared\Anonimo.png" />
+    <Content Include="Content\Images\Shared\apici.gif" />
+    <Content Include="Content\Images\Shared\apri_16x16.gif" />
+    <Content Include="Content\Images\Shared\AQUA ICONS SYSTEM ALERT NOTE ICON.png" />
+    <Content Include="Content\Images\Shared\arrow.gif" />
+    <Content Include="Content\Images\Shared\arrow1.gif" />
+    <Content Include="Content\Images\Shared\arrow2.gif" />
+    <Content Include="Content\Images\Shared\arrow3.gif" />
+    <Content Include="Content\Images\Shared\arrow4.gif" />
+    <Content Include="Content\Images\Shared\arrow5.gif" />
+    <Content Include="Content\Images\Shared\arrow6.gif" />
+    <Content Include="Content\Images\Shared\arrowDown.png" />
+    <Content Include="Content\Images\Shared\arrow_1_1.gif" />
+    <Content Include="Content\Images\Shared\arrow_1_1over.gif" />
+    <Content Include="Content\Images\Shared\arrow_1_2.gif" />
+    <Content Include="Content\Images\Shared\arrow_1_3.gif" />
+    <Content Include="Content\Images\Shared\arrow_1_4.gif" />
+    <Content Include="Content\Images\Shared\arrow_1_5.gif" />
+    <Content Include="Content\Images\Shared\arrow_1_6.gif" />
+    <Content Include="Content\Images\Shared\arrow_2_1.gif" />
+    <Content Include="Content\Images\Shared\at.gif" />
+    <Content Include="Content\Images\Shared\at.JPG" />
+    <Content Include="Content\Images\Shared\back_16x16.gif" />
+    <Content Include="Content\Images\Shared\basso.gif" />
+    <Content Include="Content\Images\Shared\BeOS_lock.ico" />
+    <Content Include="Content\Images\Shared\bgk1.gif" />
+    <Content Include="Content\Images\Shared\bgk2.gif" />
+    <Content Include="Content\Images\Shared\bgk3.gif" />
+    <Content Include="Content\Images\Shared\bgk4.gif" />
+    <Content Include="Content\Images\Shared\blocco.png" />
+    <Content Include="Content\Images\Shared\BLUE.png" />
+    <Content Include="Content\Images\Shared\blue1_16x16.gif" />
+    <Content Include="Content\Images\Shared\blue1_24x24.gif" />
+    <Content Include="Content\Images\Shared\blue2_16x16.png" />
+    <Content Include="Content\Images\Shared\blue2_24x24.png" />
+    <Content Include="Content\Images\Shared\box1.png" />
+    <Content Include="Content\Images\Shared\btnAnnulla.gif" />
+    <Content Include="Content\Images\Shared\btnAnnulla_old.gif" />
+    <Content Include="Content\Images\Shared\btnAvanti.gif" />
+    <Content Include="Content\Images\Shared\btnAvanti_old.gif" />
+    <Content Include="Content\Images\Shared\btnCerca.gif" />
+    <Content Include="Content\Images\Shared\btnChiudi.gif" />
+    <Content Include="Content\Images\Shared\btnClose_14x14.Image.png" />
+    <Content Include="Content\Images\Shared\btnConferma.gif" />
+    <Content Include="Content\Images\Shared\btnConferma_old.gif" />
+    <Content Include="Content\Images\Shared\btnEntra.gif" />
+    <Content Include="Content\Images\Shared\btnEntra_old.gif" />
+    <Content Include="Content\Images\Shared\btnFind150.Image.png" />
+    <Content Include="Content\Images\Shared\btnIndietro.gif" />
+    <Content Include="Content\Images\Shared\btnIndietro_old.gif" />
+    <Content Include="Content\Images\Shared\btnInizia.gif" />
+    <Content Include="Content\Images\Shared\btnInizia_old.gif" />
+    <Content Include="Content\Images\Shared\btnInvia.gif" />
+    <Content Include="Content\Images\Shared\btnLogout.gif" />
+    <Content Include="Content\Images\Shared\btnLogout2.gif" />
+    <Content Include="Content\Images\Shared\btnModifica.gif" />
+    <Content Include="Content\Images\Shared\btnOK.gif" />
+    <Content Include="Content\Images\Shared\btnPaginaRicerca.png" />
+    <Content Include="Content\Images\Shared\btnQuote.gif" />
+    <Content Include="Content\Images\Shared\btnReset150.Image.png" />
+    <Content Include="Content\Images\Shared\btnRispondi.gif" />
+    <Content Include="Content\Images\Shared\btnRispondi_old.gif" />
+    <Content Include="Content\Images\Shared\btnTrova.gif" />
+    <Content Include="Content\Images\Shared\btnTrova_old.gif" />
+    <Content Include="Content\Images\Shared\btn_donate_150wx70h.gif" />
+    <Content Include="Content\Images\Shared\bullet.gif" />
+    <Content Include="Content\Images\Shared\bullet2.gif" />
+    <Content Include="Content\Images\Shared\calendario.gif" />
+    <Content Include="Content\Images\Shared\casa16X16.gif" />
+    <Content Include="Content\Images\Shared\casa_10x10.gif" />
+    <Content Include="Content\Images\Shared\casa_14px.gif" />
+    <Content Include="Content\Images\Shared\casa_16x16.gif" />
+    <Content Include="Content\Images\Shared\cerca.gif" />
+    <Content Include="Content\Images\Shared\cerco-vendo-casa.css" />
+    <Content Include="Content\Images\Shared\certificato1.gif" />
+    <Content Include="Content\Images\Shared\check.gif" />
+    <Content Include="Content\Images\Shared\Clipper System_1 Get Info.png" />
+    <Content Include="Content\Images\Shared\Clipper System_1 User.png" />
+    <Content Include="Content\Images\Shared\Comic Icons 3 lock.png" />
+    <Content Include="Content\Images\Shared\Connecting.gif" />
+    <Content Include="Content\Images\Shared\copy_16x16.gif" />
+    <Content Include="Content\Images\Shared\copy_24x24.gif" />
+    <Content Include="Content\Images\Shared\copy_32x32.gif" />
+    <Content Include="Content\Images\Shared\dett.png" />
+    <Content Include="Content\Images\Shared\down1_16x16.png" />
+    <Content Include="Content\Images\Shared\down1_24x24.png" />
+    <Content Include="Content\Images\Shared\down1_32x32.png" />
+    <Content Include="Content\Images\Shared\down1_48x48.png" />
+    <Content Include="Content\Images\Shared\download.gif" />
+    <Content Include="Content\Images\Shared\downloaddisk.gif" />
+    <Content Include="Content\Images\Shared\download_1.gif" />
+    <Content Include="Content\Images\Shared\edit.png" />
+    <Content Include="Content\Images\Shared\edit1_16x16.png" />
+    <Content Include="Content\Images\Shared\edit1_24x24.png" />
+    <Content Include="Content\Images\Shared\edit1_32x32.png" />
+    <Content Include="Content\Images\Shared\elimina_16x16.gif" />
+    <Content Include="Content\Images\Shared\elimina_32x32.gif" />
+    <Content Include="Content\Images\Shared\elimina_icov.gif" />
+    <Content Include="Content\Images\Shared\email1_16x16.gif" />
+    <Content Include="Content\Images\Shared\email1_32x32.gif" />
+    <Content Include="Content\Images\Shared\email1_48x48.gif" />
+    <Content Include="Content\Images\Shared\empty.gif" />
+    <Content Include="Content\Images\Shared\entra.gif" />
+    <Content Include="Content\Images\Shared\error.png" />
+    <Content Include="Content\Images\Shared\error1_16x16.gif" />
+    <Content Include="Content\Images\Shared\error1_24x24.gif" />
+    <Content Include="Content\Images\Shared\error1_32x32.gif" />
+    <Content Include="Content\Images\Shared\error1_48x48.gif" />
+    <Content Include="Content\Images\Shared\euro.gif" />
+    <Content Include="Content\Images\Shared\excel.png" />
+    <Content Include="Content\Images\Shared\excel2.png" />
+    <Content Include="Content\Images\Shared\excel2_32x32.png" />
+    <Content Include="Content\Images\Shared\execbtn.png" />
+    <Content Include="Content\Images\Shared\eye1.jpg" />
+    <Content Include="Content\Images\Shared\eye2.jpg" />
+    <Content Include="Content\Images\Shared\eye3.jpg" />
+    <Content Include="Content\Images\Shared\Failed.gif" />
+    <Content Include="Content\Images\Shared\first_16x16.gif" />
+    <Content Include="Content\Images\Shared\folder1_128x128.gif" />
+    <Content Include="Content\Images\Shared\folder1_32x32.gif" />
+    <Content Include="Content\Images\Shared\folder2_128x128.gif" />
+    <Content Include="Content\Images\Shared\folder2_32x32.gif" />
+    <Content Include="Content\Images\Shared\FrecciaAllDx.gif" />
+    <Content Include="Content\Images\Shared\FrecciaAllSx.gif" />
+    <Content Include="Content\Images\Shared\frecciaBlu.gif" />
+    <Content Include="Content\Images\Shared\FrecciaDown.gif" />
+    <Content Include="Content\Images\Shared\FrecciaDx.gif" />
+    <Content Include="Content\Images\Shared\frecciaRossa.gif" />
+    <Content Include="Content\Images\Shared\FrecciaSx.gif" />
+    <Content Include="Content\Images\Shared\FrecciaUp.gif" />
+    <Content Include="Content\Images\Shared\frecciaWord.gif" />
+    <Content Include="Content\Images\Shared\getacro.gif" />
+    <Content Include="Content\Images\Shared\go.jpg" />
+    <Content Include="Content\Images\Shared\Google-Maps.png" />
+    <Content Include="Content\Images\Shared\green1_16x16.gif" />
+    <Content Include="Content\Images\Shared\green1_24x24.gif" />
+    <Content Include="Content\Images\Shared\green2_128x128.png" />
+    <Content Include="Content\Images\Shared\green2_16x16.png" />
+    <Content Include="Content\Images\Shared\helpicon.gif" />
+    <Content Include="Content\Images\Shared\home1_128x128.gif" />
+    <Content Include="Content\Images\Shared\home1_16x16.gif" />
+    <Content Include="Content\Images\Shared\home1_32x32.gif" />
+    <Content Include="Content\Images\Shared\home1_48x48.gif" />
+    <Content Include="Content\Images\Shared\home1_64x64.gif" />
+    <Content Include="Content\Images\Shared\home2_16x16.gif" />
+    <Content Include="Content\Images\Shared\home2_16x16.png" />
+    <Content Include="Content\Images\Shared\home2_24x24.png" />
+    <Content Include="Content\Images\Shared\home2_32x32.gif" />
+    <Content Include="Content\Images\Shared\home2_32x32.png" />
+    <Content Include="Content\Images\Shared\home2_48x48.gif" />
+    <Content Include="Content\Images\Shared\home2_48x48.png" />
+    <Content Include="Content\Images\Shared\ico_modificav.gif" />
+    <Content Include="Content\Images\Shared\indicator_mozilla_blu.gif" />
+    <Content Include="Content\Images\Shared\indicator_waitanim.gif" />
+    <Content Include="Content\Images\Shared\info1_16x16.gif" />
+    <Content Include="Content\Images\Shared\info1_32x32.gif" />
+    <Content Include="Content\Images\Shared\info1_48x48.gif" />
+    <Content Include="Content\Images\Shared\info2_16x16.gif" />
+    <Content Include="Content\Images\Shared\info2_32x32.gif" />
+    <Content Include="Content\Images\Shared\info2_32x32gif.gif" />
+    <Content Include="Content\Images\Shared\info2_48x48.gif" />
+    <Content Include="Content\Images\Shared\it.gif" />
+    <Content Include="Content\Images\Shared\last_16x16.gif" />
+    <Content Include="Content\Images\Shared\left.jpg" />
+    <Content Include="Content\Images\Shared\left1_32x32.gif" />
+    <Content Include="Content\Images\Shared\lente.gif" />
+    <Content Include="Content\Images\Shared\link.gif" />
+    <Content Include="Content\Images\Shared\lock1_16x16.gif" />
+    <Content Include="Content\Images\Shared\lock1_32x32.gif" />
+    <Content Include="Content\Images\Shared\lock1_64x64.gif" />
+    <Content Include="Content\Images\Shared\login.gif" />
+    <Content Include="Content\Images\Shared\logo.gif" />
+    <Content Include="Content\Images\Shared\LogoAttivo.gif" />
+    <Content Include="Content\Images\Shared\LogoInEsecuzione.gif" />
+    <Content Include="Content\Images\Shared\LogoNonAttivo.gif" />
+    <Content Include="Content\Images\Shared\medio.gif" />
+    <Content Include="Content\Images\Shared\meno.png" />
+    <Content Include="Content\Images\Shared\menu1.gif" />
+    <Content Include="Content\Images\Shared\menu2.gif" />
+    <Content Include="Content\Images\Shared\menu3.gif" />
+    <Content Include="Content\Images\Shared\modifica1_32x32.gif" />
+    <Content Include="Content\Images\Shared\modifica2_16x16.gif" />
+    <Content Include="Content\Images\Shared\modifica2_32x32.gif" />
+    <Content Include="Content\Images\Shared\news.gif" />
+    <Content Include="Content\Images\Shared\next_16x16.gif" />
+    <Content Include="Content\Images\Shared\nodi tv.png" />
+    <Content Include="Content\Images\Shared\Notepad.ico" />
+    <Content Include="Content\Images\Shared\obbligatorio.gif" />
+    <Content Include="Content\Images\Shared\ok.png" />
+    <Content Include="Content\Images\Shared\ok1_16x16.gif" />
+    <Content Include="Content\Images\Shared\ok1_32x32.gif" />
+    <Content Include="Content\Images\Shared\ok1_48x48.gif" />
+    <Content Include="Content\Images\Shared\ok2_16x16.gif" />
+    <Content Include="Content\Images\Shared\ok2_32x32.gif" />
+    <Content Include="Content\Images\Shared\ok2_48x48.gif" />
+    <Content Include="Content\Images\Shared\OlDLogoInvia.gif" />
+    <Content Include="Content\Images\Shared\onlyforweb_a1.gif" />
+    <Content Include="Content\Images\Shared\oper.png" />
+    <Content Include="Content\Images\Shared\OrgDown.gif" />
+    <Content Include="Content\Images\Shared\OrgUp.gif" />
+    <Content Include="Content\Images\Shared\password.gif" />
+    <Content Include="Content\Images\Shared\path3420.png" />
+    <Content Include="Content\Images\Shared\Pause.gif" />
+    <Content Include="Content\Images\Shared\pbNew.png" />
+    <Content Include="Content\Images\Shared\pbVuota.png" />
+    <Content Include="Content\Images\Shared\pdf1.gif" />
+    <Content Include="Content\Images\Shared\photo1_128x128.png" />
+    <Content Include="Content\Images\Shared\photo1_16x16.png" />
+    <Content Include="Content\Images\Shared\photo1_32x32.png" />
+    <Content Include="Content\Images\Shared\photo1_48x48.png" />
+    <Content Include="Content\Images\Shared\photo1_64x64.png" />
+    <Content Include="Content\Images\Shared\piu.png" />
+    <Content Include="Content\Images\Shared\pixelNero.gif" />
+    <Content Include="Content\Images\Shared\PJFOLDERS LOCKED.png" />
+    <Content Include="Content\Images\Shared\poweredByTechub.gif" />
+    <Content Include="Content\Images\Shared\printer.gif" />
+    <Content Include="Content\Images\Shared\progressbar_long.gif" />
+    <Content Include="Content\Images\Shared\progressbar_long_green.gif" />
+    <Content Include="Content\Images\Shared\prontoinvio.gif" />
+    <Content Include="Content\Images\Shared\Prorita1.gif" />
+    <Content Include="Content\Images\Shared\Prorita2.gif" />
+    <Content Include="Content\Images\Shared\Prorita3.gif" />
+    <Content Include="Content\Images\Shared\punto.gif" />
+    <Content Include="Content\Images\Shared\p_2.jpg" />
+    <Content Include="Content\Images\Shared\p_3.jpg" />
+    <Content Include="Content\Images\Shared\quadratino_grigio.gif" />
+    <Content Include="Content\Images\Shared\quadrato.gif" />
+    <Content Include="Content\Images\Shared\questionarioCompleto.gif" />
+    <Content Include="Content\Images\Shared\questionariosemi.gif" />
+    <Content Include="Content\Images\Shared\questionariovuoto.gif" />
+    <Content Include="Content\Images\Shared\question_icon_hover.gif" />
+    <Content Include="Content\Images\Shared\Ramoavantiddr.gif" />
+    <Content Include="Content\Images\Shared\RamoDown.gif" />
+    <Content Include="Content\Images\Shared\RamoDownDis.gif" />
+    <Content Include="Content\Images\Shared\Ramoindietroadr.gif" />
+    <Content Include="Content\Images\Shared\RamoUp.gif" />
+    <Content Include="Content\Images\Shared\RamoUpDis.gif" />
+    <Content Include="Content\Images\Shared\red1_16x16.gif" />
+    <Content Include="Content\Images\Shared\red1_24x24.gif" />
+    <Content Include="Content\Images\Shared\red2_128x128.png" />
+    <Content Include="Content\Images\Shared\red2_16x16.png" />
+    <Content Include="Content\Images\Shared\reload1_16x16.gif" />
+    <Content Include="Content\Images\Shared\reload1_24x24.gif" />
+    <Content Include="Content\Images\Shared\reload1_32x32.gif" />
+    <Content Include="Content\Images\Shared\reload1_48x48.gif" />
+    <Content Include="Content\Images\Shared\Report.gif" />
+    <Content Include="Content\Images\Shared\report248x48 24-bit.png" />
+    <Content Include="Content\Images\Shared\report2_16x16.gif" />
+    <Content Include="Content\Images\Shared\report2_32x32.gif" />
+    <Content Include="Content\Images\Shared\report2_48x48.gif" />
+    <Content Include="Content\Images\Shared\rep_1.jpg" />
+    <Content Include="Content\Images\Shared\rep_10.jpg" />
+    <Content Include="Content\Images\Shared\rep_12.jpg" />
+    <Content Include="Content\Images\Shared\rep_14.jpg" />
+    <Content Include="Content\Images\Shared\rep_2.jpg" />
+    <Content Include="Content\Images\Shared\rep_3.jpg" />
+    <Content Include="Content\Images\Shared\rep_4.jpg" />
+    <Content Include="Content\Images\Shared\rep_4_1.jpg" />
+    <Content Include="Content\Images\Shared\rep_4_2.jpg" />
+    <Content Include="Content\Images\Shared\rep_5.jpg" />
+    <Content Include="Content\Images\Shared\rep_6.jpg" />
+    <Content Include="Content\Images\Shared\rep_7.jpg" />
+    <Content Include="Content\Images\Shared\rep_8.jpg" />
+    <Content Include="Content\Images\Shared\rep_9.jpg" />
+    <Content Include="Content\Images\Shared\rep_left.jpg" />
+    <Content Include="Content\Images\Shared\rep_right.jpg" />
+    <Content Include="Content\Images\Shared\restart1_16x16.gif" />
+    <Content Include="Content\Images\Shared\restart1_24x24.gif" />
+    <Content Include="Content\Images\Shared\restart1_32x32.gif" />
+    <Content Include="Content\Images\Shared\restart1_48x48.gif" />
+    <Content Include="Content\Images\Shared\RichiediDettagli.gif" />
+    <Content Include="Content\Images\Shared\richiestaInviaDettagli.gif" />
+    <Content Include="Content\Images\Shared\richiestaNota.gif" />
+    <Content Include="Content\Images\Shared\richiestaStoria.gif" />
+    <Content Include="Content\Images\Shared\RifiutaForzatura.gif" />
+    <Content Include="Content\Images\Shared\right.jpg" />
+    <Content Include="Content\Images\Shared\right1_32x32.gif" />
+    <Content Include="Content\Images\Shared\rtf.png" />
+    <Content Include="Content\Images\Shared\Running.gif" />
+    <Content Include="Content\Images\Shared\salva.png" />
+    <Content Include="Content\Images\Shared\schedaRating.gif" />
+    <Content Include="Content\Images\Shared\SdiSONAR.gif" />
+    <Content Include="Content\Images\Shared\search1_16x16.gif" />
+    <Content Include="Content\Images\Shared\search1_32x32.gif" />
+    <Content Include="Content\Images\Shared\search1_48x48.gif" />
+    <Content Include="Content\Images\Shared\security1.png" />
+    <Content Include="Content\Images\Shared\security1_192x192.gif" />
+    <Content Include="Content\Images\Shared\SettDown.gif" />
+    <Content Include="Content\Images\Shared\SettUp.gif" />
+    <Content Include="Content\Images\Shared\SettUpDis.gif" />
+    <Content Include="Content\Images\Shared\sfondo.jpg" />
+    <Content Include="Content\Images\Shared\shutdown1_16x16.gif" />
+    <Content Include="Content\Images\Shared\shutdown1_24x24.gif" />
+    <Content Include="Content\Images\Shared\shutdown1_32x32.gif" />
+    <Content Include="Content\Images\Shared\shutdown1_48x48.gif" />
+    <Content Include="Content\Images\Shared\SmallCalendar.gif" />
+    <Content Include="Content\Images\Shared\sortAscending.gif" />
+    <Content Include="Content\Images\Shared\sortDescending.gif" />
+    <Content Include="Content\Images\Shared\spacer.gif" />
+    <Content Include="Content\Images\Shared\stampaOFF.gif" />
+    <Content Include="Content\Images\Shared\stampaON.gif" />
+    <Content Include="Content\Images\Shared\Stato1.gif" />
+    <Content Include="Content\Images\Shared\Stato2.gif" />
+    <Content Include="Content\Images\Shared\Stato3.gif" />
+    <Content Include="Content\Images\Shared\STOP.GIF" />
+    <Content Include="Content\Images\Shared\stop_16x16.gif" />
+    <Content Include="Content\Images\Shared\Success.gif" />
+    <Content Include="Content\Images\Shared\SYSTEM ALERT STOP.png" />
+    <Content Include="Content\Images\Shared\trash1_16x16.png" />
+    <Content Include="Content\Images\Shared\trash1_24x24.png" />
+    <Content Include="Content\Images\Shared\trash1_32x32.png" />
+    <Content Include="Content\Images\Shared\trash1_64x64.png" />
+    <Content Include="Content\Images\Shared\tsbtnCancel.png" />
+    <Content Include="Content\Images\Shared\tsbtnOk.Image.png" />
+    <Content Include="Content\Images\Shared\tsbtnOk.png" />
+    <Content Include="Content\Images\Shared\ui-anim_basic_16x16.gif" />
+    <Content Include="Content\Images\Shared\unavailable.jpg" />
+    <Content Include="Content\Images\Shared\uncheck.gif" />
+    <Content Include="Content\Images\Shared\under-construction.jpg" />
+    <Content Include="Content\Images\Shared\under_construction.gif" />
+    <Content Include="Content\Images\Shared\unknown2_24x24.gif" />
+    <Content Include="Content\Images\Shared\unknown2_32x32.gif" />
+    <Content Include="Content\Images\Shared\unlock1_16x16.gif" />
+    <Content Include="Content\Images\Shared\unlock1_32x32.gif" />
+    <Content Include="Content\Images\Shared\unlock1_48x48.gif" />
+    <Content Include="Content\Images\Shared\USEFULL BUTTONS EMPTY AQUA.png" />
+    <Content Include="Content\Images\Shared\USEFULL BUTTONS WHITE.png" />
+    <Content Include="Content\Images\Shared\User copy.bmp" />
+    <Content Include="Content\Images\Shared\User.bmp" />
+    <Content Include="Content\Images\Shared\user.png" />
+    <Content Include="Content\Images\Shared\User1.png" />
+    <Content Include="Content\Images\Shared\user1_24x24.gif" />
+    <Content Include="Content\Images\Shared\user1_24x24.png" />
+    <Content Include="Content\Images\Shared\user1_32x32.gif" />
+    <Content Include="Content\Images\Shared\user1_64x64.gif" />
+    <Content Include="Content\Images\Shared\user2_16x16.gif" />
+    <Content Include="Content\Images\Shared\user2_24x24.gif" />
+    <Content Include="Content\Images\Shared\user2_32x32.gif" />
+    <Content Include="Content\Images\Shared\userGroup1_16x16.gif" />
+    <Content Include="Content\Images\Shared\userGroup1_24x24.gif" />
+    <Content Include="Content\Images\Shared\userGroup1_32x32.gif" />
+    <Content Include="Content\Images\Shared\userGroup1_48x48.gif" />
+    <Content Include="Content\Images\Shared\Users.png" />
+    <Content Include="Content\Images\Shared\utente.gif" />
+    <Content Include="Content\Images\Shared\utenti.gif" />
+    <Content Include="Content\Images\Shared\vuota.gif" />
+    <Content Include="Content\Images\Shared\warning_16x16.gif" />
+    <Content Include="Content\Images\Shared\warning_32x32.gif" />
+    <Content Include="Content\Images\Shared\WOA_CandyBar Toolbar - Info.png" />
+    <Content Include="Content\Images\Shared\yellow1_16x16.gif" />
+    <Content Include="Content\Images\Shared\yellow1_24x24.gif" />
+    <Content Include="Content\Images\Shared\yellow2_128x128.png" />
+    <Content Include="Content\Images\Shared\yellow2_16x16.png" />
+    <Content Include="Content\Images\Shared\zoom1_16x16.gif" />
+    <Content Include="Content\Images\Shared\zoom1_24x24.gif" />
+    <Content Include="Content\Images\Shared\zoom1_32x32.gif" />
+    <Content Include="Content\Images\Shared\zoom1_48x48.gif" />
     <Content Include="Content\Images\single-brick.gif" />
     <Content Include="Content\Images\single-brick.jpg" />
     <Content Include="Content\Images\spacer.gif" />
@@ -369,7 +746,9 @@
     <Content Include="Content\xml\MySiteMap.xml" />
     <Content Include="Content\xsl\menuLeftMySiteMap.xsl" />
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -392,6 +771,7 @@
     <Content Include="Views\Shared\LoginPartialMobile.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Content\Images\Shared\Thumbs.db" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -401,7 +781,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Images\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MyFramework4.5\MyManagerCSharp\MyManagerCSharp.csproj">
@@ -450,13 +829,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-  </Target>
+
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
