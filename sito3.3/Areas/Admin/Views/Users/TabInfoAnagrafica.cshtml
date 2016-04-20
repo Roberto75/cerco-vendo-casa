@@ -1,0 +1,20 @@
+﻿@model MyUsers.Models.MyUser
+
+<div class="ui-grid-a">
+    <div class="ui-block-a">
+        <div class="ui-bar ui-bar-a">Nome:</div>
+        <div class="ui-bar ui-bar-a">Cognome:</div>
+        <div class="ui-bar ui-bar-a">Codice fiscale:</div>
+        <div class="ui-bar ui-bar-a">Email:</div>
+        <div class="ui-bar ui-bar-a">Data di nascita:</div>
+        <div class="ui-bar ui-bar-a">Sesso:</div>
+    </div>
+    <div class="ui-block-b">
+        <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.nome)</div>
+        <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.cognome)</div>
+        <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.codiceFiscale)</div>
+        <div class="ui-bar ui-bar-c"><a data-role="none"  href="mailto:@Model.email">@Model.email</a></div>
+        <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.dataDiNascita)</div>
+        <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.sesso)</div>
+    </div>
+</div>

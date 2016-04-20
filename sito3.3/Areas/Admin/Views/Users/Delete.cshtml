@@ -1,0 +1,41 @@
+﻿@model MyUsers.Models.MyUser
+
+@{
+    ViewBag.Title = "Delete utente:" + ((String.IsNullOrEmpty(Model.login)) ? "N/A" : Model.login);
+    Layout = "~/Areas/Admin/Views/Shared/MasterPageAdminMobile.cshtml";
+}
+
+<h2>Cancellazione utente: @Model.login (id: @Model.userId)</h2>
+
+<h3>Confermare la cancellazione di questo utente?</h3>
+
+
+<h3>Account</h3>
+@{Html.RenderPartial("TabInfoAccount", Model);}
+
+<h3>Anagrafica</h3>
+@{Html.RenderPartial("TabInfoAnagrafica", Model);}
+
+
+
+
+<h3>Immobiliare</h3>
+
+Numero di annunci @ViewBag.numeroAnnunci
+
+<br />
+
+
+
+@using (Html.BeginForm("Delete", "Users", FormMethod.Post, new { id = "MyForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <input  type="hidden" name="id" value="@Model.userId" />
+    
+    <div data-role="controlgrup" data-type="horizontal">
+        <a href="@Url.Action("Index", "Users")" class="ui-btn-inline ui-btn ui-corner-all" >Torna alla lista</a>
+        <a href="@Url.Action("Details", "Users", new { id = Model.userId })"  class="ui-btn-inline ui-btn ui-corner-all" >Annulla</a>
+        <input type="submit" value="Elimina" data-inline="true" data-icon="delete" />
+    </div>
+}

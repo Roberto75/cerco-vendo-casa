@@ -1,0 +1,47 @@
+﻿@model MyWebApplication.Models.UserProfile
+@{
+    ViewBag.Title = "Cerco Vendo Casa: Il mio profilo";
+    Layout = "~/Views/Shared/MasterPageMobile.cshtml";
+}
+
+<h2>Manage</h2>
+
+
+
+
+
+<ul data-role="listview" data-ajax="false" data-inset="true" data-theme="d">
+    <li data-role="list-divider">Password</li>
+    <li><a href="@Url.Action("ChangePassword", "Account")">Change password</a></li>
+    <li><a href="@Url.Action("ResetPassword", "Account")">Reset password</a></li>
+</ul>
+
+
+
+
+<ul data-role="listview" data-inset="true">
+    <li><a href="#changeImageProfile" data-rel="popup" data-position-to="window" data-transition="pop">
+        <img src="@Url.Content(Model.pathImageProfile)">
+        <h2> Modifica l'immagine del tuo profilo</h2>
+        <p>Scegli un'immagine da associare al tuo account.  
+        Le immagini con dimensione maggiore di 80x80(WxH) verranno automaticamente ridimensionate.</p></a>
+    </li>
+   
+</ul>
+
+
+<div data-role="popup" id="changeImageProfile" data-theme="d" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
+    <h3>Seleziona un file:</h3>
+    @using (Html.BeginForm("Upload", "Account", FormMethod.Post, new { id = "MyForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <label for="file">File:</label>
+    <input type="file" name="file" id="file" value="">
+    
+        <a href="index.html" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>
+        <input type ="submit" value="Upload" data-inline="true" data-mini="true" />
+        
+    
+    
+    }
+</div>

@@ -1,0 +1,32 @@
+﻿@model MyUsers.Models.MyUser
+
+<div class="ui-grid-a">
+    <div class="ui-block-a">
+        <div class="ui-bar ui-bar-a">Login:</div>
+        <div class="ui-bar ui-bar-a">Cliente:</div>
+        <div class="ui-bar ui-bar-a">Profilo:</div>
+        <div class="ui-bar ui-bar-a">Attivo:</div>
+    </div>
+    <div class="ui-block-b">
+        <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.login)</div>
+        <div class="ui-bar ui-bar-c">@((Model.Customer == null || String.IsNullOrEmpty(Model.Customer.ragioneSociale)) ? "N/A" : Model.Customer.ragioneSociale)</div>
+        <div class="ui-bar ui-bar-c">
+            @{
+                string temp;
+
+                if (Model.Profilo == null)
+                {
+                    temp = "Profilo NON disponibile";
+                }
+                else
+                {
+                    temp = Model.Profilo.nome;
+                }
+            }
+
+
+            @temp
+        </div>
+        <div class="ui-bar ui-bar-c">@Model.isEnabled.ToString()</div>
+    </div>
+</div>

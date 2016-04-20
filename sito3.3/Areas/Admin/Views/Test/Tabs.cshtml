@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Tabs";
+    Layout = "~/Areas/Admin/Views/Shared/MasterPageAdminMobile.cshtml";
+}
+
+<h2>Tabs</h2>
+
+
+<div data-role="tabs" id="tabs">
+  <div data-role="navbar">
+    <ul>
+      <li><a href="#one" data-ajax="false">one</a></li>
+      <li><a href="#two" data-ajax="false">two</a></li>
+      <li><a href="#three" data-ajax="false">three</a></li>
+    </ul>
+  </div>
+  <div id="one" >
+    <h1>one</h1>
+  </div>
+  <div id="two">
+    <h1>two</h1>
+  </div>
+    <div id="three" class="ui-body-d ui-content">
+    <h1>three</h1>
+  </div>
+</div>

@@ -1,0 +1,129 @@
+﻿body {
+  
+}
+
+header,
+footer,
+nav,
+section {
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+div.Paginazione {
+    font-size: initial;
+    background: linear-gradient(rgb(83, 147, 197), rgb(111, 172, 213)) repeat scroll 0% 0% rgb(83, 147, 197);
+    padding: 5px;
+    text-shadow: none;
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+    text-shadow: 0px 1px 0px rgb(62, 103, 144);
+    /* stessa larghezza della tabella!*/
+    display: table-row-group
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**************/
+/*** FORUM ***/
+/*************/
+
+#MyTrattativa {
+    border-top: 1px solid #000000;
+    border-right: 1px solid #000000;
+    border-left: 1px solid #000000;
+    width: 100%;
+}
+
+
+
+.MyTable {
+    padding: 0px;
+    display: table;
+     width: 100%;
+    border-collapse: collapse;
+    border:1px solid #DDD;
+    font-weight: normal;
+}
+
+
+
+
+    .MyTable .MyHeader {
+        border: none;
+        background-color: #E2EECD;
+        color: #698D73;
+        height: 25px;
+        width: 100%;
+        display: table-caption;
+        font-weight: bold;
+        padding-top: 5px;
+        padding-left: 0px;
+    }
+
+        .MyTable .MyHeader .MyDate {
+            margin-left: 5px;
+        }
+
+        .MyTable .MyHeader .MyReplyId {
+            float: right;
+            margin-right: 5px;
+        }
+
+    .MyTable .MyRow {
+        display: table-row;
+    }
+
+        .MyTable .MyCell-A {
+            background-color:white;
+         
+            vertical-align: top;
+        }
+
+        .MyTable .MyCell-B {
+              background-color:#DDEEFF;
+            vertical-align: top;
+   
+        }
+
+            .MyTable .MyRow .MyCell-B .button {
+                text-align: right;
+                background-color: #DDEEFF;
+                color: #333333;
+                margin: 0px;
+                margin-top: 0px;
+                width: 100%;
+            }
+
+            .MyTable .MyRow .MyCell-B .testo {
+                background-color: White;
+                white-space: normal;
+                font-weight: normal;
+                margin: 5px;
+            }

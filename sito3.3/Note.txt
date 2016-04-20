@@ -1,0 +1,222 @@
+﻿
+where valore != Annunci.Models.Immobile.TipoClasseEnergetica.Undefined 
+
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/localization/messages_it.js"></script>
+
+
+
+
+
+LISTA INDEX
+
+ @wGrid.GetHtml(
+            fillEmptyRows: false,
+            tableStyle: "MyTable",
+            rowStyle: "ui-bar-c",
+            alternatingRowStyle: "ui-bar-d",
+                headerStyle: "ui-bar-b",
+                footerStyle: "ui-bar-b",
+                htmlAttributes: new { data_role = "table", id = "MyWebGrid" },
+                columns: new[]{
+                        wGrid.Column ("login","", format: item=> MyHelper.getProfileImage(Server.MapPath("~"), @item.login,@item.customerId, @item.immobileId) , canSort : false),
+                        wGrid.Column("ANNUNCIO.date_added", header: "Data", format: p=>p.DataInserimento.ToShortDateString(), canSort :true),
+                        wGrid.Column("Categoria" , "Categoria", canSort :false),
+                        wGrid.Column ("Prezzo","Prezzo" , format: @<text> @item.prezzo.ToString("C")</text>, canSort : true) ,
+                        wGrid.Column ("MQ", canSort : true) ,
+                        wGrid.Column ("Dati", "Dati", format: item => MyHelper.getDatiImmobile((Annunci.Models.Immobile) @item.Value) , canSort : false) ,
+                        wGrid.Column ("Localita", "Localita", format: item =>  MyHelper.getLocalitaImmobileVerticale((Annunci.Models.Immobile) @item.Value) , canSort : false) ,
+                        wGrid.Column ("Photo", "", format: item =>  MyHelper.getPhotoImmobile(@item.immobileId) , canSort : false) ,
+                        wGrid.Column ("Dettagli","Dettagli", format: @<text><a data-role="button" data-theme="b" data-icon="info" data-iconpos="right" href="@Url.Action("Details", "Immobiliare", new {id=item.immobileId})">Info</a></text>, canSort : false)
+                        }
+                )
+                        
+        
+		
+		
+		    @Html.DropDownList("pageSize", new SelectList(new[] {
+                new KeyValuePair<string, int>("5", 5)  
+                ,new KeyValuePair<string, int>("10", 10)
+                ,new KeyValuePair<string, int>("20", 20)
+                ,new KeyValuePair<string, int>("50", 50)
+                
+        }, "Value", "Key", Model.PageSize), new { onchange = "paging(" + (Model.PageNumber) + ", '" + Model.Sort + "', '" + Model.SortDir + "')" , data_role = "" , data_mini="true" , data_inline="true" })
+
+
+		
+		
+                <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                    <legend>Data:</legend>
+
+                    @Html.RadioButtonFor(p => Model.Tempo, Annunci.Models.SearchModel.EnumTempo.Oggi, new { @id = "radio-choice-1" })
+                    <label for="radio-choice-1">Oggi</label>
+
+                    @Html.RadioButtonFor(p => Model.Tempo, Annunci.Models.SearchModel.EnumTempo.UltimaSettimana, new { @id = "radio-choice-2" })
+                    <label for="radio-choice-2">Ultima settimana</label>
+
+                    @Html.RadioButtonFor(p => Model.Tempo, Annunci.Models.SearchModel.EnumTempo.UltimoMese, new { @id = "radio-choice-3" })
+                    <label for="radio-choice-3">Ultimo mese</label>
+
+                    @Html.RadioButtonFor(p => Model.Tempo, Annunci.Models.SearchModel.EnumTempo.Tutti, new { @id = "radio-choice-4" })
+                    <label for="radio-choice-4">Tutti</label>
+
+                </fieldset>
+		
+		
+		
+		
+		
+		
+		                
+						  <div class="ui-field-contain">
+                <label for="customerId">Cliente:</label>
+                @Html.DropDownListFor(model => model.Utente.customerId, (IEnumerable<SelectListItem>)ViewBag.listaClienti, "---", new { style = "width:150px;", data_val = "true", data_val_required = "Valore obbligatorio" })
+                @Html.ValidationMessageFor(model => model.Utente.customerId)
+            </div>
+
+
+            <div class="ui-field-contain">
+                <label for="profiloId">Profilo:</label>
+                @Html.DropDownListFor(model => model.Utente.profiloId, (IEnumerable<SelectListItem>)ViewBag.listaProfili, "---", new { style = "width:150px;", data_val = "true", data_val_required = "Valore obbligatorio" })
+                @Html.ValidationMessageFor(model => model.Utente.profiloId)
+
+            </div>
+
+
+
+
+
+@Html.DropDownListFor(p => p.categoria, from Annunci.Models.Immobile.Categorie valore in Enum.GetValues(typeof(Annunci.Models.Immobile.Categorie)) select new System.Web.Mvc.SelectListItem() { Text = valore.ToString(), Value = ((int)valore).ToString() }, ((Model.categoria  == null)?"---": Model.categoria.Value.ToString()  ), new { data_mini = "true", data_inline = "true",  required="required"  })
+      
+
+	  
+      @Html.DropDownListFor(p => p.immobile, from Annunci.Models.Immobile.TipoImmobile valore in Enum.GetValues(typeof(Annunci.Models.Immobile.TipoImmobile)) select new System.Web.Mvc.SelectListItem() { Text = valore.ToString(), Value = ((int)valore).ToString() }, ((Model.immobile == null)?"---":Model.immobile.Value.ToString() ) , new { data_mini = "true", data_inline = "true",  required="required"  })
+
+
+	  , new { data_mini = "true", data_inline = "true",  required="required"  }
+
+
+
+
+
+ <table class="post" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <th align="left" nowrap >@r.dateAdded</th>
+                            <th align="right"><%#getPostReplyTo(Eval("risposta_id"), Eval("fk_risposta_id"))%></th>
+                        </tr>
+                        <tr>
+                            <td align="center"  valign="middle"  width="180px"  ><%#getProfiloUtente(Eval("my_login"), Eval("isModeratore"))%></td>
+                            <td valign="top"  style="border: 1px solid #BBBBBB; ">
+                                <div>
+                                    <img class="btnReply" src ="@Url.Content("~/Content/Images/Forum/newpost.gif")" />
+                                    <img class="btnQuote" src ="@Url.Content("~/Content/Images/Forum/quote.gif")" />
+
+                                
+                                </div>
+                                <p class="testo">@r.testo</p>
+                           </td>
+                        </tr>
+                    </table>
+
+
+
+
+
+
+
+https://github.com/posabsolute/jQuery-Validation-Engine
+<link rel="stylesheet" href="@Url.Content("~/Content/validationEngine.jquery.css")" />
+ <script type="text/javascript" charset="utf-8" src="@Url.Content("~/Scripts/jQuery.validationEngine.2.6.1/jquery.validationEngine.js")"></script>
+    <script type="text/javascript" charset="utf-8" src="@Url.Content("~/Scripts/jQuery.validationEngine.2.6.1/languages/jquery.validationEngine-it.js")"></script>
+
+
+
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+
+
+
+<script src="@Url.Content("~/Scripts/code.photoswipe-3.0.5/klass.min.js")"></script>
+<script src="@Url.Content("~/Scripts/code.photoswipe-3.0.5/code.photoswipe-3.0.5.min.js")"></script>
+
+
+
+
+FIX:
+http://connect.microsoft.com/VisualStudio/feedback/details/776965/please-support-jquery-v1-9-0-properly-in-jquery-validate-unobtrusive
+
+
+
+FIX:
+// http://docs.jquery.com/Plugins/Validation/Methods/date
+		date: function( value, element ) {
+		    //return this.optional(element) || !/Invalid|NaN/.test(new Date(value).toString());
+		    if ($.browser.webkit) {
+
+		        //ES - Chrome does not use the locale when new Date objects instantiated:
+		        var d = new Date();
+
+		        return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+		    }
+		    else {
+
+		        return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+		    }
+		},
+
+
+
+
+<link rel="stylesheet" href="@Url.Content("~/style/jquery.cerco-vendo-casa.css")" />
+
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+
+
+     
+
+	  
+     <script src="http://code.jquery.com/jquery-1.10.0-beta1.js"></script>
+   <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+
+ <li><a href="@Url.Action("Donazione", "Home")"     data-role="button" data-ajax="false">Donate</a></li>
+
+
+  <link rel="stylesheet" href="@Url.Content("~/Content/ui-lightness/jquery-ui-1.10.2.custom.css")" />
+
+
+
+  
+
+int page = 1, string sort = "ANNUNCIO.date_added", string sortDir = "DESC"
+
+<p>
+    Model.Immobili.Count() = @Model.Immobili.Count()
+</p>
+<p>
+    Model.TotalRows = @Model.TotalRows
+</p>
+
+
+ <input type="radio" name="filtroTempo" id="radio-choice-1" value="1" />
+            <label for="radio-choice-1">Oggi</label>
+
+            <input type="radio" name="filtroTempo" id="radio-choice-2" value="2" />
+            <label for="radio-choice-2">Ultima settimana</label>
+
+            <input type="radio" name="filtroTempo" id="radio-choice-3" value="3" />
+            <label for="radio-choice-3">Ultimo mese</label>
+
+            <input type="radio" name="filtroTempo" id="radio-choice-4" value="4" checked="checked" />
+            <label for="radio-choice-4">Tutti</label>
+
+
+
+			@foreach (Annunci.Models.SearchParameter.EnumTipoAnnuncio item in Enum.GetValues(typeof(Annunci.Models.SearchParameter.EnumTipoAnnuncio)))
+            {
+                <input name="TipoAnnnuncio" id="TipoAnnnuncio" type="checkbox"  value="@item"/> 
+                <label for="">@item.ToString() + (i++)</label> 
+                    
+                     
+            }

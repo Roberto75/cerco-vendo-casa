@@ -89,6 +89,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\forum.mdb" />
+    <Content Include="App_Data\immobiliare.mdb" />
+    <Content Include="App_Data\log.mdb" />
+    <Content Include="App_Data\RegioniProvinceComuni.mdb" />
+    <Content Include="App_Data\rubrica.mdb" />
+    <Content Include="App_Data\utenti.mdb" />
     <Content Include="Content\Images\1dot.gif" />
     <Content Include="Content\Images\3puntiniBianchi.gif" />
     <Content Include="Content\Images\AddFavoriti.gif" />
@@ -743,23 +749,198 @@
     <Content Include="Content\Images\wait.gif" />
     <Content Include="Content\Images\workflow.jpg" />
     <Content Include="Content\Images\zoom1_16x16.gif" />
+    <Content Include="Content\Style\Admin.css" />
+    <Content Include="Content\Style\lightbox.css" />
+    <Content Include="Content\Style\Site.css" />
+    <Content Include="Content\Style\themes\images\ajax-loader.gif" />
+    <Content Include="Content\Style\themes\images\icons-png\action-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\action-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\alert-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\alert-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-d-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-d-l-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-d-l-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-d-r-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-d-r-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-d-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-l-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-l-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-r-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-r-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-u-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-u-l-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-u-l-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-u-r-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-u-r-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-u-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\audio-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\audio-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\back-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\back-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\bars-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\bars-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\bullets-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\bullets-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\calendar-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\calendar-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\camera-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\camera-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\carat-d-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\carat-d-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\carat-l-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\carat-l-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\carat-r-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\carat-r-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\carat-u-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\carat-u-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\check-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\check-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\clock-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\clock-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\cloud-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\cloud-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\comment-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\comment-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\delete-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\delete-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\edit-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\edit-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\eye-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\eye-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\forbidden-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\forbidden-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\forward-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\forward-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\gear-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\gear-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\grid-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\grid-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\heart-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\heart-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\home-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\home-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\info-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\info-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\location-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\location-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\lock-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\lock-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\mail-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\mail-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\minus-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\minus-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\navigation-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\navigation-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\phone-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\phone-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\plus-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\plus-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\power-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\power-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\recycle-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\recycle-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\refresh-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\refresh-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\search-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\search-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\shop-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\shop-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\star-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\star-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\tag-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\tag-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\user-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\user-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\video-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\video-white.png" />
+    <Content Include="Content\Style\themes\jquery.mobile.icons.min.css" />
+    <Content Include="Content\Style\themes\MyTheme.css" />
+    <Content Include="Content\Style\themes\MyTheme.min.css" />
+    <Content Include="Content\xml\faq.xml" />
+    <Content Include="Content\xml\menuLeft.xml" />
+    <Content Include="Content\xml\menuRight.xml" />
+    <Content Include="Content\xml\menuTop.xml" />
     <Content Include="Content\xml\MySiteMap.xml" />
+    <Content Include="Content\xml\whatsnew.xml" />
+    <Content Include="Content\xsl\faq.xsl" />
+    <Content Include="Content\xsl\faq_categorie.xsl" />
+    <Content Include="Content\xsl\menuLeft.xsl" />
     <Content Include="Content\xsl\menuLeftMySiteMap.xsl" />
+    <Content Include="Content\xsl\menuLeftMySiteMap_1.xsl" />
+    <Content Include="Content\xsl\menuLeftSiteMap_1.xsl" />
+    <Content Include="Content\xsl\menuLeftSiteMap_2.xsl" />
+    <Content Include="Content\xsl\menuRight.xsl" />
+    <Content Include="Content\xsl\menuTop.xsl" />
+    <Content Include="Content\xsl\menuTopSiteMap_1.xsl" />
+    <Content Include="Content\xsl\menuTopSiteMap_2.xsl" />
+    <Content Include="Content\xsl\menuTop_2.xsl" />
+    <Content Include="Content\xsl\whatsnew.xsl" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Note.txt" />
+    <Content Include="postinfo.html" />
+    <Content Include="robots.txt" />
+    <Content Include="Scripts\lightbox-2.6.min.js" />
+    <Content Include="Scripts\markerclusterer_packed_2.0.9.js" />
+    <Content Include="Tasks\RevoAgent.aspx" />
+    <Content Include="Tasks\Test.aspx" />
+    <Content Include="Views\Test\DIV.htm" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GroupsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ImmobiliareController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MyAuthorizeAttribute.cs" />
+    <Compile Include="Areas\Admin\Controllers\MyBaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TestController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Admin\Models\ModelHome.cs" />
+    <Compile Include="Areas\Admin\Models\MyGroupModel.cs" />
+    <Compile Include="Areas\Admin\Models\MyUserImmobiliareModel.cs" />
+    <Compile Include="Areas\Admin\Models\MyUserModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImmobiliareController.cs" />
     <Compile Include="Controllers\MyBaseController.cs" />
+    <Compile Include="Controllers\RegioneProvinciaComuneController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\ThumbnailController.cs" />
+    <Compile Include="Controllers\UtenteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\GalleryModel.cs" />
+    <Compile Include="Models\ModelImmobiliareSearch.cs" />
+    <Compile Include="Models\ModelRegioneProvinciaComune.cs" />
+    <Compile Include="Models\ModelTrattativa.cs" />
+    <Compile Include="Models\ReplyModel.cs" />
+    <Compile Include="Models\TestModels.cs" />
+    <Compile Include="Models\UpdateModel.cs" />
+    <Compile Include="Models\UserModels.cs" />
+    <Compile Include="MyHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tasks\RevoAgent.aspx.cs">
+      <DependentUpon>RevoAgent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tasks\RevoAgent.aspx.designer.cs">
+      <DependentUpon>RevoAgent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tasks\Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tasks\Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -772,6 +953,43 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Content\Images\Shared\Thumbs.db" />
+    <Content Include="App_Data\web.config" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Home\Contatti.cshtml" />
+    <Content Include="Views\Home\Donazione.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Home\Faq.cshtml" />
+    <Content Include="Views\Home\NotAuthorized.cshtml" />
+    <Content Include="Views\Home\Ok.cshtml" />
+    <Content Include="Views\Immobiliare\Create.cshtml" />
+    <Content Include="Views\Immobiliare\CreateStep2.cshtml" />
+    <Content Include="Views\Immobiliare\Delete.cshtml" />
+    <Content Include="Views\Immobiliare\Details.cshtml" />
+    <Content Include="Views\Immobiliare\Index.cshtml" />
+    <Content Include="Views\Immobiliare\MyAnnunci.cshtml" />
+    <Content Include="Views\Immobiliare\MyAnnuncio.cshtml" />
+    <Content Include="Views\Immobiliare\MyTrattative.cshtml" />
+    <Content Include="Views\Immobiliare\Preview.cshtml" />
+    <Content Include="Views\Immobiliare\Reply.cshtml" />
+    <Content Include="Views\Immobiliare\TabInfoImmobile.cshtml" />
+    <Content Include="Views\Immobiliare\Trattativa.cshtml" />
+    <Content Include="Views\Test\ArrayObject.cshtml" />
+    <Content Include="Views\Test\DropDownListFor.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Test\Panel01.cshtml" />
+    <Content Include="Views\Test\Table.cshtml" />
+    <Content Include="Views\Test\Test1.cshtml" />
+    <Content Include="Views\Test\Test2.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\MasterPageAdminMobile.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\MasterPageAmministrazione.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\GalleryEdit.cshtml" />
+    <Content Include="Views\Shared\Paging.cshtml" />
+    <Content Include="Views\Shared\RegioneProvinciaComune.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -780,7 +998,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\Account\" />
+    <Folder Include="Areas\Admin\Views\Admin\" />
+    <Folder Include="Areas\Admin\Views\Groups\" />
+    <Folder Include="Areas\Admin\Views\Immobiliare\" />
+    <Folder Include="Areas\Admin\Views\Test\" />
+    <Folder Include="Areas\Admin\Views\Users\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MyFramework4.5\MyManagerCSharp\MyManagerCSharp.csproj">
@@ -829,7 +1052,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

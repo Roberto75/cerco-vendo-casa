@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/Style/Admin.css")" />
+   
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+
+    
+    <script>
+        $(document).on("pageinit", function () {
+            // alert("mobileinit");
+            $.mobile.ajaxEnabled = false;
+        });
+    </script>
+
+</head>
+<body>
+    <div data-role="page">
+
+        <div data-role="header" style="background-color: white; min-height: 60px; overflow: hidden;">
+            <nav class="menuTop">
+                <ul>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li><a href="@Url.Action("Index", "Admin")"          >Home</a></li>
+                        <li><a href="@Url.Action("Index", "Users")"         >Utenti</a></li>
+                        <li><a href="@Url.Action("Index", "Groups")"         >Gruppi</a></li>
+                        <li><a href="@Url.Action("Index", "Immobiliare")"    >Immobiliare</a></li>
+                        <li><a href="@Url.Action("Index", "Test")"    >Test</a></li>
+                        <li><a href="#"        >@User.Identity.Name </a></li>
+                        <li><a href="@Url.Action("MD5", "Admin")"    >MD5</a></li>
+                        <li><a href="@Url.Action("LogOff", "Account")"       >Log Off  </a></li>
+                    }
+                </ul>
+            </nav>
+        </div>
+        <div data-role="content">
+            @RenderBody()
+        </div>
+        <div data-role="footer">Footer</div>
+    </div>
+</body>
+</html>

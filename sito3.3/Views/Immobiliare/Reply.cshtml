@@ -1,0 +1,46 @@
+﻿@model MyWebApplication.Models.ReplyModel
+@{
+    ViewBag.Title = "Reply";
+    Layout = "~/Views/Shared/MasterPageMobile.cshtml";
+}
+
+
+<script src="http://tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: "textarea",
+        encoding: "xml"
+    });
+</script>
+
+
+<h1>Rispondi all'annuncio: @Model.annuncio.immobile.ToString() </h1>
+
+<p>Al termine dell'operazione verrà inviato un messaggio di notifica al proprietario (@Model.annuncio.login) dell'annuncio.</p>
+
+
+@using (Html.BeginForm("Reply", "Immobiliare", FormMethod.Post, new { id = "MyForm" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <input type="hidden" name="annuncioId"      value="@Model.annuncioId" />
+    <input type="hidden" name="trattativaId"    value="@Model.trattativaId" />
+    <input type="hidden" name="rispostaId"      value="@Model.rispostaId" />
+
+    <textarea style="height: 150px;" name="testo">@Model.testo</textarea>
+       
+    <div data-role="controlgrup" data-type="horizontal" data-mini="true">
+        <a href="@Url.Action("Index", "Immobiliare")" data-role="button" data-inline="true">Torna all'elenco</a>
+        <a href="@Url.Action("Details", "Immobiliare", new { id = Model.annuncioId })" data-role="button" data-inline="true">Torna all'annuncio</a>
+
+        @if (Model.trattativaId != -1)
+        {
+            <a href="@Url.Action("Trattativa", "Immobiliare", new { id = Model.trattativaId })" data-role="button" data-inline="true">Torna alla trattativa</a>
+        }
+        <input type="submit" value="Reply" data-inline="true" />
+    </div>
+}
+
+
+
+

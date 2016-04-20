@@ -1,0 +1,128 @@
+﻿@model  MyWebApplication.Areas.Admin.Models.MyUserModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/MasterPageAdminMobile.cshtml";
+}
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script>
+    $(function () {
+        $("#tabs").tabs();
+    });
+</script>
+
+
+<script>
+
+    $(function () {
+
+
+        //per abilitare il controllo anche sui tah hidde
+        $("form").validate().settings.ignore = "";
+
+
+        //Add custom rule / Validation method
+        $.validator.addMethod("checkboxrequired", function (value, element, param) {
+            //alert("checkboxGroup: " + $("[id ^='Gruppi']:checked").length);
+            if ($("[id ^='Gruppi']").length == 0) {
+                return false;
+            }
+            return true;
+        }, "Selezionare almeno un gruppo");
+
+
+        $.validator.addClassRules("checkRequireOne", { checkboxrequired: true });
+        //alert("dd");
+
+    });
+</script>
+
+
+<h2>Utente: @Model.Utente.login (id: @Model.Utente.userId)</h2>
+
+@using (Html.BeginForm("Edit", "Users", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false)
+
+    
+ <input  type="hidden" name="Utente.userId" value="@Model.Utente.userId" />
+    
+       
+    
+    
+    <div data-role="tabs" id="tabs">
+
+        <ul>
+            <li><a href="#tabs-1" data-ajax="false">Account</a></li>
+            <li><a href="#tabs-2" data-ajax="false">Anagrafica</a></li>
+            <li><a href="#tabs-3">Gruppi</a></li>
+          </ul>
+
+        <div id="tabs-1">
+            <div class="ui-field-contain">
+                <label for="customerId">Cliente:</label>
+                
+            </div>
+
+
+            <div class="ui-field-contain">
+                <label for="profiloId">Profilo:</label>
+
+            </div>
+        </div>
+
+        <div id="tabs-2">
+
+            <div class="ui-field-contain">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required="required" value="@Model.Utente.nome" />
+            </div>
+
+
+                
+
+
+        </div>
+
+        <div id="tabs-3">
+            <fieldset data-role="controlgroup">
+                <legend></legend>
+
+                @{
+    int conta = 0;
+                }
+                @foreach (SelectListItem i in Model.Gruppi)
+                {
+                
+                    <input type ="checkbox" name="gruppiIDs" id="Gruppi[@(conta)].gruppoId" @(i.Selected ? "checked" : "")   value ="@(i.Value)" />
+                    <label for="Gruppi[@(conta++)].gruppoId">@(i.Text)</label>
+                }
+            </fieldset>
+        </div>
+
+
+      
+
+    </div>
+
+      
+    
+    <div data-role="controlgrup" data-type="horizontal">
+        <a href="@Url.Action("Index", "Users")" class="ui-btn-inline ui-btn ui-corner-all ui-mini" >Torna alla lista</a>
+        <a href="@Url.Action("Details", "Users", new { id = Model.Utente.userId })" class="ui-btn-inline ui-btn ui-corner-all ui-mini">Annulla</a>
+        <input type="submit" value="Salva" data-inline="true" data-mini="true" />
+    </div>
+
+    
+}
+
+
+
+
+
+
+
+
+

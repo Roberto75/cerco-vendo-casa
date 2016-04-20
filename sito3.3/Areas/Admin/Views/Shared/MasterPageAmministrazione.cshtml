@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/Style/Admin.css")" />
+   
+    <link rel="stylesheet" href ="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
+
+    <script>
+        $(function () {
+
+            //$("#menuTop").menu();
+            //$("#menuTop").menu("option", "position", { my: "right top", at: "right-5 top+25" });
+
+
+        });
+    </script>
+
+
+
+</head>
+<body>
+    <div class="container">
+        <div class="riga">
+            <header>
+
+                <div id="logo">
+                    <a href="#">
+                        <img  src="@Url.Content("~/Content/images/shared/eye1.jpg")"  />
+                    </a>
+                </div>
+
+                <nav class="menuTop">
+                    <ul>
+                        <li><a href="@Url.Action("Index", "Admin")"          >Home</a></li>
+                        <li><a href="@Url.Action("Index", "Users")"         >Utenti</a></li>
+                        <li><a href="@Url.Action("Index", "Immobiliare")"    >Immobiliare</a></li>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+
+        <div class="riga">
+            <nav class="menuLeft">
+                <ul>
+                    <li>
+                        <a href="#">Chi siamo</a>
+                    </li>
+                    <li>
+                        <a href="#">Dove siamo</a>
+                    </li>
+                    <li>
+                        <a href="#">Servizi</a>
+                    </li>
+                    <li>
+                        <a href="#">Blog</a>
+                    </li>
+                    <li>
+                        <a href="#">Contatti</a>
+                    </li>
+                     <li>
+                        <a href="#">Servizi</a>
+                    </li>
+                    <li>
+                        <a href="#">Blog</a>
+                    </li>
+                    <li>
+                        <a href="#">Contatti</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="content">
+                @RenderBody()
+            </div>
+        </div>
+        <div class="riga">
+            <footer>
+                <p>Footer...</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

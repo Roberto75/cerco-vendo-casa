@@ -1,0 +1,96 @@
+﻿@model MyWebApplication.Models.ModelTrattativa
+
+@{
+    ViewBag.Title = "Trattativa";
+    Layout = "~/Views/Shared/MasterPageMobile.cshtml";
+}
+
+<h2>Trattativa</h2>
+
+<div class="ui-grid-c">
+    <div class="ui-block-a">
+        <div class="ui-bar ui-bar-b">Data inserimento</div>
+        <div class="ui-bar ui-bar-b">Tipo</div>
+        <div class="ui-bar ui-bar-b">Mq</div>
+        <div class="ui-bar ui-bar-b">Prezzo</div>
+    </div>
+    <div class="ui-block-b">
+        <div class="ui-bar ui-bar-c">@Model.immobile.dataInserimento.ToShortDateString()</div>
+        <div class="ui-bar ui-bar-c">@Model.immobile.immobile.ToString()</div>
+        <div class="ui-bar ui-bar-c">@Model.immobile.MQ.ToString("N")</div>
+        <div class="ui-bar ui-bar-c">@Model.immobile.prezzo.ToString("C")</div>
+    </div>
+    <div class="ui-block-c">
+        <div class="ui-bar ui-bar-b">Utente</div>
+        <div class="ui-bar ui-bar-b">Categoria</div>
+        <div class="ui-bar ui-bar-b">Classe energetica</div>
+    </div>
+    <div class="ui-block-d">
+        <div class="ui-bar ui-bar-c">@Model.immobile.login</div>
+        <div class="ui-bar ui-bar-c">@Model.immobile.categoria.ToString()</div>
+        <div class="ui-bar ui-bar-c">@MyHelper.decodeEnum(Model.immobile.classeEnergetica.ToString())</div>
+    </div>
+</div>
+
+<br />
+
+<div class="ui-grid-c">
+    <div class="ui-block-a">
+        <div class="ui-bar ui-bar-b">Regione - Provincia</div>
+        <div class="ui-bar ui-bar-b">Zona/Quartiere</div>
+    </div>
+    <div class="ui-block-b">
+        <div class="ui-bar ui-bar-c">@MyHelper.getLocalitaImmobileOrizzontale(Model.immobile)</div>
+        <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.immobile.quartiere)</div>
+    </div>
+    <div class="ui-block-c">
+        <div class="ui-bar ui-bar-b">CAP</div>
+        <div class="ui-bar ui-bar-b">Indirizzo</div>
+    </div>
+    <div class="ui-block-d">
+        <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.immobile.cap)</div>
+        <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.immobile.indirizzo)</div>
+    </div>
+</div>
+
+<br />
+
+<div id="MyTrattativa">
+
+    @foreach (Annunci.Models.Risposta r in Model.trattativa.risposte)
+    {
+        <div class="MyTable">
+
+            <div class="MyHeader">
+                <span class="MyReplyId">@((r.refRispostaId == -1) ? "" : r.refRispostaId.ToString())</span>
+                <span class="MyDate">@r.dateAdded.ToString()</span>
+            </div>
+
+
+            <div class="MyRow">
+                <div class="MyCell-A">
+                    <p>Utente: @r.login</p>
+                    @MyHelper.getProfileImage(Server.MapPath("~"), r.login, r.customerId)
+                </div>
+
+
+                <div class="MyCell-B">
+                    <div class="button">
+
+                        <a data-inline="true" data-role="button" href="@Url.Action("Reply", "Immobiliare", new { annuncioId = r.annuncioId, trattativaId = r.trattativaId , rispostaId = r.rispostaId })" >Reply</a>
+
+                        <a data-inline="true" data-role="button" href="@Url.Action("Reply", "Immobiliare", new { annuncioId = r.annuncioId, trattativaId = r.trattativaId, quote =  r.rispostaId })" >Quote</a>
+
+                    </div>
+                    <div class="testo">@Html.Raw(r.testo)</div>
+                </div>
+            </div>
+
+
+        </div>
+    }
+
+
+</div>
+
+<a data-inline="true" data-role="button" href="@Url.Action("MyTrattative", "Immobiliare")" >Annulla</a>

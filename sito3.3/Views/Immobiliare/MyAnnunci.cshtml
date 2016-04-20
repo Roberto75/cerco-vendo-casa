@@ -1,0 +1,123 @@
+﻿@model List<Annunci.Models.Immobile>
+
+@{
+    ViewBag.Title = "Cerco Vendo Casa: I miei annunci";
+    Layout = "~/Views/Shared/MasterPageMobile.cshtml";
+}
+
+<h2>I miei annunci</h2>
+
+<p>
+    In questa pagina sono elencati gli annunci che hai pubblicato.<br />
+    Per ogni annuncio è indicato il <b>numero di risposte</b> che hai ricevuto.<br />
+    Clicca sul dettaglio dell'annuncio per vedere le trattative in corso con le relative risposte.
+</p>
+
+
+
+
+@if (Model.Count == 0)
+{
+    <h2>Non hai inserito nessun annuncio.</h2>
+    <p>Accedi all pagina di <a href="@Url.Action("Create", "Immobiliare")" >inserimento annuncio</a> per crearne uno.</p>
+
+}
+else
+{
+    <!--
+    <label for="slider-flip-m">Visualizza gli annunci importati da RevoAgent</label>
+    <select name="slider-flip-m" id="slider-flip-m" data-role="slider" data-mini="true">
+        <option value="0" selected="">No</option>
+        <option value="1">Si</option>
+    </select>
+    -->
+
+    <table data-role="table" id="MyTable" data-mode="reflow" class="ui-responsive table-stroke">
+        <thead>
+            <tr>
+                <th data-priority="1"></th>
+                <th data-priority="persist">Categoria</th>
+                <th data-priority="2">Data inserimento</th>
+                <th data-priority="3">Tipo</th>
+                <th data-priority="4">Prezzo</th>
+                <th data-priority="5">Risposte</th>
+                <th data-priority="6">Modifica</th>
+                <th data-priority="7">Cancella</th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+            @foreach (Annunci.Models.Immobile i in Model)
+            {
+
+                <tr>
+                    <td>
+                        @if( ((long) (ViewData["hashtableRisposte"] as System.Collections.Hashtable )[i.immobileId]) > 0){
+                            <img src="@Url.Content("~/Content/Images/shared/green2_16x16.png")" alt="Ci sono delle risposte per l'annuncio" />
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Content/Images/shared/empty.gif")" alt="Non ci sono risposte per l'annuncio" />
+                        }
+
+                    </td>
+                    <td>@i.categoria</td>
+                    <td>@i.dataInserimento.ToShortDateString()</td>
+                    <td>@i.immobile</td>
+                    <td>@i.prezzo.ToString("C") </td>
+                    <td>@((ViewData["hashtableRisposte"] as System.Collections.Hashtable)[i.immobileId])</td>
+                    <td><a href="/Immobiliare/MyAnnuncio/@i.immobileId" data-role="button"  data-iconpos="notext" data-inline="true" data-theme="b" data-icon="edit">Edit</a></td>
+                    <td><a href="javascript:deleteRow('@i.immobileId');" data-role="button" data-iconpos="notext" data-inline="true" data-theme="b" data-icon="delete">Delete</a></td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+    
+    
+    
+
+    
+    
+    
+    <script type="text/javascript">
+        function deleteRow(id) {
+           // alert("deleteRow: " + id);
+
+
+
+            //<td><a href="javascript:deleteRow('i.immobileId');" data-role="button" data-iconpos="notext" data-inline="true" data-theme="b" data-icon="delete">Delete</a></td>
+
+
+            //$("#popupDialogConfirm").dialog({
+            //    resizable: false,
+            //    height: 140,
+            //    modal: true,
+            //    buttons: {
+            //        "Delete selected toon": function () {
+            //            alert("ff");
+            //           // $(this).dialog("close");
+            //        },
+            //        Cancel: function () {
+            //            $(this).dialog("close");
+            //        }
+            //    }
+            //});
+            //$.mobile.changePage("#myDialog");
+            //if (window.confirm("Confermare l'operazione")) {
+                $("#annuncioId").val(id);
+                $("#MyForm").submit();
+            //}
+
+        }
+    </script>
+    
+}
+
+
+@using (Html.BeginForm("Delete", "Immobiliare", FormMethod.Post, new { id = "MyForm" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" id="annuncioId" name="annuncioId" />
+}

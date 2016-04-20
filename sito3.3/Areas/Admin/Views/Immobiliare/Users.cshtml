@@ -1,0 +1,117 @@
+﻿@model Annunci.Models.SearchUsers
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Areas/Admin/Views/Shared/MasterPageAdminMobile.cshtml";
+
+    WebGrid wGrid = new WebGrid(null, rowsPerPage: Model.PageSize, defaultSort: "MY_LOGIN", canPage: false);
+    wGrid.Bind(Model.Utenti, rowCount: Model.TotalRows, autoSortAndPage: false);
+}
+
+<h2>Users</h2>
+
+
+@using (Html.BeginForm("Users", "Immobiliare", FormMethod.Post, new { id = "MyForm" }))
+{
+        
+    <div class="ui-field-contain">
+        <label for="filter_userId">User ID:</label>
+        <input type ="text" data-mini="true" data-clear-btn="true" id="filter_userId" name="filter.userId"  value ="@Model.filter.userId"   />
+    </div>
+    
+    <div class="ui-field-contain">
+        <label for="filter_login">Login:</label>
+        <input type ="text" data-mini="true" data-clear-btn="true" id="filter_login" name="filter.login"  value ="@Model.filter.login"   />
+    </div>
+        
+    <div class="ui-field-contain">
+        <label for="filter_email">Email:</label>
+        <input type ="text" data-mini="true" data-clear-btn="true" id="filter_email" name="filter.email"  value ="@Model.filter.email"   />
+    </div>
+        
+    <div class="ui-field-contain">
+        <label for="filter_nome">Nome:</label>
+        <input type ="text" data-mini="true" data-clear-btn="true" id="filter_nome" name="filter.nome"  value ="@Model.filter.nome"   />
+    </div>
+        
+    <div class="ui-field-contain">
+        <label for="filter_cognome">Cognome:</label>
+        <input type ="text" data-mini="true" data-clear-btn="true" id="filter_cognome" name="filter.cognome"  value ="@Model.filter.cognome"   />
+    </div>
+    
+    <div class="ui-field-contain">
+        <label for="filter_externalId">External ID:</label>
+        <input type ="text" data-mini="true" data-clear-btn="true" id="filter_externalId" name="filter.externalId"  value ="@Model.filter.externalId"   />
+    </div>
+    
+       <div class="ui-field-contain">
+        <label for="tipo">Tipo:</label>
+        <select name="tipo" id="tipo" data-mini="true">
+            <option value=""  @((Model.tipo  == -1) ? "selected" : "") >---</option>
+            <option value="1" @((Model.tipo == 1) ? "selected" : "")>Agenzia</option>
+            <option value="2" @((Model.tipo == 2) ? "selected" : "")>Privato</option>
+        </select>
+    </div>
+    
+    
+    <div class="ui-field-contain">
+        <label for="filter_statoId">Stato:</label>
+        <select name="filter.statoId" id="filter_statoId" data-mini="true">
+            <option value=""  @((Model.filter.statoId == null  || Model.filter.statoId == Annunci.Models.Immobile.StatoUtente.Undefined) ? "selected" : "") >---</option>
+            <option value="1" @((Model.filter.statoId == Annunci.Models.Immobile.StatoUtente.Active) ? "selected" : "")>Active</option>
+            <option value="2" @((Model.filter.statoId == Annunci.Models.Immobile.StatoUtente.Test) ? "selected" : "")>Test</option>
+            <option value="3" @((Model.filter.statoId == Annunci.Models.Immobile.StatoUtente.Disabled ) ? "selected" : "")>Disabled</option>
+        </select>
+    </div>
+    
+     <div class="ui-field-contain">
+        <label for="filter_sourceId">Source:</label>
+        <select name="filter.sourceId" id="filter_sourceId" data-mini="true">
+            <option value=""  @((Model.filter.sourceId == null  || Model.filter.sourceId == Annunci.Models.Immobile.TipoSourceId.Undefined) ? "selected" : "") >---</option>
+            <option value="1" @((Model.filter.sourceId == Annunci.Models.Immobile.TipoSourceId.RevoAgent) ? "selected" : "")>RevoAgent</option>
+        </select>
+    </div>
+        
+    <div data-role="controlgrup" data-type="horizontal" data-mini="true">
+        <input type="reset" data-inline="true" data-mini="true" value="Reset" />
+        <input type="submit" data-inline="true" data-mini="true" value="Seach" data-icon="search" />
+    </div>
+    
+
+    if (Model.TotalRows == 0)
+    {
+    <h3>Non è stato trovato nessun utente. Modificare i filtri di ricerca.</h3>
+    }
+    else
+    {
+    <div style="margin-top: 20px;">
+        @wGrid.GetHtml(
+            fillEmptyRows: false,
+            tableStyle: "MyTable ui-responsive",
+            headerStyle: "ui-bar-b",
+            footerStyle: "ui-bar-b",
+            rowStyle: "ui-bar-a",
+            alternatingRowStyle: "ui-bar-c",
+            htmlAttributes: new { data_role = "table", id = "MyWebGrid", data_mode = "reflow" },
+            columns: new[]{
+                wGrid.Column ("Login","", format:(item) =>  Html.ActionLink ( (string) (string.IsNullOrEmpty (item.login)?"N/A":item.login.ToString()), "Details", "Immobiliare",  new {id=item.userId}, null ), canSort:true),
+                wGrid.Column ("Nome","", canSort  : true),
+                wGrid.Column ("Cognome","", canSort  : true), 
+                wGrid.Column ("Email",  format: @<a href="mailto:@item.Email">@item.Email</a>),
+                wGrid.Column ("sourceId","Source ID", canSort  : true ), 
+                wGrid.Column ("externalId","External ID", canSort  : true ), 
+                wGrid.Column ("statoID","Stato ID", canSort  : false ), 
+                wGrid.Column ("DateStato","Data stato", format: p => (p.dateStato == null )?" ":p.dateStato  , canSort  : true ), 
+                wGrid.Column ("DaysStatus","GG", canSort  : false ), 
+                
+                wGrid.Column ("", header :"Actions", 
+                format:@<text>
+        <a class="ui-btn-inline ui-btn ui-icon-info ui-btn-icon-notext ui-corner-all" title="Detail"  href="@Url.Action("Details", "Immobiliare", new { id = item.userId })">Info</a>
+        </text>, canSort : false)
+            })
+
+        @{Html.RenderPartial("Paging", Model);}
+    </div>
+    }
+
+
+}

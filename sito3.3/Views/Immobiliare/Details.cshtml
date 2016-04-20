@@ -1,0 +1,212 @@
+﻿@model Annunci.Models.Immobile
+
+@{
+    Layout = "~/Views/Shared/MasterPageMobile.cshtml";
+}
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3.12&amp;sensor=false&region=IT"></script>
+
+
+<script src="@Url.Content("~/Scripts/lightbox-2.6.min.js")"></script>
+<link rel="stylesheet" href="@Url.Content("~/Content/Style/lightbox.css")" />
+
+
+<style type="text/css">
+    #Gallery {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+        #Gallery:after {
+            clear: both;
+            content: ".";
+            display: block;
+            height: 0;
+            visibility: hidden;
+        }
+
+        #Gallery li {
+            float: left;
+        }
+
+            #Gallery li a {
+                display: block;
+                margin: 5px;
+            }
+
+            #Gallery li img {
+                display: block;
+                border: 1px solid #3c3c3c;
+            }
+</style>
+
+
+
+<script>
+   
+    var map = null;
+
+    $(document).on("pageinit", function () {
+        $("#tabs").tabs();
+
+        @if (Model.latitude > 0)
+        {
+
+            @:$("#ui-id-3").on("click" , function(){
+
+                    @:if(map == null){
+                        //@:alert("show");
+                    
+                        @:var center = new google.maps.LatLng(@Model.latitude.ToString().Replace(",", ".") , @Model.longitude.ToString().Replace(",", "."));
+
+                        @:map = new google.maps.Map(document.getElementById('map-container'), {  zoom: 17,      center: center,      mapTypeId: google.maps.MapTypeId.ROADMAP });
+
+                        @:var latLng = new google.maps.LatLng(@Model.latitude.ToString().Replace(",", "."), @Model.longitude.ToString().Replace(",", "."));
+                
+                        @:var marker = new google.maps.Marker({  position: latLng,  map: map,  icon: "/Content/Images/Immobiliare/casa.gif",    title: "@MyHelper.getTitoloImmobile(Model)"    });
+                                                    
+                    @:}
+                                                                                                                 
+            @:});
+                           
+        }
+        else
+        {
+            // @:$("#ui-id-3").hide();
+        }
+
+
+
+
+    });
+
+
+</script>
+
+<h2>Dettaglio immobile</h2>
+
+
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Info</a></li>
+
+        <li><a href="#tabs-2">Descrizione</a></li>
+
+        <li><a href="#tabs-3">Mappa</a></li>
+
+        <li><a href="#tabs-4">Photo</a></li>
+
+    </ul>
+
+    <div id="tabs-1">
+
+        @{Html.RenderPartial("TabInfoImmobile", Model);}
+    </div>
+
+
+
+    <div id="tabs-2">
+
+        <p class="testo">@Html.Raw(WebUtility.HtmlDecode(Model.nota))</p>
+
+    </div>
+
+
+
+
+    <div id="tabs-3">
+        @if (Model.latitude == 0)
+        {
+            <p>Mappa non disponibile</p>
+        }
+        else
+        {
+            <div id="map-container" style="margin-top: 20px; width: 100%; height: 500px;">
+            </div>    
+        }
+
+
+    </div>
+
+
+
+    <div id="tabs-4">
+        @if (ViewBag.photos == null || (ViewBag.photos as List<Annunci.Models.MyPhoto>).Count == 0)
+        {
+            <p>Immagini non disponibili</p>
+        }
+        else
+        {
+            <ul id="Gallery">
+
+                @foreach (Annunci.Models.MyPhoto p in ViewBag.photos)
+                {
+
+                    if (p.Path.StartsWith("http:"))
+                    {
+                    <li><a href="@p.Path" data-lightbox="gallery" title="@p.Note ">
+                        <img src="@p.Path" alt="@p.Note" width="@MyWebApplication.Controllers.ImmobiliareController._widthThumbnail" height="@MyWebApplication.Controllers.ImmobiliareController._heightThumbnail" /></a></li>
+                    }
+
+                    else
+                    {
+                        FileInfo myFile = new FileInfo(Server.MapPath(p.Path));
+
+                        if (!myFile.Exists)
+                        {
+                    <li><a href="#">
+                        <img src="@Url.Content("~\\Content\\Images\\Shared\\unavailable.jpg")" alt="Immagine non disponibile" width="@MyWebApplication.Controllers.ImmobiliareController._widthThumbnail" height="@MyWebApplication.Controllers.ImmobiliareController._heightThumbnail" /></a></li>
+         
+                            
+                        }
+                        else
+                        {
+
+                            System.Diagnostics.Debug.WriteLine("File Name: " + System.IO.Path.GetFileName(p.Path));
+                            System.Diagnostics.Debug.WriteLine("Directory Name: " + System.IO.Path.GetDirectoryName(p.Path));
+
+
+                            string thumbnail;
+                            thumbnail = System.IO.Path.GetDirectoryName(p.Path) + "\\thumbnail_" + myFile.Name;
+
+                            if (!System.IO.File.Exists(Server.MapPath(thumbnail)))
+                            {
+                                System.Diagnostics.Debug.WriteLine("NON esiste: " + thumbnail);
+                                //lo creo al volo
+                                thumbnail = String.Format("\\Thumbnail\\Image?id={0}", HttpUtility.UrlEncode(p.Path));
+                            }
+                            else
+                            {
+                                thumbnail = thumbnail.Replace("~", "");
+                            }
+
+
+                            System.Diagnostics.Debug.WriteLine("thumbnail: " + thumbnail);    
+                            
+                            
+                             
+                    <li><a href="@p.Path.Replace("~", "")" data-lightbox="gallery">
+                        <img src="@thumbnail " alt="@p.Note" /></a></li>    
+                        }
+                    }
+
+                }
+
+            </ul>
+        }
+
+    </div>
+
+</div>
+
+<p>
+    Se sei interessato a questo annuncio clicca su "Rispondi" per mandare un un messaggio all'inserzionista.
+</p>
+
+<div data-role="controlgrup" data-type="horizontal" data-mini="true">
+    <a href="@Url.Action("Index", "Immobiliare")" data-role="button" data-inline="true">Torna all'elenco</a>
+    <a href="@Url.Action("Reply", "Immobiliare", new { annuncioId = Model.immobileId })" data-role="button" data-inline="true">Rispondi</a>
+</div>

@@ -1,0 +1,30 @@
+﻿@model MyWebApplication.Areas.Admin.Models.MyGroupModel
+
+@{
+    ViewBag.Title = "DeleteUser";
+    Layout = "~/Areas/Admin/Views/Shared/MasterPageAdminMobile.cshtml";
+}
+
+
+<h2>Cancellazione utente</h2>
+
+rimuovere l'associazione  tra il gruppo @Model.Gruppo.nome e l'utente @((Model.Utenti as List<MyUsers.Models.MyUser>)[0].login  )?
+    
+
+
+@using (Html.BeginForm("DeleteUser", "Groups", FormMethod.Post, new { id = "MyForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+     <input type="hidden" name="gruppoId" value="@Model.Gruppo.gruppoId " />
+    <input type="hidden" name="userId" value="@((Model.Utenti as List<MyUsers.Models.MyUser>)[0].userId) " />
+    
+    
+    <div data-role="controlgrup" data-type="horizontal" data-mini="true">
+        <a href="@Url.Action("Edit", "Groups",new { id = Model.Gruppo.gruppoId })"  class="ui-btn-inline ui-btn ui-corner-all ui-mini"   >Annulla</a>
+        <input type="submit" value="Elimina" data-inline="true" data-mini="true"  />
+    </div>
+    
+    
+}

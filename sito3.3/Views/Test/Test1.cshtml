@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Test1";
+    Layout = "~/Views/Shared/MasterPageMobile.cshtml";
+}
+
+<h2>Test1</h2>
+
+
+
+<a href="#popupParis" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="@Url.Content("~/Content/Images/Shared/unavailable.jpg")" alt="Paris, France" style="width:30%"></a>
+<a href="#popupSydney" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="@Url.Content("~/Content/Images/Shared/unavailable.jpg")" alt="Sydney, Australia" style="width:30%"></a>
+<a href="#popupNYC" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="@Url.Content("~/Content/Images/Shared/unavailable.jpg")" alt="New York, USA" style="width:30%"></a>
+
+<div data-role="popup" id="popupParis" data-overlay-theme="a" data-theme="d" data-corners="false">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="@Url.Content("~/Content/Images/Shared/unavailable.jpg")" style="max-height:512px;" alt="Paris, France">
+</div>
+<div data-role="popup" id="popupSydney" data-overlay-theme="a" data-theme="d" data-corners="false">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="@Url.Content("~/Content/Images/Shared/unavailable.jpg")" style="max-height:512px;" alt="Sydney, Australia">
+</div>
+<div data-role="popup" id="popupNYC" data-overlay-theme="a" data-theme="d" data-corners="false">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="@Url.Content("~/Content/Images/Shared/unavailable.jpg")" style="max-height:512px;" alt="New York, USA">
+</div>
+
+
+<hr />
+
+
+
+
+
+<ul data-role="listview" data-inset="true">
+    <li><a href="#">
+        <img src="@Url.Content("~/Content/Images/Shared/unavailable.jpg")">
+        <h2>iOS 6.1</h2>
+        <p>Apple released iOS 6.1</p>
+        <p class="ui-li-aside">iOS</p>
+    </a></li>
+    <li><a href="#">
+        <img src="@Url.Content("~/Content/Images/Shared/unavailable.jpg")">
+        <h2>BlackBerry 10</h2>
+        <p>BlackBerry launched the Z10 and Q10 with the new BB10 OS</p>
+        <p class="ui-li-aside">BlackBerry</p>
+    </a></li>
+    <li><a href="#">
+        <img src="@Url.Content("~/Content/Images/Shared/unavailable.jpg")">
+        <h2>WP 7.8</h2>
+        <p>Nokia rolls out WP 7.8 to Lumia 800</p>
+        <p class="ui-li-aside">Windows Phone</p>
+    </a></li>
+    <li><a href="#">
+        <img src="@Url.Content("~/Content/Images/Shared/unavailable.jpg")">
+        <h2>Galaxy</h2>
+        <p>New Samsung Galaxy Express</p>
+        <p class="ui-li-aside">Samsung</p>
+    </a></li>
+    <li><a href="#">
+        <img src="@Url.Content("~/Content/Images/Shared/unavailable.jpg")">
+        <h2>Nexus 7</h2>
+        <p>Rumours about new full HD Nexus 7</p>
+        <p class="ui-li-aside">Android</p>
+    </a></li>
+    <li><a href="#">
+        <img src="@Url.Content("~/Content/Images/Shared/unavailable.jpg")">
+        <h2>Firefox OS</h2>
+        <p>ZTE to launch Firefox OS smartphone at MWC</p>
+        <p class="ui-li-aside">Firefox</p>
+    </a></li>
+    <li><a href="#">
+        <img src="@Url.Content("~/Content/Images/Shared/unavailable.jpg")">
+        <h2>Tizen</h2>
+        <p>First Samsung phones with Tizen can be expected in 2013</p>
+        <p class="ui-li-aside">Tizen</p>
+    </a></li>
+    <li><a href="#">
+        <h2>Symbian</h2>
+        <p>Nokia confirms the end of Symbian</p>
+        <p class="ui-li-aside">Symbian</p>
+    </a></li>
+</ul>

@@ -1,0 +1,49 @@
+﻿@model MyUsers.Models.SearchGroups
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/MasterPageAdminMobile.cshtml";
+
+    WebGrid wGrid = new WebGrid(null, rowsPerPage: Model.PageSize, defaultSort: "NOME", canPage: false);
+    wGrid.Bind(Model.Gruppi, rowCount: Model.TotalRows, autoSortAndPage: false);
+}
+
+<h2>Gruppi</h2>
+
+<a href="@Url.Action("Create", "Groups")"  data-icon="plus"  data-inline="true" data-mini="true"  data-role="button"  >Crea un nuovo gruppo</a>
+
+
+
+
+@if (Model.TotalRows == 0)
+{
+    <h3>Non è stato trovato nessun gruppo. Modificare i filtri di ricerca.</h3>
+}
+else
+{
+
+    <div style="margin-top: 20px;">
+        @wGrid.GetHtml(
+         fillEmptyRows: false,
+            tableStyle: "MyTable",
+            rowStyle: "ui-bar-a",
+            alternatingRowStyle: "ui-bar-a",
+                headerStyle: "ui-bar-b",
+                footerStyle: "ui-bar-a",
+                htmlAttributes: new { data_role = "table", id = "MyWebGrid" },
+                columns: new[]{
+                     wGrid.Column ("Nome","", canSort  : true),
+                    wGrid.Column ("", header :"Actions", 
+                          format:@<text>
+        <a class="ui-btn-inline ui-btn ui-icon-info ui-btn-icon-notext ui-corner-all"   href="@Url.Action("Details", "Groups", new { id = item.gruppoId })">Info</a>
+        <a class="ui-btn-inline ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all" href="@Url.Action("Delete", "Groups", new { id = item.gruppoId })">Delete</a>
+        </text>, canSort : false)
+        })
+
+        @{Html.RenderPartial("Paging", Model);}
+    </div>
+    
+    
+    
+    
+
+}

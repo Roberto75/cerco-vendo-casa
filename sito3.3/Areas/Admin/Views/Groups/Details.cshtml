@@ -1,0 +1,123 @@
+﻿@model MyWebApplication.Areas.Admin.Models.MyGroupModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/MasterPageAdminMobile.cshtml";
+}
+
+<h2>Gruppo: @Model.Gruppo.nome (id: @Model.Gruppo.gruppoId)</h2>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script>
+    $(function () {
+        $("#tabs").tabs();
+    });
+</script>
+
+
+
+
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Dettagli</a></li>
+        <li><a href="#tabs-2">Utenti</a></li>
+        <li><a href="#tabs-3">Ruoli</a></li>
+         <li><a href="#tabs-4">Utenti Async</a></li>
+    </ul>
+    <div id="tabs-1">
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <div class="ui-bar ui-bar-a">Nome:</div>
+            </div>
+            <div class="ui-block-b">
+                <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Gruppo.nome)</div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="tabs-2">
+         @if (Model.Utenti.Count() == 0)
+        {
+            <h3>Nessun utente associato</h3>
+        }
+        else
+        {
+             <br />
+            <ul data-role="listview">
+                @foreach (MyUsers.Models.MyUser u in Model.Utenti )
+                {
+                    <li> <a href="@Url.Action("Details", "Users", new  { id = u.userId })"> @(u.login)</a></li>
+                }
+            </ul>
+        }
+    </div>
+
+
+
+    <div id="tabs-3">
+
+        @if (Model.Gruppo.Ruoli.Count() == 0)
+        {
+            <h3>Nessun ruolo associato</h3>
+        }
+        else
+        {
+            <br />
+            <ul data-role="listview">
+                @foreach (MyUsers.Models.MyRole p in Model.Gruppo.Ruoli)
+                {
+                    <li data-icon="false"><a href="#" >@(p.nome)</a></li>
+                }
+            </ul>
+        }
+    </div>
+
+
+     <div id="tabs-4">
+        <p>
+            Clicca su "Cerca" per visualizzare tutti gli utenti associati al gruppo:  
+            <input type="button" id="button" data-inline="true" data-mini="true" value="Cerca" />
+        </p>
+
+
+        <div id="usersList">
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<div data-role="controlgrup" data-type="horizontal" data-mini="true">
+    <a href="@Url.Action("Index", "Groups")" class="ui-btn-inline ui-btn ui-corner-all">Torna alla lista</a>
+    <a href="@Url.Action("Edit", "Groups", new { id = Model.Gruppo.gruppoId })" class="ui-btn ui-icon-edit ui-btn-icon-left ui-btn-inline ui-corner-all">Modifica</a>
+</div>
+
+
+
+
+<script>
+    $(function () {
+        //alert("ready");
+
+        $("#button").click(function () {
+            //  alert("click");
+            $.ajax({
+                type: "GET",
+                url: "/Groups/Users/@Model.Gruppo.gruppoId",
+                dataType: "html",
+                success: function (resultdata) {
+                    $('#usersList').html(resultdata);
+                }
+            });
+        });
+
+    });
+</script>
+
+
+
+
