@@ -10,11 +10,6 @@ namespace MyWebApplication.Areas.Admin.Controllers
 {
     public class MyBaseController : System.Web.Mvc.Controller
     {
-
-
-
-
-
         protected override void OnAuthorization(System.Web.Mvc.AuthorizationContext filterContext)
         {
 
@@ -68,6 +63,22 @@ namespace MyWebApplication.Areas.Admin.Controllers
                            ReturnUrl = filterContext.HttpContext.Request.RawUrl
                        }));
             }
+
+
+
+            if (System.Web.HttpContext.Current.User.Identity.Name != "roberto.rutigliano")
+            {
+                filterContext.Result = new RedirectToRouteResult(
+                   new System.Web.Routing.RouteValueDictionary(
+                       new
+                       {
+                           area = "Admin",
+                           controller = "Admin",
+                           action = "AccessDenied"                           
+                       }));
+
+            }
+
 
             //base.OnAuthorization(filterContext);
 

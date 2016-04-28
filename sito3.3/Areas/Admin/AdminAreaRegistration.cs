@@ -18,7 +18,7 @@ namespace MyWebApplication.Areas.Admin
               name:  "Admin_default",
               url:  "Admin/{controller}/{action}/{id}",
               defaults:  new { controller = "Admin", action = "Index", id = UrlParameter.Optional },
-                namespaces: new[] { "MyWebApplication.Areas.Controllers" }
+                namespaces: new[] { "MyWebApplication.Areas.Admin.Controllers" }
             );
         }
     }

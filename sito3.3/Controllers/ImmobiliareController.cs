@@ -8,21 +8,17 @@ using System.Diagnostics;
 
 namespace MyWebApplication.Controllers
 {
-    public class ImmobiliareController : Controller
+    public class ImmobiliareController : MyBaseController
     {
+        private Annunci.ImmobiliareManager _manager = new Annunci.ImmobiliareManager("immobiliare");
 
-        private Annunci.ImmobiliareManager manager = new Annunci.ImmobiliareManager("immobiliare");
+        public const int MaxWidthImage = 500;
+        public const int MaxHeightImage = 500;
 
-        public const int _maxWidthImage = 500;
-        public const int _maxHeightImage = 500;
+        public const int WidthThumbnail = 200;
+        public const int HeightThumbnail = 200;
 
-        public const int _widthThumbnail = 200;
-        public const int _heightThumbnail = 200;
-
-
-
-        // GET: /Immobiliare/
-
+        [AllowAnonymous]
         public ActionResult Index(Annunci.Models.SearchImmobili model, int page = 1, string sort = "ANNUNCIO.date_added", string sortDir = "DESC", int pageSize = 10)
         {
             int totalRecords;
@@ -31,14 +27,14 @@ namespace MyWebApplication.Controllers
 
             List<Annunci.Models.Immobile> risultato;
 
-            manager.mOpenConnection();
+            _manager.mOpenConnection();
             try
             {
-                risultato = manager.getList(model, out totalRecords, model.PageSize, model.PageNumber, model.Sort, model.SortDir);
+                risultato = _manager.getList(model, out totalRecords, model.PageSize, model.PageNumber, model.Sort, model.SortDir);
             }
             finally
             {
-                manager.mCloseConnection();
+                _manager.mCloseConnection();
             }
 
 
@@ -124,10 +120,10 @@ namespace MyWebApplication.Controllers
         public ActionResult Details(long id = 0)
         {
             Annunci.Models.Immobile immobile = null;
-            manager.mOpenConnection();
+            _manager.mOpenConnection();
             try
             {
-                immobile = manager.getImmobile(id);
+                immobile = _manager.getImmobile(id);
 
                 if (immobile == null)
                 {
@@ -137,21 +133,22 @@ namespace MyWebApplication.Controllers
                 //CLICK
                 if (User.Identity.IsAuthenticated)
                 {
-                    if ((User.Identity as MyUsers.MyCustomIdentity).UserId != immobile.userId)
+                    //if ((User.Identity as MyUsers.MyCustomIdentity).UserId != immobile.userId)
+                    if (MySessionData.UserId != immobile.userId)
                     {
                         //se non si tratta di un mio annuncio ...
-                        manager.annuncioAddClick(id);
+                        _manager.annuncioAddClick(id);
                     }
                 }
                 else
                 {
                     //nel caso di connessioni anonime non posso fare nulla
-                    manager.annuncioAddClick(id);
+                    _manager.annuncioAddClick(id);
                 }
 
 
                 // PHOTO
-                Annunci.PhotoManager photoManager = new Annunci.PhotoManager(manager.mGetConnection());
+                Annunci.PhotoManager photoManager = new Annunci.PhotoManager(_manager.mGetConnection());
                 List<Annunci.Models.MyPhoto> photos;
                 photos = photoManager.getMyPhotosIsNotPlanimetria(id);
                 Debug.WriteLine("Trovate {0} immagini", photos.Count);
@@ -198,12 +195,12 @@ namespace MyWebApplication.Controllers
             }
             finally
             {
-                manager.mCloseConnection();
+                _manager.mCloseConnection();
             }
             return View(immobile);
         }
 
-
+        [AllowAnonymous]
         public ActionResult GetMap(Annunci.Models.SearchImmobili model)
         {
 
@@ -211,17 +208,17 @@ namespace MyWebApplication.Controllers
 
             int totalRecords;
 
-            manager.mOpenConnection();
+            _manager.mOpenConnection();
 
             List<Annunci.Models.Immobile> risultato;
 
             try
             {
-                risultato = manager.getList(model, out totalRecords, 0, 0, "ANNUNCIO.date_added", "");
+                risultato = _manager.getList(model, out totalRecords, 0, 0, "ANNUNCIO.date_added", "");
             }
             finally
             {
-                manager.mCloseConnection();
+                _manager.mCloseConnection();
             }
 
 
@@ -238,7 +235,7 @@ namespace MyWebApplication.Controllers
         {
 
             Debug.WriteLine("*** FILTRI DI RICERCA ***");
-            Debug.WriteLine("SORT: " + model.Sort + " DIR: " + model.SortDir );
+            Debug.WriteLine("SORT: " + model.Sort + " DIR: " + model.SortDir);
 
             if (model.Sort == "date_added" || model.Sort == "date")
             {
@@ -480,7 +477,8 @@ namespace MyWebApplication.Controllers
 
             // PREVIEW
             model.dataInserimento = DateTime.Now;
-            model.login = (User.Identity as MyUsers.MyCustomIdentity).Login;
+            //   model.login = (User.Identity as MyUsers.MyCustomIdentity).Login;
+            model.login = MySessionData.Login;
 
             //Debug.WriteLine("Nota:" + Request["nota"]);
             //Debug.WriteLine("Nota:" + model.nota);
@@ -521,7 +519,7 @@ namespace MyWebApplication.Controllers
             }
 
 
-            manager.mOpenConnection();
+            _manager.mOpenConnection();
 
             //Debug.WriteLine("Nota:" + Request["nota"]);
             //Debug.WriteLine("Nota:" + model.nota);
@@ -529,11 +527,12 @@ namespace MyWebApplication.Controllers
             try
             {
                 model.nota = HttpUtility.HtmlDecode(model.nota);
-                manager.insertAnnuncio(model, (User.Identity as MyUsers.MyCustomIdentity).UserId);
+                //  _manager.insertAnnuncio(model, (User.Identity as MyUsers.MyCustomIdentity).UserId);
+                _manager.insertAnnuncio(model, MySessionData.UserId);
             }
             finally
             {
-                manager.mCloseConnection();
+                _manager.mCloseConnection();
             }
 
 
@@ -572,17 +571,17 @@ namespace MyWebApplication.Controllers
 
             try
             {
-                manager.mOpenConnection();
+                _manager.mOpenConnection();
 
                 Annunci.Models.Immobile immobile;
-                immobile = manager.getImmobile(annuncioId);
+                immobile = _manager.getImmobile(annuncioId);
 
                 model.annuncio = immobile;
 
                 if (quote != null)
                 {
                     Annunci.Models.Risposta risposta;
-                    risposta = manager.getRisposta((long)quote);
+                    risposta = _manager.getRisposta((long)quote);
                     model.testo = "<blockquote><hr/><b>" + risposta.login + "</b> scrive: </br></br>" + risposta.testo + "<hr/></blockquote>";
                     model.rispostaId = (long)quote;
                 }
@@ -603,7 +602,7 @@ namespace MyWebApplication.Controllers
             }
             finally
             {
-                manager.mCloseConnection();
+                _manager.mCloseConnection();
             }
 
             return model;
@@ -616,7 +615,8 @@ namespace MyWebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ReplyPost(long annuncioId, string testo, long? rispostaId, long? trattativaId)
         {
-            long userId = (User.Identity as MyUsers.MyCustomIdentity).UserId;
+            //long userId = (User.Identity as MyUsers.MyCustomIdentity).UserId;
+            long userId = MySessionData.UserId;
 
 
             if (String.IsNullOrEmpty(testo.Trim()))
@@ -636,15 +636,15 @@ namespace MyWebApplication.Controllers
 
                 try
                 {
-                    manager.mOpenConnection();
+                    _manager.mOpenConnection();
 
-                    Annunci.TrattativaManager managerVb = new Annunci.TrattativaManager(manager.mGetConnection());
+                    Annunci.TrattativaManager managerVb = new Annunci.TrattativaManager(_manager.mGetConnection());
 
 
                     if (rispostaId == null || rispostaId == -1)
                     {
                         //' si tratta di una nuova trattativa!!
-                        trattativaId = manager.insertTrattativa(annuncioId, userId);
+                        trattativaId = _manager.insertTrattativa(annuncioId, userId);
                         managerVb.rispondi((long)trattativaId, userId, testo);
                     }
                     else
@@ -654,7 +654,7 @@ namespace MyWebApplication.Controllers
                 }
                 finally
                 {
-                    manager.mCloseConnection();
+                    _manager.mCloseConnection();
                 }
             }
 
@@ -672,17 +672,17 @@ namespace MyWebApplication.Controllers
         {
 
 
-            manager.mOpenConnection();
+            _manager.mOpenConnection();
 
             List<Annunci.Models.Trattativa> risultato;
 
             try
             {
-                risultato = manager.getListTrattative((User.Identity as MyUsers.MyCustomIdentity).UserId);
+                risultato = _manager.getListTrattative(MySessionData.UserId);
             }
             finally
             {
-                manager.mCloseConnection();
+                _manager.mCloseConnection();
             }
 
 
@@ -699,31 +699,31 @@ namespace MyWebApplication.Controllers
             Debug.WriteLine("trattativaId: " + id);
 
 
-            MyWebApplication.Models.ModelTrattativa model = new Models.ModelTrattativa();
+            Models.ModelTrattativa model = new Models.ModelTrattativa();
 
 
 
-            manager.mOpenConnection();
+            _manager.mOpenConnection();
 
             Annunci.Models.Trattativa risultato;
 
             try
             {
-                risultato = manager.getTrattativa((long)id);
+                risultato = _manager.getTrattativa((long)id);
 
                 if (risultato != null)
                 {
-                    manager.setRisposteFromTrattativa(risultato);
+                    _manager.setRisposteFromTrattativa(risultato);
                 }
 
                 model.trattativa = risultato;
 
-                model.immobile = manager.getImmobile(risultato.annuncioId);
+                model.immobile = _manager.getImmobile(risultato.annuncioId);
 
             }
             finally
             {
-                manager.mCloseConnection();
+                _manager.mCloseConnection();
             }
 
 
@@ -742,11 +742,10 @@ namespace MyWebApplication.Controllers
 
 
 
-        [Authorize]
+
         public ActionResult MyAnnunci()
         {
-
-            manager.mOpenConnection();
+            _manager.mOpenConnection();
 
             List<Annunci.Models.Immobile> risultato;
 
@@ -754,20 +753,32 @@ namespace MyWebApplication.Controllers
 
             try
             {
-                risultato = manager.getListAnnunci((User.Identity as MyUsers.MyCustomIdentity).UserId);
 
-                Annunci.AnnuncioManager annuncioManager = new Annunci.AnnuncioManager(manager.mGetConnection());
+                //if (User.Identity is System.Web.Security.FormsIdentity)
+                //{
+                //    risultato = manager.getListAnnunci((User.Identity as System.Web.Security.FormsIdentity)..UserId);
+                //}
+
+                //if (User.Identity is MyUsers.MyCustomIdentity)
+                //{
+                //    risultato = manager.getListAnnunci((User.Identity as MyUsers.MyCustomIdentity).UserId);
+                //}
+
+
+                risultato = _manager.getListAnnunci(MySessionData.UserId);
+
+                Annunci.AnnuncioManager annuncioManager = new Annunci.AnnuncioManager(_manager.mGetConnection());
                 long numeroRisposte;
                 foreach (Annunci.Models.Immobile i in risultato)
                 {
 
-                    numeroRisposte = annuncioManager.getNumeroRisposteOfAnnuncio(i.immobileId, (User.Identity as MyUsers.MyCustomIdentity).UserId);
+                    numeroRisposte = annuncioManager.getNumeroRisposteOfAnnuncio(i.immobileId, MySessionData.UserId);
                     hashtableRisposte.Add(i.immobileId, numeroRisposte);
                 }
             }
             finally
             {
-                manager.mCloseConnection();
+                _manager.mCloseConnection();
             }
 
             ViewData["hashtableRisposte"] = hashtableRisposte;
@@ -779,27 +790,27 @@ namespace MyWebApplication.Controllers
         {
             Debug.WriteLine("MyAnnuncioId: " + id);
 
-            MyWebApplication.Models.UpdateModel model;
+            Models.UpdateModel model;
             model = new Models.UpdateModel();
 
             Annunci.Models.Immobile immobile = null;
-            manager.mOpenConnection();
+            _manager.mOpenConnection();
             try
             {
-                immobile = manager.getImmobile(id);
+                immobile = _manager.getImmobile(id);
 
                 if (immobile == null)
                 {
                     return HttpNotFound();
                 }
 
-                if (immobile.userId != (User.Identity as MyUsers.MyCustomIdentity).UserId)
+                if (immobile.userId != MySessionData.UserId)
                 {
                     return RedirectToAction("NotAuthorized", "Home");
                 }
 
                 // PHOTO
-                Annunci.PhotoManager photoManager = new Annunci.PhotoManager(manager.mGetConnection());
+                Annunci.PhotoManager photoManager = new Annunci.PhotoManager(_manager.mGetConnection());
 
                 List<Annunci.Models.MyPhoto> photos;
                 photos = photoManager.getMyPhotosIsNotPlanimetria(id);
@@ -808,7 +819,7 @@ namespace MyWebApplication.Controllers
 
                 if (Request.IsAjaxRequest())
                 {
-                    MyWebApplication.Models.GalleryModel modelGallery = new Models.GalleryModel();
+                    Models.GalleryModel modelGallery = new Models.GalleryModel();
                     modelGallery.externalId = immobile.immobileId;
                     modelGallery.photos = photos;
                     return PartialView("GalleryEdit", modelGallery);
@@ -818,7 +829,7 @@ namespace MyWebApplication.Controllers
             }
             finally
             {
-                manager.mCloseConnection();
+                _manager.mCloseConnection();
             }
 
             model.immobile = immobile;
@@ -897,20 +908,20 @@ namespace MyWebApplication.Controllers
             try
             {
 
-                manager.mOpenConnection();
+                _manager.mOpenConnection();
 
-                if (manager.updateAnnuncioDescrizione((long)annuncioId, nota, false) > 0)
+                if (_manager.updateAnnuncioDescrizione((long)annuncioId, nota, false) > 0)
                 {
 
                     System.Data.DataTable dt;
-                    dt = manager.getEmailUtentiInTrattativa((long)annuncioId);
+                    dt = _manager.getEmailUtentiInTrattativa((long)annuncioId);
 
 
                     if (dt.Rows.Count > 0)
                     {
 
                         Annunci.Models.Immobile i;
-                        i = manager.getImmobile((long)annuncioId);
+                        i = _manager.getImmobile((long)annuncioId);
 
                         Annunci.ImmobiliareMailMessageManager mail = new Annunci.ImmobiliareMailMessageManager(System.Configuration.ConfigurationManager.AppSettings["application.name"], System.Configuration.ConfigurationManager.AppSettings["application.url"]);
                         mail.Subject = System.Configuration.ConfigurationManager.AppSettings["application.name"] + " - Modifica annuncio";
@@ -929,7 +940,7 @@ namespace MyWebApplication.Controllers
             }
             finally
             {
-                manager.mCloseConnection();
+                _manager.mCloseConnection();
             }
 
             return RedirectToAction("MyAnnuncio", new { id = annuncioId });
@@ -964,20 +975,20 @@ namespace MyWebApplication.Controllers
             try
             {
 
-                manager.mOpenConnection();
+                _manager.mOpenConnection();
 
-                if (manager.updateAnnuncioPrezzo((long)annuncioId, (decimal)dNuovoPrezzo, false) > 0)
+                if (_manager.updateAnnuncioPrezzo((long)annuncioId, (decimal)dNuovoPrezzo, false) > 0)
                 {
 
                     System.Data.DataTable dt;
-                    dt = manager.getEmailUtentiInTrattativa((long)annuncioId);
+                    dt = _manager.getEmailUtentiInTrattativa((long)annuncioId);
 
 
                     if (dt.Rows.Count > 0)
                     {
 
                         Annunci.Models.Immobile i;
-                        i = manager.getImmobile((long)annuncioId);
+                        i = _manager.getImmobile((long)annuncioId);
 
                         Annunci.ImmobiliareMailMessageManager mail = new Annunci.ImmobiliareMailMessageManager(System.Configuration.ConfigurationManager.AppSettings["application.name"], System.Configuration.ConfigurationManager.AppSettings["application.url"]);
                         mail.Subject = System.Configuration.ConfigurationManager.AppSettings["application.name"] + " - Modifica annuncio";
@@ -996,7 +1007,7 @@ namespace MyWebApplication.Controllers
             }
             finally
             {
-                manager.mCloseConnection();
+                _manager.mCloseConnection();
             }
 
             return RedirectToAction("MyAnnuncio", new { id = annuncioId });
@@ -1014,7 +1025,7 @@ namespace MyWebApplication.Controllers
 
             Debug.WriteLine("AddImage: " + annuncioId + " " + Request["MyFile"]);
 
-            MyWebApplication.Models.JsonMessageModel model = new Models.JsonMessageModel();
+            Models.JsonMessageModel model = new Models.JsonMessageModel();
 
             if (MyFile == null)
             {
@@ -1068,14 +1079,14 @@ namespace MyWebApplication.Controllers
             }
 
 
-            if (myImage.Height > _maxHeightImage)
+            if (myImage.Height > MaxHeightImage)
             {
-                myImage = Annunci.PhotoManager.resizeImageHeight(myImage, _maxHeightImage);
+                myImage = Annunci.PhotoManager.resizeImageHeight(myImage, MaxHeightImage);
             }
 
-            if (myImage.Width > _maxWidthImage)
+            if (myImage.Width > MaxWidthImage)
             {
-                myImage = Annunci.PhotoManager.resizeImageWidth(myImage, _maxWidthImage);
+                myImage = Annunci.PhotoManager.resizeImageWidth(myImage, MaxWidthImage);
             }
 
             //Salvo l'immagine originale su file system
@@ -1085,7 +1096,7 @@ namespace MyWebApplication.Controllers
 
             //'creo la thumbnail con altezza massima di 120px ... mantenendo le proporzioni 
             System.Drawing.Image thumbnail;
-            thumbnail = Annunci.PhotoManager.resizeImageHeight(myImage, _heightThumbnail);
+            thumbnail = Annunci.PhotoManager.resizeImageHeight(myImage, HeightThumbnail);
             pathFile = folder + "thumbnail_" + System.IO.Path.GetFileName(MyFile.FileName);
             thumbnail.Save(Server.MapPath(pathFile));
 
@@ -1130,20 +1141,20 @@ namespace MyWebApplication.Controllers
         {
             if (annuncioId == null)
             {
-                throw new MyManagerCSharp.MyException(MyManagerCSharp.MyException.ErrorNumber.ParametroNull, "DeleteExecute");
+                throw new MyManagerCSharp.MyException(MyManagerCSharp.MyException.ErrorNumber.ParametroNull, "ResetContatore");
             }
 
             try
             {
-                manager.mOpenConnection();
-                manager.resetContatoreParziale((long)annuncioId);
+                _manager.mOpenConnection();
+                _manager.resetContatoreParziale((long)annuncioId);
             }
             finally
             {
-                manager.mCloseConnection();
+                _manager.mCloseConnection();
             }
 
-            MyWebApplication.Models.JsonMessageModel model = new Models.JsonMessageModel();
+            Models.JsonMessageModel model = new Models.JsonMessageModel();
             model.esito = "Success";
             model.messaggio = "Operazione conlusa con successo";
             return Json(model);

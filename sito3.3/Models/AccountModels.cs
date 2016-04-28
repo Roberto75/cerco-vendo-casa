@@ -7,9 +7,7 @@ using System.Web.Security;
 
 namespace MyWebApplication.Models
 {
-    
 
-  
     public class UserProfile
     {
         public long userId { get; set; }
@@ -35,14 +33,14 @@ namespace MyWebApplication.Models
         public string OldPassword { get; set; }
 
         [Required]
-       // [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        // [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "New password")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
-     //   [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        //   [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -65,10 +63,10 @@ namespace MyWebApplication.Models
         [Required(ErrorMessage = "La login è un valore obbligatorio")]
         public string login { get; set; }
 
-        [Required ( ErrorMessage = "L'indirizzo email è un valore obbligatorio")]
+        [Required(ErrorMessage = "L'indirizzo email è un valore obbligatorio")]
         public string email { get; set; }
 
-       
+
         public string nome { get; set; }
         public string cognome { get; set; }
         public string ragioneSociale { get; set; }
@@ -76,7 +74,7 @@ namespace MyWebApplication.Models
 
         //A= Agenzia, P = Persona fisica
         public string tipoUtenza { get; set; }
-     
+
 
 
         //[Required]
@@ -100,7 +98,7 @@ namespace MyWebApplication.Models
         [Display(Name = "User name")]
         public string Login { get; set; }
 
-         [Required]
+        [Required]
         public string Email { get; set; }
     }
 

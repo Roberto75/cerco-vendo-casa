@@ -148,7 +148,7 @@
                     if (p.Path.StartsWith("http:"))
                     {
                     <li><a href="@p.Path" data-lightbox="gallery" title="@p.Note ">
-                        <img src="@p.Path" alt="@p.Note" width="@MyWebApplication.Controllers.ImmobiliareController._widthThumbnail" height="@MyWebApplication.Controllers.ImmobiliareController._heightThumbnail" /></a></li>
+                        <img src="@p.Path" alt="@p.Note" width="@MyWebApplication.Controllers.ImmobiliareController.WidthThumbnail" height="@MyWebApplication.Controllers.ImmobiliareController.HeightThumbnail" /></a></li>
                     }
 
                     else
@@ -158,7 +158,7 @@
                         if (!myFile.Exists)
                         {
                     <li><a href="#">
-                        <img src="@Url.Content("~\\Content\\Images\\Shared\\unavailable.jpg")" alt="Immagine non disponibile" width="@MyWebApplication.Controllers.ImmobiliareController._widthThumbnail" height="@MyWebApplication.Controllers.ImmobiliareController._heightThumbnail" /></a></li>
+                        <img src="@Url.Content("~\\Content\\Images\\Shared\\unavailable.jpg")" alt="Immagine non disponibile" width="@MyWebApplication.Controllers.ImmobiliareController.WidthThumbnail" height="@MyWebApplication.Controllers.ImmobiliareController.HeightThumbnail" /></a></li>
          
                             
                         }
