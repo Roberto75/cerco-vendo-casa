@@ -1,23 +1,87 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    MyManagerCSharp.MySessionData sessionData = (Session["MySessionData"] as MyManagerCSharp.MySessionData);
+
+    bool IsInGroupAdministrators = false;
+
+    if (sessionData != null)
+    {
+        // IsInGroupAdministrators = sessionData.IsInGroupAdministrators();
+
+        if (sessionData.Login == "roberto.rutigliano")
+        {
+            IsInGroupAdministrators = true;
+        }
+    }
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>@ViewBag.Title</title>
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
-    <link rel="stylesheet" href="@Url.Content("~/Content/Style/Admin.css")" />
-   
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 
-    
-    <script>
+    <link rel="stylesheet" href="@Url.Content("~/Content/Style/Admin.css")" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/Style/themes/Admin.min.css")" />
+    <link rel="stylesheet" media="all" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+
+    @if (MyManagerCSharp.RegularExpressionManager.isOldBrowser(Request.UserAgent))
+    {
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    }
+    else
+    {
+        <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    }
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/paging.js")"></script>
+
+    <!-- NOTY -->
+    <script type="text/javascript" src="@Url.Content("~/Scripts/noty/packaged/jquery.noty.packaged.min.js")"></script>
+    <link rel="stylesheet" media="all" href="@Url.Content("~/Content/Style/animate.css")" />
+
+
+    <script type="text/javascript" src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+
+    <script type="text/javascript">
         $(document).on("pageinit", function () {
             // alert("mobileinit");
             $.mobile.ajaxEnabled = false;
         });
+
+        function MyNoty(tipo, messaggio) {
+
+            var timeOut;
+            var layOut;
+
+            if (tipo == 'error') {
+                timeOut = false;
+                layOut = 'top';
+            } else {
+                timeOut = 3000;
+                layOut = 'top';
+            }
+
+
+            var n = noty({
+                text: messaggio,
+                theme: 'relax',
+                type: tipo,
+                layout: layOut,
+                timeout: timeOut,
+                buttons: false,
+                animation: {
+                    open: 'animated flipInX', // Animate.css class names
+                    close: 'animated flipOutX', // Animate.css class names
+                    easing: 'swing', // unavailable - no need
+                    speed: 500 // unavailable - no need
+                }
+            });
+        };
     </script>
 
 </head>
@@ -25,26 +89,75 @@
     <div data-role="page">
 
         <div data-role="header" style="background-color: white; min-height: 60px; overflow: hidden;">
-            <nav class="menuTop">
-                <ul>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a href="#nav-panel" data-icon="bars" class="ui-btn-right" data-iconpos="notext">Menu</a>
+            }
+
+            <span>
+                <a href="@Url.Action("Index", "Admin")" class="ui-btn-left">
+                    <img src="@Url.Content("~/Content/Images/marioh62.png")" height="55">
+                </a>
+            </span>
+
+
+            @if (IsSectionDefined("Menu"))
+            {
+                @RenderSection("Menu", required: false);
+            }
+            else
+            {
+                <div id="menuTop" data-role="controlgroup" data-type="horizontal" style="text-align: right;margin-top:3.8em;">
                     @if (Request.IsAuthenticated)
                     {
-                        <li><a href="@Url.Action("Index", "Admin")"          >Home</a></li>
-                        <li><a href="@Url.Action("Index", "Users")"         >Utenti</a></li>
-                        <li><a href="@Url.Action("Index", "Groups")"         >Gruppi</a></li>
-                        <li><a href="@Url.Action("Index", "Immobiliare")"    >Immobiliare</a></li>
-                        <li><a href="@Url.Action("Index", "Test")"    >Test</a></li>
-                        <li><a href="#"        >@User.Identity.Name </a></li>
-                        <li><a href="@Url.Action("MD5", "Admin")"    >MD5</a></li>
-                        <li><a href="@Url.Action("LogOff", "Account")"       >Log Off  </a></li>
+                        if (IsInGroupAdministrators)
+                        {
+                            <a data-role="button" href="@Url.Action("Index", "Admin")">Home</a>
+                            <a data-role="button" href="@Url.Action("Index", "Users")">Utenti</a>
+                            <a data-role="button" href="@Url.Action("Index", "Groups")">Gruppi</a>
+                            <a data-role="button" href="@Url.Action("Index", "Immobiliare")">Immobiliare</a>
+                            <a data-role="button" href="@Url.Action("Index", "Test")">Test</a>
+                        }
+
+                        <a href="@Url.Action("MD5", "Admin")" data-role="button">MD5</a>
+                        <a href="@Url.Action("Manage", "Account")" data-role="button">@User.Identity.Name</a>
+                        <a href="@Url.Action("LogOff", "Account")" data-role="button">Log Off</a>
                     }
-                </ul>
-            </nav>
+                    else
+                    {
+                        <a href="@Url.Action("Login", "Account")" data-role="button">Login</a>
+                    }
+                </div>
+            }
+
+
         </div>
         <div data-role="content">
             @RenderBody()
         </div>
+  
         <div data-role="footer">Footer</div>
-    </div>
+
+        <div id="responsive"></div>
+
+
+        <!--nav-panel -->
+        <div data-role="panel" data-position-fixed="false" data-display="overlay" data-theme="a" id="nav-panel">
+            <ul data-role="listview">
+                <li data-icon="delete"><a href="#" data-rel="close">Close menu</a></li>
+                <li><a href="@Url.Action("Index", "Admin")" data-role="button">Home</a></li>
+                <li><a href="@Url.Action("Index", "Users")" data-role="button">Utenti</a></li>
+                <li><a href="@Url.Action("Index", "Groups")" data-role="button">Gruppi</a></li>
+                <li><a href="@Url.Action("Index", "Logs")" data-role="button">Logs</a></li>
+                <li><a href="@Url.Action("Check", "Admin")" data-role="button">Check</a></li>
+                <li><a href="@Url.Action("Database", "Admin")" data-role="button">Database</a></li>
+                <li><a href="@Url.Action("Logoff", "Account")">LogOff</a></li>
+            </ul>
+        </div>
+        <!--/nav-panel -->
+
+
+    </div> <!--/page-->
 </body>
 </html>

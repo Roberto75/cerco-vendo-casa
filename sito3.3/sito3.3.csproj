@@ -12,7 +12,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MyWebApplication</RootNamespace>
-    <AssemblyName>www.cerco-vendo-casa.it</AssemblyName>
+    <AssemblyName>cerco-vendo-casa.it</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -879,6 +879,8 @@
     <Content Include="Global.asax" />
     <Content Include="Note.txt" />
     <Content Include="postinfo.html" />
+    <Content Include="Public\RevoAgent\categorie.xml" />
+    <Content Include="Public\RevoAgent\RevoAgent.xml" />
     <Content Include="robots.txt" />
     <Content Include="Scripts\lightbox-2.6.min.js" />
     <Content Include="Scripts\markerclusterer_packed_2.0.9.js" />
@@ -1015,6 +1017,11 @@
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Users\TabInfoAccount.cshtml" />
     <Content Include="Areas\Admin\Views\Users\TabInfoAnagrafica.cshtml" />
+    <Content Include="Public\RevoAgent\RevoAgent.log" />
+    <Content Include="Public\RevoAgent\RevoAgentException.log" />
+    <Content Include="Public\RevoAgent\Test.log" />
+    <Content Include="Public\RevoAgent\TestException.log" />
+    <None Include="Properties\PublishProfiles\Temp.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

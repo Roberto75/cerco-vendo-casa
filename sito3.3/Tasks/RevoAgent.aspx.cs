@@ -103,23 +103,23 @@ namespace MyWebApplication.Tasks
 
                 //if (manager._contaRecordConErrori > 0)
                 //'{
-                    //'*** EMAIL ***
+                //'*** EMAIL ***
 
 
-                    MyManagerCSharp.MailMessageManager mail = new MyManagerCSharp.MailMessageManager(System.Configuration.ConfigurationManager.AppSettings["application.url"], System.Configuration.ConfigurationManager.AppSettings["application.name"]);
-                    if (isTestMode)
-                    {
-                        mail.Subject = "Test task import RevoAgent";
-                    }
-                    else
-                    {
-                        mail.Subject = "Task import RevoAgent *** ERROR ***";
-                    }
+                MyManagerCSharp.MailMessageManager mail = new MyManagerCSharp.MailMessageManager(System.Configuration.ConfigurationManager.AppSettings["application.url"], System.Configuration.ConfigurationManager.AppSettings["application.name"]);
+                if (isTestMode)
+                {
+                    mail.Subject = "Test task import RevoAgent";
+                }
+                else
+                {
+                    mail.Subject = "Task import RevoAgent *** ERROR ***";
+                }
 
-                    mail.Body = _logInfo.Replace(Environment.NewLine, "<br />");
-                    mail.To(System.Configuration.ConfigurationManager.AppSettings["mail.To.Ccn"]);
-                    //'MY-DEBUGG
-                    mail.send();
+                mail.Body = _logInfo.Replace(Environment.NewLine, "<br />");
+                mail.To(System.Configuration.ConfigurationManager.AppSettings["mail.To.Ccn"]);
+                //'MY-DEBUGG
+                mail.send();
                 //}
             }
             catch (Exception ex)

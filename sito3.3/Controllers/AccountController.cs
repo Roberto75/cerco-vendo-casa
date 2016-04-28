@@ -276,10 +276,6 @@ namespace MyWebApplication.Controllers
 
 
                     }
-
-
-
-
                 }
                 catch (MyManagerCSharp.MyException ex)
                 {

@@ -10,9 +10,9 @@ using System.Diagnostics;
 
 namespace MyWebApplication.Areas.Admin.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : MyBaseController
     {
-        private MyUsers.UserManager manager = new MyUsers.UserManager("utenti");
+        private MyUsers.UserManager _manager = new MyUsers.UserManager("utenti");
 
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -20,6 +20,10 @@ namespace MyWebApplication.Areas.Admin.Controllers
             ViewBag.ReturnUrl = returnUrl;
             LogOnModel model = new LogOnModel();
             model.Password = "";
+#if DEBUG
+            model.UserName = "roberto.rutigliano";
+            model.Password = "r0b3rt0";
+#endif
             return View(model);
         }
 
@@ -39,11 +43,11 @@ namespace MyWebApplication.Areas.Admin.Controllers
                 // MyUsers.UserManager manager = new UserManager("utenti");
                 long userId;
 
-                manager.mOpenConnection();
+                _manager.mOpenConnection();
 
                 try
                 {
-                    userId = manager.isAuthenticated(model.UserName.Trim(), model.Password.Trim());
+                    userId = _manager.isAuthenticated(model.UserName.Trim(), model.Password.Trim());
 
                     if (userId != -1)
                     {
@@ -73,6 +77,17 @@ namespace MyWebApplication.Areas.Admin.Controllers
                         temp = FormsAuthentication.GetRedirectUrl(model.UserName, model.RememberMe);
 
                         Debug.WriteLine("FormsAuthentication.GetRedirectUrl " + temp);
+
+
+                        /** SESSIONE **/
+                        MyManagerCSharp.MySessionData session = new MyManagerCSharp.MySessionData(userId);
+                        session.Login = model.UserName.Trim();
+                        //session.Login = _manager.getLogin(userId);
+                        //   session.Roles = manager.getRoles(userId);
+                        // session.Profili = manager.getProfili(userId);
+                        // session.Groups = manager.getGroupSmall(userId);
+
+                        Session["MySessionData"] = session;
 
                         //System.Web.HttpContext.Current.User = new MyUsers.MyCustomPrincipal(new MyUsers.MyCustomIndentity(userId, model.UserName));
                         // System.Web.HttpContext.Current.
@@ -117,7 +132,7 @@ namespace MyWebApplication.Areas.Admin.Controllers
                 }
                 finally
                 {
-                    manager.mCloseConnection();
+                    _manager.mCloseConnection();
                 }
 
                 if (Url.IsLocalUrl(returnUrl))
@@ -136,17 +151,21 @@ namespace MyWebApplication.Areas.Admin.Controllers
         }
 
 
-        //
-        // POST: /Account/LogOff
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public ActionResult LogOff()
         {
+            TempData["AREA"] = "Admin";
             //WebSecurity.Logout();
             FormsAuthentication.SignOut();
 
-            return RedirectToAction("Index", "Admin");
+            if (MySessionData != null)
+            {
+                MySessionData.LogOff();
+            }
+
+            //            return RedirectToAction("Index", "Admin");
+            return RedirectToAction("Login", "Account");
         }
 
 

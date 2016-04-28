@@ -29,6 +29,7 @@ namespace MyWebApplication.Areas.Admin.Controllers
         }
 
 
+        [AllowAnonymous]
         public ActionResult AccessDenied()
         {
             return View();
