@@ -106,6 +106,10 @@
     <Content Include="Nota.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\MyFramework4.5\MyAnnunciManager\MyAnnunci.csproj">
+      <Project>{cee27564-2c50-49a8-b388-9963c6776f83}</Project>
+      <Name>MyAnnunci</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\MyFramework4.5\MyManagerCSharp\MyManagerCSharp.csproj">
       <Project>{1cfb1797-36c1-4887-b980-747fcc81d6a1}</Project>
       <Name>MyManagerCSharp</Name>
@@ -113,10 +117,6 @@
     <ProjectReference Include="..\..\..\MyFramework4.5\MyManager\MyManager.vbproj">
       <Project>{245337a0-76c0-47a7-91df-8bab4f54e6b9}</Project>
       <Name>MyManager</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AnnunciManager\Annunci.csproj">
-      <Project>{cee27564-2c50-49a8-b388-9963c6776f83}</Project>
-      <Name>Annunci</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

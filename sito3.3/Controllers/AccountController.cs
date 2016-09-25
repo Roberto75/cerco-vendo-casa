@@ -369,7 +369,7 @@ namespace MyWebApplication.Controllers
 
 
 
-
+        [AllowAnonymous]
         public ActionResult ResetPassword()
         {
             ResetPasswordModel model = new ResetPasswordModel();
@@ -404,7 +404,7 @@ namespace MyWebApplication.Controllers
 
                 if (userId == -1)
                 {
-                    ModelState.AddModelError("", "La Login o l'e-mail inserite non sono corrette");
+                    ModelState.AddModelError("", "La Login o l'email inserite non sono corrette");
                     return View(model);
                 }
                 passwordGenerata = _manager.resetPassword(userId);

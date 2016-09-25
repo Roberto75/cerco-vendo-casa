@@ -880,7 +880,6 @@
     <Content Include="Note.txt" />
     <Content Include="postinfo.html" />
     <Content Include="Public\RevoAgent\categorie.xml" />
-    <Content Include="Public\RevoAgent\RevoAgent.xml" />
     <Content Include="robots.txt" />
     <Content Include="Scripts\lightbox-2.6.min.js" />
     <Content Include="Scripts\markerclusterer_packed_2.0.9.js" />
@@ -1031,6 +1030,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\..\..\MyFramework4.5\MyAnnunciManager\MyAnnunci.csproj">
+      <Project>{cee27564-2c50-49a8-b388-9963c6776f83}</Project>
+      <Name>MyAnnunci</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\MyFramework4.5\MyManagerCSharp\MyManagerCSharp.csproj">
       <Project>{1cfb1797-36c1-4887-b980-747fcc81d6a1}</Project>
       <Name>MyManagerCSharp</Name>
@@ -1042,10 +1045,6 @@
     <ProjectReference Include="..\..\..\MyFramework4.5\MyUsers\MyUsers.csproj">
       <Project>{de537bc0-c7b3-4f38-9de2-5757d6d3999e}</Project>
       <Name>MyUsers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AnnunciManager\Annunci.csproj">
-      <Project>{cee27564-2c50-49a8-b388-9963c6776f83}</Project>
-      <Name>Annunci</Name>
     </ProjectReference>
     <ProjectReference Include="..\RevoAgent\RevoAgent.vbproj">
       <Project>{e9f382d8-fe59-482c-93eb-a8f997ff54ce}</Project>

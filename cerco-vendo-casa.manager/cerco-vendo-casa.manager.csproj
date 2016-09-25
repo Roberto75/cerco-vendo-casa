@@ -1,17 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CEE27564-2C50-49A8-B388-9963C6776F83}</ProjectGuid>
+    <ProjectGuid>{28DFD008-429F-42B2-9C6B-6B684108D4AE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Annunci</RootNamespace>
-    <AssemblyName>Annunci</AssemblyName>
+    <RootNamespace>cerco_vendo_casa.manager</RootNamespace>
+    <AssemblyName>cerco-vendo-casa.manager</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,7 +20,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,49 +28,25 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnnuncioManager.cs" />
-    <Compile Include="ImmobiliareMailMessageManager.cs" />
-    <Compile Include="Models\Immobile.cs" />
-    <Compile Include="ImmobiliareManager.cs" />
-    <Compile Include="Models\MyPhoto.cs" />
-    <Compile Include="Models\MyUser.cs" />
-    <Compile Include="Models\Pagedlmmobili.cs" />
-    <Compile Include="Models\PagedUsers.cs" />
-    <Compile Include="Models\Risposta.cs" />
-    <Compile Include="Models\SearchImmobili.cs" />
-    <Compile Include="Models\SearchUsers.cs" />
-    <Compile Include="Models\Trattativa.cs" />
-    <Compile Include="PhotoManager.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Shared\Paged.cs" />
-    <Compile Include="TrattativaManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\MyFramework4.5\MyManagerCSharp\MyManagerCSharp.csproj">
-      <Project>{1cfb1797-36c1-4887-b980-747fcc81d6a1}</Project>
-      <Name>MyManagerCSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MyFramework4.5\MyUsers\MyUsers.csproj">
-      <Project>{de537bc0-c7b3-4f38-9de2-5757d6d3999e}</Project>
-      <Name>MyUsers</Name>
+    <ProjectReference Include="..\..\..\MyFramework4.5\MyAnnunciManager\MyAnnunci.csproj">
+      <Project>{cee27564-2c50-49a8-b388-9963c6776f83}</Project>
+      <Name>MyAnnunci</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

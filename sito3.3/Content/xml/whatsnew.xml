@@ -5,6 +5,13 @@
   type => changes
  -->
 
+  <release number="3.0.0.2" data="25/09/2016">
+    <item data="25/09/2016"     owner="Rutigliano"  type="bug" >
+      Reset password AllowAnonymous
+    </item>
+  </release>
+
+  
   <release number="3.0.0.1" data="28/04/2016">
     <item data="28/04/2016"     owner="Rutigliano"  type="changes" >
       Update al Framework 4.5
