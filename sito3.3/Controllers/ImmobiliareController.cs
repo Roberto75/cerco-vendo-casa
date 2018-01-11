@@ -678,7 +678,7 @@ namespace MyWebApplication.Controllers
 
             try
             {
-                risultato = _manager.getListTrattative(MySessionData.UserId);
+                risultato = _manager.getListTrattative(MySessionData.UserId, Annunci.Models.Trattativa.TipoTrattativa.Immobile);
             }
             finally
             {

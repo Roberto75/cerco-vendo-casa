@@ -41,9 +41,9 @@ Id : @ViewData["MyId"]
     <p>
         Specificare il motivo della cancellazione:  <select id="causale" name="causale" data-mini="true" data-inline="true">
         <option value="">---</option>
-        <option value="@MyManagerCSharp.AnnuncioManager.StatoAnnuncio.Oggetto_non_piu_disponibile.ToString()">Oggetto della compravendita non più disponibile</option>
-        <option value="@MyManagerCSharp.AnnuncioManager.StatoAnnuncio.Concluso_con_successo.ToString()">Compravendita conclusa correttamente</option>
-        <option value="@MyManagerCSharp.AnnuncioManager.StatoAnnuncio.Altro.ToString()">Altro - inserire eventuali note</option>
+        <option value="@Annunci.AnnuncioManager.StatoAnnuncio.Oggetto_non_piu_disponibile.ToString()">Oggetto della compravendita non più disponibile</option>
+        <option value="@Annunci.AnnuncioManager.StatoAnnuncio.Concluso_con_successo.ToString()">Compravendita conclusa correttamente</option>
+        <option value="@Annunci.AnnuncioManager.StatoAnnuncio.Altro.ToString()">Altro - inserire eventuali note</option>
     </select>
     </p>
 
