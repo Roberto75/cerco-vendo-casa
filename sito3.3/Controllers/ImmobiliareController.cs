@@ -925,7 +925,7 @@ namespace MyWebApplication.Controllers
 
                         Annunci.ImmobiliareMailMessageManager mail = new Annunci.ImmobiliareMailMessageManager(System.Configuration.ConfigurationManager.AppSettings["application.name"], System.Configuration.ConfigurationManager.AppSettings["application.url"]);
                         mail.Subject = System.Configuration.ConfigurationManager.AppSettings["application.name"] + " - Modifica annuncio";
-                        mail.Body = mail.getBodyImmobiliareModificaTestoAnnuncio((long)annuncioId, i.categoria.ToString() + " - " + i.immobile.ToString());
+                        mail.Body = mail.getBodyModificaTestoAnnuncio((long)annuncioId, i.categoria.ToString() + " - " + i.immobile.ToString());
 
                         foreach (System.Data.DataRow row in dt.Rows)
                         {
@@ -992,7 +992,7 @@ namespace MyWebApplication.Controllers
 
                         Annunci.ImmobiliareMailMessageManager mail = new Annunci.ImmobiliareMailMessageManager(System.Configuration.ConfigurationManager.AppSettings["application.name"], System.Configuration.ConfigurationManager.AppSettings["application.url"]);
                         mail.Subject = System.Configuration.ConfigurationManager.AppSettings["application.name"] + " - Modifica annuncio";
-                        mail.Body = mail.getBodyImmobiliareAggiornamentoPrezzoAnnuncio((long)annuncioId, i.categoria.ToString() + " - " + i.immobile.ToString(), i.prezzo, (decimal)dNuovoPrezzo);
+                        mail.Body = mail.getBodyAggiornamentoPrezzoAnnuncio((long)annuncioId, i.categoria.ToString() + " - " + i.immobile.ToString(), i.prezzo, (decimal)dNuovoPrezzo);
 
                         foreach (System.Data.DataRow row in dt.Rows)
                         {

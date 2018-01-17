@@ -1045,10 +1045,6 @@
       <Project>{de537bc0-c7b3-4f38-9de2-5757d6d3999e}</Project>
       <Name>MyUsers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\cerco-vendo-casa.manager\cerco-vendo-casa.manager.csproj">
-      <Project>{cee27564-2c50-49a8-b388-9963c6776f83}</Project>
-      <Name>cerco-vendo-casa.manager</Name>
-    </ProjectReference>
     <ProjectReference Include="..\RevoAgent\RevoAgent.vbproj">
       <Project>{e9f382d8-fe59-482c-93eb-a8f997ff54ce}</Project>
       <Name>RevoAgent</Name>

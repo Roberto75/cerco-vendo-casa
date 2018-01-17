@@ -107,7 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MyFramework4.5\MyAnnunciManager\MyAnnunci.csproj">
-      <Project>{cee27564-2c50-49a8-b388-9963c6776f83}</Project>
+      <Project>{5c5c908f-04c5-49a5-b9f2-6cfc686981c6}</Project>
       <Name>MyAnnunci</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\MyFramework4.5\MyManagerCSharp\MyManagerCSharp.csproj">
