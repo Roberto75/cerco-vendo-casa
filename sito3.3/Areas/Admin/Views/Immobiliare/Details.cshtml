@@ -43,7 +43,7 @@
 
 <h3>Numero di annunci by Stato</h3>
 <ul data-role="listview" data-count-theme="b" data-inset="true">
-@foreach (Annunci.AnnuncioManager.StatoAnnuncio k in Model.ContaAnnunciByStato.Keys)
+@foreach (Annunci.AnnunciManager.StatoAnnuncio k in Model.ContaAnnunciByStato.Keys)
 {
     <li>@k.ToString().Replace("_", " ") <span class="ui-li-count">@Model.ContaAnnunciByStato[k]</span></li>
 }

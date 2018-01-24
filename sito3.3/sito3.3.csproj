@@ -861,7 +861,9 @@
     <Content Include="Content\xml\menuRight.xml" />
     <Content Include="Content\xml\menuTop.xml" />
     <Content Include="Content\xml\MySiteMap.xml" />
-    <Content Include="Content\xml\whatsnew.xml" />
+    <Content Include="Content\xml\whatsnew.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Content\xsl\faq.xsl" />
     <Content Include="Content\xsl\faq_categorie.xsl" />
     <Content Include="Content\xsl\menuLeft.xsl" />

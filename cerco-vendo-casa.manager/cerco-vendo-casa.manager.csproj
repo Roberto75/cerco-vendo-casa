@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CEE27564-2C50-49A8-B388-9963C6776F83}</ProjectGuid>
+    <ProjectGuid>{28DFD008-429F-42B2-9C6B-6B684108D4AE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>cerco_vendo_casa.manager</RootNamespace>
