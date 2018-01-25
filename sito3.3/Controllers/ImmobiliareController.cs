@@ -767,7 +767,7 @@ namespace MyWebApplication.Controllers
 
                 risultato = _manager.getListAnnunci(MySessionData.UserId);
 
-                Annunci.AnnuncioManager annuncioManager = new Annunci.AnnuncioManager(_manager.mGetConnection());
+                Annunci.AnnunciManager annuncioManager = new Annunci.AnnunciManager(_manager.mGetConnection());
                 long numeroRisposte;
                 foreach (Annunci.Models.Immobile i in risultato)
                 {
@@ -871,12 +871,12 @@ namespace MyWebApplication.Controllers
             Debug.WriteLine("MyAnnuncioId: " + MyId);
 
 
-            Annunci.AnnuncioManager managerAnnuncio = new Annunci.AnnuncioManager("immobiliare");
+            Annunci.AnnunciManager managerAnnuncio = new Annunci.AnnunciManager("immobiliare");
             try
             {
                 managerAnnuncio.mOpenConnection();
 
-                managerAnnuncio.deleteAnnuncioLogic((long)MyId, Annunci.AnnuncioManager.StatoAnnuncio.Da_cancellare, Server.MapPath("~"));
+                managerAnnuncio.deleteAnnuncioLogic((long)MyId, Annunci.AnnunciManager.StatoAnnuncio.Da_cancellare, Server.MapPath("~"));
 
             }
             finally
@@ -925,7 +925,7 @@ namespace MyWebApplication.Controllers
 
                         Annunci.ImmobiliareMailMessageManager mail = new Annunci.ImmobiliareMailMessageManager(System.Configuration.ConfigurationManager.AppSettings["application.name"], System.Configuration.ConfigurationManager.AppSettings["application.url"]);
                         mail.Subject = System.Configuration.ConfigurationManager.AppSettings["application.name"] + " - Modifica annuncio";
-                        mail.Body = mail.getBodyModificaTestoAnnuncio((long)annuncioId, i.categoria.ToString() + " - " + i.immobile.ToString());
+                        mail.Body = mail.getBodyModificaTestoAnnuncio((long)annuncioId, i.categoria.ToString() + " - " + i.immobile.ToString(), String.Format("Immobiliare/Details/{0}", annuncioId));
 
                         foreach (System.Data.DataRow row in dt.Rows)
                         {
@@ -992,7 +992,7 @@ namespace MyWebApplication.Controllers
 
                         Annunci.ImmobiliareMailMessageManager mail = new Annunci.ImmobiliareMailMessageManager(System.Configuration.ConfigurationManager.AppSettings["application.name"], System.Configuration.ConfigurationManager.AppSettings["application.url"]);
                         mail.Subject = System.Configuration.ConfigurationManager.AppSettings["application.name"] + " - Modifica annuncio";
-                        mail.Body = mail.getBodyAggiornamentoPrezzoAnnuncio((long)annuncioId, i.categoria.ToString() + " - " + i.immobile.ToString(), i.prezzo, (decimal)dNuovoPrezzo);
+                        mail.Body = mail.getBodyAggiornamentoPrezzoAnnuncio((long)annuncioId, i.categoria.ToString() + " - " + i.immobile.ToString(), i.prezzo, (decimal)dNuovoPrezzo, String.Format("Immobiliare/Details/{0}", annuncioId));
 
                         foreach (System.Data.DataRow row in dt.Rows)
                         {

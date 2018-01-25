@@ -967,7 +967,7 @@ STEP1:
                     'Dim mail As New MyManager.MailMessage(System.Configuration.ConfigurationManager.AppSettings("application.url"), System.Configuration.ConfigurationManager.AppSettings("application.name"))
 
                     mail.Subject = System.Configuration.ConfigurationManager.AppSettings("application.name") & " - Cancellazione annuncio"
-                    mail.Body = mail.getBodyCancellaAnnuncio(row("tipo").ToString & " " & row("comune").ToString & " " & row("indirizzo").ToString)
+                    mail.Body = mail.getBodyCancellaAnnuncio(row("tipo").ToString & " " & row("comune").ToString & " " & row("indirizzo").ToString, "Immobiliare\MyTrattative")
 
                     If (dt.Rows.Count > 0) Then
                         For Each email As Data.DataRow In dt.Rows

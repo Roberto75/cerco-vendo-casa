@@ -10,7 +10,7 @@ namespace MyWebApplication.Areas.Admin.Controllers
     public class ImmobiliareController : MyBaseController
     {
 
-        private Annunci.ImmobiliareManager manager = new Annunci.ImmobiliareManager("immobiliare");
+        private Annunci.AnnunciAdminManager manager = new Annunci.AnnunciAdminManager("immobiliare");
 
         public ActionResult Index()
         {
