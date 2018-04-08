@@ -5,7 +5,12 @@
   type => changes
  -->
 
-
+  <release number="3.0.0.4" data="8/04/2018">
+    <item data="8/04/2018"     owner="Rutigliano"  type="bug" >
+      la pagina di dettaglio di un immobile AllowAnonymous
+    </item>
+  </release>
+  
   <release number="3.0.0.3" data="18/02/2018">
     <item data="18/02/2018"     owner="Rutigliano"  type="bug" >
       Passaggio a https

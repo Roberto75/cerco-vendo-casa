@@ -116,7 +116,7 @@ namespace MyWebApplication.Controllers
         //}
 
 
-
+        [AllowAnonymous]
         public ActionResult Details(long id = 0)
         {
             Annunci.Models.Immobile immobile = null;
