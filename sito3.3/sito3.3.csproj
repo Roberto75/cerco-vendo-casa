@@ -749,6 +749,7 @@
     <Content Include="Content\Images\wait.gif" />
     <Content Include="Content\Images\workflow.jpg" />
     <Content Include="Content\Images\zoom1_16x16.gif" />
+    <Content Include="Content\js\mdc.ripple.min.js" />
     <Content Include="Content\Style\Admin.css" />
     <Content Include="Content\Style\lightbox.css" />
     <Content Include="Content\Style\Site.css" />
@@ -914,6 +915,7 @@
     <Compile Include="Controllers\MyBaseController.cs" />
     <Compile Include="Controllers\RegioneProvinciaComuneController.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\TestMaterialController.cs" />
     <Compile Include="Controllers\ThumbnailController.cs" />
     <Compile Include="Controllers\UtenteController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1023,6 +1025,12 @@
     <Content Include="Public\RevoAgent\Test.log" />
     <Content Include="Public\RevoAgent\TestException.log" />
     <None Include="Properties\PublishProfiles\Temp.pubxml" />
+    <Content Include="Views\Shared\MasterPageMaterialDesign.cshtml" />
+    <Content Include="Views\TestMaterial\Index.cshtml" />
+    <Content Include="Views\TestMaterial\Tab.cshtml" />
+    <Content Include="Views\TestMaterial\_footer.cshtml" />
+    <Content Include="Views\TestMaterial\Button.cshtml" />
+    <Content Include="Views\TestMaterial\TextInput.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1051,6 +1059,9 @@
       <Project>{e9f382d8-fe59-482c-93eb-a8f997ff54ce}</Project>
       <Name>RevoAgent</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\TestMd\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

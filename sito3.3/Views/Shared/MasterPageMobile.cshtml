@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>@ViewBag.Title</title>
-    <meta name="Description"  content="@ViewBag.Description"/>
-    <meta name="Keywords"     content="@ViewBag.Keywords"/>
+    <meta name="Description" content="@ViewBag.Description" />
+    <meta name="Keywords" content="@ViewBag.Keywords" />
 
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
@@ -51,17 +51,24 @@
     <div data-role="page" data-theme="a" class="ui-responsive-panel">
         <div data-role="header" data-position="fixed" data-theme="none" style="background-color: white; min-height: 120px; overflow: hidden;">
             <span>
-                <a href="@Url.Action("Index", "Home")" class="ui-btn-left" >
-                    <img  src ="@Url.Content("~/Content/Images/logo_cerco-vendo-casa.gif")"  >
+                <a href="@Url.Action("Index", "Home")" class="ui-btn-left">
+                    <img src="@Url.Content("~/Content/Images/logo_cerco-vendo-casa.gif")">
                 </a>
             </span>
             <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
 
-            <div data-role="navbar" style="padding-top: 85px" >
+            <div data-role="navbar" style="padding-top: 85px">
                 <ul>
-                    <li><a data-theme="c" href="@Url.Action("Index", "Immobiliare")"         >Ricerca</a></li>
-                    <li><a data-theme="c" href="@Url.Action("MyAnnunci", "Immobiliare")"      >I miei annunci</a></li>
-                    <li><a data-theme="c" href="@Url.Action("MyTrattative", "Immobiliare")"  >Le mie trattative</a></li>
+                    <li><a data-theme="c" href="@Url.Action("Index", "Immobiliare")">Ricerca</a></li>
+                    <li><a data-theme="c" href="@Url.Action("MyAnnunci", "Immobiliare")">I miei annunci</a></li>
+                    <li><a data-theme="c" href="@Url.Action("MyTrattative", "Immobiliare")">Le mie trattative</a></li>
+
+                    @{if (Request.IsLocal)
+                        {
+                            <li><a data-theme="c" href="@Url.Action("Index", "TestMaterial")">Test Material</a></li>
+                        }
+                    }
+
                     @Html.Partial("LoginPartialMobile")
                 </ul>
             </div>
@@ -73,18 +80,18 @@
             @RenderBody()
         </div>
         <!-- /main -->
-
-
         <!-- panel -->
         <div data-role="panel" data-position-fixed="true" data-display="push" data-theme="b" id="nav-panel">
             <ul data-role="listview">
                 <li data-icon="delete"><a href="#" data-rel="close">Close menu</a></li>
-                <li data-icon="false"><a href="@Url.Action("Index", "Immobiliare")"         >Ricerca</a></li>
-                <li data-icon="false"><a href="@Url.Action("MyAnnunci", "Immobiliare")"      >I miei annunci</a></li>
-                <li data-icon="false"><a href="@Url.Action("MyTrattative", "Immobiliare")"    >Le mie trattative</a></li>
+                <li data-icon="false"><a href="@Url.Action("Index", "Immobiliare")">Ricerca</a></li>
+                <li data-icon="false"><a href="@Url.Action("MyAnnunci", "Immobiliare")">I miei annunci</a></li>
+                <li data-icon="false"><a href="@Url.Action("MyTrattative", "Immobiliare")">Le mie trattative</a></li>
 
-                <li data-icon="false"><a href="@Url.Action("Contatti", "Home")"         >Contatti</a></li>
-                <li data-icon="false"><a href="@Url.Action("Faq", "Home")"              >F.A.Q.</a></li>
+                <li data-icon="false"><a href="@Url.Action("Contatti", "Home")">Contatti</a></li>
+                <li data-icon="false"><a href="@Url.Action("Faq", "Home")">F.A.Q.</a></li>
+
+
 
                 <!-- <a href="@Url.Action("Index", "Test")"               data-role="button">Test</a>-->
                 @Html.Partial("LoginPartialMobile")
@@ -147,7 +154,7 @@
                         risultato = "";
                     }
 
-                    HtmlString risultatoHTML = new HtmlString(risultato);   
+                    HtmlString risultatoHTML = new HtmlString(risultato);
                 }
 
                 @risultatoHTML
