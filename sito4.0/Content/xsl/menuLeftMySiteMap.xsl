@@ -19,7 +19,7 @@
     yyy: <xsl:value-of select ="contains($urlCorrente, @url)"/>
     
     -->
-    <ul>
+    <ul class="nav nav-pills nav-fill">
 
 
       <!--
@@ -76,7 +76,9 @@
        <xsl:if test="contains($roles, '-12345') or ((contains($roles, $Codes) or (@authorization='?' and string-length($roles) &gt; 0) or @authorization='*'))">
       <xsl:if test="contains($roles, '-12345') or (contains($roles, @authorization) )">-->
       <xsl:element name="li">
+        <xsl:attribute name="class">nav-item</xsl:attribute>
         <xsl:element name="a">
+          <xsl:attribute name="class">nav-link</xsl:attribute>
           <xsl:attribute name="href">
             <xsl:value-of select="$contesto"/>
             <xsl:value-of select="substring(@url,2)"/>
@@ -102,11 +104,12 @@
     <xsl:if test="@hide ='false' ">
 
       <xsl:element name="li">
+        <xsl:attribute name="class">nav-item</xsl:attribute>
         <xsl:element name="a">
           <!--       <xsl:attribute name ="data-role">button</xsl:attribute>
           <xsl:attribute name ="data-theme">e</xsl:attribute>
 -->
-
+ <xsl:attribute name="class">nav-link</xsl:attribute>
           <xsl:attribute name="href">
             <xsl:value-of select="$contesto"/>
             <xsl:value-of select="substring(@url,2)"/>

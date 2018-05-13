@@ -1,16 +1,25 @@
-﻿@model MyWebApplication.Models.UserProfile
+﻿@model MyWebApplication.Models.ManageModel
 @{
     ViewBag.Title = "Cerco Vendo Casa: Il mio profilo";
     Layout = "~/Views/Shared/MasterPageMobile.cshtml";
 }
 
-<h2>Manage</h2>
+<h2>Il tuo profilo</h2>
+<p>Benvenuto, @Model.NomeCognome</p>
+@{
+    if (Model.datePreviousLogin != null)
+    {
+        <p>
+            il tuo ultimo accesso è del @Model.datePreviousLogin.Value.ToShortDateString() alle ore @Model.datePreviousLogin.Value.ToShortTimeString()
+        </p>
 
-<ul data-role="listview" data-ajax="false" data-inset="true" data-theme="d">
-    <li data-role="list-divider">Password</li>
-    <li><a href="@Url.Action("ChangePassword", "Account")">Change password</a></li>
-    <li><a href="@Url.Action("ResetPassword", "Account")">Reset password</a></li>
-</ul>
+    }
+}
+
+<p><a class="btn btn-secondary" href="@Url.Action("ChangePassword", "Account")"><i class="fa fa-key fa-fw"></i> Modifica password</a></p>
+<p><a class="btn btn-secondary" href="@Url.Action("ResetPassword", "Account")"><i class="fa fa-key fa-fw"></i> Reset password</a></p>
+
+
 
 
 <ul data-role="listview" data-inset="true">

@@ -104,10 +104,10 @@ namespace MyWebApplication.Controllers
 
 
         [Authorize]
-        public ActionResult Manage(UserProfile model)
+        public ActionResult Manage()
         {
             _manager.mOpenConnection();
-
+            Models.ManageModel model = new Models.ManageModel();
             MyUsers.Models.MyUser u = null;
             try
             {
@@ -119,8 +119,9 @@ namespace MyWebApplication.Controllers
                 }
 
 
-                model.login = u.login;
-
+                model.Login = u.login;
+                model.Nome = u.nome;
+                model.Cognome = u.cognome;
                 if (u.customerId != null)
                 {
                     model.customerId = (long)u.customerId;

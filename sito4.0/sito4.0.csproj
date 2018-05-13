@@ -868,7 +868,9 @@
     <Content Include="Content\xsl\faq.xsl" />
     <Content Include="Content\xsl\faq_categorie.xsl" />
     <Content Include="Content\xsl\menuLeft.xsl" />
-    <Content Include="Content\xsl\menuLeftMySiteMap.xsl" />
+    <Content Include="Content\xsl\menuLeftMySiteMap.xsl">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Content\xsl\menuLeftMySiteMap_1.xsl" />
     <Content Include="Content\xsl\menuLeftSiteMap_1.xsl" />
     <Content Include="Content\xsl\menuLeftSiteMap_2.xsl" />
@@ -923,6 +925,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\GalleryModel.cs" />
+    <Compile Include="Models\ManageModel.cs" />
     <Compile Include="Models\ModelImmobiliareSearch.cs" />
     <Compile Include="Models\ModelRegioneProvinciaComune.cs" />
     <Compile Include="Models\ModelTrattativa.cs" />
@@ -1032,6 +1035,7 @@
     <Content Include="Views\TestMaterial\_footer.cshtml" />
     <Content Include="Views\TestMaterial\Button.cshtml" />
     <Content Include="Views\TestMaterial\TextInput.cshtml" />
+    <Content Include="Views\Shared\_MyValidationSummary.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -554,7 +554,7 @@ public static class MyHelper
         }
 
 
-        temp = String.Format("<select id=\"{0}\" name=\"{1}\"   data-mini=\"true\" data-inline=\"true\" {2}  >", nome.Replace(".", "_"), nome, required);
+        temp = String.Format("<select id=\"{0}\" name=\"{1}\" class=\"form-control mb-3\"   {2}  >", nome.Replace(".", "_"), nome, required);
 
         temp += "<option value=\"\" " + (String.IsNullOrEmpty(selectedValue) ? "selected=\"selected\"" : "") + " >---</option>";
 

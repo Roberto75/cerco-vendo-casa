@@ -46,7 +46,7 @@
 
 
 <script>
-   
+
     var map = null;
 
     $(document).on("pageinit", function () {
@@ -58,20 +58,20 @@
             @:$("#ui-id-3").on("click" , function(){
 
                     @:if(map == null){
-                        //@:alert("show");
-                    
+                                        //@:alert("show");
+
                         @:var center = new google.maps.LatLng(@Model.latitude.ToString().Replace(",", ".") , @Model.longitude.ToString().Replace(",", "."));
 
                         @:map = new google.maps.Map(document.getElementById('map-container'), {  zoom: 17,      center: center,      mapTypeId: google.maps.MapTypeId.ROADMAP });
 
                         @:var latLng = new google.maps.LatLng(@Model.latitude.ToString().Replace(",", "."), @Model.longitude.ToString().Replace(",", "."));
-                
+
                         @:var marker = new google.maps.Marker({  position: latLng,  map: map,  icon: "/Content/Images/Immobiliare/casa.gif",    title: "@MyHelper.getTitoloImmobile(Model)"    });
-                                                    
+
                     @:}
-                                                                                                                 
+
             @:});
-                           
+
         }
         else
         {
@@ -89,35 +89,46 @@
 <h2>Dettaglio immobile</h2>
 
 
-<div id="tabs">
-    <ul>
-        <li><a href="#tabs-1">Info</a></li>
+<!-- Nav tabs -->
 
-        <li><a href="#tabs-2">Descrizione</a></li>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item"><a href="#tabs-1" id="info-tab" class="nav-link active" role="tab" data-toggle="tab" aria-controls="info" aria-selected="true">Info</a></li>
+    <li class="nav-item"><a href="#tabs-2" id="descrizione-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="descrizione" aria-selected="false">Descrizione</a></li>
+    <li class="nav-item"><a href="#tabs-3" id="mappa-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="mappa" aria-selected="false">Mappa</a></li>
+    <li class="nav-item"><a href="#tabs-4" id="photo-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="photo" aria-selected="false">Photo</a></li>
+</ul>
 
-        <li><a href="#tabs-3">Mappa</a></li>
 
-        <li><a href="#tabs-4">Photo</a></li>
 
-    </ul>
+<!-- Tab panes -->
+<div class="tab-content mb-3 mt-3">
 
-    <div id="tabs-1">
+
+    <div id="tabs-1" class="tab-pane fade show active" role="tabpanel" aria-labelledby="info-tab">
 
         @{Html.RenderPartial("TabInfoImmobile", Model);}
     </div>
 
 
 
-    <div id="tabs-2">
+    <div id="tabs-2" class="tab-pane fade" role="tabpanel" aria-labelledby="descrizione-tab">
 
-        <p class="testo">@Html.Raw(WebUtility.HtmlDecode(Model.nota))</p>
-
+        @if (String.IsNullOrEmpty(Model.nota))
+        {
+            <p>Descrizione non disponibile</p>
+        }
+        else
+        {
+            <div class="jumbotron">
+                <blockquote>@Html.Raw(WebUtility.HtmlDecode(Model.nota))</blockquote>
+            </div>
+        }
     </div>
 
 
 
 
-    <div id="tabs-3">
+    <div id="tabs-3" class="tab-pane fade" role="tabpanel" aria-labelledby="mappa-tab">
         @if (Model.latitude == 0)
         {
             <p>Mappa non disponibile</p>
@@ -125,7 +136,7 @@
         else
         {
             <div id="map-container" style="margin-top: 20px; width: 100%; height: 500px;">
-            </div>    
+            </div>
         }
 
 
@@ -133,7 +144,7 @@
 
 
 
-    <div id="tabs-4">
+    <div id="tabs-4" class="tab-pane fade" role="tabpanel" aria-labelledby="photo-tab">
         @if (ViewBag.photos == null || (ViewBag.photos as List<Annunci.Models.MyPhoto>).Count == 0)
         {
             <p>Immagini non disponibili</p>
@@ -147,8 +158,11 @@
 
                     if (p.Path.StartsWith("http:"))
                     {
-                    <li><a href="@p.Path" data-lightbox="gallery" title="@p.Note ">
-                        <img src="@p.Path" alt="@p.Note" width="@MyWebApplication.Controllers.ImmobiliareController.WidthThumbnail" height="@MyWebApplication.Controllers.ImmobiliareController.HeightThumbnail" /></a></li>
+                        <li>
+                            <a href="@p.Path" data-lightbox="gallery" title="@p.Note ">
+                                <img src="@p.Path" alt="@p.Note" width="@MyWebApplication.Controllers.ImmobiliareController.WidthThumbnail" height="@MyWebApplication.Controllers.ImmobiliareController.HeightThumbnail" />
+                            </a>
+                        </li>
                     }
 
                     else
@@ -157,10 +171,13 @@
 
                         if (!myFile.Exists)
                         {
-                    <li><a href="#">
-                        <img src="@Url.Content("~\\Content\\Images\\Shared\\unavailable.jpg")" alt="Immagine non disponibile" width="@MyWebApplication.Controllers.ImmobiliareController.WidthThumbnail" height="@MyWebApplication.Controllers.ImmobiliareController.HeightThumbnail" /></a></li>
-         
-                            
+                            <li>
+                                <a href="#">
+                                    <img src="@Url.Content("~\\Content\\Images\\Shared\\unavailable.jpg")" alt="Immagine non disponibile" width="@MyWebApplication.Controllers.ImmobiliareController.WidthThumbnail" height="@MyWebApplication.Controllers.ImmobiliareController.HeightThumbnail" />
+                                </a>
+                            </li>
+
+
                         }
                         else
                         {
@@ -184,12 +201,15 @@
                             }
 
 
-                            System.Diagnostics.Debug.WriteLine("thumbnail: " + thumbnail);    
-                            
-                            
-                             
-                    <li><a href="@p.Path.Replace("~", "")" data-lightbox="gallery">
-                        <img src="@thumbnail " alt="@p.Note" /></a></li>    
+                            System.Diagnostics.Debug.WriteLine("thumbnail: " + thumbnail);
+
+
+
+                            <li>
+                                <a href="@p.Path.Replace("~", "")" data-lightbox="gallery">
+                                    <img src="@thumbnail " alt="@p.Note" />
+                                </a>
+                            </li>
                         }
                     }
 
@@ -202,11 +222,16 @@
 
 </div>
 
+
+
 <p>
     Se sei interessato a questo annuncio clicca su "Rispondi" per mandare un un messaggio all'inserzionista.
 </p>
 
-<div data-role="controlgrup" data-type="horizontal" data-mini="true">
-    <a href="@Url.Action("Index", "Immobiliare")" data-role="button" data-inline="true">Torna all'elenco</a>
-    <a href="@Url.Action("Reply", "Immobiliare", new { annuncioId = Model.immobileId })" data-role="button" data-inline="true">Rispondi</a>
-</div>
+
+<br />
+
+<a class="btn btn-secondary" href="@Url.Action("Index", "Immobiliare")"> <i class="fa fa-search fa-fw"></i> Pagina di ricerca</a>
+<a class="btn btn-primary text-right" href="@Url.Action("Reply", "Immobiliare", new { annuncioId = Model.immobileId })"><i class="fa fa-pencil-alt fa-fw"></i>Rispondi</a>
+
+

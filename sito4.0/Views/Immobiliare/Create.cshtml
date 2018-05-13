@@ -10,42 +10,6 @@
 
 <h2>Nuovo annuncio</h2>
 
-<script type="text/javascript">
-
-
-    $(document).on("pageinit", function () {
-
-        //alert("pageinit");
-
-        // $("#tabs").tabs();
-
-        //$("#MyForm").validate({
-
-        //    rules: {
-        //        MQ: {
-        //            required: true,
-        //            number: true,
-        //            min: 0,
-        //            max: 1000
-        //        },
-        //        piano: {
-        //            number: true,
-        //            min: 0,
-        //            max: 100
-        //        },
-        //        pianiTotali: {
-        //            number: true,
-        //            min: 0,
-        //            max: 100
-        //        }
-        //    }
-        //});
-
-    });
-
-
-</script>
-
 
 <p>
     Compila la maschera sottostante per l'inserimento di un nuovo annuncio.
@@ -61,18 +25,12 @@
 <p>
     <b>Dopo</b> aver concluso la procedura guidata potrai aggiungere delle <b>immagini</b>
     cliccado sul relativo annuncio dal menu "I miei annunci".
-                    <img src="@Url.Content("~/Content/Images/shared/photo1_48x48.png")" border="0" alt="photo" />
+    <img src="@Url.Content("~/Content/Images/shared/photo1_48x48.png")" border="0" alt="photo" />
 
 </p>
 
 
-<style>
-    .MyLabel {
-        padding-bottom: 20px;
-        font-weight: normal;
-        font-size: inherit;
-    }
-</style>
+
 
 
 @using (Html.BeginForm("Create", "Immobiliare", FormMethod.Post, new { id = "MyForm" }))
@@ -81,296 +39,253 @@
     @Html.ValidationSummary(false)
 
     <h3>Informazioni generali</h3>
-    
-    
-    <div class="ui-field-contain">
+
+
+    <div class="form-group">
         <label for="categoria">Categoria*:</label>
         @MyHelper.getComboEnum(default(Annunci.Models.Immobile.Categorie), Model.categoria.ToString(), "categoria", true)
     </div>
-    
-    <div class="ui-field-contain">
+
+    <div class="form-group">
         <label for="immobile">Tipo di immobile*:</label>
         @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoImmobile), Model.immobile.ToString(), "immobile", true)
     </div>
-    
-    <div class="ui-field-contain">
+
+    <div class="form-group">
         <label for="MQ">MQ*:</label>
-        <input type="range" name="MQ" id="MQ" value="@Model.MQ" min="0" max="1000" data-highlight="true">
-    </div>
-    
-    <div class="ui-field-contain">
-        <label for="prezzo">Prezzo €*:</label>
-        <input type="number" data-clear-btn="true" name="prezzo" id="prezzo"  value="@Model.prezzo" data-mini="true" data-inline="true" required >
+        <input type="range" class="form-control" name="MQ" id="MQ" value="@Model.MQ" min="0" max="1000">
+        <span id="mqCurrentSliderVal"></span>
     </div>
 
-        
-    <div class="ui-field-contain">
+    <div class="form-group">
+        <label for="prezzo">Prezzo €*:</label>
+        <input type="number" class="form-control" name="prezzo" id="prezzo" value="@Model.prezzo" required>
+    </div>
+
+
+    <div class="form-group">
         <span>
             @{  ViewData["required"] = true;
                 Html.RenderPartial("RegioneProvinciaComune", Model, ViewData);}
         </span>
     </div>
-    
-    <div class="ui-field-contain">
+
+    <div class="form-group">
         <label class="MyLabel" for="classeEnergetica">Classe energetica:</label>
         @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoClasseEnergetica), Model.classeEnergetica.ToString(), "classeEnergetica", false)
     </div>
-    
-    <div class="ui-field-contain">
+
+    <div class="form-group">
 
         <label class="MyLabel" for="piano">Piano:</label>
-        <input type="number" data-clear-btn="true" name="piano" id="piano" data-mini="true" data-inline="true" value="@Model.piano">
+        <input type="number" class="form-control" name="piano" id="piano" value="@Model.piano">
     </div>
-    
-    <div class="ui-field-contain">
+
+    <div class="form-group">
         <label class="MyLabel" for="pianiTotali">Totali piani dell'edificio:</label>
-        <input type="number" data-clear-btn="true" name="pianiTotali" id="pianiTotali" data-mini="true" data-inline="true" value="@Model.pianiTotali">
+        <input type="number" class="form-control" name="pianiTotali" id="pianiTotali" value="@Model.pianiTotali">
     </div>
-    
-    
-    
-    <div class="ui-field-contain">
+
+    <div class="form-group">
         <label class="MyLabel" for="anno">Anno di costruzione:</label>
-        <input type="number" data-clear-btn="true" name="anno" id="anno" data-mini="true" data-inline="true" value="@Model.anno">
+        <input type="number" class="form-control" name="anno" id="anno" value="@Model.anno">
     </div>
-    
-    <div class="ui-field-contain">
 
+    <div class="form-group">
         <label class="MyLabel" for="speseCondominiali">Spese condominiali mensili €:</label>
-        <input type="number" data-clear-btn="true" name="speseCondominiali" id="speseCondominiali" data-mini="true" data-inline="true" value="@Model.speseCondominiali">
+        <input type="number" class="form-control" name="speseCondominiali" id="speseCondominiali" value="@Model.speseCondominiali">
     </div>
-    
-    
-    
-    
-    
-    <div class="ui-grid-b">
-        <div class="ui-block-a">
-            <div class="ui-bar ui-field-contain">
-                <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                    <legend class="MyLabel">Portiere:</legend>
-                    <input type="radio" name="portiere" id="portiere-choice-a" value="-1" @((Model.portiere == null) ? "checked=\"checked\"" : "") />
-                    <label for="portiere-choice-a">---</label>
-                    <input type="radio" name="portiere" id="portiere-choice-b" value="1"  @((Model.portiere != null && Model.portiere == 1) ? "checked=\"checked\"" : "")/>
-                    <label for="portiere-choice-b">Si</label>
-                    <input type="radio" name="portiere" id="portiere-choice-c" value="0"  @((Model.portiere != null && Model.portiere == 0) ? "checked=\"checked\"" : "")/>
-                    <label for="portiere-choice-c">No</label>
-                </fieldset>
-            </div>
+
+
+
+
+
+    <div class="form-group">
+        <label>Portiere:</label>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="portiere" id="portiere-choice-a" value="-1" @( (Model.portiere == null) ? "checked=\" checked\"" : "" ) />
+            <label class="form-check-label" for="portiere-choice-a">---</label>
         </div>
-
-        <div class="ui-block-b">
-            <div class="ui-bar ui-field-contain">
-
-                <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                    <legend class="MyLabel">Ascensore</legend>
-                    <input type="radio" name="ascensore" id="ascensore-choice-a" value="-1" @((Model.ascensore == null) ? "checked=\"checked\"" : "") />
-                    <label for="ascensore-choice-a">---</label>
-                    <input type="radio" name="ascensore" id="ascensore-choice-b" value="1"  @((Model.ascensore != null && Model.ascensore == 1) ? "checked=\"checked\"" : "") />
-                    <label for="ascensore-choice-b">Si</label>
-                    <input type="radio" name="ascensore" id="ascensore-choice-c" value="0"  @((Model.ascensore != null && Model.ascensore == 0) ? "checked=\"checked\"" : "")/>
-                    <label for="ascensore-choice-c">No</label>
-                </fieldset>
-            </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="portiere" id="portiere-choice-b" value="1" @( (Model.portiere != null && Model.portiere == 1) ? "checked=\" checked\"" : "" ) />
+            <label class="form-check-label" for="portiere-choice-b">Si</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="portiere" id="portiere-choice-c" value="0" @( (Model.portiere != null && Model.portiere == 0) ? "checked=\" checked\"" : "" ) />
+            <label class="form-check-label" for="portiere-choice-c">No</label>
         </div>
     </div>
-    
-    
-    
-    
 
-    <div class="ui-grid-b">
-        <div class="ui-block-a">
-            <div class="ui-bar ui-field-contain">
-                <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                    <legend class="MyLabel">Cantina:</legend>
-                    <input type="radio" name="cantina" id="cantina-choice-a" value="-1" @((Model.cantina == null) ? "checked=\"checked\"" : "") />
-                    <label for="cantina-choice-a">---</label>
-                    <input type="radio" name="cantina" id="cantina-choice-b" value="1"  @((Model.cantina != null && Model.cantina == 1) ? "checked=\"checked\"" : "")/>
-                    <label for="cantina-choice-b">Si</label>
-                    <input type="radio" name="cantina" id="cantina-choice-c" value="0"  @((Model.cantina != null && Model.cantina == 0) ? "checked=\"checked\"" : "")/>
-                    <label for="cantina-choice-c">No</label>
-                </fieldset>
-            </div>
+
+    <div class="form-group">
+        <label>Ascensore</label>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="ascensore" id="ascensore-choice-a" value="-1" @( (Model.ascensore == null) ? "checked=\" checked\"" : "" ) />
+            <label for="ascensore-choice-a">---</label>
         </div>
-
-
-        <div class="ui-block-b">
-            <div class="ui-bar ui-field-contain">
-                <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                    <legend class="MyLabel">Soffitta:</legend>
-                    <input type="radio" name="soffitta" id="soffitta-choice-a" value="-1" @((Model.soffitta == null) ? "checked=\"checked\"" : "") />
-                    <label for="soffitta-choice-a">---</label>
-                    <input type="radio" name="soffitta" id="soffitta-choice-b" value="1"  @((Model.soffitta != null && Model.soffitta == 1) ? "checked=\"checked\"" : "") />
-                    <label for="soffitta-choice-b">Si</label>
-                    <input type="radio" name="soffitta" id="soffitta-choice-c" value="0"  @((Model.soffitta != null && Model.soffitta == 0) ? "checked=\"checked\"" : "")/>
-                    <label for="soffitta-choice-c">No</label>
-                </fieldset>
-
-
-            </div>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="ascensore" id="ascensore-choice-b" value="1" @( (Model.ascensore != null && Model.ascensore == 1) ? "checked=\" checked\"" : "" ) />
+            <label for="ascensore-choice-b">Si</label>
         </div>
-
-        <div class="ui-block-c">
-            <div class="ui-bar ui-field-contain">
-
-                <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                    <legend class="MyLabel">Climatizzato:</legend>
-                    <input type="radio" name="climatizzato" id="climatizzato-choice-a" value="-1" @((Model.climatizzato == null) ? "checked=\"checked\"" : "") />
-                    <label for="climatizzato-choice-a">---</label>
-                    <input type="radio" name="climatizzato" id="climatizzato-choice-b" value="1" @((Model.climatizzato != null && Model.climatizzato == 1) ? "checked=\"checked\"" : "")/>
-                    <label for="climatizzato-choice-b">Si</label>
-                    <input type="radio" name="climatizzato" id="climatizzato-choice-c" value="0" @((Model.climatizzato != null && Model.climatizzato == 0) ? "checked=\"checked\"" : "")/>
-                    <label for="climatizzato-choice-c">No</label>
-                </fieldset>
-
-            </div>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="ascensore" id="ascensore-choice-c" value="0" @( (Model.ascensore != null && Model.ascensore == 0) ? "checked=\" checked\"" : "" ) />
+            <label for="ascensore-choice-c">No</label>
         </div>
-    </div> 
-    
-    
-       
-    
-    
-    
+    </div>
+
+
+
+    <div class="form-group">
+        <label>Ascensore</label>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="cantina" id="cantina-choice-a" value="-1" @( (Model.cantina == null) ? "checked=\" checked\"" : "" ) />
+            <label for="cantina-choice-a">---</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="cantina" id="cantina-choice-b" value="1" @( (Model.cantina != null && Model.cantina == 1) ? "checked=\" checked\"" : "" ) />
+            <label for="cantina-choice-b">Si</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="cantina" id="cantina-choice-c" value="0" @( (Model.cantina != null && Model.cantina == 0) ? "checked=\" checked\"" : "" ) />
+            <label for="cantina-choice-c">No</label>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label>Soffitta</label>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="soffitta" id="soffitta-choice-a" value="-1" @( (Model.soffitta == null) ? "checked=\" checked\"" : "" ) />
+            <label for="soffitta-choice-a">---</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="soffitta" id="soffitta-choice-b" value="1" @( (Model.soffitta != null && Model.soffitta == 1) ? "checked=\" checked\"" : "" ) />
+            <label for="soffitta-choice-b">Si</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="soffitta" id="soffitta-choice-c" value="0" @( (Model.soffitta != null && Model.soffitta == 0) ? "checked=\" checked\"" : "" ) />
+            <label for="soffitta-choice-c">No</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Climatizzato</label>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="climatizzato" id="climatizzato-choice-a" value="-1" @( (Model.climatizzato == null) ? "checked=\" checked\"" : "" ) />
+            <label for="climatizzato-choice-a">---</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="climatizzato" id="climatizzato-choice-b" value="1" @( (Model.climatizzato != null && Model.climatizzato == 1) ? "checked=\" checked\"" : "" ) />
+            <label for="climatizzato-choice-b">Si</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="climatizzato" id="climatizzato-choice-c" value="0" @( (Model.climatizzato != null && Model.climatizzato == 0) ? "checked=\" checked\"" : "" ) />
+            <label for="climatizzato-choice-c">No</label>
+        </div>
+    </div>
+
+
     <h3>Dettaglio appartamento</h3>
-    
-    
-    <div class="ui-grid-b">
-        <div class="ui-block-a">
-            <div class="ui-bar ui-field-contain">
-
-                <label class="MyLabel" for="statoImmobile">Stato:</label>
-                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoStatoImmobile), Model.statoImmobile.ToString(), "statoImmobile", false)
 
 
+    <div class="form-group">
+        <label class="MyLabel" for="statoImmobile">Stato:</label>
+        @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoStatoImmobile), Model.statoImmobile.ToString(), "statoImmobile", false)
+    </div>
+
+    <div class="form-group">
+        <label class="MyLabel" for="occupazione">Occupazione:</label>
+        @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoOccupazione), Model.occupazione.ToString(), "occupazione", false)
+    </div>
 
 
-            </div>
-        </div>
-
-        <div class="ui-block-b">
-            <div class="ui-bar ui-field-contain">
-                <label class="MyLabel" for="occupazione">Occupazione:</label>
-                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoOccupazione), Model.occupazione.ToString(), "occupazione", false)
-
-            </div>
-        </div>
-
-
-        <div class="ui-block-c">
-            <div class="ui-bar ui-field-contain">
-                <label class="MyLabel" for="camereDaLetto">Camere da letto:</label>
-                @MyHelper.getComboNumeroStanze(Model.camereDaLetto.ToString(), "camereDaLetto", false)
-            </div>
-        </div>
+    <div class="form-group">
+        <label class="MyLabel" for="camereDaLetto">Camere da letto:</label>
+        @MyHelper.getComboNumeroStanze(Model.camereDaLetto.ToString(), "camereDaLetto", false)
+    </div>
 
 
 
-        <!-- 2 -->
+    <div class="form-group">
+        <label class="MyLabel" for="camerette">Camerette:</label>
+        @MyHelper.getComboNumeroStanze(Model.camerette.ToString(), "camerette", false)
+    </div>
 
 
-        <div class="ui-block-a">
-            <div class="ui-bar ui-field-contain">
-                <label class="MyLabel" for="camerette">Camerette:</label>
-                @MyHelper.getComboNumeroStanze(Model.camerette.ToString(), "camerette", false)
-            </div>
-        </div>
-
-        <div class="ui-block-b">
-            <div class="ui-bar ui-field-contain">
-                <label class="MyLabel" for="bagni">Bagni:</label>
-                @MyHelper.getComboNumeroStanze(Model.bagni.ToString(), "bagni", false)
-            </div>
-        </div>
+    <div class="form-group">
+        <label class="MyLabel" for="bagni">Bagni:</label>
+        @MyHelper.getComboNumeroStanze(Model.bagni.ToString(), "bagni", false)
+    </div>
 
 
-        <div class="ui-block-c">
-            <div class="ui-bar ui-field-contain">
-                <label class="MyLabel" for="terrazzi">Terrazzi:</label>
-                @MyHelper.getComboNumeroStanze(Model.terrazzi.ToString(), "terrazzi", false)
-            </div>
-        </div>
+    <div class="form-group">
+        <label class="MyLabel" for="terrazzi">Terrazzi:</label>
+        @MyHelper.getComboNumeroStanze(Model.terrazzi.ToString(), "terrazzi", false)
+    </div>
 
 
-
-        <!-- 3 -->
-
-        <div class="ui-block-a">
-            <div class="ui-bar ui-field-contain">
-                <label for="balconi">Balconi:</label>
-                @MyHelper.getComboNumeroStanze(Model.balconi.ToString(), "balconi", false)
-
-            </div>
-        </div>
-
-        <div class="ui-block-b">
-            <div class="ui-bar ui-field-contain">
-                <label class="MyLabel" for="cucina">Cucina:</label>
-                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoCucina), Model.cucina.ToString(), "cucina", false)
-            </div>
-        </div>
-
-
-        <div class="ui-block-c">
-            <div class="ui-bar ui-field-contain">
-                <label class="MyLabel" for="salone">Salone:</label>
-                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoSalone), Model.salone.ToString(), "salone", false)
-            </div>
-        </div>
-
-
-
-        <!-- 4 -->
-
-        <div class="ui-block-a">
-            <div class="ui-bar ui-field-contain">
-                <label class="MyLabel" for="postoAuto">Posto auto:</label>
-                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoPostoAuto), Model.postoAuto.ToString(), "postoAuto", false)
-
-            </div>
-        </div>
-
-        <div class="ui-block-b">
-            <div class="ui-bar ui-field-contain">
-                <label class="MyLabel" for="box">Box:</label>
-                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoBoxAuto), Model.box.ToString(), "box", false)
-
-
-            </div>
-        </div>
-
-
-        <div class="ui-block-c">
-            <div class="ui-bar ui-field-contain">
-                <label class="MyLabel" for="riscaldamento">Riscaldamento:</label>
-                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoRiscaldamento), Model.riscaldamento.ToString(), "riscaldamento", false)
-
-            </div>
-        </div>
-
-
-
-
+    <div class="form-group">
+        <label for="balconi">Balconi:</label>
+        @MyHelper.getComboNumeroStanze(Model.balconi.ToString(), "balconi", false)
 
     </div>
-     
-    
-    
-    <div data-role="fieldcontain">
+
+    <div class="form-group">
+        <label class="MyLabel" for="cucina">Cucina:</label>
+        @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoCucina), Model.cucina.ToString(), "cucina", false)
+    </div>
+
+    <div class="form-group">
+        <label class="MyLabel" for="salone">Salone:</label>
+        @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoSalone), Model.salone.ToString(), "salone", false)
+    </div>
+
+    <div class="form-group">
+        <label class="MyLabel" for="postoAuto">Posto auto:</label>
+        @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoPostoAuto), Model.postoAuto.ToString(), "postoAuto", false)
+    </div>
+
+    <div class="form-group">
+        <label class="MyLabel" for="box">Box:</label>
+        @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoBoxAuto), Model.box.ToString(), "box", false)
+    </div>
+
+    <div class="form-group">
+        <label class="MyLabel" for="riscaldamento">Riscaldamento:</label>
+        @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoRiscaldamento), Model.riscaldamento.ToString(), "riscaldamento", false)
+    </div>
 
 
-
+    <div class="form-group">
         <label class="MyLabel" for="MQ">Giardino mq:</label>
-        <input type="range" name="giardinoMq" id="giardinoMq" value="@Model.giardinoMq" min="0" max="1000" data-highlight="true">
+        <input type="text" name="giardinoMq" id="giardinoMq"  data-slider-value="@Model.giardinoMq"   data-slider-min="0" data-slider-max="1000" >
+        <span id="giardinoMqCurrentSliderValLabel"></span>
     </div>
-    
-    
-    
-    
-    <div data-role="controlgrup" data-type="horizontal" data-mini="true">
-        <a href="javascript:history.back();" data-inline="true" data-role="button">Annulla</a>
-        <input type="submit" value="Avanti" data-inline="true" />
+      
+    <a class="btn btn-secondary" href="@Url.Action("MyAnnunci")" role="button">Annulla</a>
+    <input type="submit" value="Avanti" class="btn btn-primary" />
 
-    </div>
-}
+                }
+
+
+<script>
+    
+    $("#MQ").oninput = function () {
+        console.log("" + this.value);
+        $("#mqCurrentSliderVal").innerHTML = this.value;
+    }
+
+
+    $("#giardinoMq").slider({ tooltip: 'always' });
+    $("#giardinoMq").on("slide", function (slideEvt) {
+        $("#giardinoMqCurrentSliderValLabel").text(slideEvt.value);
+    });
+
+    /*
+    $('#giardinoMq').slider({
+        formatter: function (value) {
+            console.log('Current value: ' + value);
+            return 'Current value: ' + value;
+        }
+    });*/
+</script>
