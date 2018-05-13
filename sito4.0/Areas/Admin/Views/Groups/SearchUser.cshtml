@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "SearchUser";
+    Layout = "~/Areas/Admin/Views/Shared/MasterPageAdminMobile.cshtml";
+}
+
+<h2>SearchUser</h2>
+
+
+<input type="text" id="searchField" placeholder="Search">
+
+<div    >
+
+    <fieldset id="suggestions" data-role="controlgroup">
+        <legend></legend>
+        </fieldset>
+
+</div>
+
+
+
+
+<script>
+    $(document).on("pageshow", function () {
+        //alert("pageinit");
+        console.log("Ready to bring the awesome.");
+        var sugList = $("#suggestions");
+
+        $("#searchField").on("input", function (e) {
+            var text = $(this).val();
+
+            if (text.length < 3) {
+                sugList.html("");
+                sugList.listview("refresh");
+            } else {
+
+                //                alert(text);
+
+                $.getJSON('@Url.Action("AutoCompleteLogin", "Users")', { value: text }, function (mydata) {
+
+                    var str = "";
+
+                    for (var i = 0, len = mydata.length; i < len; i++) {
+                        //str += "<li>" + res[i] + "</li>";
+                        str += "<input type =\"checkbox\" name=\"myItems\" id=\"myItems[" + i + "]\"  value =\"" + mydata[i].Value + "\">";
+                        str += "<label for=\"myItems[" + i + "]\">" + mydata[i].Text + "</label>";
+
+                    }
+
+
+                    //$.each(mydata, function (index, item) {
+
+                    //    str += "<li>" + item.Text + "</li>";
+
+                    //});
+
+                    sugList.html(str);
+                    //sugList.listview("refresh");
+                    //$('input:checkbox').checkboxradio('refresh');
+                    $("[type=checkbox]").checkboxradio();
+                    $("[data-role=controlgroup]").controlgroup("refresh");
+
+                    console.dir(mydata);
+
+
+                });
+
+            }
+        });
+    });
+</script>

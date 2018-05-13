@@ -1,0 +1,21 @@
+﻿@model MyWebApplication.Models.TestModelDropDownListFor 
+@{
+    ViewBag.Title = "DropDownListFor";
+    Layout = "~/Views/Shared/MasterPageMobile.cshtml";
+}
+
+<h2>DropDownListFor</h2>
+
+ @Html.DropDownListFor(x => x.selectedValue , Model.allValues , new { data_mini = "true", data_inline = "true", required = "required" })
+
+
+selectedCategoria: Value: @((int)Model.selectedCategoria)
+
+ 
+@Html.DropDownListFor(x => x.selectedCategoriaId , Model.allCategorie  ,new { data_mini = "true", data_inline = "true", required = "required" })
+
+
+
+ @MyHelper.getComboEnum( default (Annunci.Models.Immobile.Categorie), Model.selectedCategoria.ToString(), "ffff")  
+
+

@@ -1,0 +1,151 @@
+﻿@model MyWebApplication.Areas.Admin.Models.MyUserModel
+@{
+    ViewBag.Title = "Dettaglio utente: " + ((String.IsNullOrEmpty(Model.Utente.login)) ? "N/A" : Model.Utente.login);
+    Layout = "~/Areas/Admin/Views/Shared/MasterPageAdminMobile.cshtml";
+}
+
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+
+<script>
+    $(function () {
+        $("#tabs").tabs();
+    });
+</script>
+
+
+<h2>Utente: @Model.Utente.login (id: @Model.Utente.userId)</h2>
+
+<div id="tabs">
+
+    <ul>
+        <li><a href="#tabs-1">Account</a></li>
+        <li><a href="#tabs-2">Anagrafica</a></li>
+        <li><a href="#tabs-3">Gruppi</a></li>
+    </ul>
+
+
+    <div id="tabs-1">
+        <br />
+         @{Html.RenderPartial("TabInfoAccount", Model.Utente);}
+
+
+        <br />
+        <br />
+
+        <div class="ui-grid-c">
+            <div class="ui-block-a">
+                <div class="ui-bar ui-bar-a">Date added:</div>
+                <div class="ui-bar ui-bar-a">Date modified:</div>
+                <div class="ui-bar ui-bar-a">Date expire:</div>
+                <div class="ui-bar ui-bar-a">Date expire password:</div>
+                <div class="ui-bar ui-bar-a">Date activation account:</div>
+            </div>
+            <div class="ui-block-b">
+                <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.dateAdded)</div>
+                <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.dateModified)</div>
+                <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.dateExpire)</div>
+                <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.dateExpirePassword)</div>
+                <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.dateActivationAccount)</div>
+            </div>
+            <div class="ui-block-c">
+                <div class="ui-bar ui-bar-a">Login success:</div>
+                <div class="ui-bar ui-bar-a">Login failed:</div>
+                <div class="ui-bar ui-bar-a">Date last login:</div>
+            </div>
+            <div class="ui-block-d">
+                <div class="ui-bar ui-bar-c">@Model.Utente.loginSuccess </div>
+                <div class="ui-bar ui-bar-c">@Model.Utente.loginFailed</div>
+                <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.dateLastLogin)</div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="tabs-2">
+        <br />
+        @{Html.RenderPartial("TabInfoAnagrafica", Model.Utente);}
+
+       
+        <br />
+        <br />
+
+
+        <div class="ui-grid-c">
+            <div class="ui-block-a">
+                <div class="ui-bar ui-bar-a">Telefono:</div>
+                <div class="ui-bar ui-bar-a">Mobile:</div>
+            </div>
+            <div class="ui-block-b">
+                <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.telefono)</div>
+                <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.mobile)</div>
+            </div>
+            <div class="ui-block-c">
+                <div class="ui-bar ui-bar-a">Http:</div>
+                <div class="ui-bar ui-bar-a">Fax:</div>
+            </div>
+            <div class="ui-block-d">
+                <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.http)</div>
+                <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.fax)</div>
+            </div>
+        </div>
+
+
+
+        <div class="ui-grid-c">
+            <div class="ui-block-a">
+                <div class="ui-bar ui-bar-a">Indirizzo:</div>
+                <div class="ui-bar ui-bar-a">Numero civico:</div>
+                <div class="ui-bar ui-bar-a">Cap:</div>
+            </div>
+            <div class="ui-block-b">
+                <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.indirizzo)</div>
+                <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.numero_civico)</div>
+                <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.cap)</div>
+            </div>
+            <div class="ui-block-c">
+                <div class="ui-bar ui-bar-a">Regione:</div>
+                <div class="ui-bar ui-bar-a">Provincia:</div>
+                <div class="ui-bar ui-bar-a">Comune:</div>
+            </div>
+            <div class="ui-block-d">
+                <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.regione)</div>
+                <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.provincia)</div>
+                <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.comune)</div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div id="tabs-3">
+        @if (Model.Utente.Gruppi == null || Model.Utente.Gruppi.Count() == 0)
+        {
+            <h3>Nessun gruppo associato</h3>
+        }
+        else
+        {
+            <br />
+            <ul data-role="listview">
+                @foreach (MyUsers.Models.MyGroup g in Model.Utente.Gruppi)
+                {
+                    <li><a href="@Url.Action("Details", "Groups", new  { id = g.gruppoId })"> @(g.nome)</a></li>
+                }
+            </ul>
+        }
+    </div>
+
+
+
+
+</div>
+
+
+<div data-role="controlgrup" data-type="horizontal" data-mini="true">
+    <a href="@Url.Action("Index", "Users")" class="ui-btn-inline ui-btn ui-corner-all">Torna alla lista</a>
+    <a href="@Url.Action("Edit", "Users", new { id = Model.Utente.userId })" class="ui-btn ui-icon-edit ui-btn-icon-left ui-btn-inline ui-corner-all">Modifica</a>
+    <a href="@Url.Action("Delete", "Users", new { id = Model.Utente.userId })" class="ui-btn ui-icon-delete ui-btn-icon-left ui-btn-inline ui-corner-all">Elimina</a>
+</div>
+
+

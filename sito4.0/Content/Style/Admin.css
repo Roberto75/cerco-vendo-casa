@@ -1,0 +1,190 @@
+﻿/* Box-sizing -*/
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+      
+
+}
+
+/* Display block per gli elementi HTML5 su IE */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+    display: block;
+}
+
+
+/* Stili di base e tipografia */
+
+html {
+    font-size: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+    color: #333;
+    background-color: #bcebf0;
+}
+
+a {
+    color: #558bc4;
+    text-decoration: none;
+}
+
+    a:hover {
+        color: #558bc4;
+        text-decoration: none;
+    }
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Georgia", "Times New Roman", serif;
+}
+
+h1 {
+    font-size: 42px;
+    line-height: 46px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 28px;
+    line-height: 32px;
+    margin-bottom: 12px;
+}
+
+h3 {
+    font-size: 21px;
+    line-height: 25px;
+    margin-bottom: 8px;
+}
+
+img {
+    border: none;
+}
+/* Griglia */
+
+.container {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 0;
+    background: #fff;
+    position:relative;
+}
+
+.riga {
+    margin: 0 0 20px 0;
+}
+
+
+.content {
+    margin: 0 0 0 200px;
+    padding: 0;
+    background: #ff6a00;
+   
+}
+
+
+header {
+    height: 70px;
+    border-bottom: 1px solid #333;
+}
+
+    header #logo {
+        float: left;
+        display: block;
+        border: 1px solid red;
+    }
+
+        header #logo img {
+            display: block;
+            height :60px;
+        }
+
+        header #logo a {
+            display: block;
+        }
+
+nav.menuTop {
+    padding: 20px 20px 0 0;
+    float: right;
+}
+
+    nav.menuTop ul, nav.menuTop li {
+        margin: 0;
+        padding: 0;
+        float :left;
+    }
+
+        nav.menuTop ul li {
+            list-style: none;
+            margin-right: 5px;
+
+        }
+
+            nav.menuTop ul li a {
+                display: block;
+                padding: 5px;
+            }
+
+
+
+nav.menuLeft {
+    float: left;
+    width: 200px;
+    background-color: aqua;
+   
+}
+
+    nav.menuLeft ul, nav li {
+        margin: 0;
+        padding: 0;
+    }
+
+        nav.menuLeft ul li {
+            list-style: none;
+            margin-right: 5px;
+        }
+
+            nav.menuLeft ul li a {
+                display: inline-block;
+                padding: 5px;
+            }
+
+
+
+footer {
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+}
+
+
+
+
+
+
+
+div.Paginazione {
+    font-size: initial;
+    background: linear-gradient(rgb(83, 147, 197), rgb(111, 172, 213)) repeat scroll 0% 0% rgb(83, 147, 197);
+    padding: 5px;
+    text-shadow: none;
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+    text-shadow: 0px 1px 0px rgb(62, 103, 144);
+    /* stessa larghezza della tabella!*/
+    display: table-row-group
+}

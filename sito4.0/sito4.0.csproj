@@ -1,0 +1,1099 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FF07C6F9-16F3-44CA-8504-47A515C6F076}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyWebApplication</RootNamespace>
+    <AssemblyName>cerco-vendo-casa.it</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\forum.mdb" />
+    <Content Include="App_Data\immobiliare.mdb" />
+    <Content Include="App_Data\log.mdb" />
+    <Content Include="App_Data\RegioniProvinceComuni.mdb" />
+    <Content Include="App_Data\rubrica.mdb" />
+    <Content Include="App_Data\utenti.mdb" />
+    <Content Include="Content\Images\1dot.gif" />
+    <Content Include="Content\Images\3puntiniBianchi.gif" />
+    <Content Include="Content\Images\AddFavoriti.gif" />
+    <Content Include="Content\Images\Agenzia.gif" />
+    <Content Include="Content\Images\alert.gif" />
+    <Content Include="Content\Images\angolino_lilla.gif" />
+    <Content Include="Content\Images\angolo_azzurro_bl.gif" />
+    <Content Include="Content\Images\angolo_azzurro_br.gif" />
+    <Content Include="Content\Images\angolo_azzurro_tl.gif" />
+    <Content Include="Content\Images\angolo_azzurro_tr.gif" />
+    <Content Include="Content\Images\arrow.gif" />
+    <Content Include="Content\Images\arrow2.gif" />
+    <Content Include="Content\Images\arrow2old.gif" />
+    <Content Include="Content\Images\at.gif" />
+    <Content Include="Content\Images\bluearrow.gif" />
+    <Content Include="Content\Images\bottom.gif" />
+    <Content Include="Content\Images\BtnHome.gif" />
+    <Content Include="Content\Images\BtnIndietro.gif" />
+    <Content Include="Content\Images\BtnIndietro_old.gif" />
+    <Content Include="Content\Images\btnLeft.gif" />
+    <Content Include="Content\Images\btnRight.gif" />
+    <Content Include="Content\Images\BtnTop.gif" />
+    <Content Include="Content\Images\bullet.gif" />
+    <Content Include="Content\Images\calendario.gif" />
+    <Content Include="Content\Images\casa_14px.gif" />
+    <Content Include="Content\Images\ccs.jpg" />
+    <Content Include="Content\Images\ccs_4.gif" />
+    <Content Include="Content\Images\Cerca.gif" />
+    <Content Include="Content\Images\cerco-vendo-casa.gif" />
+    <Content Include="Content\Images\close.gif" />
+    <Content Include="Content\Images\close.png" />
+    <Content Include="Content\Images\closelabel.gif" />
+    <Content Include="Content\Images\compro.gif" />
+    <Content Include="Content\Images\consulenzalinguistiche.jpg" />
+    <Content Include="Content\Images\contatta.gif" />
+    <Content Include="Content\Images\contatti.gif" />
+    <Content Include="Content\Images\content_menu.gif" />
+    <Content Include="Content\Images\documenti.jpg" />
+    <Content Include="Content\Images\donate-button.gif" />
+    <Content Include="Content\Images\donate.gif" />
+    <Content Include="Content\Images\donate1.gif" />
+    <Content Include="Content\Images\donate_.gif" />
+    <Content Include="Content\Images\done.gif" />
+    <Content Include="Content\Images\download-icon.gif" />
+    <Content Include="Content\Images\download.gif" />
+    <Content Include="Content\Images\entra.gif" />
+    <Content Include="Content\Images\entra_old.gif" />
+    <Content Include="Content\Images\faq.jpg" />
+    <Content Include="Content\Images\Forum\anonymous.gif" />
+    <Content Include="Content\Images\Forum\folder.gif" />
+    <Content Include="Content\Images\Forum\folder1_16x16.gif" />
+    <Content Include="Content\Images\Forum\folder1_24x24.gif" />
+    <Content Include="Content\Images\Forum\folder1_32x32.gif" />
+    <Content Include="Content\Images\Forum\folder1_48x48.gif" />
+    <Content Include="Content\Images\Forum\newpost.gif" />
+    <Content Include="Content\Images\Forum\newthread_1.gif" />
+    <Content Include="Content\Images\Forum\newthread_2.gif" />
+    <Content Include="Content\Images\Forum\post_button_locked.gif" />
+    <Content Include="Content\Images\Forum\quote.gif" />
+    <Content Include="Content\Images\Forum\quote_1.gif" />
+    <Content Include="Content\Images\Forum\reply_1.gif" />
+    <Content Include="Content\Images\forum_status.gif" />
+    <Content Include="Content\Images\foto.jpg" />
+    <Content Include="Content\Images\freccia1_close.gif" />
+    <Content Include="Content\Images\freccia1_open.gif" />
+    <Content Include="Content\Images\freccia2_close.gif" />
+    <Content Include="Content\Images\freccia2_open.gif" />
+    <Content Include="Content\Images\FrecciaAllDx.gif" />
+    <Content Include="Content\Images\FrecciaAllSx.gif" />
+    <Content Include="Content\Images\FrecciaDown.gif" />
+    <Content Include="Content\Images\FrecciaDx.gif" />
+    <Content Include="Content\Images\FrecciaSx.gif" />
+    <Content Include="Content\Images\FrecciaUp.gif" />
+    <Content Include="Content\Images\frecciaWord.gif" />
+    <Content Include="Content\Images\gmap-icon.jpg" />
+    <Content Include="Content\Images\gmap.gif" />
+    <Content Include="Content\Images\go.jpg" />
+    <Content Include="Content\Images\h1.gif" />
+    <Content Include="Content\Images\h1_1.gif" />
+    <Content Include="Content\Images\h1_2.gif" />
+    <Content Include="Content\Images\helpicon.gif" />
+    <Content Include="Content\Images\iconaHelp.gif" />
+    <Content Include="Content\Images\iconaHelp_f2.gif" />
+    <Content Include="Content\Images\Immobiliare\agenzia.gif" />
+    <Content Include="Content\Images\Immobiliare\agenzia.jpg" />
+    <Content Include="Content\Images\Immobiliare\brand.jpg" />
+    <Content Include="Content\Images\Immobiliare\brand1.jpg" />
+    <Content Include="Content\Images\Immobiliare\brand2.jpg" />
+    <Content Include="Content\Images\Immobiliare\camera.jpg" />
+    <Content Include="Content\Images\Immobiliare\car.png" />
+    <Content Include="Content\Images\Immobiliare\car_old.png" />
+    <Content Include="Content\Images\Immobiliare\casa.gif" />
+    <Content Include="Content\Images\Immobiliare\casa.jpg" />
+    <Content Include="Content\Images\Immobiliare\casa32x32.gif" />
+    <Content Include="Content\Images\Immobiliare\classe-energetica-a.png" />
+    <Content Include="Content\Images\Immobiliare\classe-energetica-aa.png" />
+    <Content Include="Content\Images\Immobiliare\classe-energetica-b.png" />
+    <Content Include="Content\Images\Immobiliare\classe-energetica-c.png" />
+    <Content Include="Content\Images\Immobiliare\classe-energetica-d.png" />
+    <Content Include="Content\Images\Immobiliare\classe-energetica-e.png" />
+    <Content Include="Content\Images\Immobiliare\classe-energetica-f.png" />
+    <Content Include="Content\Images\Immobiliare\classe-energetica-g.png" />
+    <Content Include="Content\Images\Immobiliare\classeEnergetica.jpg" />
+    <Content Include="Content\Images\Immobiliare\compro.gif" />
+    <Content Include="Content\Images\Immobiliare\drag.jpg" />
+    <Content Include="Content\Images\Immobiliare\feature_click.jpg" />
+    <Content Include="Content\Images\Immobiliare\for-sale-by-owner.jpg" />
+    <Content Include="Content\Images\Immobiliare\GoogleMaps.jpg" />
+    <Content Include="Content\Images\Immobiliare\marker.gif" />
+    <Content Include="Content\Images\Immobiliare\newpost.gif" />
+    <Content Include="Content\Images\Immobiliare\privato.gif" />
+    <Content Include="Content\Images\Immobiliare\privato.jpg" />
+    <Content Include="Content\Images\Immobiliare\revoagent.jpg" />
+    <Content Include="Content\Images\Immobiliare\scambio.gif" />
+    <Content Include="Content\Images\Immobiliare\share.png" />
+    <Content Include="Content\Images\Immobiliare\siti.jpg" />
+    <Content Include="Content\Images\Immobiliare\stickies1_128x128.gif" />
+    <Content Include="Content\Images\Immobiliare\stickies1_60x60.gif" />
+    <Content Include="Content\Images\Immobiliare\tools.jpg" />
+    <Content Include="Content\Images\Immobiliare\user2_16x16.gif" />
+    <Content Include="Content\Images\Immobiliare\user2_24x24.gif" />
+    <Content Include="Content\Images\Immobiliare\user2_32x32.gif" />
+    <Content Include="Content\Images\Immobiliare\vendo.gif" />
+    <Content Include="Content\Images\Immobiliare\_agenzia.gif" />
+    <Content Include="Content\Images\Immobiliare\_privato.gif" />
+    <Content Include="Content\Images\inizia.gif" />
+    <Content Include="Content\Images\inviaAnnuncio.gif" />
+    <Content Include="Content\Images\KEYpill.jpg" />
+    <Content Include="Content\Images\left1_32x32.gif" />
+    <Content Include="Content\Images\lente.gif" />
+    <Content Include="Content\Images\libri1_128x128.gif" />
+    <Content Include="Content\Images\libri1_24x24.gif" />
+    <Content Include="Content\Images\libri1_32x32.gif" />
+    <Content Include="Content\Images\libri1_48x48.gif" />
+    <Content Include="Content\Images\libri1_60x60.gif" />
+    <Content Include="Content\Images\loading.gif" />
+    <Content Include="Content\Images\loading01.gif" />
+    <Content Include="Content\Images\login.gif" />
+    <Content Include="Content\Images\login.jpg" />
+    <Content Include="Content\Images\login1.gif" />
+    <Content Include="Content\Images\logo.jpg" />
+    <Content Include="Content\Images\LogoAnnunciPrivati.gif" />
+    <Content Include="Content\Images\LogoAnnunciPrivati_f2.gif" />
+    <Content Include="Content\Images\LogoCataloghiLibrerie.gif" />
+    <Content Include="Content\Images\LogoCataloghiLibrerie_f2.gif" />
+    <Content Include="Content\Images\LogoChiSiamo.gif" />
+    <Content Include="Content\Images\LogoChiSiamo_f2.gif" />
+    <Content Include="Content\Images\LogoInserimentoAnnuncio.gif" />
+    <Content Include="Content\Images\LogoInserimentoAnnuncio_f2.gif" />
+    <Content Include="Content\Images\LogoLibro.gif" />
+    <Content Include="Content\Images\LogoLibro120x60_ANI.gif" />
+    <Content Include="Content\Images\logoLibro468x60_ANI.gif" />
+    <Content Include="Content\Images\LogoLink.gif" />
+    <Content Include="Content\Images\LogoOK.gif" />
+    <Content Include="Content\Images\LogoRicerca.gif" />
+    <Content Include="Content\Images\LogoRicerca_f2.gif" />
+    <Content Include="Content\Images\logoTrovaCD.gif" />
+    <Content Include="Content\Images\logoTrovalibro468x60.gif" />
+    <Content Include="Content\Images\logo_cerco-vendo-casa.gif" />
+    <Content Include="Content\Images\logo_entra.gif" />
+    <Content Include="Content\Images\logo_svelenati.gif" />
+    <Content Include="Content\Images\logo_trova-libro.gif" />
+    <Content Include="Content\Images\marker.gif" />
+    <Content Include="Content\Images\menu1.gif" />
+    <Content Include="Content\Images\menu1top.gif" />
+    <Content Include="Content\Images\menu2.gif" />
+    <Content Include="Content\Images\menu3.gif" />
+    <Content Include="Content\Images\messagioNo.gif" />
+    <Content Include="Content\Images\messagioOK.gif" />
+    <Content Include="Content\Images\middle.gif" />
+    <Content Include="Content\Images\MSIE.gif" />
+    <Content Include="Content\Images\new.gif" />
+    <Content Include="Content\Images\newpost.gif" />
+    <Content Include="Content\Images\next.png" />
+    <Content Include="Content\Images\nextlabel.gif" />
+    <Content Include="Content\Images\Number-1-icon.png" />
+    <Content Include="Content\Images\Number-2-icon.png" />
+    <Content Include="Content\Images\Number-3-icon.png" />
+    <Content Include="Content\Images\Number-4-icon.png" />
+    <Content Include="Content\Images\Number-5-icon.png" />
+    <Content Include="Content\Images\Number-6-icon.png" />
+    <Content Include="Content\Images\Number-7-icon.png" />
+    <Content Include="Content\Images\Number-8-icon.png" />
+    <Content Include="Content\Images\Number-9-icon.png" />
+    <Content Include="Content\Images\paper.jpg" />
+    <Content Include="Content\Images\photo_unavailable.gif" />
+    <Content Include="Content\Images\poweredByCCS.jpg" />
+    <Content Include="Content\Images\prev.png" />
+    <Content Include="Content\Images\prevlabel.gif" />
+    <Content Include="Content\Images\printer.gif" />
+    <Content Include="Content\Images\privati.gif" />
+    <Content Include="Content\Images\privato.gif" />
+    <Content Include="Content\Images\provaBanner.gif" />
+    <Content Include="Content\Images\puntini.gif" />
+    <Content Include="Content\Images\puntini2.gif" />
+    <Content Include="Content\Images\quote.gif" />
+    <Content Include="Content\Images\rep_1.jpg" />
+    <Content Include="Content\Images\rep_10.jpg" />
+    <Content Include="Content\Images\rep_12.jpg" />
+    <Content Include="Content\Images\rep_14.jpg" />
+    <Content Include="Content\Images\rep_2.jpg" />
+    <Content Include="Content\Images\rep_3.jpg" />
+    <Content Include="Content\Images\rep_4.jpg" />
+    <Content Include="Content\Images\rep_4_1.jpg" />
+    <Content Include="Content\Images\rep_4_2.jpg" />
+    <Content Include="Content\Images\rep_5.jpg" />
+    <Content Include="Content\Images\rep_6.jpg" />
+    <Content Include="Content\Images\rep_7.jpg" />
+    <Content Include="Content\Images\rep_8.jpg" />
+    <Content Include="Content\Images\rep_9.jpg" />
+    <Content Include="Content\Images\rep_left.jpg" />
+    <Content Include="Content\Images\rep_right.jpg" />
+    <Content Include="Content\Images\riga1.jpg" />
+    <Content Include="Content\Images\riga2.jpg" />
+    <Content Include="Content\Images\riga3.gif" />
+    <Content Include="Content\Images\right.jpg" />
+    <Content Include="Content\Images\right1_32x32.gif" />
+    <Content Include="Content\Images\risparmio.jpg" />
+    <Content Include="Content\Images\roadmap.jpg" />
+    <Content Include="Content\Images\scambio.gif" />
+    <Content Include="Content\Images\sfLink1.jpg" />
+    <Content Include="Content\Images\sfMenu.gif" />
+    <Content Include="Content\Images\sfMenu2.gif" />
+    <Content Include="Content\Images\sfMenu2.jpg" />
+    <Content Include="Content\Images\sfMenuCat.jpg" />
+    <Content Include="Content\Images\sfondo.jpg" />
+    <Content Include="Content\Images\sfondoGrigio.gif" />
+    <Content Include="Content\Images\sfP1.jpg" />
+    <Content Include="Content\Images\sfP2.jpg" />
+    <Content Include="Content\Images\sfPremi10.jpg" />
+    <Content Include="Content\Images\sfPremi2.jpg" />
+    <Content Include="Content\Images\sfPremi3.jpg" />
+    <Content Include="Content\Images\sfPremi4.jpg" />
+    <Content Include="Content\Images\sfPremi5.jpg" />
+    <Content Include="Content\Images\sfPremi6.jpg" />
+    <Content Include="Content\Images\sfPremi7.jpg" />
+    <Content Include="Content\Images\sfPremi8.jpg" />
+    <Content Include="Content\Images\sfPremi9.jpg" />
+    <Content Include="Content\Images\sfPremiDx.jpg" />
+    <Content Include="Content\Images\sfPremiSx.jpg" />
+    <Content Include="Content\Images\Shared\1dot.gif" />
+    <Content Include="Content\Images\Shared\3puntini.gif" />
+    <Content Include="Content\Images\Shared\4puntini.gif" />
+    <Content Include="Content\Images\Shared\account.gif" />
+    <Content Include="Content\Images\Shared\aggiorna_16x16.gif" />
+    <Content Include="Content\Images\Shared\alert.gif" />
+    <Content Include="Content\Images\Shared\alert1_16x16.gif" />
+    <Content Include="Content\Images\Shared\alert1_32x32.gif" />
+    <Content Include="Content\Images\Shared\alert1_48x48.gif" />
+    <Content Include="Content\Images\Shared\alto.gif" />
+    <Content Include="Content\Images\Shared\alto_1.gif" />
+    <Content Include="Content\Images\Shared\amber_128x128.png" />
+    <Content Include="Content\Images\Shared\amber_16x16.png" />
+    <Content Include="Content\Images\Shared\angolino_1.gif" />
+    <Content Include="Content\Images\Shared\angolino_2.gif" />
+    <Content Include="Content\Images\Shared\angolino_3.gif" />
+    <Content Include="Content\Images\Shared\angolino_4.gif" />
+    <Content Include="Content\Images\Shared\angolino_lilla.gif" />
+    <Content Include="Content\Images\Shared\angolodxdwn.gif" />
+    <Content Include="Content\Images\Shared\angolosxup.gif" />
+    <Content Include="Content\Images\Shared\Anonimo.png" />
+    <Content Include="Content\Images\Shared\apici.gif" />
+    <Content Include="Content\Images\Shared\apri_16x16.gif" />
+    <Content Include="Content\Images\Shared\AQUA ICONS SYSTEM ALERT NOTE ICON.png" />
+    <Content Include="Content\Images\Shared\arrow.gif" />
+    <Content Include="Content\Images\Shared\arrow1.gif" />
+    <Content Include="Content\Images\Shared\arrow2.gif" />
+    <Content Include="Content\Images\Shared\arrow3.gif" />
+    <Content Include="Content\Images\Shared\arrow4.gif" />
+    <Content Include="Content\Images\Shared\arrow5.gif" />
+    <Content Include="Content\Images\Shared\arrow6.gif" />
+    <Content Include="Content\Images\Shared\arrowDown.png" />
+    <Content Include="Content\Images\Shared\arrow_1_1.gif" />
+    <Content Include="Content\Images\Shared\arrow_1_1over.gif" />
+    <Content Include="Content\Images\Shared\arrow_1_2.gif" />
+    <Content Include="Content\Images\Shared\arrow_1_3.gif" />
+    <Content Include="Content\Images\Shared\arrow_1_4.gif" />
+    <Content Include="Content\Images\Shared\arrow_1_5.gif" />
+    <Content Include="Content\Images\Shared\arrow_1_6.gif" />
+    <Content Include="Content\Images\Shared\arrow_2_1.gif" />
+    <Content Include="Content\Images\Shared\at.gif" />
+    <Content Include="Content\Images\Shared\at.JPG" />
+    <Content Include="Content\Images\Shared\back_16x16.gif" />
+    <Content Include="Content\Images\Shared\basso.gif" />
+    <Content Include="Content\Images\Shared\BeOS_lock.ico" />
+    <Content Include="Content\Images\Shared\bgk1.gif" />
+    <Content Include="Content\Images\Shared\bgk2.gif" />
+    <Content Include="Content\Images\Shared\bgk3.gif" />
+    <Content Include="Content\Images\Shared\bgk4.gif" />
+    <Content Include="Content\Images\Shared\blocco.png" />
+    <Content Include="Content\Images\Shared\BLUE.png" />
+    <Content Include="Content\Images\Shared\blue1_16x16.gif" />
+    <Content Include="Content\Images\Shared\blue1_24x24.gif" />
+    <Content Include="Content\Images\Shared\blue2_16x16.png" />
+    <Content Include="Content\Images\Shared\blue2_24x24.png" />
+    <Content Include="Content\Images\Shared\box1.png" />
+    <Content Include="Content\Images\Shared\btnAnnulla.gif" />
+    <Content Include="Content\Images\Shared\btnAnnulla_old.gif" />
+    <Content Include="Content\Images\Shared\btnAvanti.gif" />
+    <Content Include="Content\Images\Shared\btnAvanti_old.gif" />
+    <Content Include="Content\Images\Shared\btnCerca.gif" />
+    <Content Include="Content\Images\Shared\btnChiudi.gif" />
+    <Content Include="Content\Images\Shared\btnClose_14x14.Image.png" />
+    <Content Include="Content\Images\Shared\btnConferma.gif" />
+    <Content Include="Content\Images\Shared\btnConferma_old.gif" />
+    <Content Include="Content\Images\Shared\btnEntra.gif" />
+    <Content Include="Content\Images\Shared\btnEntra_old.gif" />
+    <Content Include="Content\Images\Shared\btnFind150.Image.png" />
+    <Content Include="Content\Images\Shared\btnIndietro.gif" />
+    <Content Include="Content\Images\Shared\btnIndietro_old.gif" />
+    <Content Include="Content\Images\Shared\btnInizia.gif" />
+    <Content Include="Content\Images\Shared\btnInizia_old.gif" />
+    <Content Include="Content\Images\Shared\btnInvia.gif" />
+    <Content Include="Content\Images\Shared\btnLogout.gif" />
+    <Content Include="Content\Images\Shared\btnLogout2.gif" />
+    <Content Include="Content\Images\Shared\btnModifica.gif" />
+    <Content Include="Content\Images\Shared\btnOK.gif" />
+    <Content Include="Content\Images\Shared\btnPaginaRicerca.png" />
+    <Content Include="Content\Images\Shared\btnQuote.gif" />
+    <Content Include="Content\Images\Shared\btnReset150.Image.png" />
+    <Content Include="Content\Images\Shared\btnRispondi.gif" />
+    <Content Include="Content\Images\Shared\btnRispondi_old.gif" />
+    <Content Include="Content\Images\Shared\btnTrova.gif" />
+    <Content Include="Content\Images\Shared\btnTrova_old.gif" />
+    <Content Include="Content\Images\Shared\btn_donate_150wx70h.gif" />
+    <Content Include="Content\Images\Shared\bullet.gif" />
+    <Content Include="Content\Images\Shared\bullet2.gif" />
+    <Content Include="Content\Images\Shared\calendario.gif" />
+    <Content Include="Content\Images\Shared\casa16X16.gif" />
+    <Content Include="Content\Images\Shared\casa_10x10.gif" />
+    <Content Include="Content\Images\Shared\casa_14px.gif" />
+    <Content Include="Content\Images\Shared\casa_16x16.gif" />
+    <Content Include="Content\Images\Shared\cerca.gif" />
+    <Content Include="Content\Images\Shared\cerco-vendo-casa.css" />
+    <Content Include="Content\Images\Shared\certificato1.gif" />
+    <Content Include="Content\Images\Shared\check.gif" />
+    <Content Include="Content\Images\Shared\Clipper System_1 Get Info.png" />
+    <Content Include="Content\Images\Shared\Clipper System_1 User.png" />
+    <Content Include="Content\Images\Shared\Comic Icons 3 lock.png" />
+    <Content Include="Content\Images\Shared\Connecting.gif" />
+    <Content Include="Content\Images\Shared\copy_16x16.gif" />
+    <Content Include="Content\Images\Shared\copy_24x24.gif" />
+    <Content Include="Content\Images\Shared\copy_32x32.gif" />
+    <Content Include="Content\Images\Shared\dett.png" />
+    <Content Include="Content\Images\Shared\down1_16x16.png" />
+    <Content Include="Content\Images\Shared\down1_24x24.png" />
+    <Content Include="Content\Images\Shared\down1_32x32.png" />
+    <Content Include="Content\Images\Shared\down1_48x48.png" />
+    <Content Include="Content\Images\Shared\download.gif" />
+    <Content Include="Content\Images\Shared\downloaddisk.gif" />
+    <Content Include="Content\Images\Shared\download_1.gif" />
+    <Content Include="Content\Images\Shared\edit.png" />
+    <Content Include="Content\Images\Shared\edit1_16x16.png" />
+    <Content Include="Content\Images\Shared\edit1_24x24.png" />
+    <Content Include="Content\Images\Shared\edit1_32x32.png" />
+    <Content Include="Content\Images\Shared\elimina_16x16.gif" />
+    <Content Include="Content\Images\Shared\elimina_32x32.gif" />
+    <Content Include="Content\Images\Shared\elimina_icov.gif" />
+    <Content Include="Content\Images\Shared\email1_16x16.gif" />
+    <Content Include="Content\Images\Shared\email1_32x32.gif" />
+    <Content Include="Content\Images\Shared\email1_48x48.gif" />
+    <Content Include="Content\Images\Shared\empty.gif" />
+    <Content Include="Content\Images\Shared\entra.gif" />
+    <Content Include="Content\Images\Shared\error.png" />
+    <Content Include="Content\Images\Shared\error1_16x16.gif" />
+    <Content Include="Content\Images\Shared\error1_24x24.gif" />
+    <Content Include="Content\Images\Shared\error1_32x32.gif" />
+    <Content Include="Content\Images\Shared\error1_48x48.gif" />
+    <Content Include="Content\Images\Shared\euro.gif" />
+    <Content Include="Content\Images\Shared\excel.png" />
+    <Content Include="Content\Images\Shared\excel2.png" />
+    <Content Include="Content\Images\Shared\excel2_32x32.png" />
+    <Content Include="Content\Images\Shared\execbtn.png" />
+    <Content Include="Content\Images\Shared\eye1.jpg" />
+    <Content Include="Content\Images\Shared\eye2.jpg" />
+    <Content Include="Content\Images\Shared\eye3.jpg" />
+    <Content Include="Content\Images\Shared\Failed.gif" />
+    <Content Include="Content\Images\Shared\first_16x16.gif" />
+    <Content Include="Content\Images\Shared\folder1_128x128.gif" />
+    <Content Include="Content\Images\Shared\folder1_32x32.gif" />
+    <Content Include="Content\Images\Shared\folder2_128x128.gif" />
+    <Content Include="Content\Images\Shared\folder2_32x32.gif" />
+    <Content Include="Content\Images\Shared\FrecciaAllDx.gif" />
+    <Content Include="Content\Images\Shared\FrecciaAllSx.gif" />
+    <Content Include="Content\Images\Shared\frecciaBlu.gif" />
+    <Content Include="Content\Images\Shared\FrecciaDown.gif" />
+    <Content Include="Content\Images\Shared\FrecciaDx.gif" />
+    <Content Include="Content\Images\Shared\frecciaRossa.gif" />
+    <Content Include="Content\Images\Shared\FrecciaSx.gif" />
+    <Content Include="Content\Images\Shared\FrecciaUp.gif" />
+    <Content Include="Content\Images\Shared\frecciaWord.gif" />
+    <Content Include="Content\Images\Shared\getacro.gif" />
+    <Content Include="Content\Images\Shared\go.jpg" />
+    <Content Include="Content\Images\Shared\Google-Maps.png" />
+    <Content Include="Content\Images\Shared\green1_16x16.gif" />
+    <Content Include="Content\Images\Shared\green1_24x24.gif" />
+    <Content Include="Content\Images\Shared\green2_128x128.png" />
+    <Content Include="Content\Images\Shared\green2_16x16.png" />
+    <Content Include="Content\Images\Shared\helpicon.gif" />
+    <Content Include="Content\Images\Shared\home1_128x128.gif" />
+    <Content Include="Content\Images\Shared\home1_16x16.gif" />
+    <Content Include="Content\Images\Shared\home1_32x32.gif" />
+    <Content Include="Content\Images\Shared\home1_48x48.gif" />
+    <Content Include="Content\Images\Shared\home1_64x64.gif" />
+    <Content Include="Content\Images\Shared\home2_16x16.gif" />
+    <Content Include="Content\Images\Shared\home2_16x16.png" />
+    <Content Include="Content\Images\Shared\home2_24x24.png" />
+    <Content Include="Content\Images\Shared\home2_32x32.gif" />
+    <Content Include="Content\Images\Shared\home2_32x32.png" />
+    <Content Include="Content\Images\Shared\home2_48x48.gif" />
+    <Content Include="Content\Images\Shared\home2_48x48.png" />
+    <Content Include="Content\Images\Shared\ico_modificav.gif" />
+    <Content Include="Content\Images\Shared\indicator_mozilla_blu.gif" />
+    <Content Include="Content\Images\Shared\indicator_waitanim.gif" />
+    <Content Include="Content\Images\Shared\info1_16x16.gif" />
+    <Content Include="Content\Images\Shared\info1_32x32.gif" />
+    <Content Include="Content\Images\Shared\info1_48x48.gif" />
+    <Content Include="Content\Images\Shared\info2_16x16.gif" />
+    <Content Include="Content\Images\Shared\info2_32x32.gif" />
+    <Content Include="Content\Images\Shared\info2_32x32gif.gif" />
+    <Content Include="Content\Images\Shared\info2_48x48.gif" />
+    <Content Include="Content\Images\Shared\it.gif" />
+    <Content Include="Content\Images\Shared\last_16x16.gif" />
+    <Content Include="Content\Images\Shared\left.jpg" />
+    <Content Include="Content\Images\Shared\left1_32x32.gif" />
+    <Content Include="Content\Images\Shared\lente.gif" />
+    <Content Include="Content\Images\Shared\link.gif" />
+    <Content Include="Content\Images\Shared\lock1_16x16.gif" />
+    <Content Include="Content\Images\Shared\lock1_32x32.gif" />
+    <Content Include="Content\Images\Shared\lock1_64x64.gif" />
+    <Content Include="Content\Images\Shared\login.gif" />
+    <Content Include="Content\Images\Shared\logo.gif" />
+    <Content Include="Content\Images\Shared\LogoAttivo.gif" />
+    <Content Include="Content\Images\Shared\LogoInEsecuzione.gif" />
+    <Content Include="Content\Images\Shared\LogoNonAttivo.gif" />
+    <Content Include="Content\Images\Shared\medio.gif" />
+    <Content Include="Content\Images\Shared\meno.png" />
+    <Content Include="Content\Images\Shared\menu1.gif" />
+    <Content Include="Content\Images\Shared\menu2.gif" />
+    <Content Include="Content\Images\Shared\menu3.gif" />
+    <Content Include="Content\Images\Shared\modifica1_32x32.gif" />
+    <Content Include="Content\Images\Shared\modifica2_16x16.gif" />
+    <Content Include="Content\Images\Shared\modifica2_32x32.gif" />
+    <Content Include="Content\Images\Shared\news.gif" />
+    <Content Include="Content\Images\Shared\next_16x16.gif" />
+    <Content Include="Content\Images\Shared\nodi tv.png" />
+    <Content Include="Content\Images\Shared\Notepad.ico" />
+    <Content Include="Content\Images\Shared\obbligatorio.gif" />
+    <Content Include="Content\Images\Shared\ok.png" />
+    <Content Include="Content\Images\Shared\ok1_16x16.gif" />
+    <Content Include="Content\Images\Shared\ok1_32x32.gif" />
+    <Content Include="Content\Images\Shared\ok1_48x48.gif" />
+    <Content Include="Content\Images\Shared\ok2_16x16.gif" />
+    <Content Include="Content\Images\Shared\ok2_32x32.gif" />
+    <Content Include="Content\Images\Shared\ok2_48x48.gif" />
+    <Content Include="Content\Images\Shared\OlDLogoInvia.gif" />
+    <Content Include="Content\Images\Shared\onlyforweb_a1.gif" />
+    <Content Include="Content\Images\Shared\oper.png" />
+    <Content Include="Content\Images\Shared\OrgDown.gif" />
+    <Content Include="Content\Images\Shared\OrgUp.gif" />
+    <Content Include="Content\Images\Shared\password.gif" />
+    <Content Include="Content\Images\Shared\path3420.png" />
+    <Content Include="Content\Images\Shared\Pause.gif" />
+    <Content Include="Content\Images\Shared\pbNew.png" />
+    <Content Include="Content\Images\Shared\pbVuota.png" />
+    <Content Include="Content\Images\Shared\pdf1.gif" />
+    <Content Include="Content\Images\Shared\photo1_128x128.png" />
+    <Content Include="Content\Images\Shared\photo1_16x16.png" />
+    <Content Include="Content\Images\Shared\photo1_32x32.png" />
+    <Content Include="Content\Images\Shared\photo1_48x48.png" />
+    <Content Include="Content\Images\Shared\photo1_64x64.png" />
+    <Content Include="Content\Images\Shared\piu.png" />
+    <Content Include="Content\Images\Shared\pixelNero.gif" />
+    <Content Include="Content\Images\Shared\PJFOLDERS LOCKED.png" />
+    <Content Include="Content\Images\Shared\poweredByTechub.gif" />
+    <Content Include="Content\Images\Shared\printer.gif" />
+    <Content Include="Content\Images\Shared\progressbar_long.gif" />
+    <Content Include="Content\Images\Shared\progressbar_long_green.gif" />
+    <Content Include="Content\Images\Shared\prontoinvio.gif" />
+    <Content Include="Content\Images\Shared\Prorita1.gif" />
+    <Content Include="Content\Images\Shared\Prorita2.gif" />
+    <Content Include="Content\Images\Shared\Prorita3.gif" />
+    <Content Include="Content\Images\Shared\punto.gif" />
+    <Content Include="Content\Images\Shared\p_2.jpg" />
+    <Content Include="Content\Images\Shared\p_3.jpg" />
+    <Content Include="Content\Images\Shared\quadratino_grigio.gif" />
+    <Content Include="Content\Images\Shared\quadrato.gif" />
+    <Content Include="Content\Images\Shared\questionarioCompleto.gif" />
+    <Content Include="Content\Images\Shared\questionariosemi.gif" />
+    <Content Include="Content\Images\Shared\questionariovuoto.gif" />
+    <Content Include="Content\Images\Shared\question_icon_hover.gif" />
+    <Content Include="Content\Images\Shared\Ramoavantiddr.gif" />
+    <Content Include="Content\Images\Shared\RamoDown.gif" />
+    <Content Include="Content\Images\Shared\RamoDownDis.gif" />
+    <Content Include="Content\Images\Shared\Ramoindietroadr.gif" />
+    <Content Include="Content\Images\Shared\RamoUp.gif" />
+    <Content Include="Content\Images\Shared\RamoUpDis.gif" />
+    <Content Include="Content\Images\Shared\red1_16x16.gif" />
+    <Content Include="Content\Images\Shared\red1_24x24.gif" />
+    <Content Include="Content\Images\Shared\red2_128x128.png" />
+    <Content Include="Content\Images\Shared\red2_16x16.png" />
+    <Content Include="Content\Images\Shared\reload1_16x16.gif" />
+    <Content Include="Content\Images\Shared\reload1_24x24.gif" />
+    <Content Include="Content\Images\Shared\reload1_32x32.gif" />
+    <Content Include="Content\Images\Shared\reload1_48x48.gif" />
+    <Content Include="Content\Images\Shared\Report.gif" />
+    <Content Include="Content\Images\Shared\report248x48 24-bit.png" />
+    <Content Include="Content\Images\Shared\report2_16x16.gif" />
+    <Content Include="Content\Images\Shared\report2_32x32.gif" />
+    <Content Include="Content\Images\Shared\report2_48x48.gif" />
+    <Content Include="Content\Images\Shared\rep_1.jpg" />
+    <Content Include="Content\Images\Shared\rep_10.jpg" />
+    <Content Include="Content\Images\Shared\rep_12.jpg" />
+    <Content Include="Content\Images\Shared\rep_14.jpg" />
+    <Content Include="Content\Images\Shared\rep_2.jpg" />
+    <Content Include="Content\Images\Shared\rep_3.jpg" />
+    <Content Include="Content\Images\Shared\rep_4.jpg" />
+    <Content Include="Content\Images\Shared\rep_4_1.jpg" />
+    <Content Include="Content\Images\Shared\rep_4_2.jpg" />
+    <Content Include="Content\Images\Shared\rep_5.jpg" />
+    <Content Include="Content\Images\Shared\rep_6.jpg" />
+    <Content Include="Content\Images\Shared\rep_7.jpg" />
+    <Content Include="Content\Images\Shared\rep_8.jpg" />
+    <Content Include="Content\Images\Shared\rep_9.jpg" />
+    <Content Include="Content\Images\Shared\rep_left.jpg" />
+    <Content Include="Content\Images\Shared\rep_right.jpg" />
+    <Content Include="Content\Images\Shared\restart1_16x16.gif" />
+    <Content Include="Content\Images\Shared\restart1_24x24.gif" />
+    <Content Include="Content\Images\Shared\restart1_32x32.gif" />
+    <Content Include="Content\Images\Shared\restart1_48x48.gif" />
+    <Content Include="Content\Images\Shared\RichiediDettagli.gif" />
+    <Content Include="Content\Images\Shared\richiestaInviaDettagli.gif" />
+    <Content Include="Content\Images\Shared\richiestaNota.gif" />
+    <Content Include="Content\Images\Shared\richiestaStoria.gif" />
+    <Content Include="Content\Images\Shared\RifiutaForzatura.gif" />
+    <Content Include="Content\Images\Shared\right.jpg" />
+    <Content Include="Content\Images\Shared\right1_32x32.gif" />
+    <Content Include="Content\Images\Shared\rtf.png" />
+    <Content Include="Content\Images\Shared\Running.gif" />
+    <Content Include="Content\Images\Shared\salva.png" />
+    <Content Include="Content\Images\Shared\schedaRating.gif" />
+    <Content Include="Content\Images\Shared\SdiSONAR.gif" />
+    <Content Include="Content\Images\Shared\search1_16x16.gif" />
+    <Content Include="Content\Images\Shared\search1_32x32.gif" />
+    <Content Include="Content\Images\Shared\search1_48x48.gif" />
+    <Content Include="Content\Images\Shared\security1.png" />
+    <Content Include="Content\Images\Shared\security1_192x192.gif" />
+    <Content Include="Content\Images\Shared\SettDown.gif" />
+    <Content Include="Content\Images\Shared\SettUp.gif" />
+    <Content Include="Content\Images\Shared\SettUpDis.gif" />
+    <Content Include="Content\Images\Shared\sfondo.jpg" />
+    <Content Include="Content\Images\Shared\shutdown1_16x16.gif" />
+    <Content Include="Content\Images\Shared\shutdown1_24x24.gif" />
+    <Content Include="Content\Images\Shared\shutdown1_32x32.gif" />
+    <Content Include="Content\Images\Shared\shutdown1_48x48.gif" />
+    <Content Include="Content\Images\Shared\SmallCalendar.gif" />
+    <Content Include="Content\Images\Shared\sortAscending.gif" />
+    <Content Include="Content\Images\Shared\sortDescending.gif" />
+    <Content Include="Content\Images\Shared\spacer.gif" />
+    <Content Include="Content\Images\Shared\stampaOFF.gif" />
+    <Content Include="Content\Images\Shared\stampaON.gif" />
+    <Content Include="Content\Images\Shared\Stato1.gif" />
+    <Content Include="Content\Images\Shared\Stato2.gif" />
+    <Content Include="Content\Images\Shared\Stato3.gif" />
+    <Content Include="Content\Images\Shared\STOP.GIF" />
+    <Content Include="Content\Images\Shared\stop_16x16.gif" />
+    <Content Include="Content\Images\Shared\Success.gif" />
+    <Content Include="Content\Images\Shared\SYSTEM ALERT STOP.png" />
+    <Content Include="Content\Images\Shared\trash1_16x16.png" />
+    <Content Include="Content\Images\Shared\trash1_24x24.png" />
+    <Content Include="Content\Images\Shared\trash1_32x32.png" />
+    <Content Include="Content\Images\Shared\trash1_64x64.png" />
+    <Content Include="Content\Images\Shared\tsbtnCancel.png" />
+    <Content Include="Content\Images\Shared\tsbtnOk.Image.png" />
+    <Content Include="Content\Images\Shared\tsbtnOk.png" />
+    <Content Include="Content\Images\Shared\ui-anim_basic_16x16.gif" />
+    <Content Include="Content\Images\Shared\unavailable.jpg" />
+    <Content Include="Content\Images\Shared\uncheck.gif" />
+    <Content Include="Content\Images\Shared\under-construction.jpg" />
+    <Content Include="Content\Images\Shared\under_construction.gif" />
+    <Content Include="Content\Images\Shared\unknown2_24x24.gif" />
+    <Content Include="Content\Images\Shared\unknown2_32x32.gif" />
+    <Content Include="Content\Images\Shared\unlock1_16x16.gif" />
+    <Content Include="Content\Images\Shared\unlock1_32x32.gif" />
+    <Content Include="Content\Images\Shared\unlock1_48x48.gif" />
+    <Content Include="Content\Images\Shared\USEFULL BUTTONS EMPTY AQUA.png" />
+    <Content Include="Content\Images\Shared\USEFULL BUTTONS WHITE.png" />
+    <Content Include="Content\Images\Shared\User copy.bmp" />
+    <Content Include="Content\Images\Shared\User.bmp" />
+    <Content Include="Content\Images\Shared\user.png" />
+    <Content Include="Content\Images\Shared\User1.png" />
+    <Content Include="Content\Images\Shared\user1_24x24.gif" />
+    <Content Include="Content\Images\Shared\user1_24x24.png" />
+    <Content Include="Content\Images\Shared\user1_32x32.gif" />
+    <Content Include="Content\Images\Shared\user1_64x64.gif" />
+    <Content Include="Content\Images\Shared\user2_16x16.gif" />
+    <Content Include="Content\Images\Shared\user2_24x24.gif" />
+    <Content Include="Content\Images\Shared\user2_32x32.gif" />
+    <Content Include="Content\Images\Shared\userGroup1_16x16.gif" />
+    <Content Include="Content\Images\Shared\userGroup1_24x24.gif" />
+    <Content Include="Content\Images\Shared\userGroup1_32x32.gif" />
+    <Content Include="Content\Images\Shared\userGroup1_48x48.gif" />
+    <Content Include="Content\Images\Shared\Users.png" />
+    <Content Include="Content\Images\Shared\utente.gif" />
+    <Content Include="Content\Images\Shared\utenti.gif" />
+    <Content Include="Content\Images\Shared\vuota.gif" />
+    <Content Include="Content\Images\Shared\warning_16x16.gif" />
+    <Content Include="Content\Images\Shared\warning_32x32.gif" />
+    <Content Include="Content\Images\Shared\WOA_CandyBar Toolbar - Info.png" />
+    <Content Include="Content\Images\Shared\yellow1_16x16.gif" />
+    <Content Include="Content\Images\Shared\yellow1_24x24.gif" />
+    <Content Include="Content\Images\Shared\yellow2_128x128.png" />
+    <Content Include="Content\Images\Shared\yellow2_16x16.png" />
+    <Content Include="Content\Images\Shared\zoom1_16x16.gif" />
+    <Content Include="Content\Images\Shared\zoom1_24x24.gif" />
+    <Content Include="Content\Images\Shared\zoom1_32x32.gif" />
+    <Content Include="Content\Images\Shared\zoom1_48x48.gif" />
+    <Content Include="Content\Images\single-brick.gif" />
+    <Content Include="Content\Images\single-brick.jpg" />
+    <Content Include="Content\Images\spacer.gif" />
+    <Content Include="Content\Images\stampaON.gif" />
+    <Content Include="Content\Images\subarrow.gif" />
+    <Content Include="Content\Images\subarrow2.gif" />
+    <Content Include="Content\Images\Supporta.gif" />
+    <Content Include="Content\Images\tariffeCaricamentoAnnunci.png" />
+    <Content Include="Content\Images\top.gif" />
+    <Content Include="Content\Images\top1.gif" />
+    <Content Include="Content\Images\top2.gif" />
+    <Content Include="Content\Images\top_new.gif" />
+    <Content Include="Content\Images\top_old.gif" />
+    <Content Include="Content\Images\top_old_working.gif" />
+    <Content Include="Content\Images\transparent.gif" />
+    <Content Include="Content\Images\trova-libro_120x60.gif" />
+    <Content Include="Content\Images\TxtAnnunciPrivati.gif" />
+    <Content Include="Content\Images\TxtAnnunciPrivati_f2.gif" />
+    <Content Include="Content\Images\TxtCataloghiLibrerie.gif" />
+    <Content Include="Content\Images\TxtCataloghiLibrerie_f2.gif" />
+    <Content Include="Content\Images\TxtChiSiamo.gif" />
+    <Content Include="Content\Images\TxtChiSiamo_f2.gif" />
+    <Content Include="Content\Images\TxtInserimentoAnnuncio.gif" />
+    <Content Include="Content\Images\TxtInserimentoAnnuncio_f2.gif" />
+    <Content Include="Content\Images\TxtRicerca.gif" />
+    <Content Include="Content\Images\TxtRicerca_f2.gif" />
+    <Content Include="Content\Images\TxtVuoto.gif" />
+    <Content Include="Content\Images\unavailable.jpg" />
+    <Content Include="Content\Images\under_construction.gif" />
+    <Content Include="Content\Images\under_construction1.gif" />
+    <Content Include="Content\Images\under_construction3.gif" />
+    <Content Include="Content\Images\utente.gif" />
+    <Content Include="Content\Images\utenti.jpg" />
+    <Content Include="Content\Images\vendo.gif" />
+    <Content Include="Content\Images\wait.gif" />
+    <Content Include="Content\Images\workflow.jpg" />
+    <Content Include="Content\Images\zoom1_16x16.gif" />
+    <Content Include="Content\js\mdc.ripple.min.js" />
+    <Content Include="Content\Style\Admin.css" />
+    <Content Include="Content\Style\lightbox.css" />
+    <Content Include="Content\Style\Site.css" />
+    <Content Include="Content\Style\themes\images\ajax-loader.gif" />
+    <Content Include="Content\Style\themes\images\icons-png\action-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\action-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\alert-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\alert-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-d-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-d-l-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-d-l-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-d-r-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-d-r-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-d-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-l-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-l-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-r-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-r-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-u-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-u-l-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-u-l-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-u-r-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-u-r-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\arrow-u-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\audio-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\audio-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\back-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\back-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\bars-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\bars-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\bullets-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\bullets-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\calendar-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\calendar-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\camera-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\camera-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\carat-d-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\carat-d-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\carat-l-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\carat-l-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\carat-r-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\carat-r-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\carat-u-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\carat-u-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\check-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\check-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\clock-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\clock-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\cloud-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\cloud-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\comment-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\comment-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\delete-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\delete-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\edit-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\edit-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\eye-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\eye-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\forbidden-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\forbidden-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\forward-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\forward-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\gear-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\gear-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\grid-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\grid-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\heart-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\heart-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\home-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\home-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\info-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\info-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\location-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\location-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\lock-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\lock-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\mail-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\mail-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\minus-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\minus-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\navigation-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\navigation-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\phone-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\phone-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\plus-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\plus-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\power-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\power-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\recycle-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\recycle-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\refresh-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\refresh-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\search-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\search-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\shop-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\shop-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\star-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\star-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\tag-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\tag-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\user-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\user-white.png" />
+    <Content Include="Content\Style\themes\images\icons-png\video-black.png" />
+    <Content Include="Content\Style\themes\images\icons-png\video-white.png" />
+    <Content Include="Content\Style\themes\jquery.mobile.icons.min.css" />
+    <Content Include="Content\Style\themes\MyTheme.css" />
+    <Content Include="Content\Style\themes\MyTheme.min.css" />
+    <Content Include="Content\xml\faq.xml" />
+    <Content Include="Content\xml\menuLeft.xml" />
+    <Content Include="Content\xml\menuRight.xml" />
+    <Content Include="Content\xml\menuTop.xml" />
+    <Content Include="Content\xml\MySiteMap.xml" />
+    <Content Include="Content\xml\whatsnew.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\xsl\faq.xsl" />
+    <Content Include="Content\xsl\faq_categorie.xsl" />
+    <Content Include="Content\xsl\menuLeft.xsl" />
+    <Content Include="Content\xsl\menuLeftMySiteMap.xsl" />
+    <Content Include="Content\xsl\menuLeftMySiteMap_1.xsl" />
+    <Content Include="Content\xsl\menuLeftSiteMap_1.xsl" />
+    <Content Include="Content\xsl\menuLeftSiteMap_2.xsl" />
+    <Content Include="Content\xsl\menuRight.xsl" />
+    <Content Include="Content\xsl\menuTop.xsl" />
+    <Content Include="Content\xsl\menuTopSiteMap_1.xsl" />
+    <Content Include="Content\xsl\menuTopSiteMap_2.xsl" />
+    <Content Include="Content\xsl\menuTop_2.xsl" />
+    <Content Include="Content\xsl\whatsnew.xsl" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Note.txt" />
+    <Content Include="postinfo.html" />
+    <Content Include="Public\RevoAgent\categorie.xml" />
+    <Content Include="robots.txt" />
+    <Content Include="Scripts\lightbox-2.6.min.js" />
+    <Content Include="Scripts\markerclusterer_packed_2.0.9.js" />
+    <Content Include="Tasks\RevoAgent.aspx" />
+    <Content Include="Tasks\Test.aspx" />
+    <Content Include="Views\Test\DIV.htm" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GroupsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ImmobiliareController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MyAuthorizeAttribute.cs" />
+    <Compile Include="Areas\Admin\Controllers\MyBaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TestController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Admin\Models\ModelHome.cs" />
+    <Compile Include="Areas\Admin\Models\MyGroupModel.cs" />
+    <Compile Include="Areas\Admin\Models\MyUserImmobiliareModel.cs" />
+    <Compile Include="Areas\Admin\Models\MyUserModel.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GalleryController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImmobiliareController.cs" />
+    <Compile Include="Controllers\MyBaseController.cs" />
+    <Compile Include="Controllers\RegioneProvinciaComuneController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\TestMaterialController.cs" />
+    <Compile Include="Controllers\ThumbnailController.cs" />
+    <Compile Include="Controllers\UtenteController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\GalleryModel.cs" />
+    <Compile Include="Models\ModelImmobiliareSearch.cs" />
+    <Compile Include="Models\ModelRegioneProvinciaComune.cs" />
+    <Compile Include="Models\ModelTrattativa.cs" />
+    <Compile Include="Models\ReplyModel.cs" />
+    <Compile Include="Models\TestModels.cs" />
+    <Compile Include="Models\UpdateModel.cs" />
+    <Compile Include="Models\UserModels.cs" />
+    <Compile Include="MyConstants.cs" />
+    <Compile Include="MyConstantsAdmin.cs" />
+    <Compile Include="MyHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tasks\RevoAgent.aspx.cs">
+      <DependentUpon>RevoAgent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tasks\RevoAgent.aspx.designer.cs">
+      <DependentUpon>RevoAgent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tasks\Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tasks\Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Shared\MasterPageMobile.cshtml" />
+    <Content Include="Views\Shared\BoxLogin.cshtml" />
+    <Content Include="Views\Shared\LoginPartialMobile.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Content\Images\Shared\Thumbs.db" />
+    <Content Include="App_Data\web.config" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Home\Contatti.cshtml" />
+    <Content Include="Views\Home\Donazione.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Home\Faq.cshtml" />
+    <Content Include="Views\Home\NotAuthorized.cshtml" />
+    <Content Include="Views\Home\Ok.cshtml" />
+    <Content Include="Views\Immobiliare\Create.cshtml" />
+    <Content Include="Views\Immobiliare\CreateStep2.cshtml" />
+    <Content Include="Views\Immobiliare\Delete.cshtml" />
+    <Content Include="Views\Immobiliare\Details.cshtml" />
+    <Content Include="Views\Immobiliare\Index.cshtml" />
+    <Content Include="Views\Immobiliare\MyAnnunci.cshtml" />
+    <Content Include="Views\Immobiliare\MyAnnuncio.cshtml" />
+    <Content Include="Views\Immobiliare\MyTrattative.cshtml" />
+    <Content Include="Views\Immobiliare\Preview.cshtml" />
+    <Content Include="Views\Immobiliare\Reply.cshtml" />
+    <Content Include="Views\Immobiliare\TabInfoImmobile.cshtml" />
+    <Content Include="Views\Immobiliare\Trattativa.cshtml" />
+    <Content Include="Views\Test\ArrayObject.cshtml" />
+    <Content Include="Views\Test\DropDownListFor.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Test\Panel01.cshtml" />
+    <Content Include="Views\Test\Table.cshtml" />
+    <Content Include="Views\Test\Test1.cshtml" />
+    <Content Include="Views\Test\Test2.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\MasterPageAdminMobile.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\MasterPageAmministrazione.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\GalleryEdit.cshtml" />
+    <Content Include="Views\Shared\Paging.cshtml" />
+    <Content Include="Views\Shared\RegioneProvinciaComune.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\AccessDenied.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\MD5.cshtml" />
+    <Content Include="Areas\Admin\Views\Groups\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Groups\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Groups\DeleteUser.cshtml" />
+    <Content Include="Areas\Admin\Views\Groups\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Groups\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Groups\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Groups\SearchUser.cshtml" />
+    <Content Include="Areas\Admin\Views\Immobiliare\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Immobiliare\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Immobiliare\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Immobiliare\Users.cshtml" />
+    <Content Include="Areas\Admin\Views\Test\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Test\Tabs.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\TabInfoAccount.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\TabInfoAnagrafica.cshtml" />
+    <Content Include="Public\RevoAgent\RevoAgent.log" />
+    <Content Include="Public\RevoAgent\RevoAgentException.log" />
+    <Content Include="Public\RevoAgent\Test.log" />
+    <Content Include="Public\RevoAgent\TestException.log" />
+    <None Include="Properties\PublishProfiles\Temp.pubxml" />
+    <Content Include="Views\Shared\MasterPageMaterialDesign.cshtml" />
+    <Content Include="Views\TestMaterial\Index.cshtml" />
+    <Content Include="Views\TestMaterial\Tab.cshtml" />
+    <Content Include="Views\TestMaterial\_footer.cshtml" />
+    <Content Include="Views\TestMaterial\Button.cshtml" />
+    <Content Include="Views\TestMaterial\TextInput.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\MyFramework4.5\MyAnnunciManager\MyAnnunci.csproj">
+      <Project>{5c5c908f-04c5-49a5-b9f2-6cfc686981c6}</Project>
+      <Name>MyAnnunci</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MyFramework4.5\MyManagerCSharp\MyManagerCSharp.csproj">
+      <Project>{1cfb1797-36c1-4887-b980-747fcc81d6a1}</Project>
+      <Name>MyManagerCSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MyFramework4.5\MyManager\MyManager.vbproj">
+      <Project>{245337a0-76c0-47a7-91df-8bab4f54e6b9}</Project>
+      <Name>MyManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MyFramework4.5\MyUsers\MyUsers.csproj">
+      <Project>{de537bc0-c7b3-4f38-9de2-5757d6d3999e}</Project>
+      <Name>MyUsers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RevoAgent\RevoAgent.vbproj">
+      <Project>{e9f382d8-fe59-482c-93eb-a8f997ff54ce}</Project>
+      <Name>RevoAgent</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\TestMd\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50008</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:51712/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

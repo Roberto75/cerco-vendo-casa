@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<ROOT>
+  <MENU>
+    <value>Home</value>
+    <href>default.aspx</href>
+    <tip>Home</tip>
+    <target/>
+    <roles>
+      <role>*</role>
+    </roles>
+  </MENU>
+
+  <MENU>
+		<value>Libri</value>
+		<href>libri/default.aspx</href>
+		<tip>Libri</tip>
+		<target/>
+    <roles>
+      <role>*</role>
+    </roles>
+	</MENU>
+  <MENU>
+    <value>Chi siamo</value>
+    <href>chiSiamo.aspx</href>
+    <tip>Chi Siamo</tip>
+    <target/>
+    <roles>
+      <role>*</role>
+    </roles>
+  </MENU>
+</ROOT>
+

@@ -1,0 +1,192 @@
+﻿@model  MyWebApplication.Areas.Admin.Models.MyGroupModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/MasterPageAdminMobile.cshtml";
+}
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" />
+
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+
+<style type="text/css">
+
+    .ui-autocomplete-loading {
+        background-image:url('/Content/Images/shared/ui-anim_basic_16x16.gif');
+    }
+
+    
+</style>
+
+
+<script>
+    $(function () {
+        $("#tabs").tabs();
+    });
+</script>
+
+<h2>Gruppo: @Model.Gruppo.nome (id: @Model.Gruppo.gruppoId)</h2>
+
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Dettagli</a></li>
+        <li><a href="#tabs-2">Utenti</a></li>
+        <li><a href="#tabs-3">Ruoli</a></li>
+    </ul>
+
+    <div id="tabs-1">
+        @using (Html.BeginForm("Edit", "Groups", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <input type="hidden" name="Gruppo.gruppoId" value ="@Model.Gruppo.gruppoId" />
+            
+            <div class="ui-field-contain">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="Gruppo.nome" required="required" value="@Model.Gruppo.nome" />
+            </div>
+            
+            
+            <input type="submit" value="Salva" data-inline="true" data-mini="true" />
+        }
+    </div>
+
+
+    <div id="tabs-2">
+       
+        <p>Inserisci il nome dell'utente da aggiungere al gruppo:</p>
+        <input type="text" id="searchField" data-icon="plus" placeholder="Login utente da cercare">
+
+
+
+        <div>
+            @using (Html.BeginForm("AddUser", "Groups", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <input type="hidden" name="gruppoId" value ="@Model.Gruppo.gruppoId" />
+                 
+                <fieldset id="suggestions" data-role="controlgroup">
+                    <legend></legend>
+                </fieldset>
+                 
+                <input type="submit" value="Salva" data-inline="true" data-mini="true" />
+            }
+        </div>
+
+     <br />
+
+        @if (Model.Utenti == null || Model.Utenti.Count<MyUsers.Models.MyUser>() == 0)
+        {
+            <h3>Nessun utente associato</h3>
+        }
+        else
+        {
+            
+            
+            <ul data-role="listview">
+                @foreach (MyUsers.Models.MyUser u in Model.Utenti)
+                {
+                    <li data-icon="delete" ><a href="@Url.Action("DeleteUser", "Groups", new { id = Model.Gruppo.gruppoId,  userId = u.userId })">@u.login</a></li>
+                }
+            </ul>
+        }
+    </div>
+
+
+
+    <div id="tabs-3">
+        @using (Html.BeginForm("Roles", "Groups", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+      
+            <input type="hidden" name="Gruppo.gruppoId" value ="@Model.Gruppo.gruppoId" />
+            
+            
+            <fieldset data-role="controlgroup">
+                <legend></legend>
+
+                @{
+            int conta = 0;
+                }
+                @foreach (SelectListItem i in Model.Ruoli)
+                {
+                
+                    <input type ="checkbox" name="permessiIDs" id="Permessi[@(conta)].permessoId" @(i.Selected ? "checked" : "")   value ="@(i.Value)" />
+                    <label for="Permessi[@(conta++)].permessoId">@(i.Text)</label>
+                }
+            </fieldset>
+            
+            <input type="submit" value="Salva" data-inline="true" data-mini="true" />
+        }
+
+
+    </div>
+
+
+
+</div>
+
+
+
+
+<div data-role="controlgrup" data-type="horizontal">
+    <a href="@Url.Action("Index", "Groups")" class="ui-btn-inline ui-btn ui-corner-all ui-mini" >Torna alla lista</a>
+    <a href="@Url.Action("Details", "Groups", new { id = Model.Gruppo.gruppoId })" class="ui-btn-inline ui-btn ui-corner-all ui-mini">Annulla</a>
+
+</div>
+
+
+
+
+
+<script>
+    $(document).on("pageshow", function () {
+        //alert("pageshow");
+
+        $("#searchField").autocomplete({
+            minLength: 3,
+            delay: 500,
+            search: function (e, u) {
+               
+               // $(this).addClass('ui-autocomplete-loading');
+                //alert("search");
+                //this.autocomplete("refresh");
+            },
+            response: function (event, ui) {
+                console.log("response");
+            },
+            source: function (request, response) {
+
+                console.log("source");
+                $.getJSON('@Url.Action("AutoCompleteLogin", "Users")', { value: request.term }, function (mydata) {
+
+                    var str = "";
+                    for (var i = 0, len = mydata.length; i < len; i++) {
+                        //str += "<li>" + res[i] + "</li>";
+                        str += "<input type =\"checkbox\" name=\"myItems\" id=\"myItems[" + i + "]\"  value =\"" + mydata[i].Value + "\">";
+                        str += "<label for=\"myItems[" + i + "]\">" + mydata[i].Text + "</label>";
+
+                    }
+                    
+                    $("#suggestions").html(str);
+
+                    $("[type=checkbox]").checkboxradio();
+                    $("[data-role=controlgroup]").controlgroup("refresh");
+                });
+
+                //$("#searchField").removeClass('ui-autocomplete-loading');
+                console.log("source END");
+            }
+        });
+
+
+    });
+</script>
+
+

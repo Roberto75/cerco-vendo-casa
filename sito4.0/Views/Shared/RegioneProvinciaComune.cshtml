@@ -1,0 +1,248 @@
+﻿@using System.Data
+@model dynamic
+@{
+    string selectedRegione = "---";
+    string selectedProvincia = "---";
+    string selectedComune = "---";
+
+    SelectList listaProvince = null;
+    SelectList listaComuni = null;
+
+
+    //listaProvince = new SelectList(new[] { "---" });
+    //listaComuni = new SelectList(new[] { "---" });
+    //selectedRegione = "---";
+
+
+
+
+    if (Model.regioneId > 0)
+    {
+        selectedRegione = Model.regioneId + "";
+    }
+
+    if (!String.IsNullOrEmpty(Model.provinciaId) && Model.provinciaId != "-1")
+    {
+        selectedProvincia = Model.provinciaId;
+    }
+
+    if (!String.IsNullOrEmpty(Model.comuneId) && Model.comuneId != "-1")
+    {
+        selectedComune = Model.comuneId;
+    }
+
+
+    MyManager.RegioniProvinceComuniManager manager = new MyManager.RegioniProvinceComuniManager("RegioniProvinceComuni");
+    manager.openConnection();
+
+    System.Data.DataTable dt = null;
+
+    try
+    {
+
+        if (!String.IsNullOrEmpty(selectedRegione) && selectedRegione != "---")
+        {
+            dt = manager.getProvince(Model.regioneId);
+
+            List<SelectListItem> newList = new List<SelectListItem>();
+            newList.Add(new SelectListItem { Text = "---", Value = "-1" });
+            newList.AddRange(dt.AsEnumerable().Select(x => new SelectListItem { Value = x.Field<string>("Id"), Text = x.Field<string>("valore") }));
+
+
+
+
+
+            //listaProvince = new SelectList( dt.AsEnumerable().Select(x => new { value = x.Field<string>("Id"), text = x.Field<string>("valore") }), "value", "text", selectedProvincia);
+
+            listaProvince = new SelectList(newList, "value", "text", selectedProvincia);
+        }
+        else
+        {
+            listaProvince = new SelectList(new[] { "---" });
+        }
+
+
+        if (selectedProvincia != "---")
+        {
+
+            dt = manager.getComuni(Model.provinciaId);
+
+            List<SelectListItem> newList = new List<SelectListItem>();
+            newList.Add(new SelectListItem { Text = "---", Value = "-1" });
+            newList.AddRange(dt.AsEnumerable().Select(x => new SelectListItem { Value = x.Field<string>("Id"), Text = x.Field<string>("valore") }));
+
+
+            //listaComuni = new SelectList(dt.AsEnumerable().Select(x => new { value = x.Field<string>("Id"), text = x.Field<string>("valore") }), "value", "text", selectedComune);
+
+            listaComuni = new SelectList(newList, "value", "text", selectedComune);
+        }
+        else
+        {
+            listaComuni = new SelectList(new[] { "---" });
+        }
+
+    }
+    finally
+    {
+        manager.closeConnection();
+    }
+
+}
+
+
+
+<script type="text/javascript">
+    //$(document).on('pageinit', function () {
+
+    $(document).ready(function () {
+
+
+
+        $('#regioneId').change(function () {
+
+
+            var selectedValue = $(this).val();
+            var selectedText = $(this).find(":selected").text();
+
+            //alert("selectedValue: " + selectedValue + " selectedText: " + selectedText);
+
+            $('#regione').val(selectedText);
+
+            $.getJSON('@Url.Action("GetProvince", "RegioneProvinciaComune")', { regioneId: selectedValue }, function (province) {
+
+                $('#provinciaId').empty();
+                $('#provinciaId').append($('<option/>', { value: "", text: "---" }));
+                $('#provinciaId').val("---").change();
+
+                $('#comuneId').empty();
+                $('#comuneId').append($('<option/>', { value: "", text: "---" }));
+                $('#comuneId').val("---").change();
+
+
+                $.each(province, function (index, item) {
+                    $('#provinciaId').append($('<option/>', {
+                        value: item.value,
+                        text: item.text
+                    }));
+                });
+            });
+
+        });
+
+        $('#provinciaId').change(function () {
+            var selectedValue = $(this).val();
+            var selectedText = $(this).find(":selected").text();
+
+            $('#provincia').val(selectedText);
+
+            $.getJSON('@Url.Action("GetComuni", "RegioneProvinciaComune")', { provinciaId: selectedValue }, function (comuni) {
+
+
+                $('#comuneId').empty();
+                $('#comuneId').append($('<option/>', { value: "", text: "---" }));
+                $('#comuneId').val("---").change();
+
+                $.each(comuni, function (index, item) {
+                    $('#comuneId').append($('<option/>', {
+                        value: item.value,
+                        text: item.text
+                    }));
+                });
+
+            });
+
+        });
+
+
+        $('#comuneId').change(function () {
+            var selectedValue = $(this).val();
+            var selectedText = $(this).find(":selected").text();
+
+            $('#comune').val(selectedText);
+
+
+        });
+
+
+
+        @* var selectedRegione = '@selectedRegione';
+        if (selectedRegione != "---") {
+
+            alert("selectedRegione: " + selectedRegione);
+            $('#regioneId').val(selectedRegione).change();
+
+        }
+
+        //alert("READY");
+
+        var selectedProvincia = '@selectedProvincia';
+        if (selectedProvincia != "---") {
+
+            //alert("selectedProvincia: " + selectedProvincia);
+
+        }*@
+
+    });
+
+</script>
+
+
+
+
+@{
+    SelectList listaRegioni = new SelectList(new[]
+                {
+                    new KeyValuePair<string, string>("---", "")
+                    ,new KeyValuePair<string, string>("Abruzzo", "13")
+                    ,new KeyValuePair<string, string>("Basilicata", "17")
+                    ,new KeyValuePair<string, string>("Calabria", "18")
+                    ,new KeyValuePair<string, string>("Campania", "15")
+                    ,new KeyValuePair<string, string>("Emilia-Romagna", "8")
+                    ,new KeyValuePair<string, string>("Friuli-Venezia Giulia", "6")
+                    ,new KeyValuePair<string, string>("Lazio", "12")
+                    ,new KeyValuePair<string, string>("Liguria", "7")
+                    ,new KeyValuePair<string, string>("Lombardia", "3")
+                    ,new KeyValuePair<string, string>("Marche", "11")
+                    ,new KeyValuePair<string, string>("Molise", "14")
+                    ,new KeyValuePair<string, string>("Piemonte", "1")
+                    ,new KeyValuePair<string, string>("Puglia", "16")
+                    ,new KeyValuePair<string, string>("Sardegna", "20")
+                    ,new KeyValuePair<string, string>("Sicilia", "19")
+                    ,new KeyValuePair<string, string>("Toscana", "9")
+                    ,new KeyValuePair<string, string>("Trentino-Alto Adige", "4")
+                    ,new KeyValuePair<string, string>("Umbria", "10")
+                    ,new KeyValuePair<string, string>("Valle d'Aosta", "2")
+                    ,new KeyValuePair<string, string>("Veneto", "5")
+                }, "Value", "Key", selectedRegione);
+
+
+    bool isRequired = false;
+
+    if (ViewData["required"] != null && bool.Parse(ViewData["required"].ToString()))
+    {
+        isRequired = true;
+    }
+
+}
+
+
+<fieldset data-role="controlgroup" data-type="horizontal">
+    <legend class="MyLabel">Località@((isRequired) ? "*" : ""):</legend>
+
+    <input type="hidden" name="regione" id="regione" value="@Model.regione" />
+    <input type="hidden" name="provincia" id="provincia" value="@Model.provincia" />
+    <input type="hidden" name="comune" id="comune" value="@Model.comune" />
+
+    @if (isRequired)
+    {
+        @Html.DropDownList("regioneId", listaRegioni, new { @class = "form-control", required = "required" })
+        @Html.DropDownList("provinciaId", listaProvince, new { @class = "form-control", required = "required" })
+        @Html.DropDownList("comuneId", listaComuni, new { @class = "form-control", required = "required" })
+    }
+    else
+    {
+        @Html.DropDownList("regioneId", listaRegioni, new { @class = "form-control" })
+        @Html.DropDownList("provinciaId", listaProvince, new { @class = "form-control" })
+        @Html.DropDownList("comuneId", listaComuni, new { @class = "form-control" })
+    }
+</fieldset>

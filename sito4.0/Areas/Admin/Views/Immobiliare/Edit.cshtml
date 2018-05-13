@@ -1,0 +1,57 @@
+﻿@model Annunci.Models.MyUser
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/MasterPageAdminMobile.cshtml";
+}
+
+<h2>Edit</h2>
+
+<h2>Utente: @Model.login (id: @Model.userId)</h2>
+
+@using (Html.BeginForm("Edit", "Immobiliare", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false)
+
+    
+    <input  type="hidden" name="userId" value="@Model.userId" />
+    
+    
+    <div class="ui-field-contain">
+        <label for="nome">External Id:</label>
+        <input type="text" id="externalId" name="externalId" required="required" value="@Model.externalId" />
+    </div>
+    
+    
+    <div class="ui-field-contain">
+        <label for="sourceId">Source:</label>
+        <select name="sourceId" id="sourceId">
+            <option value="">---</option>
+            <option value="@((int)Annunci.Models.Immobile.TipoSourceId.RevoAgent)"   @((Model.sourceId == Annunci.Models.Immobile.TipoSourceId.RevoAgent) ? "selected" : "") >RevoAgent</option>
+        </select>
+    </div>
+    
+    
+    <div class="ui-field-contain">
+        <label for="statoId">Stato:</label>
+        <select name="statoId" id="statoId">
+            <option value="@((int)Annunci.Models.Immobile.StatoUtente.Undefined)"   @((Model.statoId == Annunci.Models.Immobile.StatoUtente.Undefined) ? "selected" : "")>Undefined</option>
+            <option value="@((int)Annunci.Models.Immobile.StatoUtente.Active)"      @((Model.statoId == Annunci.Models.Immobile.StatoUtente.Active) ? "selected" : "") >Active</option>
+            <option value="@((int)Annunci.Models.Immobile.StatoUtente.Test)"        @((Model.statoId == Annunci.Models.Immobile.StatoUtente.Test) ? "selected" : "") >Test</option>
+            <option value="@((int)Annunci.Models.Immobile.StatoUtente.Disabled)"    @((Model.statoId == Annunci.Models.Immobile.StatoUtente.Disabled) ? "selected" : "") >Disabled</option>
+        </select>
+    </div>
+       
+    
+    <div class="ui-field-contain">
+        <label for="nota">Nota:</label>
+       <textarea name ="nota">@Model.nota</textarea>
+    </div>
+ 
+     
+    <div data-role="controlgrup" data-type="horizontal">
+        <a href="@Url.Action("Details", "Immobiliare", new { id = Model.userId })" class="ui-btn-inline ui-btn ui-corner-all ui-mini">Annulla</a>
+        <input type="submit" value="Salva" data-inline="true" data-mini="true" />
+    </div>
+       
+}

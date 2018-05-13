@@ -1,0 +1,256 @@
+﻿@model MyWebApplication.Models.GalleryModel
+
+@{
+    System.IO.FileInfo fi;
+    string temp;
+}
+
+<div id="Gallery">
+
+    <ul data-role="listview" data-split-icon="delete" data-split-theme="d" data-inset="true">
+        @foreach (Annunci.Models.MyPhoto p in Model.photos)
+        {
+            System.Diagnostics.Debug.WriteLine("Path : " + Server.MapPath(p.Path));
+
+            if (p.Path.StartsWith("http:"))
+            {
+            <li><a href="@p.Path" data-lightbox="gallery" title="@p.Note ">
+                <img src="@p.Path" alt="@p.Note"  /></a>
+                <a href="#">Delete</a>
+
+            </li>
+        
+            }
+            else
+            {
+                fi = new System.IO.FileInfo(Server.MapPath(p.Path));
+                if (fi.Exists)
+                {
+                    //verifico che ci sia la thumbnail
+                    if (System.IO.File.Exists(fi.DirectoryName + System.IO.Path.DirectorySeparatorChar + "thumbnail_" + fi.Name))
+                    {
+                        temp = p.Path.Replace(fi.Name, "thumbnail_" + fi.Name);
+                    }
+                    else
+                    {
+                        temp = p.Path;
+                    }
+            
+            <li>
+                <a href="@Url.Content(p.Path)" data-lightbox="gallery">
+                    <img src="@Url.Content(temp)" alt="@p.Note" /></a>
+                <a href="#" onclick="javascript:MyDeleteAsync('@p.PhotoId')" >Delete</a>
+
+            </li>
+                }
+                else
+                {
+            <li><a href="#">
+                <img src="@Url.Content("~/Content/Images/Shared/unavailable.jpg")" alt="Immagine non disponibile" width="120" height="120" /></a>
+                <a href="javascript:MyDeleteAsync('@p.PhotoId')">Delete</a>
+            </li>
+         
+                }
+            }
+        }
+    </ul>
+</div>
+
+<div data-role="controlgrup" data-type="horizontal" data-mini="true">
+
+    <a href="#" data-role="button" data-inline="true" onclick="javascript:MyAsyncUpdate();">Aggiorna</a>
+
+    <a href="#MyPopupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="plus">Aggiungi una photo</a>
+</div>
+
+
+
+<div data-role="popup" id="MyPopupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width: 400px;" class="ui-corner-all">
+    <div data-role="header" data-theme="a" class="ui-corner-top">
+        <h1>Aggiungi una photo</h1>
+    </div>
+    <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+        <h3 class="ui-title">Selezionale un'immagine</h3>
+
+        @using (Html.BeginForm("AddImage", "Immobiliare", FormMethod.Post, new { id = "MyFormUpload", enctype = "multipart/form-data" }))
+        {
+            <input type="file" name="MyFile" id="MyFile" value="">
+           
+            <input type ="hidden" name ="annuncioId" value ="@Model.externalId" />  
+            
+            <span style="color: red; visibility: hidden;" id="MyResponseMessage">messaggio</span>
+            <br />
+            
+            <a href="#" data-role="button" data-inline="true" data-mini="true" data-rel="back" data-theme="c">Annulla</a>
+            <input type="submit" value="Upload" data-inline="true" data-mini="true" onclick="javascript: MyAsyncUpload()" />
+            
+            <div id="percent">0%</div>
+        }
+
+        
+
+
+    </div>
+</div>
+
+
+
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<script type="text/javascript">
+
+    function MyDeleteAsync(id) {
+        //alert("MyDeleteAsync: " + id);
+
+        //$.get("/Gallery/Delete/"+id, 
+        //     function (data) {
+        //         alert("data: " + data.esito);
+        //     }
+        //    );
+
+        $.post("/Gallery/Delete/" + id,
+             function (data) {
+                 //alert("data: " + data.esito);
+
+                 if (data.esito == "Success") {
+                     MyAsyncUpdate();
+                 }
+             }
+            );
+    }
+
+
+    function MyAsyncUpload() {
+        //var MyData = $('#MyFormUpload').serialize();
+
+        //alert("MyAsyncUpload");
+        //var MyData = new FormData($('#MyFormUpload'));
+
+
+
+
+
+       @*  $.ajax({
+            url: "@Url.Action("AddImage", "Immobiliare")",
+            type: "POST",
+            data: MyData,
+            beforeSend: function (xhr) {
+                //xhr.overrideMimeType("text/plain; charset=x-user-defined");
+                alert("beforeSend");
+            }
+        }).done(function (data) {
+            alert("Done: " + data);
+        });*@
+
+
+        var options = {
+            beforeSend: function () {
+                //alert("beforeSend");
+                $("#MyResponseMessage").css('visibility', 'hidden');
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+                $('#percent').html(percentComplete + "%");
+            },
+            success: function () {
+
+            },
+            complete: function (response) {
+                //response text from the server.
+                //alert("response " + response.responseText);
+                var obj = JSON.parse(response.responseText);
+
+                $("#MyFile").val("");
+                $('#percent').html("0%");
+                // alert("esito: " + obj.messaggio);
+
+                if (obj.esito == "Failed") {
+                    $("#MyResponseMessage").html(obj.messaggio);
+                    $("#MyResponseMessage").css('visibility', 'visible');
+                } else {
+                    $("#MyPopupDialog").popup("close");
+                    MyAsyncUpdate();
+                }
+
+            }
+        };
+
+        $('#MyFormUpload').ajaxForm(options);
+
+    }
+
+
+
+
+    function MyAsyncUpdate() {
+        //alert("MyAsyncUpdate");
+
+        $.get('@Url.Action("MyAnnuncio", "Immobiliare", new { id = Model.externalId })', function (data) {
+            // alert("MyGalleryEdit" + data);
+            $('#MyGalleryEdit').html(data);
+            $('#MyGalleryEdit').trigger('create');
+        });
+    }
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+    #Galleryy {
+        background-color: transparent;
+    }
+        /*#photo table.photo {  background-color: transparent; }  */
+
+
+        #Galleryy ul {
+            list-style: none;
+            display: block;
+            margin: 0px;
+            padding: 0px;
+        }
+
+
+            #Galleryy ul li {
+                display: block;
+                width: 300px;
+                float: left;
+                background-color: azure;
+                margin: 10px;
+            }
+
+
+        #Galleryy div.photo {
+            margin: 10px;
+            padding: 5px;
+            border: 1px solid Black;
+            float: left;
+        }
+            /* #photo div.photo img {border: 1px solid Black;   }*/
+            #Galleryy div.photo .descrizione {
+                margin-top: 5px;
+                padding: 3px;
+                font-size: 10px;
+                text-align: center;
+                background-color: #E2EECD;
+            }
+</style>

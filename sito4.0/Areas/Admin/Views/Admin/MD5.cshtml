@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "MD5";
+    Layout = "~/Areas/Admin/Views/Shared/MasterPageAdminMobile.cshtml";
+}
+
+<h2>MD5</h2>
+
+
+@using (Html.BeginForm("MD5", "Admin", FormMethod.Post, new { id = "MyForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="ui-field-contain">
+        <label for="textinput">Valore</label>
+        <input type="text" id="textinput" name="textinput" value="" />
+    </div>
+    
+    <input type="submit" value="Conferma" data-inline="true" />
+}
+
+<br />
+
+
+@if (!String.IsNullOrEmpty(ViewBag.valore))
+{
+    @:Valore: @ViewBag.valore<br />
+
+    @:MD5: @ViewBag.risultato
+}

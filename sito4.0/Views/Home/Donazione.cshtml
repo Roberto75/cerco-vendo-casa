@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Donazione";
+    Layout = "~/Views/Shared/MasterPageMobile.cshtml";
+}
+
+<h2>Donazione</h2>
+
+
+<img src ="@Url.Content("~/Content/Images/donate1.gif")" style ="float:right; margin-right :50px" alt="donazione" />
+
+<p style="text-decoration: underline">Esegui una donazione in modo sicuro e protetto, tramite il servizio di PAYPAL</p>
+
+<p>GRAZIE <br />dallo staff di Cerco-Vendo-Casa</p>
+
+
+<br />
+<h2>DONAZIONE CON PAYPAL</h2>
+
+<p><b>PayPal</b> è la società del gruppo eBay che consente a chiunque possieda un indirizzo email di inviare e ricevere pagamenti online in modo facile, veloce e sicuro.</p>
+
+
+<p>
+Visita il sito di <a href="http://www.paypal.it/" target ="_blank">PayPal</a> per avere una descrizione dettagliata del suo funzionamento.
+</p>
+
+
+<p style="text-decoration: underline">Per effettuare la donazione con PayPal, clicca sul pulsante 'Donazione'.
+</p>
+
+
+
+
+<br />
+<br />
+<br />
+
+<input type="hidden" name="cmd" value="_s-xclick" />
+<input type="hidden" name="hosted_button_id" value="VWYZWEWLQHY5Q" />
+
+
+<center>
+<a href="javascript:theForm.__VIEWSTATE.value='';
+    theForm.encoding='application/x-www-form-urlencoded';
+    theForm.target='_blank';
+    theForm.action='https://www.paypal.com/cgi-bin/webscr';theForm.submit();">
+
+   <img src="https://www.paypalobjects.com/it_IT/IT/i/btn/btn_donateCC_LG.gif" alt="PayPal - Il sistema di pagamento online più facile e sicuro!"  border="0" />
+</a>
+</center>
+
+<img alt="" border="0" src="https://www.paypalobjects.com/it_IT/i/scr/pixel.gif" width="1" height="1" />
+

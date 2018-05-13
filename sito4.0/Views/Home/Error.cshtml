@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Errore generico";
+    Layout = "~/Views/Shared/MasterPageMobile.cshtml";
+}
+
+<h2>Errore generico</h2>
+
+
+<img style="display:block; margin-left:auto; margin-right:auto;" src="@Url.Content("~/Content/Images/shared/error1_48x48.gif")" border="0" alt="" />
+
+
+<div class="box_center">
+    <p>Attenzione si è verificato un errore all'interno del sistema.</p>
+    <p>
+        Se l'errore persiste sciveteci al sequente indirizzo: 
+                    <a href="mailto:@System.Configuration.ConfigurationManager.AppSettings["mail.webmaster"]">@System.Configuration.ConfigurationManager.AppSettings["mail.webmaster"]</a>
+    </p>
+    <p>Grazie per la collaborazione e scusateci per il disagio.</p>
+</div>
+
+<div data-role="controlgrup" data-type="horizontal" data-mini="true">
+    <a href="@Url.Action("Index", "Home")" data-role="button" data-inline="true">Torna alla home</a>
+    <a href="@Url.Action("Login", "Account")" data-role="button" data-inline="true">Torna alla pagina di login</a>
+    <a href="@Url.Action("Index", "Immobiliare")" data-role="button" data-inline="true">Torna alla pagina di ricerca</a>
+</div>

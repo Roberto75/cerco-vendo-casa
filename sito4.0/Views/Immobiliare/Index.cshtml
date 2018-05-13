@@ -1,0 +1,390 @@
+﻿@model Annunci.Models.SearchImmobili
+@{
+    ViewBag.Title = "Cerco Vendo Casa: Trova casa";
+    ViewBag.Description = "Usa la funzione di ricerca per cercare gli immobili nel sito di Cerco-Vendo-Casa on-line";
+    ViewBag.Keywords = "vendo casa, vendo appartamento, vendo immobile, cerco casa, cerco appartamento";
+
+    Layout = "~/Views/Shared/MasterPageMobile.cshtml";
+
+    WebGrid wGrid = new WebGrid(null, rowsPerPage: Model.PageSize, defaultSort: "ANNUNCIO.date_added", canPage: false);
+    wGrid.Bind(Model.Immobili, rowCount: Model.TotalRows, autoSortAndPage: false);
+
+    bool chk;
+}
+
+
+
+<style type="text/css">
+    #map-container {
+        padding: 6px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #ccc #ccc #999 #ccc;
+        -webkit-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
+        -moz-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
+        box-shadow: rgba(64, 64, 64, 0.1) 0 2px 5px;
+        width: 100%;
+        height: 600px;
+    }
+</style>
+
+
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?v=3.12&amp;sensor=false&region=IT"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/markerclusterer_packed_2.0.9.js")"></script>
+
+
+<script>
+    $(document).on("pagebeforecreate", function () {
+        //alert("pagebeforecreate " + $("#MyWebGrid").attr("data_role"));
+
+        $("#MyWebGrid").attr("data-role", "table");
+
+        //$("#MyWebGrid").attr("data-mode", "columntoggle");
+
+        // $("#MyWebGrid").attr("data-mode", "reflow");
+        // $("#MyWebGrid").attr("class", "ui-responsive");
+        //$("#MyWebGrid").attr("class", "ui-responsive");
+        //alert("pagebeforecreate" + $("#MyWebGrid").attr("data-role"));
+    });
+
+
+
+    var map;
+
+
+    $(document).on("pageinit", function () {
+
+        //        alert("pageinit");
+
+        @{
+            if (Model.TipoVista == Annunci.Models.SearchImmobili.EnumTipoVista.Mappa)
+            {
+
+                // @:alert("Mappa");
+
+                @:mappa();
+                                                                                                                                                                                                        @:getValoriMappa();
+                                                          }
+            else
+            {
+               @:elenco();
+                                                          }
+        }
+
+
+
+        //$("#buttonMappa").on("click", function () {
+        //alert("click");
+
+
+
+        //var mc = new MarkerClusterer(map);
+
+
+        //console.log("map");
+        //var markers = [];
+        //for (var i = 0; i < 100; i++) {
+
+        //    console.log(i);
+
+
+        //     var latLng = new google.maps.LatLng((Math.random() * 360 - 180), (Math.random() * 360 - 180));
+        //     console.log("latLng");
+
+        //     var marker = new google.maps.Marker({
+        //         position: latLng,
+        //         map: map,
+        //         title: "PROVA"
+        //     });
+
+        //     console.log("marker");
+
+        //}
+
+        //  });
+
+
+        //});
+
+    });
+
+
+    function getValoriMappa() {
+        //$.getJSON('@Url.Action("GetMap", "Immobiliare")', function (valori) {
+
+        var data = $('#MyForm').serialize();
+
+
+        $.post('@Url.Action("GetMap", "Immobiliare")', data, function (valori) {
+
+
+
+            //alert(valori);
+
+            var center = new google.maps.LatLng(41.884898, 12.492828);
+
+            map = new google.maps.Map(document.getElementById('map-container'), {
+                zoom: 6,
+                center: center,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+
+            var markers = [];
+
+            $.each(valori, function (index, item) {
+                console.log(index + '  latitude: ' + item.latitude + " longitude: " + item.longitude + " titolo: " + item.titolo.toString());
+
+                var latLng = new google.maps.LatLng(item.latitude, item.longitude);
+
+
+                var marker = new google.maps.Marker({
+                    position: latLng,
+                    icon: '/Content/Images/Immobiliare/casa.gif',
+                    title: item.titolo
+                });
+
+                markers.push(marker);
+
+                google.maps.event.addListener(marker, 'click', function () { document.location.href = "/Immobiliare/Details/" + item.id });
+            });
+
+            var mc = new MarkerClusterer(map, markers);
+        });
+    }
+
+
+
+
+
+    function mappa() {
+        // alert("mappa");
+        $("#list-container").hide(400);
+        $("#map-container").show(400);
+        $('#tipoVista').val("Mappa");
+
+
+        if (map == null) {
+            getValoriMappa();
+        }
+
+    }
+
+
+
+    function elenco() {
+        $("#map-container").hide(400);
+        $("#list-container").show(400);
+        $("#tipoVista").val("Elenco");
+    }
+
+
+
+    function resetOnClick() {
+        //alert("MyReset");
+        //alert($("#filter_categoria option:selected").val());
+        $("#filter_categoria").val("---").change();
+        $("#filter_immobile").val("---").change();
+        $("#regioneId").val("---").change();
+    }
+
+
+</script>
+
+
+@using (Html.BeginForm("Index", "Immobiliare", FormMethod.Post, new { id = "MyForm", @class = "form-horizontal" }))
+{
+
+    <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
+        <i class="fa fa-bars fa-fw"></i>Filtri <span class="badge badge-light">XXX</span>
+    </button>
+
+
+    <div class="collapse mt-3" id="collapseFilter">
+        <span>
+
+            @{Html.RenderPartial("RegioneProvinciaComune", Model.filter);}
+
+        </span>
+
+        <br />
+
+
+
+        <div class="form-group">
+
+            <label for="Tempo">Data:</label>
+            <select name="Tempo" id="Tempo" class="form-control">
+                <option value="1" @((Model.Tempo == Annunci.Models.SearchImmobili.EnumTempo.Oggi) ? "selected" : "")>Oggi</option>
+                <option value="2" @((Model.Tempo == Annunci.Models.SearchImmobili.EnumTempo.UltimaSettimana) ? "selected" : "")>Ultima settimana</option>
+                <option value="3" @((Model.Tempo == Annunci.Models.SearchImmobili.EnumTempo.UltimoMese) ? "selected" : "")>Ultimo mese</option>
+                <option value="4" @((Model.Tempo == Annunci.Models.SearchImmobili.EnumTempo.Tutti) ? "selected" : "")>Tutti</option>
+            </select>
+
+
+            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                <legend style="font-size: initial; font-weight: initial;">Tipo di annuncio:</legend>
+
+                @foreach (var value in Enum.GetValues(typeof(Annunci.Models.SearchImmobili.EnumTipoAnnuncio)))
+                {
+                    //System.Diagnostics.Debug.WriteLine("{0,3}     {1}", (int)value, ((Annunci.Models.SearchModel.EnumTipoAnnuncio)value));
+
+                    if (Model.TipoAnnuncio.Contains((Annunci.Models.SearchImmobili.EnumTipoAnnuncio)value))
+                    {
+                        chk = true;
+                    }
+                    else
+                    {
+                        chk = false;
+                    }
+
+                <input name="TipoAnnnuncio" id="TipoAnnnuncio @value" type="checkbox" @((chk) ? "checked" : "") value="@((Annunci.Models.SearchImmobili.EnumTipoAnnuncio)value)" />
+                <label for="TipoAnnnuncio @value">@((Annunci.Models.SearchImmobili.EnumTipoAnnuncio)value)</label>
+                }
+            </fieldset>
+
+            <div class="form-group">
+                <label for="filter.immobile">Tipo di immmobile:</label>
+                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoImmobile), Model.filter.immobile.ToString(), "filter.immobile", false)
+            </div>
+
+            <div class="form-group">
+                <label for="filter.categoria">Categoria:</label>
+                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.Categorie), Model.filter.categoria.ToString(), "filter.categoria", false)
+            </div>
+
+            <div class="form-group">
+                <label for="prezzoMax">Prezzo max:</label>
+                <select name="prezzoMax" id="prezzoMax" class="form-control">
+                    <option value="" @((Model.prezzoMax == null) ? "selected" : "")>Qualsiasi</option>
+                    <option value="50000" @((Model.prezzoMax == 50000) ? "selected" : "")>50.000</option>
+                    <option value="100000" @((Model.prezzoMax == 100000) ? "selected" : "")>100.000</option>
+                    <option value="150000" @((Model.prezzoMax == 150000) ? "selected" : "")>150.000</option>
+                    <option value="200000" @((Model.prezzoMax == 200000) ? "selected" : "")>200.000</option>
+                    <option value="250000" @((Model.prezzoMax == 250000) ? "selected" : "")>250.000</option>
+                    <option value="300000" @((Model.prezzoMax == 300000) ? "selected" : "")>300.000</option>
+                    <option value="350000" @((Model.prezzoMax == 350000) ? "selected" : "")>350.000</option>
+                    <option value="400000" @((Model.prezzoMax == 400000) ? "selected" : "")>400.000</option>
+                    <option value="450000" @((Model.prezzoMax == 450000) ? "selected" : "")>450.000</option>
+                    <option value="500000" @((Model.prezzoMax == 500000) ? "selected" : "")>500.000</option>
+                    <option value="550000" @((Model.prezzoMax == 550000) ? "selected" : "")>550.000</option>
+                    <option value="600000" @((Model.prezzoMax == 600000) ? "selected" : "")>600.000</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="mqMin">Metri quadri min:</label>
+                <select name="mqMin" id="mqMin" class="form-control">
+                    <option value="" @((Model.mqMin == null) ? "selected" : "")>Qualsiasi</option>
+                    <option value="50" @((Model.mqMin == 50) ? "selected" : "")>50</option>
+                    <option value="80" @((Model.mqMin == 80) ? "selected" : "")>80</option>
+                    <option value="100" @((Model.mqMin == 100) ? "selected" : "")>100</option>
+                    <option value="120" @((Model.mqMin == 120) ? "selected" : "")>120</option>
+                    <option value="150" @((Model.mqMin == 150) ? "selected" : "")>150</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                    <legend style="font-size: initial; font-weight: initial;">Ascensore:</legend>
+                    <input type="radio" name="filter.ascensore" id="ascensore-choice-a" value="-1" @((Model.filter.ascensore == null || Model.filter.ascensore == -1) ? "checked" : "") />
+                    <label for="ascensore-choice-a">Indifferente</label>
+                    <input type="radio" name="filter.ascensore" id="ascensore-choice-b" value="1" @((Model.filter.ascensore == 1) ? "checked" : "") />
+                    <label for="ascensore-choice-b">Si</label>
+                    <input type="radio" name="filter.ascensore" id="ascensore-choice-c" value="0" @((Model.filter.ascensore == 0) ? "checked" : "") />
+                    <label for="ascensore-choice-c">No</label>
+                </fieldset>
+            </div>
+            <div class="form-group">
+                <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                    <legend style="font-size: initial; font-weight: initial;">Posto auto:</legend>
+                    <input type="radio" name="filter.postoAuto" id="postoAuto-choice-a" value="-1" @((Model.filter.postoAuto == null || Model.filter.postoAuto == Annunci.Models.Immobile.TipoPostoAuto.Undefined) ? "checked" : "") />
+                    <label for="postoAuto-choice-a">Indifferente</label>
+                    <input type="radio" name="filter.postoAuto" id="postoAuto-choice-b" value="1" @((Model.filter.postoAuto != null && Model.filter.postoAuto != Annunci.Models.Immobile.TipoPostoAuto.Undefined && Model.filter.postoAuto != Annunci.Models.Immobile.TipoPostoAuto.No) ? "checked" : "") />
+                    <label for="postoAuto-choice-b">Si</label>
+                    <input type="radio" name="filter.postoAuto" id="postoAuto-choice-c" value="0" @((Model.filter.postoAuto == Annunci.Models.Immobile.TipoPostoAuto.No) ? "checked" : "") />
+                    <label for="postoAuto-choice-c">No</label>
+                </fieldset>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <button type="button" class="btn btn-default" onclick="resetOnClick()">Reset</button>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-search fa-fw"></i>Ricerca</button>
+
+
+
+                if (Model.TotalRows == 0)
+                {
+                    <div class="alert alert-info mt-3" role="alert">
+                        Non è stato trovato nessun immobile. Modificare i filtri di ricerca.
+                    </div>
+                }
+                else
+                {
+
+                    <div data-role="navbar">
+                        <ul>
+                            <li><a id="btnElenco" data-theme="" href="#" onclick="javascript:elenco();" @((Model.TipoVista == Annunci.Models.SearchImmobili.EnumTipoVista.Elenco) ? "class=ui-btn-active" : "")>Elenco</a></li>
+                            <li><a id="btnMappa" data-theme="" href="#" onclick="javascript:mappa();" @((Model.TipoVista == Annunci.Models.SearchImmobili.EnumTipoVista.Mappa) ? "class=ui-btn-active" : "")>Mappa</a></li>
+                        </ul>
+                        <input type="hidden" name="tipoVista" id="tipoVista" />
+
+                    </div>
+
+                    <div id="list-container" style="margin-top: 20px">
+
+                        @wGrid.GetHtml(
+                fillEmptyRows: false,
+                tableStyle: MyConstants.TABLE_STYLE,
+                rowStyle: MyConstants.TABLE_ROW_STYLE,
+                alternatingRowStyle: MyConstants.TABLE_ALTERNATING_ROW_STYLE,
+                headerStyle: MyConstants.TABLE_HEADER_STYLE,
+                footerStyle: MyConstants.TABLE_FOOTER_STYLE,
+                htmlAttributes: new { data_role = "table", id = "MyWebGrid", data_mode = "reflow" },
+                columns: new[]{
+                        wGrid.Column ("login","Utente", format: item=> MyHelper.getProfileImage(Server.MapPath("~"), @item.login,@item.customerId, @item.immobileId) , canSort : false),
+                        wGrid.Column("date_added", header: "Data", format: p=>p.DataInserimento.ToShortDateString(), canSort :true),
+                        wGrid.Column("Categoria" , "Categoria", canSort :false),
+                        wGrid.Column ("Prezzo","Prezzo" , format: @<text> @item.prezzo.ToString("C")</text>, canSort : true) ,
+                        wGrid.Column ("MQ", canSort : true),
+                        wGrid.Column ("Dati", "Dati", format: item => MyHelper.getDatiImmobile((Annunci.Models.Immobile) @item.Value) , canSort : false) ,
+                        wGrid.Column ("Localita", "Localita", format: item =>  MyHelper.getLocalitaImmobileVerticale((Annunci.Models.Immobile) @item.Value) , canSort : false) ,
+                        wGrid.Column ("Photo", "Photo", format: item =>  MyHelper.getPhotoImmobile(@item.immobileId) , canSort : false) ,
+                        wGrid.Column ("Dettagli","Dettagli", format: @<text><a data-role="button" data-theme="a" data-icon="info" data-iconpos="right" href="@Url.Action("Details", "Immobiliare", new {id=item.immobileId})">Info</a></text>, canSort : false)
+                        }
+                )
+
+
+                        @{Html.RenderPartial("Paging", Model);}
+
+
+
+                    </div>
+
+                                }
+
+                            }
+
+
+
+
+<div id="map-container" style="margin-top: 20px; width: 100%; height: 400px;">
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

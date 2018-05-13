@@ -1,0 +1,19 @@
+﻿@model  MyWebApplication.Areas.Admin.Models.ModelHome
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/MasterPageAdminMobile.cshtml";
+}
+
+<h2>Admin</h2>
+
+MyWebApplication: @Model.versionMyWebApplication
+<br />
+Immobiliare (C#): @Model.versionImmobiliareCSharp
+<br />
+Immobiliare (VB): @Model.versionImmobiliareVb
+<br />
+MyManagerCSharp: @Model.versionMyManagerCSharp
+<br />
+MyUsers: @Model.versionMyUsers
+<br />
+MVC:  @Model.versionMVC

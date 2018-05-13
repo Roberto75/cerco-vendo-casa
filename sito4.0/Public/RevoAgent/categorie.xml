@@ -1,0 +1,993 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<revo>
+  <cat>
+    <id>17</id>
+    <contratto>V</contratto>
+    <nome>1 locale</nome>
+    <nome_en>Studio/flat</nome_en>
+    <nome_de>1-Zimmer-Wohnung</nome_de>
+    <nome_es>1 local</nome_es>
+    <nome_fr>1 pièce</nome_fr>
+    <nome_ru>Однокомнатная квартира</nome_ru>
+  </cat>
+  <cat>
+    <id>18</id>
+    <contratto>V</contratto>
+    <nome>2 locali</nome>
+    <nome_en>1br. apartment</nome_en>
+    <nome_de>2-Zimmer-Wohnung</nome_de>
+    <nome_es>2 locales</nome_es>
+    <nome_fr>2 pièces</nome_fr>
+    <nome_ru>Двухкомнатная квартира</nome_ru>
+  </cat>
+  <cat>
+    <id>25</id>
+    <contratto>V</contratto>
+    <nome>3 locali</nome>
+    <nome_en>2br. apartment</nome_en>
+    <nome_de>3-Zimmer-Wohnung</nome_de>
+    <nome_es>3 locales</nome_es>
+    <nome_fr>3 pièces</nome_fr>
+    <nome_ru>Трёхкомнатная квартира</nome_ru>
+  </cat>
+  <cat>
+    <id>26</id>
+    <contratto>V</contratto>
+    <nome>4 o più locali</nome>
+    <nome_en>3br. or more apartment</nome_en>
+    <nome_de>4-Zimmer-Wohnung oder mehr</nome_de>
+    <nome_es>4 o màs locales</nome_es>
+    <nome_fr>4 ou plus pièces</nome_fr>
+    <nome_ru>Четырёхкомнатная квартира</nome_ru>
+  </cat>
+  <cat>
+    <id>28</id>
+    <contratto>V</contratto>
+    <nome>Villa</nome>
+    <nome_en>Villa</nome_en>
+    <nome_de>Villen/Häuser</nome_de>
+    <nome_es>Villa</nome_es>
+    <nome_fr>Villa</nome_fr>
+    <nome_ru>Вилла</nome_ru>
+  </cat>
+  <cat>
+    <id>119</id>
+    <contratto>V</contratto>
+    <nome>Villa Bifamiliare</nome>
+    <nome_en>Family Villa</nome_en>
+    <nome_de>Zweifamilienhaus</nome_de>
+    <nome_es>Villa bifamiliar</nome_es>
+    <nome_fr>Villa Bifamiliare</nome_fr>
+    <nome_ru>Спаренная вилла </nome_ru>
+  </cat>
+  <cat>
+    <id>50</id>
+    <contratto>V</contratto>
+    <nome>Porzione Villa</nome>
+    <nome_en>Portion of villa</nome_en>
+    <nome_de>Haushälfte</nome_de>
+    <nome_es>porciòn de villa</nome_es>
+    <nome_fr>Part de villa</nome_fr>
+    <nome_ru>Часть виллы</nome_ru>
+  </cat>
+  <cat>
+    <id>30</id>
+    <contratto>V</contratto>
+    <nome>Villetta schiera</nome>
+    <nome_en>Terraced house</nome_en>
+    <nome_de>Reihenhaus</nome_de>
+    <nome_es>chalés adosados</nome_es>
+    <nome_fr>Villa mitoyenne</nome_fr>
+    <nome_ru>Танхауз</nome_ru>
+  </cat>
+  <cat>
+    <id>32</id>
+    <contratto>V</contratto>
+    <nome>Attico</nome>
+    <nome_en>Attic</nome_en>
+    <nome_de>Penthouse</nome_de>
+    <nome_es>ático</nome_es>
+    <nome_fr>Attique</nome_fr>
+    <nome_ru>Пентхаус</nome_ru>
+  </cat>
+  <cat>
+    <id>87</id>
+    <contratto>V</contratto>
+    <nome>Porzione di Casa</nome>
+    <nome_en>Semi-Detached House</nome_en>
+    <nome_de>Doppelhaushälfte</nome_de>
+    <nome_es>casa adosada</nome_es>
+    <nome_fr>Part de maison</nome_fr>
+    <nome_ru>Часть дома</nome_ru>
+  </cat>
+  <cat>
+    <id>44</id>
+    <contratto>V</contratto>
+    <nome>Mansarda</nome>
+    <nome_en>Mansard</nome_en>
+    <nome_de>Mansarde</nome_de>
+    <nome_es>ático</nome_es>
+    <nome_fr>Mansarde</nome_fr>
+    <nome_ru>Мансарда</nome_ru>
+  </cat>
+  <cat>
+    <id>46</id>
+    <contratto>V</contratto>
+    <nome>Loft</nome>
+    <nome_en>Loft</nome_en>
+    <nome_de>Loft</nome_de>
+    <nome_es>desván</nome_es>
+    <nome_fr>Loft</nome_fr>
+    <nome_ru>Лофт</nome_ru>
+  </cat>
+  <cat>
+    <id>91</id>
+    <contratto>V</contratto>
+    <nome>Duplex</nome>
+    <nome_en>Duplex</nome_en>
+    <nome_de>Doppelgarage</nome_de>
+    <nome_es>Duplex</nome_es>
+    <nome_fr>Duplex </nome_fr>
+    <nome_ru>Дуплекс</nome_ru>
+  </cat>
+  <cat>
+    <id>117</id>
+    <contratto>V</contratto>
+    <nome>Maisonette</nome>
+    <nome_en>Maisonette</nome_en>
+    <nome_de>Maisonette</nome_de>
+    <nome_es>casita</nome_es>
+    <nome_fr>Maisonnette</nome_fr>
+    <nome_ru>Двухуровневый танхауз</nome_ru>
+  </cat>
+  <cat>
+    <id>48</id>
+    <contratto>V</contratto>
+    <nome>Casa singola</nome>
+    <nome_en>Single house</nome_en>
+    <nome_de>Haus</nome_de>
+    <nome_es>vivenda</nome_es>
+    <nome_fr>Maison (indépendente)</nome_fr>
+    <nome_ru>Особняк</nome_ru>
+  </cat>
+  <cat>
+    <id>84</id>
+    <contratto>V</contratto>
+    <nome>Stabile / Palazzo</nome>
+    <nome_en>Palace</nome_en>
+    <nome_de>Gebäude / Palast</nome_de>
+    <nome_es>inmueble/edificio</nome_es>
+    <nome_fr>Immeuble/ Palais</nome_fr>
+    <nome_ru>Городской дом</nome_ru>
+  </cat>
+  <cat>
+    <id>33</id>
+    <contratto>V</contratto>
+    <nome>Garage</nome>
+    <nome_en>Garage</nome_en>
+    <nome_de>Garage</nome_de>
+    <nome_es>Garage</nome_es>
+    <nome_fr>Garage</nome_fr>
+    <nome_ru>Гараж</nome_ru>
+  </cat>
+  <cat>
+    <id>93</id>
+    <contratto>V</contratto>
+    <nome>Posto Auto</nome>
+    <nome_en>Parking Place</nome_en>
+    <nome_de>Autostellplatz</nome_de>
+    <nome_es>plaza de garage</nome_es>
+    <nome_fr>Parking Privé</nome_fr>
+    <nome_ru>Парковочное место для машины</nome_ru>
+  </cat>
+  <cat>
+    <id>34</id>
+    <contratto>V</contratto>
+    <nome>Rustico/Casale</nome>
+    <nome_en>Rustic</nome_en>
+    <nome_de>Rustico/Landhaus</nome_de>
+    <nome_es>rústico/casa</nome_es>
+    <nome_fr>Fermette /Hameau/Ferme</nome_fr>
+    <nome_ru>Дом рустико</nome_ru>
+  </cat>
+  <cat>
+    <id>36</id>
+    <contratto>V</contratto>
+    <nome>Terreno Edificabile</nome>
+    <nome_en>Building land</nome_en>
+    <nome_de>Baugrund</nome_de>
+    <nome_es>Suelo edificable</nome_es>
+    <nome_fr>Terrain à bâtir</nome_fr>
+    <nome_ru>Земля под строительство</nome_ru>
+  </cat>
+  <cat>
+    <id>40</id>
+    <contratto>V</contratto>
+    <nome>Ufficio</nome>
+    <nome_en>Office</nome_en>
+    <nome_de>Büroräumlichkeiten</nome_de>
+    <nome_es>Oficina</nome_es>
+    <nome_fr>Bureau</nome_fr>
+    <nome_ru>Офис</nome_ru>
+  </cat>
+  <cat>
+    <id>41</id>
+    <contratto>V</contratto>
+    <nome>Negozio</nome>
+    <nome_en>Shop</nome_en>
+    <nome_de>Laden</nome_de>
+    <nome_es>Tienda</nome_es>
+    <nome_fr>Magasin </nome_fr>
+    <nome_ru>Магазин</nome_ru>
+  </cat>
+  <cat>
+    <id>42</id>
+    <contratto>V</contratto>
+    <nome>Capannone</nome>
+    <nome_en>Shed</nome_en>
+    <nome_de>Gewerbe-Industriehalle</nome_de>
+    <nome_es>cobertizo</nome_es>
+    <nome_fr>Hangar</nome_fr>
+    <nome_ru>Ангарное помещение</nome_ru>
+  </cat>
+  <cat>
+    <id>85</id>
+    <contratto>V</contratto>
+    <nome>Magazzino</nome>
+    <nome_en>Warehouse</nome_en>
+    <nome_de>Lager</nome_de>
+    <nome_es>almacén</nome_es>
+    <nome_fr>Entrepôt</nome_fr>
+    <nome_ru>Склад</nome_ru>
+  </cat>
+  <cat>
+    <id>99</id>
+    <contratto>V</contratto>
+    <nome>Laboratorio</nome>
+    <nome_en>Laboratory</nome_en>
+    <nome_de>Atelier/Labor</nome_de>
+    <nome_es>Laboratorio</nome_es>
+    <nome_fr>Laboratoire</nome_fr>
+    <nome_ru>Лаборатория</nome_ru>
+  </cat>
+  <cat>
+    <id>81</id>
+    <contratto>V</contratto>
+    <nome>Azienda Agricola</nome>
+    <nome_en>Farm</nome_en>
+    <nome_de>Landwirtschaftlicher Betrieb</nome_de>
+    <nome_es>granja</nome_es>
+    <nome_fr>Exploitation agricole</nome_fr>
+    <nome_ru>Сельскохозяйственная компания</nome_ru>
+  </cat>
+  <cat>
+    <id>82</id>
+    <contratto>V</contratto>
+    <nome>Terreno Agricolo</nome>
+    <nome_en>Agricultural field</nome_en>
+    <nome_de>Landwirtschaftlicher Grund</nome_de>
+    <nome_es>Solar</nome_es>
+    <nome_fr>Terrain agricole</nome_fr>
+    <nome_ru>Сельскохозяйственная земля</nome_ru>
+  </cat>
+  <cat>
+    <id>86</id>
+    <contratto>V</contratto>
+    <nome>Tenuta</nome>
+    <nome_en>Estate</nome_en>
+    <nome_de>Ansitz</nome_de>
+    <nome_es>finca</nome_es>
+    <nome_fr>Domaine</nome_fr>
+    <nome_ru>Поместье</nome_ru>
+  </cat>
+  <cat>
+    <id>105</id>
+    <contratto>V</contratto>
+    <nome>Baita</nome>
+    <nome_en>Chalet</nome_en>
+    <nome_de>Hütte</nome_de>
+    <nome_es>cabaña</nome_es>
+    <nome_fr>Chalet</nome_fr>
+    <nome_ru>Шале</nome_ru>
+  </cat>
+  <cat>
+    <id>83</id>
+    <contratto>V</contratto>
+    <nome>Castello</nome>
+    <nome_en>Castle</nome_en>
+    <nome_de>Schloss</nome_de>
+    <nome_es>Castillo</nome_es>
+    <nome_fr>Châteux</nome_fr>
+    <nome_ru>Крепость</nome_ru>
+  </cat>
+  <cat>
+    <id>95</id>
+    <contratto>V</contratto>
+    <nome>Hotel</nome>
+    <nome_en>Hotel</nome_en>
+    <nome_de>Hotel</nome_de>
+    <nome_es>Hotel</nome_es>
+    <nome_fr>Hôtel</nome_fr>
+    <nome_ru>Отель</nome_ru>
+  </cat>
+  <cat>
+    <id>97</id>
+    <contratto>V</contratto>
+    <nome>Posto Barca</nome>
+    <nome_en>Boat Place</nome_en>
+    <nome_de>Bootsplatz</nome_de>
+    <nome_es>puesto de amarre</nome_es>
+    <nome_fr>Parking Bateau Privé</nome_fr>
+    <nome_ru>Швартовочное место для катера/яхты</nome_ru>
+  </cat>
+  <cat>
+    <id>15</id>
+    <contratto>A</contratto>
+    <nome>1 locale</nome>
+    <nome_en>Studio/flat</nome_en>
+    <nome_de>1-Zimmer-Wohnung</nome_de>
+    <nome_es>1 local</nome_es>
+    <nome_fr>1 pièce</nome_fr>
+    <nome_ru>Однокомнатная квартира</nome_ru>
+  </cat>
+  <cat>
+    <id>16</id>
+    <contratto>A</contratto>
+    <nome>2 locali</nome>
+    <nome_en>1br. apartment</nome_en>
+    <nome_de>2-Zimmer-Wohnung</nome_de>
+    <nome_es>2 locales</nome_es>
+    <nome_fr>2 pièces</nome_fr>
+    <nome_ru>Двухкомнатная квартира</nome_ru>
+  </cat>
+  <cat>
+    <id>19</id>
+    <contratto>A</contratto>
+    <nome>3 locali</nome>
+    <nome_en>2br. apartment</nome_en>
+    <nome_de>3-Zimmer-Wohnung</nome_de>
+    <nome_es>3 locales</nome_es>
+    <nome_fr>3 pièces</nome_fr>
+    <nome_ru>Трёхкомнатная квартира</nome_ru>
+  </cat>
+  <cat>
+    <id>20</id>
+    <contratto>A</contratto>
+    <nome>4 o più locali</nome>
+    <nome_en>3br. or more apartment</nome_en>
+    <nome_de>4-Zimmer-Wohnung oder mehr</nome_de>
+    <nome_es>4 o màs locales</nome_es>
+    <nome_fr>4 ou plus pièces</nome_fr>
+    <nome_ru>Четырёхкомнатная квартира</nome_ru>
+  </cat>
+  <cat>
+    <id>52</id>
+    <contratto>A</contratto>
+    <nome>Contratto breve durata</nome>
+    <nome_en>Short time contract</nome_en>
+    <nome_de>kurzfristiger Vertrag</nome_de>
+    <nome_es>Contrato corta temporada</nome_es>
+    <nome_fr>Location Vacances </nome_fr>
+    <nome_ru>Краткосрочный контракт</nome_ru>
+  </cat>
+  <cat>
+    <id>22</id>
+    <contratto>A</contratto>
+    <nome>Villa</nome>
+    <nome_en>Villa</nome_en>
+    <nome_de>Villen/Häuser</nome_de>
+    <nome_es>Villa</nome_es>
+    <nome_fr>Villa</nome_fr>
+    <nome_ru>Вилла</nome_ru>
+  </cat>
+  <cat>
+    <id>120</id>
+    <contratto>A</contratto>
+    <nome>Villa Bifamiliare</nome>
+    <nome_en>Family Villa</nome_en>
+    <nome_de>Villa Bifamiliare</nome_de>
+    <nome_es>Villa bifamiliar</nome_es>
+    <nome_fr>Villa Bifamiliare</nome_fr>
+    <nome_ru>Спаренная вилла </nome_ru>
+  </cat>
+  <cat>
+    <id>107</id>
+    <contratto>A</contratto>
+    <nome>Porzione di Casa</nome>
+    <nome_en>Semi-Detached House</nome_en>
+    <nome_de>Hausteil</nome_de>
+    <nome_es>casa adosada</nome_es>
+    <nome_fr>Part de maison</nome_fr>
+    <nome_ru>Часть дома</nome_ru>
+  </cat>
+  <cat>
+    <id>47</id>
+    <contratto>A</contratto>
+    <nome>Casa singola</nome>
+    <nome_en>Single house</nome_en>
+    <nome_de>Haus</nome_de>
+    <nome_es>chalet</nome_es>
+    <nome_fr>Maison (indépendente)</nome_fr>
+    <nome_ru>Особняк / Отдельный дом</nome_ru>
+  </cat>
+  <cat>
+    <id>49</id>
+    <contratto>A</contratto>
+    <nome>Porzione Villa</nome>
+    <nome_en>Portion of villa</nome_en>
+    <nome_de>Haushälfte</nome_de>
+    <nome_es>porciòn de villa</nome_es>
+    <nome_fr>Part de villa</nome_fr>
+    <nome_ru>Часть виллы</nome_ru>
+  </cat>
+  <cat>
+    <id>24</id>
+    <contratto>A</contratto>
+    <nome>Villetta schiera</nome>
+    <nome_en>Terraced house</nome_en>
+    <nome_de>Reihenhaus</nome_de>
+    <nome_es>chalés adosados</nome_es>
+    <nome_fr>Villa mitoyenne</nome_fr>
+    <nome_ru>Таунхаус</nome_ru>
+  </cat>
+  <cat>
+    <id>31</id>
+    <contratto>A</contratto>
+    <nome>Attico</nome>
+    <nome_en>Attic</nome_en>
+    <nome_de>Penthouse</nome_de>
+    <nome_es>ático</nome_es>
+    <nome_fr>Attique</nome_fr>
+    <nome_ru>Пентхаус</nome_ru>
+  </cat>
+  <cat>
+    <id>43</id>
+    <contratto>A</contratto>
+    <nome>Mansarda</nome>
+    <nome_en>Mansard</nome_en>
+    <nome_de>Mansarde</nome_de>
+    <nome_es>ático</nome_es>
+    <nome_fr>Mansarde</nome_fr>
+    <nome_ru>Мансарда</nome_ru>
+  </cat>
+  <cat>
+    <id>45</id>
+    <contratto>A</contratto>
+    <nome>Loft</nome>
+    <nome_en>Loft</nome_en>
+    <nome_de>Loft</nome_de>
+    <nome_es>Loft</nome_es>
+    <nome_fr>Loft</nome_fr>
+    <nome_ru>Лофт</nome_ru>
+  </cat>
+  <cat>
+    <id>92</id>
+    <contratto>A</contratto>
+    <nome>Duplex</nome>
+    <nome_en>Duplex</nome_en>
+    <nome_de>Doppelgarage</nome_de>
+    <nome_es>Duplex</nome_es>
+    <nome_fr>Duplex </nome_fr>
+    <nome_ru>Дуплекс</nome_ru>
+  </cat>
+  <cat>
+    <id>118</id>
+    <contratto>A</contratto>
+    <nome>Maisonette</nome>
+    <nome_en>Maisonette</nome_en>
+    <nome_de>Maisonette</nome_de>
+    <nome_es>casita</nome_es>
+    <nome_fr>Maisonnette</nome_fr>
+    <nome_ru>Двухуровневый дом</nome_ru>
+  </cat>
+  <cat>
+    <id>102</id>
+    <contratto>A</contratto>
+    <nome>Rustico/Casale</nome>
+    <nome_en>Rustic</nome_en>
+    <nome_de>Rustico/Landhaus</nome_de>
+    <nome_es>rústico/casa</nome_es>
+    <nome_fr>Fermette /Hameau/Ferme</nome_fr>
+    <nome_ru>Дом рустико</nome_ru>
+  </cat>
+  <cat>
+    <id>106</id>
+    <contratto>A</contratto>
+    <nome>Baita</nome>
+    <nome_en>Chalet</nome_en>
+    <nome_de>Hütte</nome_de>
+    <nome_es>refugio</nome_es>
+    <nome_fr>Chalet</nome_fr>
+    <nome_ru>Шале</nome_ru>
+  </cat>
+  <cat>
+    <id>101</id>
+    <contratto>A</contratto>
+    <nome>Hotel</nome>
+    <nome_en>Hotel</nome_en>
+    <nome_de>Hotel</nome_de>
+    <nome_es>Hotel</nome_es>
+    <nome_fr>Hôtel</nome_fr>
+    <nome_ru>Отель</nome_ru>
+  </cat>
+  <cat>
+    <id>35</id>
+    <contratto>A</contratto>
+    <nome>Garage</nome>
+    <nome_en>Garage</nome_en>
+    <nome_de>Garage</nome_de>
+    <nome_es>Garage</nome_es>
+    <nome_fr>Garage</nome_fr>
+    <nome_ru>Гараж</nome_ru>
+  </cat>
+  <cat>
+    <id>94</id>
+    <contratto>A</contratto>
+    <nome>Posto Auto</nome>
+    <nome_en>Parking Place</nome_en>
+    <nome_de>Autostellplatz</nome_de>
+    <nome_es>plaza de garage</nome_es>
+    <nome_fr>Parking privé</nome_fr>
+    <nome_ru>Парковочное место для машины</nome_ru>
+  </cat>
+  <cat>
+    <id>37</id>
+    <contratto>A</contratto>
+    <nome>Ufficio</nome>
+    <nome_en>Office</nome_en>
+    <nome_de>Büroräumlichkeiten</nome_de>
+    <nome_es>Oficina</nome_es>
+    <nome_fr>Bureau</nome_fr>
+    <nome_ru>Офис</nome_ru>
+  </cat>
+  <cat>
+    <id>38</id>
+    <contratto>A</contratto>
+    <nome>Negozio</nome>
+    <nome_en>Shop</nome_en>
+    <nome_de>Laden</nome_de>
+    <nome_es>Tienda</nome_es>
+    <nome_fr>Bureau</nome_fr>
+    <nome_ru>Магазин</nome_ru>
+  </cat>
+  <cat>
+    <id>39</id>
+    <contratto>A</contratto>
+    <nome>Capannone</nome>
+    <nome_en>Shed</nome_en>
+    <nome_de>Gewerbe-Industriehalle</nome_de>
+    <nome_es>cobertizo</nome_es>
+    <nome_fr>Hangar</nome_fr>
+    <nome_ru>Ангарное помещение</nome_ru>
+  </cat>
+  <cat>
+    <id>88</id>
+    <contratto>A</contratto>
+    <nome>Magazzino</nome>
+    <nome_en>Warehouse</nome_en>
+    <nome_de>Lager</nome_de>
+    <nome_es>almacén</nome_es>
+    <nome_fr>Entrepôt</nome_fr>
+    <nome_ru>Склад</nome_ru>
+  </cat>
+  <cat>
+    <id>100</id>
+    <contratto>A</contratto>
+    <nome>Laboratorio</nome>
+    <nome_en>Laboratory</nome_en>
+    <nome_de>Atelier/Labor</nome_de>
+    <nome_es>Laboratorio</nome_es>
+    <nome_fr>Laboratoire</nome_fr>
+    <nome_ru>Лаборатория</nome_ru>
+  </cat>
+  <cat>
+    <id>96</id>
+    <contratto>A</contratto>
+    <nome>Terreno</nome>
+    <nome_en>Ground</nome_en>
+    <nome_de>Grund</nome_de>
+    <nome_es>Suelo</nome_es>
+    <nome_fr>Terrain</nome_fr>
+    <nome_ru>Земля</nome_ru>
+  </cat>
+  <cat>
+    <id>98</id>
+    <contratto>A</contratto>
+    <nome>Posto Barca</nome>
+    <nome_en>Boat Place</nome_en>
+    <nome_de>Bootsplatz</nome_de>
+    <nome_es>puesto de amarre</nome_es>
+    <nome_fr>Parking Bateau Privé</nome_fr>
+    <nome_ru>Швартовочное место для катера/яхты</nome_ru>
+  </cat>
+  <cat>
+    <id>70</id>
+    <contratto>I</contratto>
+    <nome>Abbigliamento</nome>
+    <nome_en>Dressing</nome_en>
+    <nome_de>Bekleidung</nome_de>
+    <nome_es>vestuario</nome_es>
+    <nome_fr>Habillement</nome_fr>
+    <nome_ru>Одежда</nome_ru>
+  </cat>
+  <cat>
+    <id>109</id>
+    <contratto>I</contratto>
+    <nome>Agenzia Viaggi</nome>
+    <nome_en>Travel Agency</nome_en>
+    <nome_de>Reiseagentur</nome_de>
+    <nome_es>agencia de viajes</nome_es>
+    <nome_fr>Agence de voyages</nome_fr>
+    <nome_ru>Туристическое агентство</nome_ru>
+  </cat>
+  <cat>
+    <id>76</id>
+    <contratto>I</contratto>
+    <nome>Agriturismo</nome>
+    <nome_en>Farm Holidays</nome_en>
+    <nome_de>Bierausschank </nome_de>
+    <nome_es>agroturismo</nome_es>
+    <nome_fr>Agro-tourisme</nome_fr>
+    <nome_ru>Агротуризм (отдых в сельской местности)</nome_ru>
+  </cat>
+  <cat>
+    <id>57</id>
+    <contratto>I</contratto>
+    <nome>Alimentari</nome>
+    <nome_en>Grocery Store</nome_en>
+    <nome_de>Lebensmittelhandlung</nome_de>
+    <nome_es>tienda de comestibles</nome_es>
+    <nome_fr>D'alimentation</nome_fr>
+    <nome_ru>Продукты</nome_ru>
+  </cat>
+  <cat>
+    <id>111</id>
+    <contratto>I</contratto>
+    <nome>Auto Officina</nome>
+    <nome_en>Car workshop</nome_en>
+    <nome_de>Autowerkstatt</nome_de>
+    <nome_es>Taller Auto</nome_es>
+    <nome_fr>Atelier de réparation</nome_fr>
+    <nome_ru>Автосервис</nome_ru>
+  </cat>
+  <cat>
+    <id>116</id>
+    <contratto>I</contratto>
+    <nome>Autoaccessori</nome>
+    <nome_en>Car Accessories</nome_en>
+    <nome_de>Autozubehör</nome_de>
+    <nome_es>auto accesorios</nome_es>
+    <nome_fr>Accessoires d'automibile</nome_fr>
+    <nome_ru>Автотовары</nome_ru>
+  </cat>
+  <cat>
+    <id>53</id>
+    <contratto>I</contratto>
+    <nome>Bar</nome>
+    <nome_en>Bar</nome_en>
+    <nome_de>Bar</nome_de>
+    <nome_es>bar</nome_es>
+    <nome_fr>Café</nome_fr>
+    <nome_ru>Бар</nome_ru>
+  </cat>
+  <cat>
+    <id>77</id>
+    <contratto>I</contratto>
+    <nome>Bed and Breakfast</nome>
+    <nome_en>Bed and Breakfast</nome_en>
+    <nome_de>Zimmer mit Frühstück</nome_de>
+    <nome_es>pension</nome_es>
+    <nome_fr>Bed and Breakfast</nome_fr>
+    <nome_ru>Ночлег с завтраками</nome_ru>
+  </cat>
+  <cat>
+    <id>56</id>
+    <contratto>I</contratto>
+    <nome>Caffetteria</nome>
+    <nome_en>Coffee Shop</nome_en>
+    <nome_de>Kaffeehaus</nome_de>
+    <nome_es>cafetería</nome_es>
+    <nome_fr>Cafétéria</nome_fr>
+    <nome_ru>Кофейня</nome_ru>
+  </cat>
+  <cat>
+    <id>69</id>
+    <contratto>I</contratto>
+    <nome>Cartoleria / Art. Regalo</nome>
+    <nome_en>Stationery / Gifts</nome_en>
+    <nome_de>Papierwaren/Geschenkartikel</nome_de>
+    <nome_es>Papelerìa / Regalos</nome_es>
+    <nome_fr>Papeterie / Cadeaux</nome_fr>
+    <nome_ru>Канцелярские товары / Подарки</nome_ru>
+  </cat>
+  <cat>
+    <id>78</id>
+    <contratto>I</contratto>
+    <nome>Clinica / Casa di Riposo</nome>
+    <nome_en>Nursing Home</nome_en>
+    <nome_de>Klinik / Altersheim</nome_de>
+    <nome_es>clínica</nome_es>
+    <nome_fr>Cilinique / Maison de retraite</nome_fr>
+    <nome_ru>Клиника / Дом престарелых </nome_ru>
+  </cat>
+  <cat>
+    <id>74</id>
+    <contratto>I</contratto>
+    <nome>Discoteca</nome>
+    <nome_en>Disco</nome_en>
+    <nome_de>Diskothek</nome_de>
+    <nome_es>asilo de ancianos</nome_es>
+    <nome_fr>Disco</nome_fr>
+    <nome_ru>Дискотека</nome_ru>
+  </cat>
+  <cat>
+    <id>68</id>
+    <contratto>I</contratto>
+    <nome>Edicola</nome>
+    <nome_en>Newsstand</nome_en>
+    <nome_de>Zeitschriftenhandlung</nome_de>
+    <nome_es>puesto de periódicos/ quiosco</nome_es>
+    <nome_fr>Kiosque à journaux</nome_fr>
+    <nome_ru>Газетный киоск</nome_ru>
+  </cat>
+  <cat>
+    <id>61</id>
+    <contratto>I</contratto>
+    <nome>Enoteca</nome>
+    <nome_en>Wine</nome_en>
+    <nome_de>Vinothek</nome_de>
+    <nome_es>enoteca/vineria</nome_es>
+    <nome_fr>Vinothèque</nome_fr>
+    <nome_ru>Винный погреб</nome_ru>
+  </cat>
+  <cat>
+    <id>67</id>
+    <contratto>I</contratto>
+    <nome>Estetica / Solarium</nome>
+    <nome_en>Esthetics / Tanning</nome_en>
+    <nome_de>Kosmetiksalon/Solarium</nome_de>
+    <nome_es>estética/ solarium</nome_es>
+    <nome_fr>Esthétique / Solarium</nome_fr>
+    <nome_ru>Салон красоты / Солярий</nome_ru>
+  </cat>
+  <cat>
+    <id>115</id>
+    <contratto>I</contratto>
+    <nome>Fast Food/Kebab</nome>
+    <nome_en>Fast Food/Kebab</nome_en>
+    <nome_de>Fast Food/Kebab</nome_de>
+    <nome_es>Comida rapida/Kebab</nome_es>
+    <nome_fr>Fast Food/ Kebab</nome_fr>
+    <nome_ru>Фастфуд / Шаурма</nome_ru>
+  </cat>
+  <cat>
+    <id>90</id>
+    <contratto>I</contratto>
+    <nome>Fiorista</nome>
+    <nome_en>Florist</nome_en>
+    <nome_de>Blumenhandlung</nome_de>
+    <nome_es>Floristeria</nome_es>
+    <nome_fr>Fleuriste</nome_fr>
+    <nome_ru>Цветочный магазин</nome_ru>
+  </cat>
+  <cat>
+    <id>64</id>
+    <contratto>I</contratto>
+    <nome>Gelateria</nome>
+    <nome_en>Ice-Cream shop</nome_en>
+    <nome_de>Eisdiele</nome_de>
+    <nome_es>heladería</nome_es>
+    <nome_fr>Café-glacier</nome_fr>
+    <nome_ru>Мороженница</nome_ru>
+  </cat>
+  <cat>
+    <id>110</id>
+    <contratto>I</contratto>
+    <nome>Giochi / Scommesse</nome>
+    <nome_en>Betting / Games</nome_en>
+    <nome_de>Spielhalle/Wetten</nome_de>
+    <nome_es>Juegos/ apuestas</nome_es>
+    <nome_fr>Jeux / Paris</nome_fr>
+    <nome_ru>Игры / Букмекерская контора</nome_ru>
+  </cat>
+  <cat>
+    <id>108</id>
+    <contratto>I</contratto>
+    <nome>Gioielleria / Bigiotteria</nome>
+    <nome_en>Jewelery</nome_en>
+    <nome_de>Schmuckwaren/Bijouterie</nome_de>
+    <nome_es>joyería/ bisutería</nome_es>
+    <nome_fr>Joaillerie /Colifichets</nome_fr>
+    <nome_ru>Ювелирные изделия / Бижутерия</nome_ru>
+  </cat>
+  <cat>
+    <id>75</id>
+    <contratto>I</contratto>
+    <nome>Hotel</nome>
+    <nome_en>Hotel</nome_en>
+    <nome_de>Hotel</nome_de>
+    <nome_es>Hotel</nome_es>
+    <nome_fr>Hôtel</nome_fr>
+    <nome_ru>Отель</nome_ru>
+  </cat>
+  <cat>
+    <id>80</id>
+    <contratto>I</contratto>
+    <nome>Impianti Sportivi</nome>
+    <nome_en>Impianti Sportivi</nome_en>
+    <nome_de>Sportanlage</nome_de>
+    <nome_es>instalaciones deportivas</nome_es>
+    <nome_fr>Installations Sportives</nome_fr>
+    <nome_ru>Спортивных сооружений</nome_ru>
+  </cat>
+  <cat>
+    <id>71</id>
+    <contratto>I</contratto>
+    <nome>Informatica</nome>
+    <nome_en>Informatics</nome_en>
+    <nome_de>Informatik</nome_de>
+    <nome_es>informática</nome_es>
+    <nome_fr>Informatique</nome_fr>
+    <nome_ru>Информатика</nome_ru>
+  </cat>
+  <cat>
+    <id>112</id>
+    <contratto>I</contratto>
+    <nome>Lavanderia</nome>
+    <nome_en>Laundry</nome_en>
+    <nome_de>Wäscherei</nome_de>
+    <nome_es>Lavandería / Lavandero</nome_es>
+    <nome_fr>Blanchisserie </nome_fr>
+    <nome_ru>Прачечная</nome_ru>
+  </cat>
+  <cat>
+    <id>114</id>
+    <contratto>I</contratto>
+    <nome>Librerie</nome>
+    <nome_en>Bookshop</nome_en>
+    <nome_de>Buchhandlung</nome_de>
+    <nome_es>Librería / estantes para libros</nome_es>
+    <nome_fr>Librairies</nome_fr>
+    <nome_ru>Библиотека</nome_ru>
+  </cat>
+  <cat>
+    <id>58</id>
+    <contratto>I</contratto>
+    <nome>Non Alimentari</nome>
+    <nome_en>Non-Grocery Store</nome_en>
+    <nome_de>Non Food</nome_de>
+    <nome_es>No alimentaria</nome_es>
+    <nome_fr>Pas d'alimentations</nome_fr>
+    <nome_ru>Без притания</nome_ru>
+  </cat>
+  <cat>
+    <id>79</id>
+    <contratto>I</contratto>
+    <nome>Palestre / Fitness</nome>
+    <nome_en>Gym / Fitness</nome_en>
+    <nome_de>Sporthalle/Fitnesscenter</nome_de>
+    <nome_es>Gimnasios/ fitness</nome_es>
+    <nome_fr>Gymnases / Fitness</nome_fr>
+    <nome_ru>Спорт зал</nome_ru>
+  </cat>
+  <cat>
+    <id>63</id>
+    <contratto>I</contratto>
+    <nome>Panetteria</nome>
+    <nome_en>Bakery</nome_en>
+    <nome_de>Brotgeschäft</nome_de>
+    <nome_es>Panaderia</nome_es>
+    <nome_fr>Boulangerie</nome_fr>
+    <nome_ru>Пекарня-Булочная</nome_ru>
+  </cat>
+  <cat>
+    <id>66</id>
+    <contratto>I</contratto>
+    <nome>Parrucchiere</nome>
+    <nome_en>Hairdresser</nome_en>
+    <nome_de>Friseursalon</nome_de>
+    <nome_es>Peluqueria</nome_es>
+    <nome_fr>Coiffeur</nome_fr>
+    <nome_ru>Парикмахерская</nome_ru>
+  </cat>
+  <cat>
+    <id>62</id>
+    <contratto>I</contratto>
+    <nome>Pasticceria</nome>
+    <nome_en>Confectionery</nome_en>
+    <nome_de>Konditorei</nome_de>
+    <nome_es>Confitería / pasteleria</nome_es>
+    <nome_fr>Pâtisserie</nome_fr>
+    <nome_ru>Кондитерская</nome_ru>
+  </cat>
+  <cat>
+    <id>60</id>
+    <contratto>I</contratto>
+    <nome>Pizza D'Asporto</nome>
+    <nome_en>Takeaway Pizza</nome_en>
+    <nome_de>Pizza zum mitnehmen</nome_de>
+    <nome_es>Pizza para llevar</nome_es>
+    <nome_fr>Pizzas à emporter</nome_fr>
+    <nome_ru>Пицца на вынос</nome_ru>
+  </cat>
+  <cat>
+    <id>59</id>
+    <contratto>I</contratto>
+    <nome>Pizzeria</nome>
+    <nome_en>Pizzeria</nome_en>
+    <nome_de>Pizzeria</nome_de>
+    <nome_es>Pizzería</nome_es>
+    <nome_fr>Pizzeria</nome_fr>
+    <nome_ru>Пиццерия</nome_ru>
+  </cat>
+  <cat>
+    <id>54</id>
+    <contratto>I</contratto>
+    <nome>Pub</nome>
+    <nome_en>Pub</nome_en>
+    <nome_de>Pub</nome_de>
+    <nome_es>Bares</nome_es>
+    <nome_fr>Pub</nome_fr>
+    <nome_ru>Паб</nome_ru>
+  </cat>
+  <cat>
+    <id>55</id>
+    <contratto>I</contratto>
+    <nome>Ristorante</nome>
+    <nome_en>Restaurant</nome_en>
+    <nome_de>Restaurant</nome_de>
+    <nome_es>Restaurante</nome_es>
+    <nome_fr>Réstaurant</nome_fr>
+    <nome_ru>Ресторан</nome_ru>
+  </cat>
+  <cat>
+    <id>89</id>
+    <contratto>I</contratto>
+    <nome>Stab. Balneare</nome>
+    <nome_en>Bathhouse</nome_en>
+    <nome_de>Badeanstalt</nome_de>
+    <nome_es>Estación balnearia</nome_es>
+    <nome_fr>Stable bord de mer</nome_fr>
+    <nome_ru>Оборудованный пляж</nome_ru>
+  </cat>
+  <cat>
+    <id>65</id>
+    <contratto>I</contratto>
+    <nome>Tabaccheria </nome>
+    <nome_en>Tabac Shop</nome_en>
+    <nome_de>Tabakwaren</nome_de>
+    <nome_es>Estanco</nome_es>
+    <nome_fr>Bureau de tabac</nome_fr>
+    <nome_ru>Табачный киоск</nome_ru>
+  </cat>
+  <cat>
+    <id>72</id>
+    <contratto>I</contratto>
+    <nome>Telefonia / Foto Ottica</nome>
+    <nome_en>Phone / Photo optics</nome_en>
+    <nome_de>Telefon / Foto / Optik</nome_de>
+    <nome_es>Telefonía/óptico</nome_es>
+    <nome_fr>Téléphonie / Photos  optique</nome_fr>
+    <nome_ru>Телефон / Фото услуги</nome_ru>
+  </cat>
+  <cat>
+    <id>113</id>
+    <contratto>I</contratto>
+    <nome>Tintoria</nome>
+    <nome_en>Dry Cleaner's</nome_en>
+    <nome_de>Reinigung</nome_de>
+    <nome_es>Tintorería</nome_es>
+    <nome_fr>Teinturerie</nome_fr>
+    <nome_ru>Химчистка</nome_ru>
+  </cat>
+  <cat>
+    <id>73</id>
+    <contratto>I</contratto>
+    <nome>Videoteca</nome>
+    <nome_en>Video</nome_en>
+    <nome_de>Videothek</nome_de>
+    <nome_es>Videoteca</nome_es>
+    <nome_fr>Vidéothèque</nome_fr>
+    <nome_ru>Видеопрокат</nome_ru>
+  </cat>
+</revo>

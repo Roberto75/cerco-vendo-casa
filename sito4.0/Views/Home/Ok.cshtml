@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Operazione conclusa con successo";
+    Layout = "~/Views/Shared/MasterPageMobile.cshtml";
+}
+
+<h2>Operazione conclusa con successo</h2>
+
+
+
+    <img style="display:block; margin-left:auto; margin-right:auto;" src="@Url.Content("~/Content/Images/shared/ok1_48x48.gif")" border="0" alt="" />
+
+
+
+@if (!String.IsNullOrEmpty(ViewData["messaggio"].ToString()))
+{
+    <div>
+        @(new HtmlString(ViewData["messaggio"].ToString()))
+    </div>
+}
+
+
+<br />
+
+<div data-role="controlgrup" data-type="horizontal" data-mini="true">
+    <a href="@Url.Action("Index", "Home")" data-role="button" data-inline="true">Torna alla home</a>
+    <a href="@Url.Action("Login", "Account")" data-role="button" data-inline="true">Torna alla pagina di login</a>
+    <a href="@Url.Action("Index", "Immobiliare")" data-role="button" data-inline="true">Torna alla pagina di ricerca</a>
+</div>

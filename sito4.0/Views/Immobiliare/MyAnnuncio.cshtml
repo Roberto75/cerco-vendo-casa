@@ -1,0 +1,181 @@
+﻿@model MyWebApplication.Models.UpdateModel
+@{
+    ViewBag.Title = "Cerco Vendo Casa: Il mio annuncio";
+    Layout = "~/Views/Shared/MasterPageMobile.cshtml";
+}
+
+<h2>Dettaglio del mio annuncio</h2>
+
+
+<p>In questa pagina puoi modificare il testo del tuo annuncio, aggiungere delle <b>photo</b>  e visualizzare le trattative in corso.</p>
+
+<div data-role="tabs" id="tabs">
+    <div data-role="navbar">
+        <ul>
+            <li><a href="#tab-1" data-ajax="false">Info</a></li>
+            <li><a href="#tab-2" data-ajax="false">Click & Prezzo</a></li>
+            <li><a href="#tab-3" data-ajax="false">Trattative</a></li>
+            <li><a href="#tab-4" data-ajax="false">Descrizione</a></li>
+            <li><a href="#tab-5" data-ajax="false">Photo</a></li>
+        </ul>
+    </div>
+    <div id="tab-1" class="ui-body-d ui-content">
+        @{Html.RenderPartial("TabInfoImmobile", Model.immobile);}
+    </div>
+    <div id="tab-2" class="ui-body-d ui-content">
+        <h3>Statistiche sui click </h3>
+        <p>In questa pagina puoi monitare il numero di volte che viene visualizzato il tuo annuncio.</p>
+        <p>Hai la possibilità di azzerare il contatore parziale.</p>
+
+        <ul data-role="listview" data-count-theme="c" data-inset="true">
+            <li data-icon="false"><a href="#">Contatore Totale <span class="ui-li-count">@Model.immobile.countClick</span></a></li>
+            <li data-icon="false"><a href="#">Contatore Parziale <span id="contatoreParziale" class="ui-li-count">@Model.immobile.countClickParziale</span></a></li>
+            <li data-icon="false"><a href="#">L&#39;ultimo click è stato eseguito il : <span class="ui-li-count">@Model.immobile.dateLastClick.ToShortDateString()</span></a></li>
+        </ul>
+
+        @using (Html.BeginForm("ResetContatore", "Immobiliare", FormMethod.Post, new { id = "MyFormResetContatore" }))
+        {
+            @Html.AntiForgeryToken()
+            <input type ="hidden" name ="annuncioId" value ="@Model.immobile.immobileId" />  
+            <input type="button" value="Reset del contatore parziale" data-inline="true" data-mini="true" onclick="javascript: MyAsyncReset();" />
+        }
+
+
+        <h3>Aggiorna il prezzo</h3>
+        <p>In questa sezione hai la possibilià di <b>aggiornare il prezzo</b> del tuo annuncio.</p>
+        <p>Questa modifica viene notificata solo gli utenti in trattativa, tramite un messaggio email.</p>
+        @using (Html.BeginForm("UpdatePrezzo", "Immobiliare", FormMethod.Post, new { id = "MyFormUpdatePrezzo" }))
+        {
+            @Html.AntiForgeryToken()
+            
+            <label>Prezzo attuale € @Model.immobile.prezzo.ToString("N2")</label>
+           
+            
+            <div data-role="fieldcontain">
+                <label for="nuovoPrezzo">Nuovo valore (nel seguente formato: 12345,00) €:</label>
+                <input type="number" id="nuovoPrezzo" name="nuovoPrezzo" pattern="[0-9]+([,\.][0-9]+)?"  required="required" step="0.01" min="0" value="@Model.immobile.prezzo.ToString("N2").Replace(".", "").Replace(",", ".")" />
+            </div>
+                
+            <input type ="hidden" name ="annuncioId" value ="@Model.immobile.immobileId" />
+            <input type="submit" value="Modifica il prezzo" data-inline="true" data-mini="true" onclick="return updatePrezzo();" />
+        }
+    </div>
+    <div id="tab-3" class="ui-body-d ui-content">
+        <h3>Trattative in corso con altri utenti</h3>
+    </div>
+    <div id="tab-4" class="ui-body-d ui-content">
+        <p>La modifica del testo del annuncio viene notificata a tutti gli utenti in trattativa, tramite un messaggio email.</p>
+
+
+        @if (Model.immobile.sourceId > 0)
+        {
+            <h4>La descrizione non è modificabile in quanto l'annuncio è importato da RevoAgent</h4>
+            <textarea readonly="readonly">@Model.immobile.nota</textarea>
+
+        }
+        else
+        {
+
+            using (Html.BeginForm("UpdateNota", "Immobiliare", FormMethod.Post, new { id = "MyFormUpdateNota" }))
+            {
+            @Html.AntiForgeryToken()
+            <textarea name="nota" id="nota">@Model.immobile.nota  </textarea>
+
+            <input type ="hidden" name ="annuncioId" value ="@Model.immobile.immobileId" />               
+            <input type="submit" value="Modifica la nota" data-inline="true" data-mini="true" onclick="return confirm('Tutti gli utenti in trattativa con questo annuncio verranno notificati della modifica tramite un messaggio email. Confermare la modifica?')" />
+            }
+        }
+    </div>
+    <div id="tab-5" class="ui-body-d ui-content">
+        <h3>Photo</h3>
+        @if (Model.immobile.sourceId > 0)
+        {
+            <h4>Le photo NON sono modificabili in quanto provengono da RevoAgent</h4>
+        }
+        else
+        {
+            
+            <p>Clicca sul bottone per aggiungere una nuova immagine: </p>
+            <p>
+                Le immagini con dimensione maggiore di @MyWebApplication.Controllers.ImmobiliareController.MaxWidthImage x @MyWebApplication.Controllers.ImmobiliareController.MaxHeightImage (WxH) verranno automaticamente ridimensionate.
+    <br />
+                Sono ammessi file con estenzione Gif, Jpeg e Png.
+            </p>
+
+   
+
+            <div id="MyGalleryEdit">
+                @{
+            MyWebApplication.Models.GalleryModel modelGallery = new MyWebApplication.Models.GalleryModel();
+            modelGallery.photos = Model.photos;
+            modelGallery.externalId = Model.immobile.immobileId;
+
+            Html.RenderPartial("~/Views/Shared/GalleryEdit.cshtml", modelGallery);
+                }
+            </div>
+        }
+    </div>
+</div>
+
+
+
+<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+<script type="text/javascript">
+    tinymce.init({
+        mode: "exact",
+        elements: "nota",
+        encoding: "xml"
+    });
+</script>
+
+
+
+<div data-role="controlgrup" data-type="horizontal" data-mini="true">
+    <a href="@Url.Action("MyAnnunci", "Immobiliare")" data-role="button" data-inline="true">Torna all'elenco</a>
+</div>
+
+
+
+<script type="text/javascript">
+
+    function MyAsyncReset() {
+
+        if (confirm("Confermare l'azzeramento del contatore parziale?")) {
+            //alert("MyAsyncReset");
+            var data = $('#MyFormResetContatore').serialize();
+
+            $.post('@Url.Action("ResetContatore", "Immobiliare")', data, function (risposta) {
+                //alert("Risposta: " + risposta.esito);
+                if (risposta.esito == "Success") {
+                   // alert("Risposta: " + risposta.esito);
+                    $("#contatoreParziale").text("0");
+                }
+            });
+        }
+    }
+
+
+    function updatePrezzo() {
+       // alert("updatePrezzo" + isNaN(parseFloat($("#nuovoPrezzo").val())));
+
+        if (isNaN(parseFloat($("#nuovoPrezzo").val()))) {
+            alert("Fomato non corretto. Es: 1234,00");
+            return false;
+        }
+
+        var num;
+        num = parseFloat($("#nuovoPrezzo").val()).toFixed(2);
+
+
+        var messaggio;
+        messaggio = "Nuovo importo: " + num.replace(".",",") + '\n\r';
+
+        if (!confirm( messaggio + 'Tutti gli utenti in trattativa con questo annuncio verranno notificati della modifica tramite un messaggio email. Confermare la modifica?')) {
+            return false;
+        }
+
+        $("#nuovoPrezzo").val(num);
+        
+        return true;
+    }
+</script>

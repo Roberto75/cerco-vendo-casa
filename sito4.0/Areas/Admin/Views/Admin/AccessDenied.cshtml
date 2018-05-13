@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "AccessDenied";
+    Layout = "~/Areas/Admin/Views/Shared/MasterPageAdminMobile.cshtml";
+}
+
+<h2>Access Denied</h2>
+
+<div style="float: right;">
+    <img src="@Url.Content("~/Content/Images/Shared/error1_48x48.gif")" />
+</div>
+
+<p>Attenzione non si posseggono le autorizzazioni necessarie per accedere alla risorsa richiesta.</p>
+
+
+
+@if (String.IsNullOrEmpty(System.Configuration.ConfigurationManager.AppSettings["mail.webmaster"]))
+{
+    <p>Contattare l'amministratore di sistema.</p>
+}
+else
+{
+    <p>
+        Contattare l'amministartore di sistema al sequente indirizzo:
+        <a href="mailto:@System.Configuration.ConfigurationManager.AppSettings["mail.webmaster"]">@System.Configuration.ConfigurationManager.AppSettings["mail.webmaster"]</a>
+    </p>
+}
+
+
+
+
+<div data-role="controlgrup" data-type="horizontal" data-mini="true">
+    <a href="javascript:history.back();" class="ui-btn-inline ui-btn ui-corner-all ui-mini">Indietro</a>
+    <a href="@Url.Action("Index", "Home")" class="ui-btn-inline ui-btn ui-corner-all ui-mini">Torna alla Home Page</a>
+</div>

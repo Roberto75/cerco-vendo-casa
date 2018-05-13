@@ -1,0 +1,86 @@
+﻿@{
+    Layout = "~/Views/Shared/MasterPageMobile.cshtml";
+    ViewBag.Keywords = "cerco casa, vendo casa, annunci immobiliari";
+}
+
+Tipo : @ViewData["Tipo"]
+Id : @ViewData["MyId"]
+
+
+
+@if (ViewData["Tipo"] == "Annuncio")
+{
+    <h1>Cancellazione annuncio</h1>
+
+    <p>Confermare la cancellazione per l'annuncio: <b><%=_titolo %> </b></p>
+
+    <p><%=_messaggioNumeroTrattative%> </p>
+
+
+
+}
+
+
+@if (ViewData["Tipo"] == "Trattativa")
+{
+    <h1>Cancellazione trattativa</h1>
+    <p>La cancellazione di una trattativa prevede l'invio di un'email di notifica al secondo utente della compravendita.</p>
+
+}
+<br />
+
+<p>Le seguenti informazioni NON verrano inviate all'utente ma rimarranno nel sistema per scopi statistici.</p>
+
+
+@using (Html.BeginForm("DeleteExecute", "Immobiliare", FormMethod.Post, new { id = "MyForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    
+
+    <p>
+        Specificare il motivo della cancellazione:  <select id="causale" name="causale" data-mini="true" data-inline="true">
+        <option value="">---</option>
+        <option value="@Annunci.AnnuncioManager.StatoAnnuncio.Oggetto_non_piu_disponibile.ToString()">Oggetto della compravendita non più disponibile</option>
+        <option value="@Annunci.AnnuncioManager.StatoAnnuncio.Concluso_con_successo.ToString()">Compravendita conclusa correttamente</option>
+        <option value="@Annunci.AnnuncioManager.StatoAnnuncio.Altro.ToString()">Altro - inserire eventuali note</option>
+    </select>
+    </p>
+
+    <br />
+    
+
+    <input type="hidden" name="MyId" value=" @ViewData["MyId"]" />
+    <input type="hidden" name="Tipo" value=" @ViewData["Tipo"]" />
+
+    
+    <h2>Note aggiuntive</h2>
+    <textarea name="nota"></textarea>
+       
+       
+    <div data-role="controlgrup" data-type="horizontal" data-mini="true">
+
+        <a href="@Url.Action("MyAnnunci", "Immobiliare")" data-role="button" data-inline="true">Torna all'elenco dei tuoi annunci</a>
+
+        @if (ViewData["Tipo"] == "Annuncio")
+        {
+            <a href="@Url.Action("MyAnnuncio", "Immobiliare", new { id = ViewData["MyId"] })" data-role="button" data-inline="true">Torna all'annuncio</a>
+        }
+
+
+        <input type="submit" value="Conferma" data-inline="true" />
+    </div>
+      
+       
+}
+
+
+
+
+
+<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: "textarea"
+    });
+</script>

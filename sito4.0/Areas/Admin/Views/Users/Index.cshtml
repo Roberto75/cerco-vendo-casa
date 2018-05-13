@@ -1,0 +1,84 @@
+﻿@model MyUsers.Models.SearchUsers
+@{
+    ViewBag.Title = "Admin: elenco utenti";
+    Layout = "~/Areas/Admin/Views/Shared/MasterPageAdminMobile.cshtml";
+
+    WebGrid wGrid = new WebGrid(null, rowsPerPage: Model.PageSize, defaultSort: "MY_LOGIN", canPage: false);
+    wGrid.Bind(Model.Utenti, rowCount: Model.TotalRows, autoSortAndPage: false);
+}
+
+
+<h2>Elenco utenti</h2>
+
+<a href="@Url.Action("Create", "Users")"  data-icon="plus"  data-inline="true" data-mini="true"  data-role="button"  >Crea un nuovo utente</a>
+
+
+
+@using (Html.BeginForm("Index", "Users", FormMethod.Post, new { id = "MyForm" }))
+{
+        
+    <div class="ui-field-contain">
+        <label for="filter_login">Login:</label>
+        <input type ="text" data-mini="true" data-clear-btn="true" id="filter_login" name="filter.login"  value ="@Model.filter.login"   />
+    </div>
+        
+    <div class="ui-field-contain">
+        <label for="filter_email">Email:</label>
+        <input type ="text" data-mini="true" data-clear-btn="true" id="filter_email" name="filter.email"  value ="@Model.filter.email"   />
+    </div>
+        
+    <div class="ui-field-contain">
+        <label for="filter_nome">Nome:</label>
+        <input type ="text" data-mini="true" data-clear-btn="true" id="filter_nome" name="filter.nome"  value ="@Model.filter.nome"   />
+    </div>
+        
+    <div class="ui-field-contain">
+        <label for="filter_cognome">Cognome:</label>
+        <input type ="text" data-mini="true" data-clear-btn="true" id="filter_cognome" name="filter.cognome"  value ="@Model.filter.cognome"   />
+    </div>
+        
+    <div data-role="controlgrup" data-type="horizontal" data-mini="true">
+        <input type="reset" data-inline="true" data-mini="true" value="Reset" />
+        <input type="submit" data-inline="true" data-mini="true" value="Seach" data-icon="search" />
+    </div>
+    
+
+
+    if (Model.TotalRows == 0)
+    {
+        <h3>Non è stato trovato nessun utente. Modificare i filtri di ricerca.</h3>
+    }
+    else
+    {
+        <div style="margin-top: 20px;">
+            @wGrid.GetHtml(
+            fillEmptyRows: false,
+            tableStyle: "MyTable ui-responsive",
+            headerStyle: "ui-bar-b",
+            footerStyle: "ui-bar-b",
+            rowStyle: "ui-bar-a",
+            alternatingRowStyle: "ui-bar-c",
+            htmlAttributes: new { data_role = "table", id = "MyWebGrid", data_mode = "reflow" },
+            columns: new[]{
+                wGrid.Column ("Login","", format:(item) =>  Html.ActionLink ( (string) (string.IsNullOrEmpty (item.login)?"N/A":item.login.ToString()), "Details",    new {id=item.userId} ), canSort:true),
+                wGrid.Column ("Nome","", canSort  : true),
+                wGrid.Column ("Cognome","", canSort  : true), 
+                wGrid.Column ("Email",  format: @<a href="mailto:@item.Email">@item.Email</a>),
+                wGrid.Column ("DateAdded","Data inserimento", canSort  : true), 
+                wGrid.Column ("DateLastLogin","Data ultimo accesso", format: p => (p.dateLastLogin == DateTime.MinValue )?" ":p.dateLastLogin  , canSort  : true ), 
+                wGrid.Column ("", header :"Actions", 
+                format:@<text>
+            <a class="ui-btn-inline ui-btn ui-icon-info ui-btn-icon-notext ui-corner-all" title="Detail"  href="@Url.Action("Details", "Users", new { id = item.userId })">Info</a>
+            <a class="ui-btn-inline ui-btn ui-icon-edit ui-btn-icon-notext ui-corner-all" title="Edit"  href="@Url.Action("Edit", "Users", new { id = item.userId })">Edit</a>
+            <a class="ui-btn-inline ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all" title="Delete"  href="@Url.Action("Delete", "Users", new { id = item.userId })">Delete</a>
+            </text>, canSort : false)
+            })
+
+            @{Html.RenderPartial("Paging", Model);}
+        </div>
+    }
+
+        
+}
+
+

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<whatsnew>
+  <!-- 
+  type => bug
+  type => changes
+ -->
+
+  
+  
+  <release number="4.0.0.0" data="13/05/2018">
+    <item data="13/05/2018"     owner="Rutigliano"  type="bug" >
+      Passaggio a Bosstrap 4.1.0
+    </item>
+  </release>
+  
+  <release number="3.0.0.4" data="8/04/2018">
+    <item data="8/04/2018"     owner="Rutigliano"  type="bug" >
+      la pagina di dettaglio di un immobile AllowAnonymous
+    </item>
+  </release>
+  
+  <release number="3.0.0.3" data="18/02/2018">
+    <item data="18/02/2018"     owner="Rutigliano"  type="bug" >
+      Passaggio a https
+    </item>
+  </release>
+
+  <release number="3.0.0.2" data="25/09/2016">
+    <item data="25/09/2016"     owner="Rutigliano"  type="bug" >
+      Reset password AllowAnonymous
+    </item>
+  </release>
+
+
+  <release number="3.0.0.1" data="28/04/2016">
+    <item data="28/04/2016"     owner="Rutigliano"  type="changes" >
+      Update al Framework 4.5
+    </item>
+  </release>
+
+  <release number="2.0.3.7" data="21/03/2014">
+    <item data="21/03/2014"     owner="Rutigliano"  type="changes" >
+      attivato il annuncioAddClick
+    </item>
+    <item data="21/03/2014"     owner="Rutigliano"  type="bug" >
+      bug su updatePrezzo di un annuncio
+    </item>
+  </release>
+
+  <release number="2.0.3.6" data="14/02/2014">
+    <item data="14/02/2014"     owner="Rutigliano"  type="changes" >
+      bug sulla nota (HTML decode)
+    </item>
+  </release>
+
+  <release number="2.0.3.5" data="02/02/2014">
+    <item data="02/02/2014"     owner="Rutigliano"  type="changes" >
+      Area Admin
+    </item>
+  </release>
+
+  <release number="2.0.3.4" data="16/01/2014">
+    <item data="13/01/2014"     owner="Rutigliano"  type="bug" >
+      time out del Task di import di RevoAgent
+    </item>
+    <item data="13/01/2014"     owner="Rutigliano"  type="bug" >
+      scripts google analitics
+    </item>
+    <item data="13/01/2014"     owner="Rutigliano"  type="bug" >
+      filtri di ricerca per prezzoMan e mqMin
+    </item>
+    <item data="16/01/2014"     owner="Rutigliano"  type="bug" >
+      form di login "Resta connesso"
+    </item>
+  </release>
+
+  <release number="2.0.3.3" data="12/01/2014">
+    <item data="09/01/2014"     owner="Rutigliano"  type="changes" >
+      bug sulla nota (HTML decode)
+    </item>
+    <item data="09/01/2014"     owner="Rutigliano"  type="changes" >
+      upgrade jquery mobile 1.4.0
+    </item>
+  </release>
+
+  <release number="2.0.3.2" data="03/01/2014">
+    <item data="03/01/2014"     owner="Rutigliano"  type="changes" >
+      icona sulla mappa di goolge
+    </item>
+    <item data="03/01/2014"     owner="Rutigliano"  type="changes" >
+      immagni con lightbox
+    </item>
+  </release>
+
+  <release number="2.0.3.1" data="03/01/2014">
+    <item data="03/01/2014"     owner="Rutigliano"  type="changes" >
+      aggiornamento con C# e jquerymobile
+    </item>
+    <item data="03/01/2014"     owner="Rutigliano"  type="changes" >
+      rename tabella utenti in utente (utenti.mdb)
+    </item>
+    <item data="03/01/2014"     owner="Rutigliano"  type="changes" >
+      add colonna  date_of_birth nella  tabella utente (utenti.mdb)
+    </item>
+  </release>
+
+</whatsnew>

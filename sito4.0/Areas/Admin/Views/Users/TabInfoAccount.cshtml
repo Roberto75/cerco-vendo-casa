@@ -1,0 +1,66 @@
+﻿@model MyUsers.Models.MyUser
+
+
+<div class="ui-grid-a">
+    <div class="ui-block-a">
+        <div class="@MyConstantsAdmin.UI_BLOCK_HEADER">Login:</div>
+        <div class="@MyConstantsAdmin.UI_BLOCK_HEADER">Nome:</div>
+        <div class="@MyConstantsAdmin.UI_BLOCK_HEADER">Cognome:</div>
+        <div class="@MyConstantsAdmin.UI_BLOCK_HEADER">Email:</div>
+        <div class="@MyConstantsAdmin.UI_BLOCK_HEADER">Cliente:</div>
+        <div class="@MyConstantsAdmin.UI_BLOCK_HEADER">Profilo:</div>
+        <div class="@MyConstantsAdmin.UI_BLOCK_HEADER">Attivo:</div>
+    </div>
+    <div class="ui-block-b">
+        <div class="@MyConstantsAdmin.UI_BLOCK_BODY">@MyHelper.decodeNull(Model.login)</div>
+        <div class="@MyConstantsAdmin.UI_BLOCK_BODY">@MyHelper.decodeNull(Model.nome)</div>
+        <div class="@MyConstantsAdmin.UI_BLOCK_BODY">@MyHelper.decodeNull(Model.cognome)</div>
+        <div class="@MyConstantsAdmin.UI_BLOCK_BODY">
+            @if (String.IsNullOrEmpty(Model.email))
+            {
+                @:N/A
+            }
+            else
+            {
+                <a data-role="none" href="mailto:@Model.email">@Model.email</a>
+            }
+        </div>
+        <div class="@MyConstantsAdmin.UI_BLOCK_BODY">@((Model.Customer == null || String.IsNullOrEmpty(Model.Customer.ragioneSociale)) ? "N/A" : Model.Customer.ragioneSociale)</div>
+
+        <div class="@MyConstantsAdmin.UI_BLOCK_BODY">
+            @{
+                string temp;
+
+                if (Model.Profili == null || Model.Profili.Count == 0)
+                {
+                    temp = "N/A";
+                }
+                else
+                {
+                    temp = "";
+                    foreach (MyUsers.Models.MyProfile p in Model.Profili)
+                    {
+                        temp += p.nome;
+                    }
+                }
+            }
+            @temp
+        </div>
+        <div class="@MyConstantsAdmin.UI_BLOCK_BODY">@Model.isEnabled.ToString()</div>
+    </div>
+</div>
+
+
+@if (Model.SID != null)
+{
+    <br />
+    <div class="ui-grid-a">
+        <div class="ui-block-a">
+            <div class="@MyConstantsAdmin.UI_BLOCK_HEADER">SID:</div>
+        </div>
+        <div class="ui-block-b">
+            <div class="@MyConstantsAdmin.UI_BLOCK_BODY"><a href="@Url.Action("SID", "Users", new { sid = Model.SID.ToString() })" data-role="none">@(Model.SID.ToString())</a></div>
+        </div>
+    </div>
+}
+

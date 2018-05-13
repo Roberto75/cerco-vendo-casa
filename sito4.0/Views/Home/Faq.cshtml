@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Cerco Vendo Casa: F.A.Q.";
+    Layout = "~/Views/Shared/MasterPageMobile.cshtml";
+}
+
+<h2>F.A.Q.</h2>
+
+@{
+    System.IO.MemoryStream risultatoMemoryStream;
+    risultatoMemoryStream = new MemoryStream();
+
+    System.Xml.Xsl.XslCompiledTransform xslt;
+    xslt = new System.Xml.Xsl.XslCompiledTransform();
+
+    xslt.Load(Server.MapPath("~/Content/xsl/faq_categorie.xsl"));
+
+    System.Xml.Xsl.XsltArgumentList args = null;
+    //new System.Xml.Xsl.XsltArgumentList();
+    //args.AddParam("urlCorrente", "", paginaRichiesta);
+    //args.AddParam("roles", "", "");
+    //args.AddParam("contesto", "", contesto);
+    //args.AddParam("controller", "", controller);
+    //args.AddParam("action", "", action);
+
+    xslt.Transform(Server.MapPath("~/Content/xml/faq.xml"), args, risultatoMemoryStream);
+    risultatoMemoryStream.Flush();
+
+
+    string risultato;
+
+    System.Text.Encoding encoding = System.Text.Encoding.UTF8;
+    risultato = encoding.GetString(risultatoMemoryStream.ToArray());
+
+
+    HtmlString risultatoHTML = new HtmlString(risultato);
+                     
+}
+
+
+ @risultatoHTML

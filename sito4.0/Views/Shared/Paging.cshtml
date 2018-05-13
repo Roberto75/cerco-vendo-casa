@@ -1,0 +1,152 @@
+﻿<div class="ui-bar-c" style="min-height:3em;" >
+
+    
+    <span style="margin-left: 10px; margin-top:15px; display: inline-block;">
+    Record @(((Model.PageNumber - 1) * Model.PageSize) + 1) to    
+        
+    @{
+        int temp = (((Model.PageNumber - 1) * Model.PageSize) + Model.PageSize);
+
+        if (temp > Model.TotalRows)
+        {
+            temp = Model.TotalRows;
+        }
+            
+    }
+    @temp.ToString("N0")  of @Model.TotalRows.ToString("N0")
+
+        </span>
+
+    <span style="margin-left: 20px">
+        @if (Model.HasPreviousPage)
+        {
+            <a data-role="button" data-theme="a"  data-inline="true" data-mini="true" href ="javascript:paging(1, '@Model.Sort', '@Model.SortDir')"><< </a>
+            @Html.Raw(" ");
+            <a data-role="button"  data-theme="a" data-inline="true" data-mini="true" href ="javascript:paging(@Model.PageNumber -1 , '@Model.Sort', '@Model.SortDir')">< Prev </a>
+        }
+        else
+        {
+            @:<<
+            @Html.Raw(" ");
+            @:< Prev
+        }
+    </span>
+
+    <span style="margin-left: 20px">
+        @Html.Raw("Page " + Model.PageNumber.ToString("N0") + " of " + Model.TotalPages.ToString("N0"))
+    </span>
+
+
+
+    <span style="margin-left: 20px">
+        @if (Model.HasNextPage)
+        {
+            <a data-role="button" data-theme="a" data-inline="true" data-mini="true" href ="javascript:paging(@(Model.PageNumber + 1), '@Model.Sort', '@Model.SortDir')">Next > </a>
+            @Html.Raw(" ");
+            <a data-role="button"  data-theme="a" data-inline="true" data-mini="true" href ="javascript:paging(@(Model.TotalPages), '@Model.Sort', '@Model.SortDir')">>> </a>
+        }
+        else
+        {
+            @:Next >
+            @Html.Raw(" ")
+            @:>>
+        }
+    </span>
+
+    <span style="float: right; text-align: right; display: inline-block; white-space: nowrap; margin-top:10px; margin-right:10px;">Page size:
+        <select data-inline="true" data-mini="true" data-role="none" id="PageSize" name="PageSize" onchange="paging(1, '@Model.Sort', '@Model.SortDir')">
+            <option value="5"  @(Model.PageSize == 5 ? "selected=\"selected\"" : "") >5</option>
+            <option value="10" @(Model.PageSize == 10 ? "selected=\"selected\"" : "") >10</option>
+            <option value="20" @(Model.PageSize == 20 ? "selected=\"selected\"" : "") >20</option>
+            <option value="50" @(Model.PageSize == 50 ? "selected=\"selected\"" : "") >50</option>
+        </select>
+    </span>
+</div>
+
+
+
+<script type="text/javascript">
+
+    $(document).on("pagebeforecreate", function () {
+        //alert("pagebeforecreate");
+
+        //rutigliano 02/04/2014 per la visualizzazione delle tabelle al 100%
+        $("#MyWebGrid").css("display", "table");
+
+
+        var links = $('#MyWebGrid thead a[href*=sort]');
+        //alert(links.length);
+
+        links.click(function () {
+            //alert("Click:  " + this.href );
+            var pageNumber = $("input[name='PageNumber']").val();
+            //alert("PageNumber : " + pageNumber);
+
+            var sort = this.href.match('sort=([a-zA-Z]*)')[1];
+            //alert("Sort: " + sort );
+
+            var sortDir = this.href.match('sortdir=([a-zA-Z]*)')[1];
+            //alert("SortDir: " + sortDir);
+
+            paging(pageNumber, sort, sortDir);
+
+            return false;
+        });
+
+
+    });
+
+
+
+    function paging(page, sort, sortDir) {
+        //alert("Paging Sort: " + sort + " " + sortDir);
+        //alert("Paging Page Numeber: " + page);
+
+        var pageSize;
+        pageSize = $("select[name='PageSize']").val();
+        //alert("PageSize: " +  pageSize);
+
+        if ($("input[name='PageNumber']").length == 0) {
+            $('<input />').attr('type', 'hidden')
+                         .attr('name', 'PageNumber')
+                         .attr('value', page)
+                         .appendTo('#MyForm');
+        } else {
+            $("input[name='PageNumber']").val(page);
+        }
+
+
+        if ($("input[name='Sort']").length == 0) {
+            $('<input />').attr('type', 'hidden')
+                         .attr('name', 'Sort')
+                         .attr('value', sort)
+                         .appendTo('#MyForm');
+        } else {
+            $("input[name='Sort']").val(sort);
+        }
+
+
+        if ($("input[name='SortDir']").length == 0) {
+            $('<input />').attr('type', 'hidden')
+                         .attr('name', 'SortDir')
+                         .attr('value', sortDir)
+                         .appendTo('#MyForm');
+        } else {
+            $("input[name='SortDir']").val(sortDir);
+        }
+
+
+        if ($("input[name='PageSize']").length == 0) {
+            $('<input />').attr('type', 'hidden')
+                         .attr('name', 'PageSize')
+                         .attr('value', pageSize)
+                         .appendTo('#MyForm');
+        } else {
+            $("input[name='PageSize']").val(pageSize);
+        }
+
+        $("#MyForm").submit();
+    }
+
+</script>
+

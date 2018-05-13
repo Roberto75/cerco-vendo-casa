@@ -1,0 +1,77 @@
+﻿@model List<Annunci.Models.Trattativa>
+@{
+    ViewBag.Title = "Le mie trattative";
+    Layout = "~/Views/Shared/MasterPageMobile.cshtml";
+}
+
+<h2>Le mie trattative</h2>
+
+<p>
+    Elenco delle <b>trattative in corso con altri utenti</b>.
+    <br />
+    In questa sezione sono elencate le richieste di compravendita che hai eseguito verso altri utenti.
+</p>
+
+<p>Se invece desideri vedere le <b>risposte ai tuoi annunci</b>, clicca <a  href="@Url.Action("MyAnnunci", "Immobiliare")"  >qui</a>.</p>
+
+
+
+@if (Model.Count == 0)
+{
+    <h2>Non ci sono trattative aperte con altri utenti.</h2>
+}
+else
+{
+ 
+    <table data-role="table" id="MyTable" data-mode="reflow" class="ui-responsive table-stroke">
+        <thead>
+            <tr>
+                <th></th>
+                <th data-priority="1">Stato</th>
+                <th data-priority="persist">Categoria</th>
+                <th data-priority="2">Data inserimento</th>
+                <th data-priority="3">Tipo</th>
+                <th data-priority="4">Utente</th>
+                <th data-priority="5">Prezzo</th>
+                <th data-priority="6">Info</th>
+                <th data-priority="7">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+            @foreach (Annunci.Models.Trattativa t in Model)
+            {
+
+                <tr>
+                    <th>@if (t.stato == Annunci.Models.Trattativa.StatoTrattativa.Attiva)
+                        {
+                        <img src="@Url.Content("~/Content/Images/Shared/green2_16x16.png")" alt="@t.stato.ToString()" />
+                        }
+                        else
+                        {
+                        <img src="@Url.Content("~/Content/Images/Shared/red2_16x16.png")" alt="@t.stato.ToString()" />
+                        }
+
+
+
+
+
+                    </th>
+                    <th>@t.stato</th>
+                    <td>@t.categoriaImmobile </td>
+                    <td>@t.dateAdded.ToShortDateString()</td>
+                    <td>@t.tipoImmobile</td>
+                    <td>@t.login</td>
+                    <td>@t.prezzo.ToString("C")</td>
+                    <td><a href="/Immobiliare/Trattativa/@t.trattativaId" data-role="button"  data-iconpos="notext" data-inline="true" data-theme="b" data-icon="info">Info</a></td>
+                    <td><a href="#" data-role="button" data-iconpos="notext" data-inline="true" data-theme="b" data-icon="delete">Delete</a></td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+}
+
+

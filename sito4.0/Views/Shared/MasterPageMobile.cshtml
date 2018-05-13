@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta name="Description" content="@ViewBag.Description" />
+    <meta name="Keywords" content="@ViewBag.Keywords" />
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="Content-Type" content="text/html" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Pragma" content="no-cache" />
+
+    <meta http-equiv="Content-Language" content="it" />
+    <meta name="language" content="italian" />
+
+    <meta content="index,follow" name="robots" />
+
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <script defer src="//use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+
+
+
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-18792002-2']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+</head>
+
+<body role="document">
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="@Url.Action("Index", "Home")"><img src="@Url.Content("~/Content/Images/logo_cerco-vendo-casa.gif")" /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "Immobiliare")">Ricerca</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("MyAnnunci", "Immobiliare")">I miei annunci</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("MyTrattative", "Immobiliare")">Le mie trattative</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Donazione", "Home")">Donazione</a>
+                </li>
+
+                @{if (Request.IsLocal)
+                    {
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "TestMaterial")">Test Material</a></li>
+                    }
+                }
+
+                @Html.Partial("LoginPartialMobile")
+
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <!-- Header -->
+
+
+    <div class="container theme-showcase" role="main">
+        @RenderBody()
+    </div>
+    <!-- /main -->
+
+
+
+    <div data-role="footer">
+        <div lass="navbar navbar-light bg-light mt-3">
+
+
+            @{
+                string controller = ViewContext.RouteData.GetRequiredString("controller");
+                string action = ViewContext.RouteData.GetRequiredString("action");
+
+                String paginaRichiesta = Request.AppRelativeCurrentExecutionFilePath;
+
+                if (paginaRichiesta == "~/")
+                {
+                    paginaRichiesta = "~/Home";
+                }
+
+
+                String contesto = Request.ApplicationPath;
+                if (contesto == "/")
+                {
+                    contesto = "";
+                }
+
+
+                System.IO.MemoryStream risultatoMemoryStream;
+                risultatoMemoryStream = new MemoryStream();
+
+                System.Xml.Xsl.XslCompiledTransform xslt;
+                xslt = new System.Xml.Xsl.XslCompiledTransform();
+                //System.Xml.XmlReader reader = System.Xml.XmlReader.Create(System.IO.File.ReadAllText(Server.MapPath("~/Content/xsl/menuTop.xsl")));
+                //xslt.Load(reader);
+
+                xslt.Load(Server.MapPath("~/Content/xsl/menuLeftMySiteMap.xsl"));
+
+                System.Xml.Xsl.XsltArgumentList args = new System.Xml.Xsl.XsltArgumentList();
+                args.AddParam("urlCorrente", "", paginaRichiesta);
+                args.AddParam("roles", "", "");
+                args.AddParam("contesto", "", contesto);
+                args.AddParam("controller", "", controller);
+                args.AddParam("action", "", action);
+
+                xslt.Transform(Server.MapPath("~/Content/xml/MySiteMap.xml"), args, risultatoMemoryStream);
+                risultatoMemoryStream.Flush();
+
+
+                string risultato;
+
+                System.Text.Encoding encoding = System.Text.Encoding.UTF8;
+                risultato = encoding.GetString(risultatoMemoryStream.ToArray());
+
+                if (risultato == "<ul />")
+                {
+                    risultato = "";
+                }
+
+                HtmlString risultatoHTML = new HtmlString(risultato);
+            }
+
+            @risultatoHTML
+
+        </div>
+    </div>
+    <!-- /footer -->
+    </div>
+    <!-- /page -->
+</body>
+</html>

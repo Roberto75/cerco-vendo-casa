@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+
+  <categoria nome="Ricerca e Gestione Annunci">
+    <faq>
+      <domanda>Come faccio ad inserire un annuncio?</domanda>
+      <risposta>Devi prima completare la procedura di registrazione e successivamente accedere alla pagina di inserimento annuncio dal menu' immobiliare</risposta>
+    </faq>
+
+    <faq >
+      <domanda>Sto cercando un immobile come faccio a vedere se e' in vendita qualcosa di mio interesse?</domanda>
+      <risposta>Accedendo alla pagina di ricerca annuncio dal menu' immobiliare si possono cercare gli annunci di vendita, affitto, scambio impostando vari criteri di ricerca (località, CAP, tipologia, etc) e ordinandoli per data, tipologia e prezzo</risposta>
+    </faq>
+    <faq>
+      <domanda>Ho trovato un immobile di mio interesse e voglio contattare il venditore. Come faccio?</domanda>
+      <risposta>
+        Andando sul dettaglio dell'annuncio puoi cliccare sul bottone rispondi ed avviare una trattativa col venditore. Appena il venditore avra'  risposto alla tua richiesta riceverai un avviso all'indirizzo di posta che hai indicato in fase di registrazione. A quel punto effettuando il login e andando attraverso il menu' di sinistra a "Le mie trattative" potrai selezionare la trattativa di tuo interesse e leggere la risposta del venditore.
+      </risposta>
+    </faq>
+    <faq>
+      <domanda>Ho inserito un annuncio ma voglio modificarne/aggiornarne il contenuto. Come faccio?</domanda>
+      <risposta>
+        Dal menu', una volta effettuato il login, puoi andare a "I miei annunci" e gestire tutti i tuoi annunci apportando i cambiamenti di cui necessiti
+      </risposta>
+    </faq>
+    <faq>
+      <domanda>Ho inserito un annuncio. Come faccio a vedere se qualcuno mi ha risposto?</domanda>
+      <risposta>
+        Se qualcuno ha risposto alla tuo annuncio riceverai un avviso all'indirizzo di posta che hai indicato in fase di registrazione. A quel punto effettuando il login e andando attraverso il menu' di sinistra a "Le mie trattative" potrai selezionare la trattativa di tuo interesse e leggere la risposta.
+      </risposta>
+    </faq>
+  </categoria>
+
+  <categoria nome="Richieste e suggerimenti">
+    <faq>
+      <domanda>Ho un suggerimento da inviare agli sviluppatori di cerco-vendo-casa.it</domanda>
+      <risposta>
+	Per sottoporre i tuoi suggerimenti al sito cerco-vendo-casa.it puoi utilizzare gli indirizzi di posta presenti nella pagina contatti o più semplicemente scrivere un post sul forum Supporto.
+      </risposta>
+    </faq>
+    <faq>
+      <domanda>Mi piacerebbe che il sito cerco-vendo-casa.it inserisse una nuova funzionalità che ritengo particolarmente utile. Come faccio a comunicarla?</domanda>
+      <risposta>
+	Per sottoporre le richieste di nuove funzionalità contatta gli sviluppatori utilizzando gli indirizzi di posta presenti nella pagina contatti o più semplicemente scrivi un post sul forum Supporto.
+Il personale di cerco-vendo-casa.it valuterà la proposta e nel caso la inserirà nella roadmap dei prossimi sviluppi. La nuova implementazione verrà portata a compimento gratuitamente. Se vuoi sostenere gli sviluppatori per la loro disponibilità puoi comunque effettuare una donazione libera a funzionalità implementata.
+      </risposta>
+    </faq>
+  </categoria>
+
+
+  <categoria nome="Costi">
+    <faq>
+      <domanda>Gli annunci sono gratis, o una volta che si conclude una trattativa, bisogna versare qualcosa a qualcuno?</domanda>
+      <risposta>Non ci sono spese di alcun tipo per poter inserire un annuncio. Tanto meno al termine della trattativa occorre versare delle percentuali o altro.</risposta>
+    </faq>
+    <faq>
+      <domanda>Voglio sostenere il sito di Cerco-Vendo-Casa.it e aiutare gli sviluppatori ad implementare nuove funzionalità</domanda>
+      <risposta>Se ritieni che cerco-vendo-casa.it sia utile e se vuoi sostenere chi lo mantiene on line puoi farlo attraverso una donazione a tuo piacimento.
+      Gli emonumenti ricevuti verranno utilizzare per consentire agli sviluppatori di pagare le spese di gestione del sito e per migliorarlo secondo i tuoi suggerimenti</risposta>
+    </faq>
+  </categoria>
+
+
+
+
+  <categoria nome="Privati">
+    <faq>
+      <domanda>Sono un privato e non voglio essere contattato dalle agenzie</domanda>
+      <risposta>
+        Solo gli utenti registrati possono rispondere ai tuoi annunci. Se l'utente registrato è un'agenzia basterà eliminare la trattativa dal dettaglio del tuo annuncio alla sezione trattative in corso. Per evitare di essere contattato in modo improprio Cerco-Vendo-Casa.it ti invita a non indicare i tuoi recapiti nella descrizione del tuo annuncio. In questo modo chi vorrà contattarti non potrà farlo se non attraverso Cerco-Vendo-Casa.it.
+      </risposta>
+    </faq>
+  </categoria>
+
+
+
+
+  <categoria nome="Agenzia immobiliare">
+    <!--<faq >
+      <domanda>Sono un'agenzia e voglio inserire un mio banner per pubblicizzare le mie attività su cerco-vendo-casa.it ed in questo modo raggiungere i migliaia di clienti che ogni giorno visitano il sito.</domanda>
+      <risposta>
+       Cerco-Vendo-Casa.it prevede per le Agenzie un servizio di scambio banner. Se non vuoi passare attraverso lo scambio puoi comunque ottenere l'inserimento su cerco-vendocasa.it con le modalità che ti verranno comunicate via e-mail dai nostri operatori.
+      </risposta>
+    </faq>-->
+    <faq >
+      <domanda>Esiste una limitazione sul numero di annunci della mia agenzia?</domanda>
+      <risposta>
+        Gli inserimenti sul sito di Cerco-Vendo-Casa.it non hanno limitazioni numeriche per le agenzie immobiliari.
+      </risposta>
+    </faq>
+    
+    <!--<faq >
+      <domanda>Sono un'agenzia e vorrei avere un sito ma non so come gestirlo</domanda>
+      <risposta>
+        Cerco-Vendo-Casa.it mette a tua disposizione un sottodominio standard studiato espressamente per le 	esigenze delle Agenzie del settore al prezzo delle sole spese di gestione annuali garantendoti un risparmio sui 	costi di sviluppo e manutenzione che normalmente si affrontano acquistando un sito web.
+      </risposta>
+    </faq>
+    <faq >
+      <domanda>Quanto costa dare in gestione il sito della mia Agenzia a Cerco-Vendo-Casa.it</domanda>
+      <risposta>
+        Cerco-Vendo-Casa.it ti da' la possibilità di ospitare un tuo sito all'interno del suo dominio al costo delle sole spese di gestione annuali garantendoti una visibilità dedicata a costi molto inferiori di quelli di gestione di un sito tradizionale.
+      </risposta>
+    </faq>-->
+    <faq >
+      <domanda>Come posso inserire il logo della mia agenzia in modo che appaia sul sito?</domanda>
+      <risposta>
+        Una volta effettuata la registrazione basta modificare il proprio profilo assegnando un'immagine di dimensioni 80x80 che verrà associata ad ogni annuncio inserito.
+      </risposta>
+    </faq>
+  </categoria>
+</root>

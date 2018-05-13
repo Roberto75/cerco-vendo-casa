@@ -1,0 +1,25 @@
+﻿@model MyWebApplication.Areas.Admin.Models.MyGroupModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/MasterPageAdminMobile.cshtml";
+}
+
+<h2>Nuovo gruppo</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    
+    <div data-role="fieldcontain">
+        <label for="nome">Nome*:</label>
+        <input type="text" data-clear-btn="true" name="gruppo.nome" id="nome" data-mini="true" data-inline="true"  required="required"  value="@Model.Gruppo.nome" />
+    </div>
+    
+    <div data-role="controlgrup" data-type="horizontal" data-mini="true">
+        <a href="@Url.Action("Index", "Groups")"    data-inline="true" data-mini="true"   data-role="button"  >Annulla</a>
+        <input type="submit" value="Crea" data-inline="true" data-mini="true" />
+    </div>
+    
+}
+

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ROOT>
+  <MENU>
+    <TITLE></TITLE>
+    <SUBMENU>
+      <value>Home</value>
+      <href>default.aspx</href>
+      <tip>Home</tip>
+      <target/>
+      <roles>
+        <role>*</role>
+      </roles>
+    </SUBMENU>
+  </MENU>
+</ROOT>
+
+
+<!--
+	<MENU>
+		<value>Inserisci annuncio</value>
+		<href>default.aspx?CON=libri/inserisciAnnuncio.ascx</href>
+		<tip>Inserisci un nuovo annuncio</tip>
+		<target/>
+	</MENU>
+	
+	<MENU>
+		<value>Guarda la bacheca</value>
+		<href>default.aspx?CON=libri/guardaBacheca.ascx</href>
+		<tip>Guarda la bacheca</tip>
+		<target/>
+	</MENU>
+	
+	<MENU>
+		<value>Ricerca</value>
+		<href>default.aspx?CON=libri/ricerca.ascx</href>
+		<tip>Ricerca un annuncio</tip>
+		<target/>
+	</MENU>
+	
+	<MENU>
+		<value>Elimina annuncio</value>
+		<href>default.aspx?CON=libri/cancellaAnnuncio.ascx</href>
+		<tip>Elimina un annuncio</tip>
+		<target/>
+	</MENU>
+	
+	<MENU>
+		<value>Chi siamo</value>
+		<href>default.aspx?CON=chiSiamo.ascx</href>
+		<tip>Chi siamo</tip>
+		<target/>
+	</MENU>
+	<MENU>
+		<value>Album Photo</value>
+		<href>default.aspx?CON=album/album.ascx</href>
+		<tip>Album Photo</tip>
+		<target/>
+	</MENU>
+-->
+

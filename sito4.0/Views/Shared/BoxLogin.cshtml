@@ -1,0 +1,26 @@
+﻿@model MyWebApplication.Models.LogOnModel
+
+@Html.ValidationSummary(true, "Attenzione")
+
+
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+{
+    @Html.AntiForgeryToken() 
+    
+    <div style="max-width: 500px;">
+        <div>
+            <label for="UserName">Login:</label>
+            <input type="text" name="UserName" id="UserName"  data-clear-btn="true" data-mini="false" required  value="@Model.UserName" >
+        </div>
+        <div >
+            <label for="Password">Password:</label>
+            <input type="password" name="Password" id="Password" data-clear-btn="true" data-mini="false" required value="">
+        </div>
+
+        <div data-role="controlgrup" data-type="horizontal" data-mini="true">
+            <input type="submit" data-inline="true" value="Login" />
+        </div>
+    </div>
+    
+    <input type ="hidden" name ="returnUrl" value ="@ViewBag.ReturnUrl" />
+}

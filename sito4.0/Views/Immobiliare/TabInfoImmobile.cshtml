@@ -1,0 +1,120 @@
+﻿@model Annunci.Models.Immobile
+
+
+
+<div class="ui-grid-c">
+    <div class="ui-block-a">
+        <div class="ui-bar ui-bar-d">Data inserimento</div>
+        <div class="ui-bar ui-bar-d">Tipo</div>
+        <div class="ui-bar ui-bar-d">Mq</div>
+        <div class="ui-bar ui-bar-d">Prezzo</div>
+    </div>
+    <div class="ui-block-b">
+        <div class="ui-bar ui-bar-b">@Model.dataInserimento.ToShortDateString()</div>
+        <div class="ui-bar ui-bar-b">@Html.DisplayFor(model => model.immobile)</div>
+        <div class="ui-bar ui-bar-b">@Model.MQ.ToString("N")</div>
+        <div class="ui-bar ui-bar-b">@Model.prezzo.ToString("C")</div>
+    </div>
+    <div class="ui-block-c">
+        <div class="ui-bar ui-bar-d">Utente</div>
+        <div class="ui-bar ui-bar-d">Categoria</div>
+        <div class="ui-bar ui-bar-d">Classe energetica</div>
+    </div>
+    <div class="ui-block-d">
+        <div class="ui-bar ui-bar-b">@Html.DisplayFor(model => model.login)</div>
+        <div class="ui-bar ui-bar-b">@Html.DisplayFor(model => model.categoria)</div>
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeEnum(Model.classeEnergetica.ToString())</div>
+    </div>
+</div>
+
+<br />
+
+<div class="ui-grid-c">
+    <div class="ui-block-a">
+        <div class="ui-bar ui-bar-d">Stato</div>
+        <div class="ui-bar ui-bar-d">Piano</div>
+        <div class="ui-bar ui-bar-d">Ascensore</div>
+        <div class="ui-bar ui-bar-d">Portiere</div>
+    </div>
+    <div class="ui-block-b">
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeEnum(Model.statoImmobile.ToString())</div>
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeNull(Model.piano)</div>
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeSiNo(Model.ascensore)</div>
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeSiNo(Model.portiere)</div>
+    </div>
+    <div class="ui-block-c">
+        <div class="ui-bar ui-bar-d">Occupazione</div>
+        <div class="ui-bar ui-bar-d">Totale piani edificio</div>
+        <div class="ui-bar ui-bar-d">Anno costruzione</div>
+        <div class="ui-bar ui-bar-d">Spese condominiali</div>
+    </div>
+    <div class="ui-block-d">
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeEnum(Model.occupazione.ToString())</div>
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeNull(Model.pianiTotali)</div>
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeNull(Model.anno)</div>
+        <div class="ui-bar ui-bar-b">@((Model.speseCondominiali == null)?"N/A":Model.speseCondominiali.ToString())</div>
+    </div>
+</div>
+
+<br />
+
+<div class="ui-grid-c">
+    <div class="ui-block-a">
+        <div class="ui-bar ui-bar-d">Cucina</div>
+        <div class="ui-bar ui-bar-d">Camere da letto</div>
+        <div class="ui-bar ui-bar-d">Bagni</div>
+        <div class="ui-bar ui-bar-d">Terrazzi</div>
+        <div class="ui-bar ui-bar-d">Cantina</div>
+        <div class="ui-bar ui-bar-d">Posto auto</div>
+        <div class="ui-bar ui-bar-d">Riscaldamento</div>
+    </div>
+    <div class="ui-block-b">
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeEnum(Model.cucina.ToString())</div>
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeNumeroStanze(Model.camereDaLetto)</div>
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeNumeroStanze(Model.bagni)</div>
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeNumeroStanze(Model.terrazzi)</div>
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeSiNo(Model.cantina)</div>
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeEnum(Model.postoAuto.ToString())</div>
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeEnum(Model.riscaldamento.ToString())</div>
+    </div>
+    <div class="ui-block-c">
+        <div class="ui-bar ui-bar-d">Salone</div>
+        <div class="ui-bar ui-bar-d">Camerette</div>
+        <div class="ui-bar ui-bar-d">Giardino mq</div>
+        <div class="ui-bar ui-bar-d">Balconi</div>
+        <div class="ui-bar ui-bar-d">Soffitta</div>
+        <div class="ui-bar ui-bar-d">Box</div>
+        <div class="ui-bar ui-bar-d">Climatizzato</div>
+    </div>
+    <div class="ui-block-d">
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeEnum(Model.salone.ToString())</div>
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeNumeroStanze(Model.camerette)</div>
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeNull(Model.giardinoMq)</div>
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeNumeroStanze(Model.balconi)</div>
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeSiNo(Model.soffitta)</div>
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeEnum(Model.box.ToString())</div>
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeSiNo(Model.climatizzato)</div>
+    </div>
+</div>
+
+<br />
+
+<div class="ui-grid-c">
+    <div class="ui-block-a">
+        <div class="ui-bar ui-bar-d">Regione - Provincia</div>
+        <div class="ui-bar ui-bar-d">Zona/Quartiere</div>
+    </div>
+    <div class="ui-block-b">
+        <div class="ui-bar ui-bar-b">@MyHelper.getLocalitaImmobileOrizzontale(Model)</div>
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeNull(Model.quartiere)</div>
+    </div>
+    <div class="ui-block-c">
+        <div class="ui-bar ui-bar-d">CAP</div>
+        <div class="ui-bar ui-bar-d">Indirizzo</div>
+    </div>
+    <div class="ui-block-d">
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeNull(Model.cap)</div>
+        <div class="ui-bar ui-bar-b">@MyHelper.decodeNull(Model.indirizzo)</div>
+    </div>
+</div>
+

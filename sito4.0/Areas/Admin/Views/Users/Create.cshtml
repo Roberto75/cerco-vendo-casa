@@ -1,0 +1,275 @@
+﻿@model MyUsers.Models.MyUser
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/MasterPageAdminMobile.cshtml";
+}
+
+<script>
+    $(function () {
+
+
+        //per abilitare il controllo anche sui tah hidde
+        $("form").validate().settings.ignore = "";
+
+        //$.validator.unobtrusive.adapters.addBool("checkBoxRequired" );
+
+
+
+
+        //function setValidationValues(options, ruleName, value) {
+        //    options.rules[ruleName] = value;
+        //    if (options.message) {
+        //        options.messages[ruleName] = options.message;
+        //    }
+        //};
+
+        //Add custom rule / Validation method
+
+        $.validator.addMethod("checkboxrequired", function (value, element, param) {
+            //alert("checkboxGroup: " + $("[id ^='Gruppi']:checked").length);
+            if ($("[id ^='Gruppi']:checked").length == 0) {
+                return false;
+            }
+            return true;
+        }, "Selezionare almeno un gruppo");
+
+        //checkboxrequired
+
+        //$.validator.unobtrusive.adapters.addBool("checkboxrequired", "checkboxrequired");
+
+        //The adapter
+        //$.validator.unobtrusive.adapters.add( 'checkboxrequired', function (options) {
+        //    options.rules["checkboxrequired"] = true;
+        //        if (options.message) {
+        //            options.messages["checkboxrequired"] = options.message;
+        //        }
+        //  }
+        //);
+
+
+
+
+        //$jQval.unobtrusive.adapters"checkboxrequired","required" );
+        $.validator.addClassRules("checkRequireOne", { checkboxrequired: true });
+
+
+        ////$.validator.addMethod("checkboxGroup", function (value, elem, param) {
+        //   alert("checkboxGroup");
+        //    //return this.optional(element) || /^http:\/\/mycorporatedomain.com/.test(value);
+        //    return false;
+        //}, "Please specify the correct domain for your documents");
+
+        //$.validator.addClassRules("checkbox", { checkboxGroup: true });
+        //  $.validator.unobtrusive.adapters.add
+        //$jQval.unobtrusive.adapters.add("checkboxrequired", null , function (options) {
+        //    //setValidationValues(options, "checkBoxRequired", true);
+        //    options.rules["checkboxrequired"] = true;
+        //    if (options.message) {
+        //        options.messages["checkboxrequired"] = options.message;
+        //    }
+
+        //});
+
+
+        //$.validator.unobtrusive.parse(document);
+
+        // alert("dd");
+    });
+
+
+
+
+</script>
+
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "Users", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false)
+
+    <fieldset>
+        <legend>User</legend>
+
+        <div class="editor-label">
+            Cliente
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.customerId, ViewBag.listaClienti as IEnumerable<SelectListItem>, "---", new { style = "width:150px;", data_val = "true" })
+            @Html.ValidationMessageFor(model => model.customerId)
+        </div>
+
+
+        <div class="editor-label">
+            Profilo
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.profiloId, ViewBag.listaProfili as IEnumerable<SelectListItem>, "---", new { style = "width:150px;", data_val = "true", data_val_required = "Selezionare un profilo" })
+            @Html.ValidationMessageFor(model => model.profiloId)
+        </div>
+
+
+        <div class="editor-label">
+            Gruppi
+        </div>
+        <div class="editor-field">
+
+            <ul>
+                @{
+    int conta = 0;
+                }
+                @foreach (SelectListItem i in ViewBag.Gruppi)
+                {
+                    <li>
+                        <input  type="checkbox"  name="gruppiIDs" id="Gruppi[@(conta++)].gruppoId" @(i.Selected ? "checked" : "")   value ="@(i.Value)"  />@(i.Text)
+                    </li>
+                }
+            </ul>
+            <input class="checkRequireOne" type="hidden" data-val="true" id="checkBoxGruppi" name="checkBoxGruppi" />
+            <span class="field-validation-valid" data-valmsg-for="checkBoxGruppi" data-valmsg-replace="true"></span>
+
+        </div>
+
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.nome)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.nome, new { data_val = "true", data_val_required = "Valore obbligatorio" })
+            @Html.ValidationMessageFor(model => model.nome)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.cognome)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.cognome, new { data_val = "true", data_val_required = "Valore obbligatorio" })
+            @Html.ValidationMessageFor(model => model.cognome)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.login)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.login)
+            @Html.ValidationMessageFor(model => model.login)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.password)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.password)
+            @Html.ValidationMessageFor(model => model.password)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.codiceFiscale)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.codiceFiscale)
+            @Html.ValidationMessageFor(model => model.codiceFiscale)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.email)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.email, new { data_val = "true", data_val_required = "Valore obbligatorio", data_val_email = "Il formato dell'email non è corretto" })
+            @Html.ValidationMessageFor(model => model.email)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.telefono)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.telefono)
+            @Html.ValidationMessageFor(model => model.telefono)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.mobile)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.mobile)
+            @Html.ValidationMessageFor(model => model.mobile)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.indirizzo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.indirizzo)
+            @Html.ValidationMessageFor(model => model.indirizzo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.numero_civico)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.numero_civico)
+            @Html.ValidationMessageFor(model => model.numero_civico)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.cap)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.cap)
+            @Html.ValidationMessageFor(model => model.cap)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.http)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.http)
+            @Html.ValidationMessageFor(model => model.http)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.fax)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.fax)
+            @Html.ValidationMessageFor(model => model.fax)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.sesso)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.sesso)
+            @Html.ValidationMessageFor(model => model.sesso)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.isEnabled)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.isEnabled)
+            @Html.ValidationMessageFor(model => model.isEnabled)
+        </div>
+
+
+        @{Html.RenderPartial("RegioneProvinciaComune", null);}
+
+
+
+
+
+
+        <div class="editor-label">
+            <input type="submit" value="Create" />
+        </div>
+    </fieldset>
+     
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /mdb-database/
+Disallow: /images/
+Disallow: /bin/
+Disallow: /App_Code/
+Disallow: /App_Data/
+Disallow: /App_Themes/
+Allow: /

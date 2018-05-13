@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ROOT>
+  <MENU>
+    <TITLE></TITLE>
+    <SUBMENU>
+      <value>Home</value>
+      <href>default.aspx</href>
+      <tip>Home</tip>
+      <target/>
+      <roles>
+        <role>*</role>
+      </roles>
+    </SUBMENU>
+  </MENU>
+</ROOT>

@@ -1,0 +1,203 @@
+﻿@model MyWebApplication.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/MasterPageMobile.cshtml";
+}
+
+<h2>Registrazione ai Servizi di @System.Configuration.ConfigurationManager.AppSettings["application.name"] </h2>
+
+
+<p>
+    Cerco-vendo-casa permette di inserire annunci immobiliari a privati ed agenzie immobiliari.
+</p>
+
+<div style="float: right">
+    <img  src="@Url.Content("~/Content/Images/Immobiliare/for-sale-by-owner.jpg")" height="180" />
+</div>
+
+<p>La registrazione al portale è libera. Ogni utente registrato può inserire <b>gratis</b> un numero illimitato di annunci.</p>
+
+<p>
+    La registrazione al servizio si articola in 4 fasi:
+</p>
+<ol>
+    <li>Selezione del tipo di utente: privato (persona fisica) o agenzia immobiliare</li>
+    <li>compilazione dei dati personali, accettazione delle condizioni e termini del servizio e consenso ai sensi del Codice in materia di protezione dei dati personali; </li>
+    <li>ricezione di un&#39;e-mail di conferma dei dati inseriti;</li>
+    <li>ricezione di una <b>seconda email con una password</b> generata dal sistema.</li>
+</ol>
+<p>
+    Gentile utente la registrazione ai servizi di
+                     @System.Configuration.ConfigurationManager.AppSettings["application.name"]
+    consente di accere alle aree riservate del sito.
+</p>
+<p>
+    <b>Consenso ai sensi del D. Lgs. 196/03</b>
+</p>
+<p>
+    Prima di completare la registrazione, leggi la nota informativa, sulle norme che 
+                    tutelano la privacy e decidi se rilasciare il consenso al trattamento dei dati 
+                    personali.
+</p>
+<p>
+    Se lo farai, non solo potrai accedere ai servizi offerti da questo portale, ma 
+                    potrai anche ricevere informazioni personalizzate nella tua casella di posta 
+                    elettronica ed essere sempre aggiornato su tutti i nostri servizi e su eventuali 
+                    nuove offerte e promozioni.
+</p>
+
+
+
+
+
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, "Attenzione")
+
+    <ul>
+        <li>
+
+            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                <legend>Tipo di utenza:</legend>
+                <input type="radio" name="tipoUtenza" id="personaFisica" value="P"  @((String.IsNullOrEmpty (Model.tipoUtenza) || Model.tipoUtenza == "P")?"checked=\"checked\"":"")>
+                <label for="personaFisica">Persona fisica</label>
+                <input type="radio" name="tipoUtenza" id="personaGiuridica" value="A" @((Model.tipoUtenza == "A")?"checked=\"checked\"":"")>
+                <label for="personaGiuridica">Agenzia immobiliare</label>
+            </fieldset>
+        </li>
+
+        <li id="LiNome">
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome" id="nome" value="@Model.nome" data-clear-btn="true">
+        </li>
+
+        <li id="LiCognome">
+            <label for="cognome">Cognome:</label>
+            <input type="text" name="cognome" id="cognome" value="@Model.cognome" data-clear-btn="true">
+        </li>
+
+        <li id="LiRagioneSociale">
+            <label for="ragioneSociale">Ragione sociale:</label>
+            <input type="text" name="ragioneSociale" id="ragioneSociale" value="@Model.ragioneSociale" data-clear-btn="true">
+        </li>
+
+        <li>
+            <label for="login">Scegli una login:</label>
+            <input type="text" name="login" id="login" value="@Model.login" data-clear-btn="true">
+        </li>
+
+        <li>
+            <label for="login">Il tuo indirizzo email attuale:</label>
+            <input type="email" name="email" id="email" value="@Model.email" data-clear-btn="true">
+        </li>
+    </ul>
+
+
+
+
+
+
+    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+        <legend>Informativa sulla privacy</legend>
+
+        <div>@(new HtmlString(ViewData["TestoPrivacy"].ToString()))</div>
+
+     
+
+        <input type="radio" name="privacy" id="privacy-si" value="SI">
+        <label for="privacy-si">Accetto</label>
+        <input type="radio" name="privacy" id="privacy-no" value="NO">
+        <label for="privacy-no">Non accetto</label>
+    </fieldset> 
+    
+
+    
+    
+    <div data-role="controlgrup" data-type="horizontal" data-mini="true">
+        <a href="javascript:history.back();" data-inline="true" data-role="button">Annulla</a>
+        <input type="submit" data-inline="true" value="Prosegui con la registrazione" />
+    </div>
+
+}
+
+<script type="text/javascript">
+
+    function tipoUtenza() {
+        //alert("tipoUtenza: " + $("#personaFisica").is(':checked'));
+
+        if ($("#personaFisica").is(":checked")) {
+            //alert("a");
+            $("#LiRagioneSociale").hide();
+            $("#LiNome").show();
+            $("#LiCognome").show();
+
+            //$("#ragioneSociale").attr('disabled', 'disabled');
+            //$("#ragioneSociale").attr("aria-disabled", true);
+            //$("#ragioneSociale").addClass("ui-disabled");
+
+
+            //$("#nome").removeAttr('disabled');
+            //$("#nome").attr("aria-disabled", false);
+            //$("#nome").removeClass("ui-disabled");
+
+
+            //$("#cognome").removeAttr('disabled');
+            //$("#cognome").attr("aria-disabled", false);
+            //$("#cognome").removeClass("ui-disabled");
+
+
+            //$("#ragioneSociale").prop('disabled', true);
+            //$("#nome").prop('disabled', false)
+            //$("#cognome").prop('disabled', false);
+
+        } else {
+            //alert("b");
+            $("#LiRagioneSociale").show();
+            $("#LiNome").hide();
+            $("#LiCognome").hide();
+
+            //$("#ragioneSociale").removeAttr('disabled');
+            //$("#ragioneSociale").attr("aria-disabled", false);
+            //$("#ragioneSociale").removeClass("ui-disabled").removeClass("mobile-textinput-disabled").removeClass("ui - state - disabled");
+
+
+            //$("#nome").attr('disabled', 'disabled');
+            //$("#nome").attr("aria-disabled", true);
+            //$("#nome").addClass("ui-disabled");
+
+
+            //$("#cognome").attr('disabled', 'disabled');
+            //$("#cognome").attr("aria-disabled", true);
+            //$("#cognome").addClass("ui-disabled");
+
+            //$("#ragioneSociale").prop('disabled', false);
+            //$("#nome").prop('disabled', true)
+            //$("#cognome").prop('disabled', true);
+
+        }
+    }
+
+    $(document).on("pageinit", function () {
+        // alert("pageinit: " + $("#personaFisica").is(':checked'));
+
+        tipoUtenza();
+
+
+        $("#personaFisica").click(function () {
+            tipoUtenza();
+        });
+
+
+        $("#personaGiuridica").click(function () {
+            tipoUtenza();
+        });
+    });
+
+
+</script>
+
+
+
