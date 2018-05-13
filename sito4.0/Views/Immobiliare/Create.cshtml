@@ -30,7 +30,7 @@
 </p>
 
 
-
+@Html.Partial("_MyValidationSummary", ViewData.ModelState)
 
 
 @using (Html.BeginForm("Create", "Immobiliare", FormMethod.Post, new { id = "MyForm" }))
@@ -71,28 +71,28 @@
     </div>
 
     <div class="form-group">
-        <label class="MyLabel" for="classeEnergetica">Classe energetica:</label>
+        <label for="classeEnergetica">Classe energetica:</label>
         @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoClasseEnergetica), Model.classeEnergetica.ToString(), "classeEnergetica", false)
     </div>
 
     <div class="form-group">
 
-        <label class="MyLabel" for="piano">Piano:</label>
+        <label for="piano">Piano:</label>
         <input type="number" class="form-control" name="piano" id="piano" value="@Model.piano">
     </div>
 
     <div class="form-group">
-        <label class="MyLabel" for="pianiTotali">Totali piani dell'edificio:</label>
+        <label for="pianiTotali">Totali piani dell'edificio:</label>
         <input type="number" class="form-control" name="pianiTotali" id="pianiTotali" value="@Model.pianiTotali">
     </div>
 
     <div class="form-group">
-        <label class="MyLabel" for="anno">Anno di costruzione:</label>
+        <label for="anno">Anno di costruzione:</label>
         <input type="number" class="form-control" name="anno" id="anno" value="@Model.anno">
     </div>
 
     <div class="form-group">
-        <label class="MyLabel" for="speseCondominiali">Spese condominiali mensili €:</label>
+        <label for="speseCondominiali">Spese condominiali mensili €:</label>
         <input type="number" class="form-control" name="speseCondominiali" id="speseCondominiali" value="@Model.speseCondominiali">
     </div>
 
@@ -189,37 +189,37 @@
 
 
     <div class="form-group">
-        <label class="MyLabel" for="statoImmobile">Stato:</label>
+        <label for="statoImmobile">Stato:</label>
         @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoStatoImmobile), Model.statoImmobile.ToString(), "statoImmobile", false)
     </div>
 
     <div class="form-group">
-        <label class="MyLabel" for="occupazione">Occupazione:</label>
+        <label for="occupazione">Occupazione:</label>
         @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoOccupazione), Model.occupazione.ToString(), "occupazione", false)
     </div>
 
 
     <div class="form-group">
-        <label class="MyLabel" for="camereDaLetto">Camere da letto:</label>
+        <label for="camereDaLetto">Camere da letto:</label>
         @MyHelper.getComboNumeroStanze(Model.camereDaLetto.ToString(), "camereDaLetto", false)
     </div>
 
 
 
     <div class="form-group">
-        <label class="MyLabel" for="camerette">Camerette:</label>
+        <label for="camerette">Camerette:</label>
         @MyHelper.getComboNumeroStanze(Model.camerette.ToString(), "camerette", false)
     </div>
 
 
     <div class="form-group">
-        <label class="MyLabel" for="bagni">Bagni:</label>
+        <label for="bagni">Bagni:</label>
         @MyHelper.getComboNumeroStanze(Model.bagni.ToString(), "bagni", false)
     </div>
 
 
     <div class="form-group">
-        <label class="MyLabel" for="terrazzi">Terrazzi:</label>
+        <label for="terrazzi">Terrazzi:</label>
         @MyHelper.getComboNumeroStanze(Model.terrazzi.ToString(), "terrazzi", false)
     </div>
 
@@ -231,33 +231,33 @@
     </div>
 
     <div class="form-group">
-        <label class="MyLabel" for="cucina">Cucina:</label>
+        <label for="cucina">Cucina:</label>
         @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoCucina), Model.cucina.ToString(), "cucina", false)
     </div>
 
     <div class="form-group">
-        <label class="MyLabel" for="salone">Salone:</label>
+        <label for="salone">Salone:</label>
         @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoSalone), Model.salone.ToString(), "salone", false)
     </div>
 
     <div class="form-group">
-        <label class="MyLabel" for="postoAuto">Posto auto:</label>
+        <label for="postoAuto">Posto auto:</label>
         @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoPostoAuto), Model.postoAuto.ToString(), "postoAuto", false)
     </div>
 
     <div class="form-group">
-        <label class="MyLabel" for="box">Box:</label>
+        <label for="box">Box:</label>
         @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoBoxAuto), Model.box.ToString(), "box", false)
     </div>
 
     <div class="form-group">
-        <label class="MyLabel" for="riscaldamento">Riscaldamento:</label>
+        <label for="riscaldamento">Riscaldamento:</label>
         @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoRiscaldamento), Model.riscaldamento.ToString(), "riscaldamento", false)
     </div>
 
 
     <div class="form-group">
-        <label class="MyLabel" for="MQ">Giardino mq:</label>
+        <label for="MQ">Giardino mq:</label>
         <input type="text" name="giardinoMq" id="giardinoMq"  data-slider-value="@Model.giardinoMq"   data-slider-min="0" data-slider-max="1000" >
         <span id="giardinoMqCurrentSliderValLabel"></span>
     </div>

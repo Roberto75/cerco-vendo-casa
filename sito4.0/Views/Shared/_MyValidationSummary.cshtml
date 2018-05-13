@@ -11,10 +11,11 @@
 
         @foreach (var key in Model.Keys)
         {
+            System.Diagnostics.Debug.WriteLine("key: " + key);
             foreach (var err in Model[key].Errors)
             {
                 @:<p> @key  @err.ErrorMessage</p>
-                        }
+            }
         }
     </div>
 }

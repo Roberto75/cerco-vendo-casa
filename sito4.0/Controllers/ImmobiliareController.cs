@@ -459,6 +459,8 @@ namespace MyWebApplication.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
+            Debug.WriteLine("Request[\"MyAction\"] " + Request["MyAction"]);
+
             if (Request["MyAction"] != "Indietro" && Request["MyAction"] != "Avanti")
             {
                 return RedirectToAction("Error", "Home");
@@ -472,6 +474,17 @@ namespace MyWebApplication.Controllers
 
             if (!ModelState.IsValid)
             {
+
+                var error = ModelState.SelectMany(x => x.Value.Errors);
+                foreach (var value in ModelState.Values)
+                {
+                    foreach (var merror in value.Errors)
+                    {
+                        //throw new Exception(merror.ErrorMessage, merror.Exception);
+                        Debug.WriteLine(merror.ErrorMessage + merror.Exception);
+                    }
+                }
+
                 return RedirectToAction("CreateStep2", "Immobiliare", model);
             }
 
