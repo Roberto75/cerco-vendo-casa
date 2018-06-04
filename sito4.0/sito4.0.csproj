@@ -1036,6 +1036,8 @@
     <Content Include="Views\TestMaterial\Button.cshtml" />
     <Content Include="Views\TestMaterial\TextInput.cshtml" />
     <Content Include="Views\Shared\_MyValidationSummary.cshtml" />
+    <Content Include="Views\Account\_TestoPrivacy.cshtml" />
+    <Content Include="Views\Account\_TestoCookies.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

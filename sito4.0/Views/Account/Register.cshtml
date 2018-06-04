@@ -13,7 +13,7 @@
 </p>
 
 <div style="float: right">
-    <img  src="@Url.Content("~/Content/Images/Immobiliare/for-sale-by-owner.jpg")" height="180" />
+    <img src="@Url.Content("~/Content/Images/Immobiliare/for-sale-by-owner.jpg")" height="180" />
 </div>
 
 <p>La registrazione al portale è libera. Ogni utente registrato può inserire <b>gratis</b> un numero illimitato di annunci.</p>
@@ -28,23 +28,22 @@
     <li>ricezione di una <b>seconda email con una password</b> generata dal sistema.</li>
 </ol>
 <p>
-    Gentile utente la registrazione ai servizi di
-                     @System.Configuration.ConfigurationManager.AppSettings["application.name"]
+    Gentile utente la registrazione ai servizi di                     @System.Configuration.ConfigurationManager.AppSettings["application.name"]
     consente di accere alle aree riservate del sito.
 </p>
 <p>
     <b>Consenso ai sensi del D. Lgs. 196/03</b>
 </p>
 <p>
-    Prima di completare la registrazione, leggi la nota informativa, sulle norme che 
-                    tutelano la privacy e decidi se rilasciare il consenso al trattamento dei dati 
-                    personali.
+    Prima di completare la registrazione, leggi la nota informativa, sulle norme che
+    tutelano la privacy e decidi se rilasciare il consenso al trattamento dei dati
+    personali.
 </p>
 <p>
-    Se lo farai, non solo potrai accedere ai servizi offerti da questo portale, ma 
-                    potrai anche ricevere informazioni personalizzate nella tua casella di posta 
-                    elettronica ed essere sempre aggiornato su tutti i nostri servizi e su eventuali 
-                    nuove offerte e promozioni.
+    Se lo farai, non solo potrai accedere ai servizi offerti da questo portale, ma
+    potrai anche ricevere informazioni personalizzate nella tua casella di posta
+    elettronica ed essere sempre aggiornato su tutti i nostri servizi e su eventuali
+    nuove offerte e promozioni.
 </p>
 
 
@@ -55,71 +54,83 @@
 @using (Html.BeginForm("Register", "Account", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(false, "Attenzione")
 
-    <ul>
-        <li>
+    <div class="card mb-3" id="datiObbligatori">
+        <div class="card-header">
+            Dati obbligatori
+        </div>
+        <div class="card-body">
+            @Html.Partial("_MyValidationSummary", ViewData.ModelState)
+
+
 
             <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                 <legend>Tipo di utenza:</legend>
-                <input type="radio" name="tipoUtenza" id="personaFisica" value="P"  @((String.IsNullOrEmpty (Model.tipoUtenza) || Model.tipoUtenza == "P")?"checked=\"checked\"":"")>
+                <input type="radio" name="tipoUtenza" id="personaFisica" value="P" @((String.IsNullOrEmpty(Model.tipoUtenza) || Model.tipoUtenza == "P") ? "checked=\"checked\"" : "")>
                 <label for="personaFisica">Persona fisica</label>
-                <input type="radio" name="tipoUtenza" id="personaGiuridica" value="A" @((Model.tipoUtenza == "A")?"checked=\"checked\"":"")>
+                <input type="radio" name="tipoUtenza" id="personaGiuridica" value="A" @((Model.tipoUtenza == "A") ? "checked=\"checked\"" : "")>
                 <label for="personaGiuridica">Agenzia immobiliare</label>
             </fieldset>
-        </li>
 
-        <li id="LiNome">
-            <label for="nome">Nome:</label>
-            <input type="text" name="nome" id="nome" value="@Model.nome" data-clear-btn="true">
-        </li>
+            <div id="LiNome" class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" name="nome" id="nome" value="@Model.nome">
+            </div>
 
-        <li id="LiCognome">
-            <label for="cognome">Cognome:</label>
-            <input type="text" name="cognome" id="cognome" value="@Model.cognome" data-clear-btn="true">
-        </li>
+            <div id="LiCognome" class="form-group">
+                <label for="cognome">Cognome:</label>
+                <input type="text" class="form-control" name="cognome" id="cognome" value="@Model.cognome">
+            </div>
 
-        <li id="LiRagioneSociale">
-            <label for="ragioneSociale">Ragione sociale:</label>
-            <input type="text" name="ragioneSociale" id="ragioneSociale" value="@Model.ragioneSociale" data-clear-btn="true">
-        </li>
+            <div id="LiRagioneSociale">
+                <label for="ragioneSociale">Ragione sociale:</label>
+                <input type="text" class="form-control" name="ragioneSociale" id="ragioneSociale" value="@Model.ragioneSociale">
+            </div>
 
-        <li>
-            <label for="login">Scegli una login:</label>
-            <input type="text" name="login" id="login" value="@Model.login" data-clear-btn="true">
-        </li>
+            <div>
+                <label for="login">Scegli una login:</label>
+                <input type="text" class="form-control" name="login" id="login" value="@Model.login">
+            </div>
 
-        <li>
-            <label for="login">Il tuo indirizzo email attuale:</label>
-            <input type="email" name="email" id="email" value="@Model.email" data-clear-btn="true">
-        </li>
-    </ul>
-
-
-
-
-
-
-    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-        <legend>Informativa sulla privacy</legend>
-
-        <div>@(new HtmlString(ViewData["TestoPrivacy"].ToString()))</div>
-
-     
-
-        <input type="radio" name="privacy" id="privacy-si" value="SI">
-        <label for="privacy-si">Accetto</label>
-        <input type="radio" name="privacy" id="privacy-no" value="NO">
-        <label for="privacy-no">Non accetto</label>
-    </fieldset> 
-    
-
-    
-    
-    <div data-role="controlgrup" data-type="horizontal" data-mini="true">
-        <a href="javascript:history.back();" data-inline="true" data-role="button">Annulla</a>
-        <input type="submit" data-inline="true" value="Prosegui con la registrazione" />
+            <div>
+                <label for="login">Il tuo indirizzo email attuale:</label>
+                <input type="email" class="form-control" name="email" id="email" value="@Model.email">
+            </div>
+        </div>
     </div>
+
+
+
+
+    <div class="card">
+        <div class="card-header">
+            Condizioni del servizio
+        </div>
+        <div class="card-body">
+            <div style="overflow-y: scroll; height:300px;">
+                @Html.Partial("~/Views/Account/_TestoPrivacy.cshtml")
+            </div>
+
+
+            <div class="form-group mt-3">
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="privacy" id="privacy-si" value="SI">
+                    <label class="form-check-label" for="privacy-si">Accetto</label>
+                    <div class="invalid-feedback">Per proseguire con la registrazione occorre dare il consenso sulla privacy</div>
+                </div>
+
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="privacy" id="privacy-no" value="NO">
+                    <label class="form-check-label" for="privacy-no">Non accetto</label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <a class="btn btn-secondary" href="@Url.Action("Index","Home")">Annulla</a>
+    <button class="btn btn-primary" type="button"  onclick="buttonSalvaOnClick()">Prosegui con la registrazione</button>
 
 }
 
@@ -179,6 +190,70 @@
 
         }
     }
+
+
+    function buttonSalvaOnClick() {
+        console.log("buttonSalvaOnClick");
+        let check = true;
+
+        if ($("#nome").val().trim() === "") {
+            console.log("nome is null");
+            $("#nome").addClass("is-invalid");
+            check = false;
+        } else {
+            $("#nome").removeClass("is-invalid");
+        }
+
+
+        if ($("#cognome").val().trim() === "") {
+            console.log("cognome is null");
+            $("#cognome").addClass("is-invalid");
+            check = false;
+        } else {
+            $("#cognome").removeClass("is-invalid");
+        }
+
+        if ($("#login").val().trim() === "") {
+            console.log("login is null");
+            $("#login").addClass("is-invalid");
+            check = false;
+        } else {
+            $("#login").removeClass("is-invalid");
+        }
+
+        if ($("#email").val().trim() === "") {
+            console.log("email is null");
+            $("#email").addClass("is-invalid");
+            check = false;
+        } else {
+            $("#email").removeClass("is-invalid");
+        }
+
+
+
+        if (check === false) {
+            $('html, body').scrollTop($("#datiObbligatori").offset().top);
+            return;
+        }
+        console.log("Privacy " + $("input[name='privacy']").attr("checked"));
+        console.log("Privacy " + $("#privacy-si").is(":checked"));
+
+
+        if ($("#privacy-si").is(":checked") != true) {
+            $("#privacy-si").addClass("is-invalid");
+            check = false;
+        } else {
+            $("#privacy-si").removeClass("is-invalid");
+        }
+
+        if (check === false) {
+            return;
+        }
+
+
+        $("form").submit();
+    }
+
 
     $(document).on("pageinit", function () {
         // alert("pageinit: " + $("#personaFisica").is(':checked'));
