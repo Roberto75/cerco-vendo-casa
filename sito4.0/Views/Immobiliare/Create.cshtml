@@ -1,4 +1,4 @@
-﻿@model Annunci.Models.Immobile
+﻿@model MyWebApplication.Models.CreateModel
 
 @{
     ViewBag.Title = "Cerco Vendo Casa: Inserimento di un nuovo immobile - Step 1";
@@ -40,252 +40,318 @@
 
     <h3>Informazioni generali</h3>
 
-
-    <div class="form-group">
-        <label for="categoria">Categoria*:</label>
-        @MyHelper.getComboEnum(default(Annunci.Models.Immobile.Categorie), Model.categoria.ToString(), "categoria", true)
-    </div>
-
-    <div class="form-group">
-        <label for="immobile">Tipo di immobile*:</label>
-        @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoImmobile), Model.immobile.ToString(), "immobile", true)
-    </div>
-
-    <div class="form-group">
-        <label for="MQ">MQ*:</label>
-        <input type="range" class="form-control" name="MQ" id="MQ" value="@Model.MQ" min="0" max="1000">
-        <span id="mqCurrentSliderVal"></span>
-    </div>
-
-    <div class="form-group">
-        <label for="prezzo">Prezzo €*:</label>
-        <input type="number" class="form-control" name="prezzo" id="prezzo" value="@Model.prezzo" required>
-    </div>
-
-
-    <div class="form-group">
-        <span>
-            @{  ViewData["required"] = true;
-                Html.RenderPartial("RegioneProvinciaComune", Model, ViewData);}
-        </span>
-    </div>
-
-    <div class="form-group">
-        <label for="classeEnergetica">Classe energetica:</label>
-        @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoClasseEnergetica), Model.classeEnergetica.ToString(), "classeEnergetica", false)
-    </div>
-
-    <div class="form-group">
-
-        <label for="piano">Piano:</label>
-        <input type="number" class="form-control" name="piano" id="piano" value="@Model.piano">
-    </div>
-
-    <div class="form-group">
-        <label for="pianiTotali">Totali piani dell'edificio:</label>
-        <input type="number" class="form-control" name="pianiTotali" id="pianiTotali" value="@Model.pianiTotali">
-    </div>
-
-    <div class="form-group">
-        <label for="anno">Anno di costruzione:</label>
-        <input type="number" class="form-control" name="anno" id="anno" value="@Model.anno">
-    </div>
-
-    <div class="form-group">
-        <label for="speseCondominiali">Spese condominiali mensili €:</label>
-        <input type="number" class="form-control" name="speseCondominiali" id="speseCondominiali" value="@Model.speseCondominiali">
-    </div>
-
-
-
-
-
-    <div class="form-group">
-        <label>Portiere:</label>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="portiere" id="portiere-choice-a" value="-1" @( (Model.portiere == null) ? "checked=\" checked\"" : "" ) />
-            <label class="form-check-label" for="portiere-choice-a">---</label>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="categoria">Categoria*:</label>
+                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.Categorie), Model.immobile.categoria.ToString(), "categoria", true)
+            </div>
         </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="portiere" id="portiere-choice-b" value="1" @( (Model.portiere != null && Model.portiere == 1) ? "checked=\" checked\"" : "" ) />
-            <label class="form-check-label" for="portiere-choice-b">Si</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="portiere" id="portiere-choice-c" value="0" @( (Model.portiere != null && Model.portiere == 0) ? "checked=\" checked\"" : "" ) />
-            <label class="form-check-label" for="portiere-choice-c">No</label>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="immobile">Tipo di immobile*:</label>
+                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoImmobile), Model.immobile.immobile.ToString(), "immobile", true)
+            </div>
         </div>
     </div>
 
 
-    <div class="form-group">
-        <label>Ascensore</label>
-        <div class="form-check form-check-inline">
-            <input type="radio" name="ascensore" id="ascensore-choice-a" value="-1" @( (Model.ascensore == null) ? "checked=\" checked\"" : "" ) />
-            <label for="ascensore-choice-a">---</label>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="MQ">MQ*:</label>
+                <input type="range" class="form-control" name="MQ" id="MQ" value="@Model.immobile.MQ" min="0" max="1000">
+                <span id="mqCurrentSliderVal"></span>
+            </div>
         </div>
-        <div class="form-check form-check-inline">
-            <input type="radio" name="ascensore" id="ascensore-choice-b" value="1" @( (Model.ascensore != null && Model.ascensore == 1) ? "checked=\" checked\"" : "" ) />
-            <label for="ascensore-choice-b">Si</label>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="prezzo">Prezzo €*:</label>
+                <input type="number" class="form-control" name="prezzo" id="prezzo" value="@Model.immobile.prezzo" required>
+            </div>
         </div>
-        <div class="form-check form-check-inline">
-            <input type="radio" name="ascensore" id="ascensore-choice-c" value="0" @( (Model.ascensore != null && Model.ascensore == 0) ? "checked=\" checked\"" : "" ) />
-            <label for="ascensore-choice-c">No</label>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-4">
+
+            <div class="form-group">
+                <label for="comboRegione">Regione</label>
+                <select class="form-control mb-3" id="comboRegione" name="filter.regioneId">
+                    <option value="">---</option>
+                    @foreach (MyManagerCSharp.Models.MyItem item in Model.comboRegioni)
+                    {
+                        <option value="@item.Value" @(item.Value == Model.immobile.regioneId.ToString() ? "selected" : "")>@item.Text</option>
+                    }
+                </select>
+                <input type="hidden" id="regione" name="filter.regione" />
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="comboProvincia">Provincia</label>
+                <select class="form-control mb-3" id="comboProvincia" name="filter.provinciaId">
+                    <option value="">---</option>
+                    @foreach (MyManagerCSharp.Models.MyItem item in Model.comboProvince)
+                    {
+                        <option value="@item.Value" @(item.Value == Model.immobile.provinciaId ? "selected" : "")>@item.Text</option>
+                    }
+                </select>
+                <input type="hidden" id="provincia" name="filter.provincia" />
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="comboComune">Comune</label>
+                <select class="form-control mb-3" id="comboComune" name="filter.comuneId">
+                    <option value="">---</option>
+                    @foreach (MyManagerCSharp.Models.MyItem item in Model.comboComuni)
+                    {
+                        <option value="@item.Value" @(item.Value == Model.immobile.comuneId ? "selected" : "")>@item.Text</option>
+                    }
+                </select>
+                <input type="hidden" id="comune" name="filter.comune" />
+            </div>
+
         </div>
     </div>
 
 
 
-    <div class="form-group">
-        <label>Ascensore</label>
-        <div class="form-check form-check-inline">
-            <input type="radio" name="cantina" id="cantina-choice-a" value="-1" @( (Model.cantina == null) ? "checked=\" checked\"" : "" ) />
-            <label for="cantina-choice-a">---</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input type="radio" name="cantina" id="cantina-choice-b" value="1" @( (Model.cantina != null && Model.cantina == 1) ? "checked=\" checked\"" : "" ) />
-            <label for="cantina-choice-b">Si</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input type="radio" name="cantina" id="cantina-choice-c" value="0" @( (Model.cantina != null && Model.cantina == 0) ? "checked=\" checked\"" : "" ) />
-            <label for="cantina-choice-c">No</label>
-        </div>
-    </div>
+            <div class="form-group">
+                <label for="classeEnergetica">Classe energetica:</label>
+                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoClasseEnergetica), Model.immobile.classeEnergetica.ToString(), "classeEnergetica", false)
+            </div>
 
+            <div class="form-group">
 
-    <div class="form-group">
-        <label>Soffitta</label>
-        <div class="form-check form-check-inline">
-            <input type="radio" name="soffitta" id="soffitta-choice-a" value="-1" @( (Model.soffitta == null) ? "checked=\" checked\"" : "" ) />
-            <label for="soffitta-choice-a">---</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input type="radio" name="soffitta" id="soffitta-choice-b" value="1" @( (Model.soffitta != null && Model.soffitta == 1) ? "checked=\" checked\"" : "" ) />
-            <label for="soffitta-choice-b">Si</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input type="radio" name="soffitta" id="soffitta-choice-c" value="0" @( (Model.soffitta != null && Model.soffitta == 0) ? "checked=\" checked\"" : "" ) />
-            <label for="soffitta-choice-c">No</label>
-        </div>
-    </div>
+                <label for="piano">Piano:</label>
+                <input type="number" class="form-control" name="piano" id="piano" value="@Model.immobile.piano">
+            </div>
 
-    <div class="form-group">
-        <label>Climatizzato</label>
-        <div class="form-check form-check-inline">
-            <input type="radio" name="climatizzato" id="climatizzato-choice-a" value="-1" @( (Model.climatizzato == null) ? "checked=\" checked\"" : "" ) />
-            <label for="climatizzato-choice-a">---</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input type="radio" name="climatizzato" id="climatizzato-choice-b" value="1" @( (Model.climatizzato != null && Model.climatizzato == 1) ? "checked=\" checked\"" : "" ) />
-            <label for="climatizzato-choice-b">Si</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input type="radio" name="climatizzato" id="climatizzato-choice-c" value="0" @( (Model.climatizzato != null && Model.climatizzato == 0) ? "checked=\" checked\"" : "" ) />
-            <label for="climatizzato-choice-c">No</label>
-        </div>
-    </div>
+            <div class="form-group">
+                <label for="pianiTotali">Totali piani dell'edificio:</label>
+                <input type="number" class="form-control" name="pianiTotali" id="pianiTotali" value="@Model.immobile.pianiTotali">
+            </div>
 
+            <div class="form-group">
+                <label for="anno">Anno di costruzione:</label>
+                <input type="number" class="form-control" name="anno" id="anno" value="@Model.immobile.anno">
+            </div>
 
-    <h3>Dettaglio appartamento</h3>
-
-
-    <div class="form-group">
-        <label for="statoImmobile">Stato:</label>
-        @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoStatoImmobile), Model.statoImmobile.ToString(), "statoImmobile", false)
-    </div>
-
-    <div class="form-group">
-        <label for="occupazione">Occupazione:</label>
-        @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoOccupazione), Model.occupazione.ToString(), "occupazione", false)
-    </div>
-
-
-    <div class="form-group">
-        <label for="camereDaLetto">Camere da letto:</label>
-        @MyHelper.getComboNumeroStanze(Model.camereDaLetto.ToString(), "camereDaLetto", false)
-    </div>
+            <div class="form-group">
+                <label for="speseCondominiali">Spese condominiali mensili €:</label>
+                <input type="number" class="form-control" name="speseCondominiali" id="speseCondominiali" value="@Model.immobile.speseCondominiali">
+            </div>
 
 
 
-    <div class="form-group">
-        <label for="camerette">Camerette:</label>
-        @MyHelper.getComboNumeroStanze(Model.camerette.ToString(), "camerette", false)
-    </div>
 
 
-    <div class="form-group">
-        <label for="bagni">Bagni:</label>
-        @MyHelper.getComboNumeroStanze(Model.bagni.ToString(), "bagni", false)
-    </div>
+            <div class="form-group">
+                <label>Portiere:</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="portiere" id="portiere-choice-a" value="-1" @( (Model.immobile.portiere == null) ? "checked=\" checked\"" : "" ) />
+                    <label class="form-check-label" for="portiere-choice-a">---</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="portiere" id="portiere-choice-b" value="1" @( (Model.immobile.portiere != null && Model.immobile.portiere == 1) ? "checked=\" checked\"" : "" ) />
+                    <label class="form-check-label" for="portiere-choice-b">Si</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="portiere" id="portiere-choice-c" value="0" @( (Model.immobile.portiere != null && Model.immobile.portiere == 0) ? "checked=\" checked\"" : "" ) />
+                    <label class="form-check-label" for="portiere-choice-c">No</label>
+                </div>
+            </div>
 
 
-    <div class="form-group">
-        <label for="terrazzi">Terrazzi:</label>
-        @MyHelper.getComboNumeroStanze(Model.terrazzi.ToString(), "terrazzi", false)
-    </div>
+            <div class="form-group">
+                <label>Ascensore</label>
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="ascensore" id="ascensore-choice-a" value="-1" @( (Model.immobile.ascensore == null) ? "checked=\" checked\"" : "" ) />
+                    <label for="ascensore-choice-a">---</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="ascensore" id="ascensore-choice-b" value="1" @( (Model.immobile.ascensore != null && Model.immobile.ascensore == 1) ? "checked=\" checked\"" : "" ) />
+                    <label for="ascensore-choice-b">Si</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="ascensore" id="ascensore-choice-c" value="0" @( (Model.immobile.ascensore != null && Model.immobile.ascensore == 0) ? "checked=\" checked\"" : "" ) />
+                    <label for="ascensore-choice-c">No</label>
+                </div>
+            </div>
 
 
-    <div class="form-group">
-        <label for="balconi">Balconi:</label>
-        @MyHelper.getComboNumeroStanze(Model.balconi.ToString(), "balconi", false)
 
-    </div>
-
-    <div class="form-group">
-        <label for="cucina">Cucina:</label>
-        @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoCucina), Model.cucina.ToString(), "cucina", false)
-    </div>
-
-    <div class="form-group">
-        <label for="salone">Salone:</label>
-        @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoSalone), Model.salone.ToString(), "salone", false)
-    </div>
-
-    <div class="form-group">
-        <label for="postoAuto">Posto auto:</label>
-        @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoPostoAuto), Model.postoAuto.ToString(), "postoAuto", false)
-    </div>
-
-    <div class="form-group">
-        <label for="box">Box:</label>
-        @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoBoxAuto), Model.box.ToString(), "box", false)
-    </div>
-
-    <div class="form-group">
-        <label for="riscaldamento">Riscaldamento:</label>
-        @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoRiscaldamento), Model.riscaldamento.ToString(), "riscaldamento", false)
-    </div>
+            <div class="form-group">
+                <label>Ascensore</label>
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="cantina" id="cantina-choice-a" value="-1" @( (Model.immobile.cantina == null) ? "checked=\" checked\"" : "" ) />
+                    <label for="cantina-choice-a">---</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="cantina" id="cantina-choice-b" value="1" @( (Model.immobile.cantina != null && Model.immobile.cantina == 1) ? "checked=\" checked\"" : "" ) />
+                    <label for="cantina-choice-b">Si</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="cantina" id="cantina-choice-c" value="0" @( (Model.immobile.cantina != null && Model.immobile.cantina == 0) ? "checked=\" checked\"" : "" ) />
+                    <label for="cantina-choice-c">No</label>
+                </div>
+            </div>
 
 
-    <div class="form-group">
-        <label for="MQ">Giardino mq:</label>
-        <input type="text" name="giardinoMq" id="giardinoMq"  data-slider-value="@Model.giardinoMq"   data-slider-min="0" data-slider-max="1000" >
-        <span id="giardinoMqCurrentSliderValLabel"></span>
-    </div>
-      
-    <a class="btn btn-secondary" href="@Url.Action("MyAnnunci")" role="button">Annulla</a>
-    <input type="submit" value="Avanti" class="btn btn-primary" />
+            <div class="form-group">
+                <label>Soffitta</label>
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="soffitta" id="soffitta-choice-a" value="-1" @( (Model.immobile.soffitta == null) ? "checked=\" checked\"" : "" ) />
+                    <label for="soffitta-choice-a">---</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="soffitta" id="soffitta-choice-b" value="1" @( (Model.immobile.soffitta != null && Model.immobile.soffitta == 1) ? "checked=\" checked\"" : "" ) />
+                    <label for="soffitta-choice-b">Si</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="soffitta" id="soffitta-choice-c" value="0" @( (Model.immobile.soffitta != null && Model.immobile.soffitta == 0) ? "checked=\" checked\"" : "" ) />
+                    <label for="soffitta-choice-c">No</label>
+                </div>
+            </div>
 
-                }
+            <div class="form-group">
+                <label>Climatizzato</label>
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="climatizzato" id="climatizzato-choice-a" value="-1" @( (Model.immobile.climatizzato == null) ? "checked=\" checked\"" : "" ) />
+                    <label for="climatizzato-choice-a">---</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="climatizzato" id="climatizzato-choice-b" value="1" @( (Model.immobile.climatizzato != null && Model.immobile.climatizzato == 1) ? "checked=\" checked\"" : "" ) />
+                    <label for="climatizzato-choice-b">Si</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="climatizzato" id="climatizzato-choice-c" value="0" @( (Model.immobile.climatizzato != null && Model.immobile.climatizzato == 0) ? "checked=\" checked\"" : "" ) />
+                    <label for="climatizzato-choice-c">No</label>
+                </div>
+            </div>
 
 
-<script>
-    
-    $("#MQ").oninput = function () {
-        console.log("" + this.value);
-        $("#mqCurrentSliderVal").innerHTML = this.value;
-    }
+            <h3>Dettaglio appartamento</h3>
 
 
-    $("#giardinoMq").slider({ tooltip: 'always' });
-    $("#giardinoMq").on("slide", function (slideEvt) {
-        $("#giardinoMqCurrentSliderValLabel").text(slideEvt.value);
+            <div class="form-group">
+                <label for="statoImmobile">Stato:</label>
+                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoStatoImmobile), Model.immobile.statoImmobile.ToString(), "statoImmobile", false)
+            </div>
+
+            <div class="form-group">
+                <label for="occupazione">Occupazione:</label>
+                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoOccupazione), Model.immobile.occupazione.ToString(), "occupazione", false)
+            </div>
+
+
+            <div class="form-group">
+                <label for="camereDaLetto">Camere da letto:</label>
+                @MyHelper.getComboNumeroStanze(Model.immobile.camereDaLetto.ToString(), "camereDaLetto", false)
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="camerette">Camerette:</label>
+                @MyHelper.getComboNumeroStanze(Model.immobile.camerette.ToString(), "camerette", false)
+            </div>
+
+
+            <div class="form-group">
+                <label for="bagni">Bagni:</label>
+                @MyHelper.getComboNumeroStanze(Model.immobile.bagni.ToString(), "bagni", false)
+            </div>
+
+
+            <div class="form-group">
+                <label for="terrazzi">Terrazzi:</label>
+                @MyHelper.getComboNumeroStanze(Model.immobile.terrazzi.ToString(), "terrazzi", false)
+            </div>
+
+
+            <div class="form-group">
+                <label for="balconi">Balconi:</label>
+                @MyHelper.getComboNumeroStanze(Model.immobile.balconi.ToString(), "balconi", false)
+
+            </div>
+
+            <div class="form-group">
+                <label for="cucina">Cucina:</label>
+                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoCucina), Model.immobile.cucina.ToString(), "cucina", false)
+            </div>
+
+            <div class="form-group">
+                <label for="salone">Salone:</label>
+                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoSalone), Model.immobile.salone.ToString(), "salone", false)
+            </div>
+
+            <div class="form-group">
+                <label for="postoAuto">Posto auto:</label>
+                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoPostoAuto), Model.immobile.postoAuto.ToString(), "postoAuto", false)
+            </div>
+
+            <div class="form-group">
+                <label for="box">Box:</label>
+                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoBoxAuto), Model.immobile.box.ToString(), "box", false)
+            </div>
+
+            <div class="form-group">
+                <label for="riscaldamento">Riscaldamento:</label>
+                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoRiscaldamento), Model.immobile.riscaldamento.ToString(), "riscaldamento", false)
+            </div>
+
+
+            <div class="form-group">
+                <label for="MQ">Giardino mq:</label>
+                <input type="text" name="giardinoMq" id="giardinoMq" data-slider-value="@Model.immobile.giardinoMq" data-slider-min="0" data-slider-max="1000">
+                <span id="giardinoMqCurrentSliderValLabel"></span>
+            </div>
+
+            <a class="btn btn-secondary" href="@Url.Action("MyAnnunci")" role="button">Annulla</a>
+            <input type="submit" value="Avanti" class="btn btn-primary" />
+
+                    }
+
+@Html.Partial("_ComboRegioneProvinciaComune")
+
+<script type="text/javascript">
+
+
+
+    $(document).ready(function () {
+        $("#comboRegione").on("change", comboRegioneOnChange);
+        $("#comboProvincia").on("change", comboProvinciaOnChange);
+
+        $("#MQ").oninput = function () {
+            console.log("" + this.value);
+            $("#mqCurrentSliderVal").innerHTML = this.value;
+        }
+
+
+        $("#giardinoMq").slider({ tooltip: 'always' });
+        $("#giardinoMq").on("slide", function (slideEvt) {
+            $("#giardinoMqCurrentSliderValLabel").text(slideEvt.value);
+        });
+
+        /*
+        $('#giardinoMq').slider({
+            formatter: function (value) {
+                console.log('Current value: ' + value);
+                return 'Current value: ' + value;
+            }
+        });*/
+        
     });
 
-    /*
-    $('#giardinoMq').slider({
-        formatter: function (value) {
-            console.log('Current value: ' + value);
-            return 'Current value: ' + value;
-        }
-    });*/
+
+
+
+   
 </script>

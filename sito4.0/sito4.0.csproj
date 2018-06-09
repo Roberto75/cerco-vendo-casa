@@ -924,6 +924,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\CreateModel.cs" />
     <Compile Include="Models\GalleryModel.cs" />
     <Compile Include="Models\ManageModel.cs" />
     <Compile Include="Models\ModelImmobiliareSearch.cs" />
@@ -1038,6 +1039,7 @@
     <Content Include="Views\Shared\_MyValidationSummary.cshtml" />
     <Content Include="Views\Account\_TestoPrivacy.cshtml" />
     <Content Include="Views\Account\_TestoCookies.cshtml" />
+    <Content Include="Views\Shared\_ComboRegioneProvinciaComune.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

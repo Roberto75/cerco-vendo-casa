@@ -29,15 +29,15 @@
 
     <textarea style="height: 150px;" name="testo">@Model.testo</textarea>
        
-    <div data-role="controlgrup" data-type="horizontal" data-mini="true">
-        <a href="@Url.Action("Index", "Immobiliare")" data-role="button" data-inline="true">Torna all'elenco</a>
-        <a href="@Url.Action("Details", "Immobiliare", new { id = Model.annuncioId })" data-role="button" data-inline="true">Torna all'annuncio</a>
+    <div >
+        <a class="btn btn-info" href="@Url.Action("Index", "Immobiliare")" >Torna all'elenco</a>
+        <a class="btn btn-secondary" href="@Url.Action("Details", "Immobiliare", new { id = Model.annuncioId })" >Torna all'annuncio</a>
 
         @if (Model.trattativaId != -1)
         {
-            <a href="@Url.Action("Trattativa", "Immobiliare", new { id = Model.trattativaId })" data-role="button" data-inline="true">Torna alla trattativa</a>
+            <a href="@Url.Action("Trattativa", "Immobiliare", new { id = Model.trattativaId })" class="btn btn-warning">Torna alla trattativa</a>
         }
-        <input type="submit" value="Reply" data-inline="true" />
+        <button type="submit" class="btn btn-primary"><i class="fa fa-pencil-alt fa-fw"></i>Rispondi</button>
     </div>
 }
 

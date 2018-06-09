@@ -28,23 +28,10 @@
     <li>ricezione di una <b>seconda email con una password</b> generata dal sistema.</li>
 </ol>
 <p>
-    Gentile utente la registrazione ai servizi di                     @System.Configuration.ConfigurationManager.AppSettings["application.name"]
+    Gentile utente la registrazione ai servizi di         @System.Configuration.ConfigurationManager.AppSettings["application.name"]
     consente di accere alle aree riservate del sito.
 </p>
-<p>
-    <b>Consenso ai sensi del D. Lgs. 196/03</b>
-</p>
-<p>
-    Prima di completare la registrazione, leggi la nota informativa, sulle norme che
-    tutelano la privacy e decidi se rilasciare il consenso al trattamento dei dati
-    personali.
-</p>
-<p>
-    Se lo farai, non solo potrai accedere ai servizi offerti da questo portale, ma
-    potrai anche ricevere informazioni personalizzate nella tua casella di posta
-    elettronica ed essere sempre aggiornato su tutti i nostri servizi e su eventuali
-    nuove offerte e promozioni.
-</p>
+
 
 
 
@@ -82,55 +69,71 @@
                 <input type="text" class="form-control" name="cognome" id="cognome" value="@Model.cognome">
             </div>
 
-            <div id="LiRagioneSociale">
+            <div id="LiRagioneSociale" class="form-group">
                 <label for="ragioneSociale">Ragione sociale:</label>
                 <input type="text" class="form-control" name="ragioneSociale" id="ragioneSociale" value="@Model.ragioneSociale">
             </div>
 
-            <div>
-                <label for="login">Scegli una login:</label>
-                <input type="text" class="form-control" name="login" id="login" value="@Model.login">
-            </div>
-
-            <div>
-                <label for="login">Il tuo indirizzo email attuale:</label>
-                <input type="email" class="form-control" name="email" id="email" value="@Model.email">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="login">Scegli una login:</label>
+                        <input type="text" class="form-control" name="login" id="login" value="@Model.login">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="login">Il tuo indirizzo email attuale:</label>
+                        <input type="email" class="form-control" name="email" id="email" value="@Model.email">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
 
+    <p>
+        Prima di completare la registrazione, leggi la nota informativa, sulle norme che
+        tutelano la privacy e decidi se rilasciare il consenso al trattamento dei dati
+        personali.
+    </p>
+        <p>
+            Se lo farai, non solo potrai accedere ai servizi offerti da questo portale, ma
+            potrai anche ricevere informazioni personalizzate nella tua casella di posta
+            elettronica ed essere sempre aggiornato su tutti i nostri servizi e su eventuali
+            nuove offerte e promozioni.
+        </p>
 
 
-    <div class="card">
-        <div class="card-header">
-            Condizioni del servizio
-        </div>
-        <div class="card-body">
-            <div style="overflow-y: scroll; height:300px;">
-                @Html.Partial("~/Views/Account/_TestoPrivacy.cshtml")
+        <div class="card">
+            <div class="card-header">
+                Informativa sulla privacy
             </div>
-
-
-            <div class="form-group mt-3">
-                <div class="form-check">
-                    <input type="radio" class="form-check-input" name="privacy" id="privacy-si" value="SI">
-                    <label class="form-check-label" for="privacy-si">Accetto</label>
-                    <div class="invalid-feedback">Per proseguire con la registrazione occorre dare il consenso sulla privacy</div>
+            <div class="card-body">
+                <div style="overflow-y: scroll; height:300px;">
+                    @Html.Partial("~/Views/Account/_TestoPrivacy.cshtml")
                 </div>
 
-                <div class="form-check">
-                    <input type="radio" class="form-check-input" name="privacy" id="privacy-no" value="NO">
-                    <label class="form-check-label" for="privacy-no">Non accetto</label>
+
+                <div class="form-group mt-3">
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" name="privacy" id="privacy-si" value="SI">
+                        <label class="form-check-label" for="privacy-si">Accetto</label>
+                        <div class="invalid-feedback">Per proseguire con la registrazione occorre dare il consenso sulla privacy</div>
+                    </div>
+
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" name="privacy" id="privacy-no" value="NO">
+                        <label class="form-check-label" for="privacy-no">Non accetto</label>
+                    </div>
                 </div>
+
             </div>
-
         </div>
-    </div>
 
 
-    <a class="btn btn-secondary" href="@Url.Action("Index","Home")">Annulla</a>
-    <button class="btn btn-primary" type="button"  onclick="buttonSalvaOnClick()">Prosegui con la registrazione</button>
+        <a class="btn btn-secondary" href="@Url.Action("Index","Home")">Annulla</a>
+            <button class="btn btn-primary" type="button" onclick="buttonSalvaOnClick()">Prosegui con la registrazione</button>
 
 }
 
@@ -255,7 +258,7 @@
     }
 
 
-    $(document).on("pageinit", function () {
+    $(document).ready(function () {
         // alert("pageinit: " + $("#personaFisica").is(':checked'));
 
         tipoUtenza();

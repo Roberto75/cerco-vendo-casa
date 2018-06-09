@@ -12,6 +12,9 @@ namespace MyWebApplication.Controllers
     {
         private Annunci.ImmobiliareManager _manager = new Annunci.ImmobiliareManager("immobiliare");
 
+        private MyManagerCSharp.RegioniProvinceComuniManager regioniProvinceComuniManager = new MyManagerCSharp.RegioniProvinceComuniManager("RegioniProvinceComuni");
+
+
         public const int MaxWidthImage = 500;
         public const int MaxHeightImage = 500;
 
@@ -19,18 +22,27 @@ namespace MyWebApplication.Controllers
         public const int HeightThumbnail = 200;
 
         [AllowAnonymous]
-        public ActionResult Index(Annunci.Models.SearchImmobili model, int page = 1, string sort = "ANNUNCIO.date_added", string sortDir = "DESC", int pageSize = 10)
+        public ActionResult Index(Annunci.Models.SearchImmobili model)
         {
-            int totalRecords;
-
             readRequestParameters(ref model);
 
-            List<Annunci.Models.Immobile> risultato;
+
 
             _manager.mOpenConnection();
             try
             {
-                risultato = _manager.getList(model, out totalRecords, model.PageSize, model.PageNumber, model.Sort, model.SortDir);
+                model.comboRegioni = regioniProvinceComuniManager.getComboRegioni();
+                if (model.filter.regioneId != null)
+                {
+                    model.comboProvince = regioniProvinceComuniManager.getComboProvince((int)model.filter.regioneId);
+                }
+
+                if (model.filter.provinciaId != null)
+                {
+                    model.comboComuni = regioniProvinceComuniManager.getComboComuni(model.filter.provinciaId);
+                }
+
+                _manager.getList(model);
             }
             finally
             {
@@ -57,8 +69,8 @@ namespace MyWebApplication.Controllers
 
             // model.PageSize = pageSize;
             //model.PageNumber = page;
-            model.Immobili = risultato;
-            model.TotalRows = totalRecords;
+            //model.Immobili = risultato;
+            // model.TotalRows = totalRecords;
             //model.Sort = sort;
             //model.SortDir = sortDir;
 
@@ -206,15 +218,15 @@ namespace MyWebApplication.Controllers
 
             readRequestParameters(ref model);
 
-            int totalRecords;
+
 
             _manager.mOpenConnection();
 
-            List<Annunci.Models.Immobile> risultato;
+            List<Annunci.Models.Immobile> risultato = new List<Annunci.Models.Immobile>();
 
             try
             {
-                risultato = _manager.getList(model, out totalRecords, 0, 0, "ANNUNCIO.date_added", "");
+                //risultato = _manager.getList(model, out totalRecords, 0, 0, "ANNUNCIO.date_added", "");
             }
             finally
             {
@@ -317,10 +329,14 @@ namespace MyWebApplication.Controllers
 
 
         [Authorize]
-        public ActionResult Create(Annunci.Models.Immobile model)
+        public ActionResult Create(Models.CreateModel model)
         {
-            Debug.WriteLine(String.Format("Categoria: {0}", model.categoria));
-            Debug.WriteLine(String.Format("Tipo annuncio: {0}", model.immobile));
+            model.comboRegioni = regioniProvinceComuniManager.getComboRegioni();
+
+            model.immobile = new Annunci.Models.Immobile();
+
+            Debug.WriteLine(String.Format("Categoria: {0}", model.immobile.categoria));
+            Debug.WriteLine(String.Format("Tipo annuncio: {0}", model.immobile.immobile));
             return View(model);
         }
 

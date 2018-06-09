@@ -1,0 +1,65 @@
+﻿<script type="text/javascript">
+
+    function comboRegioneOnChange(e) {
+        //console.log("comboRegioneOnChange", e);
+        //let selected = $(this).find("option:selected").val();
+        let selectedValue = $(this).val();
+        //var selectedText = $(this).find(":selected").text();
+        console.log("comboRegioneOnChange selectedValue:" + selectedValue);
+
+        $('#comboProvincia').empty();
+        $('#comboProvincia').append($('<option />', { value: "", text: "---" }));
+        $('#comboProvincia').val("").change();
+
+      //  $('#comboComune').empty();
+//        $('#comboComune').append($('<option />', { value: "", text: "---" }));
+        //$('#comboComune').val("").change();
+
+        if (selectedValue === "") {
+            return;
+        }
+
+
+        $.getJSON('@Url.Action("GetProvince", "RegioneProvinciaComune")', { regioneId: selectedValue }, function (dati) {
+
+            $.each(dati, function (index, item) {
+                //console.log(item.Value)
+                $('#comboProvincia').append($('<option />', { value: item.value, text: item.text }));
+            });
+
+        });
+    }
+
+    function comboProvinciaOnChange(e) {
+        //console.log("comboProvinciaOnChange", e);
+
+        let selectedValue = $(this).val();
+        let selectedText = $(this).find(":selected").text();
+        console.log("comboProvinciaOnChange selectedValue:" + selectedValue);
+        console.log("comboProvinciaOnChange selectedText:" + selectedText);
+
+        $('#comboComune').empty();
+        $('#comboComune').append($('<option />', { value: "", text: "---" }));
+        $('#comboComune').val("").change();
+
+        if (selectedValue === "") {
+            return;
+        }
+
+        $.getJSON('@Url.Action("GetComuni", "RegioneProvinciaComune")', { provinciaId: selectedValue }, function (dati) {
+
+            $.each(dati, function (index, item) {
+                //console.log(item.Value)
+                if (item.text === selectedText) {
+                    console.log("TROVATO il comune uguale alla provincia");
+                    $('#comboComune').append($('<option />', { value: item.value, text: item.text , selected: true}));
+                } else {
+                    $('#comboComune').append($('<option />', { value: item.value, text: item.text }));
+                }
+
+            });
+        });
+
+    }
+
+</script>
