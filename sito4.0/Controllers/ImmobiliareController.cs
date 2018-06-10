@@ -434,8 +434,9 @@ namespace MyWebApplication.Controllers
             if (!ModelState.IsValid)
             {
 
-               // var error = ModelState.SelectMany(x => x.Value.Errors);
-                foreach (var value in ModelState.Values) { 
+                // var error = ModelState.SelectMany(x => x.Value.Errors);
+                foreach (var value in ModelState.Values)
+                {
                     foreach (var merror in value.Errors)
                     {
 
@@ -894,16 +895,41 @@ namespace MyWebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(long? annuncioId)
         {
-            if (annuncioId != null)
+
+            if (annuncioId == null)
             {
-                Debug.WriteLine("Delete MyAnnuncio: " + annuncioId);
-                ViewData["Tipo"] = "Annuncio";
-                ViewData["MyId"] = annuncioId;
-
-
-                ViewBag.Title = "Cerco Vendo Casa: Cancellazione annuncio";
+                return HttpNotFound();
             }
-            return View();
+            Debug.WriteLine("Delete MyAnnuncio: " + annuncioId);
+
+
+            Annunci.Models.Immobile immobile;
+            try
+            {
+                _manager.mOpenConnection();
+
+                immobile = _manager.getImmobile((long)annuncioId);
+                if (immobile == null)
+                {
+                    return HttpNotFound();
+                }
+
+
+            }
+            finally
+            {
+                _manager.mCloseConnection();
+            }
+
+
+            Debug.WriteLine("Delete MyAnnuncio: " + annuncioId);
+            ViewData["Tipo"] = "Annuncio";
+            ViewData["MyId"] = annuncioId;
+
+
+            ViewBag.Title = "Cerco Vendo Casa: Cancellazione annuncio";
+
+            return View(immobile);
         }
 
 

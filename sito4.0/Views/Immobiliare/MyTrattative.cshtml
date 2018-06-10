@@ -12,7 +12,7 @@
     In questa sezione sono elencate le richieste di compravendita che hai eseguito verso altri utenti.
 </p>
 
-<p>Se invece desideri vedere le <b>risposte ai tuoi annunci</b>, clicca <a  href="@Url.Action("MyAnnunci", "Immobiliare")"  >qui</a>.</p>
+<p>Se invece desideri vedere le <b>risposte ai tuoi annunci</b>, clicca <a href="@Url.Action("MyAnnunci", "Immobiliare")">qui</a>.</p>
 
 
 
@@ -22,8 +22,8 @@
 }
 else
 {
- 
-    <table data-role="table" id="MyTable" data-mode="reflow" class="ui-responsive table-stroke">
+
+    <table id="MyTable" data-mode="reflow" class="@MyConstants.TABLE_STYLE">
         <thead>
             <tr>
                 <th></th>
@@ -44,29 +44,25 @@ else
             {
 
                 <tr>
-                    <th>@if (t.stato == Annunci.Models.Trattativa.StatoTrattativa.Attiva)
-                        {
+                    <th>
+                        @if (t.stato == Annunci.Models.Trattativa.StatoTrattativa.Attiva)
+                    {
                         <img src="@Url.Content("~/Content/Images/Shared/green2_16x16.png")" alt="@t.stato.ToString()" />
-                        }
-                        else
-                        {
+                    }
+                    else
+                    {
                         <img src="@Url.Content("~/Content/Images/Shared/red2_16x16.png")" alt="@t.stato.ToString()" />
-                        }
-
-
-
-
-
-                    </th>
-                    <th>@t.stato</th>
-                    <td>@t.categoriaImmobile </td>
-                    <td>@t.dateAdded.ToShortDateString()</td>
-                    <td>@t.tipoImmobile</td>
-                    <td>@t.login</td>
-                    <td>@t.prezzo.ToString("C")</td>
-                    <td><a href="/Immobiliare/Trattativa/@t.trattativaId" data-role="button"  data-iconpos="notext" data-inline="true" data-theme="b" data-icon="info">Info</a></td>
-                    <td><a href="#" data-role="button" data-iconpos="notext" data-inline="true" data-theme="b" data-icon="delete">Delete</a></td>
-                </tr>
+                    }
+                </th>
+                <th>@t.stato</th>
+                <td>@t.categoriaImmobile </td>
+                <td>@t.dateAdded.ToShortDateString()</td>
+                <td>@t.tipoImmobile</td>
+                <td>@t.login</td>
+                <td>@t.prezzo.ToString("C")</td>
+                <td><a href="/Immobiliare/Trattativa/@t.trattativaId" data-role="button" data-iconpos="notext" data-inline="true" data-theme="b" data-icon="info">Info</a></td>
+                <td><a href="#" data-role="button" data-iconpos="notext" data-inline="true" data-theme="b" data-icon="delete">Delete</a></td>
+            </tr>
 
             }
         </tbody>
