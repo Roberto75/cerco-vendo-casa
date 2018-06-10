@@ -345,7 +345,7 @@ namespace MyWebApplication.Controllers
         [ActionName("Create")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreatePost(Annunci.Models.Immobile model)
+        public ActionResult CreatePost(Models.CreateModel model)
         {
 
 
@@ -367,33 +367,35 @@ namespace MyWebApplication.Controllers
 
 
 
-            if (model.categoria == null)
+            if (model.immobile.categoria == null)
             {
                 ModelState.AddModelError("", "La categoria è un campo obbligatorio");
             }
 
-            if (model.immobile == null)
+            if (model.immobile.immobile == null)
             {
                 ModelState.AddModelError("", "Il tipo di immobile è un campo obbligatorio");
             }
 
-            if (model.regioneId == -1)
+            if (model.immobile.regioneId == null || model.immobile.regioneId == -1)
             {
                 ModelState.AddModelError("Specificare la località dell'immobile", "Specificare la località dell'immobile. La regione è un campo obbligatorio");
             }
 
-            if (String.IsNullOrEmpty(model.provinciaId) || model.provinciaId == "-1" || model.provinciaId == "---")
+            if (String.IsNullOrEmpty(model.immobile.provinciaId) || model.immobile.provinciaId == "-1" || model.immobile.provinciaId == "---")
             {
                 ModelState.AddModelError("Specificare la località dell'immobile", "Specificare la località dell'immobile. La provincia è un campo obbligatorio");
             }
 
-            if (String.IsNullOrEmpty(model.comuneId) || model.comuneId == "-1" || model.comuneId == "---")
+            if (String.IsNullOrEmpty(model.immobile.comuneId) || model.immobile.comuneId == "-1" || model.immobile.comuneId == "---")
             {
                 ModelState.AddModelError("Specificare la località dell'immobile", "Specificare la località dell'immobile. Il comune è un campo obbligatorio");
             }
 
             if (!ModelState.IsValid)
             {
+                model.comboRegioni = regioniProvinceComuniManager.getComboRegioni();
+
                 return View(model);
             }
 
@@ -415,6 +417,8 @@ namespace MyWebApplication.Controllers
             //    }
             //}
 
+            model.comboComuni = null;
+            model.comboProvince = null;
 
             return RedirectToAction("CreateStep2", "Immobiliare", model);
         }
@@ -422,10 +426,26 @@ namespace MyWebApplication.Controllers
 
         [Authorize]
         [HttpGet]
-        public ActionResult CreateStep2(Annunci.Models.Immobile model)
+        public ActionResult CreateStep2(Models.CreateModel model)
         {
+            //model.comboProvince = new List<MyManagerCSharp.Models.MyItem>();
+            //model.comboComuni = new List<MyManagerCSharp.Models.MyItem>();
+
             if (!ModelState.IsValid)
             {
+
+               // var error = ModelState.SelectMany(x => x.Value.Errors);
+                foreach (var value in ModelState.Values) { 
+                    foreach (var merror in value.Errors)
+                    {
+
+                        //throw new Exception(merror.ErrorMessage, merror.Exception);
+                        Debug.WriteLine(merror.ErrorMessage + merror.Exception);
+
+                    }
+
+                }
+
                 return RedirectToAction("Create", "Immobiliare", model);
             }
 
@@ -437,7 +457,7 @@ namespace MyWebApplication.Controllers
         [HttpPost]
         [ActionName("CreateStep2")]
         [ValidateInput(false)]
-        public ActionResult CreateStep2Post(Annunci.Models.Immobile model)
+        public ActionResult CreateStep2Post(Models.CreateModel model)
         {
             Debug.WriteLine("MyAction: " + Request["MyAction"]);
 

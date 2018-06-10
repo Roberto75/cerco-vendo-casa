@@ -625,7 +625,7 @@ namespace MyWebApplication.Controllers
                         //*************
                         //invio un'email di conferma registrazione
 
-                        MyManagerCSharp.MailMessageManager mail = new MyManagerCSharp.MailMessageManager(System.Configuration.ConfigurationManager.AppSettings["application.url"], System.Configuration.ConfigurationManager.AppSettings["application.name"]);
+                        Annunci.ImmobiliareMailMessageManager mail = new Annunci.ImmobiliareMailMessageManager(System.Configuration.ConfigurationManager.AppSettings["application.url"], System.Configuration.ConfigurationManager.AppSettings["application.name"]);
 
                         mail.Subject = System.Configuration.ConfigurationManager.AppSettings["application.name"] + " - Registrazione Portale";
                         mail.To(model.email);

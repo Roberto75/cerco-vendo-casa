@@ -36,21 +36,20 @@
 @using (Html.BeginForm("Create", "Immobiliare", FormMethod.Post, new { id = "MyForm" }))
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(false)
-
+ 
     <h3>Informazioni generali</h3>
 
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
                 <label for="categoria">Categoria*:</label>
-                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.Categorie), Model.immobile.categoria.ToString(), "categoria", true)
+                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.Categorie), Model.immobile.categoria.ToString(), "immobile.categoria", true)
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="immobile">Tipo di immobile*:</label>
-                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoImmobile), Model.immobile.immobile.ToString(), "immobile", true)
+                @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoImmobile), Model.immobile.immobile.ToString(), "immobile.immobile", true)
             </div>
         </div>
     </div>
@@ -78,43 +77,43 @@
         <div class="col-md-4">
 
             <div class="form-group">
-                <label for="comboRegione">Regione</label>
-                <select class="form-control mb-3" id="comboRegione" name="filter.regioneId">
+                <label for="comboRegione">Regione*</label>
+                <select class="form-control mb-3" id="comboRegione" name="immobile.regioneId">
                     <option value="">---</option>
                     @foreach (MyManagerCSharp.Models.MyItem item in Model.comboRegioni)
                     {
                         <option value="@item.Value" @(item.Value == Model.immobile.regioneId.ToString() ? "selected" : "")>@item.Text</option>
                     }
                 </select>
-                <input type="hidden" id="regione" name="filter.regione" />
+                <input type="hidden" id="regione" name="immobile.regione" />
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="form-group">
-                <label for="comboProvincia">Provincia</label>
-                <select class="form-control mb-3" id="comboProvincia" name="filter.provinciaId">
+                <label for="comboProvincia">Provincia*</label>
+                <select class="form-control mb-3" id="comboProvincia" name="immobile.provinciaId">
                     <option value="">---</option>
                     @foreach (MyManagerCSharp.Models.MyItem item in Model.comboProvince)
                     {
                         <option value="@item.Value" @(item.Value == Model.immobile.provinciaId ? "selected" : "")>@item.Text</option>
                     }
                 </select>
-                <input type="hidden" id="provincia" name="filter.provincia" />
+                <input type="hidden" id="provincia" name="immobile.provincia" />
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="form-group">
-                <label for="comboComune">Comune</label>
-                <select class="form-control mb-3" id="comboComune" name="filter.comuneId">
+                <label for="comboComune">Comune*</label>
+                <select class="form-control mb-3" id="comboComune" name="immobile.comuneId">
                     <option value="">---</option>
                     @foreach (MyManagerCSharp.Models.MyItem item in Model.comboComuni)
                     {
                         <option value="@item.Value" @(item.Value == Model.immobile.comuneId ? "selected" : "")>@item.Text</option>
                     }
                 </select>
-                <input type="hidden" id="comune" name="filter.comune" />
+                <input type="hidden" id="comune" name="immobile.comune" />
             </div>
 
         </div>
