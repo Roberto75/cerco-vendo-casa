@@ -314,7 +314,7 @@
             </div>
 
             <a class="btn btn-secondary" href="@Url.Action("MyAnnunci")" role="button">Annulla</a>
-            <input type="submit" value="Avanti" class="btn btn-primary" />
+            <button type="button" class="btn btn-primary"   onclick="buttonSalvaOnClick()">Avanti</button>
 
                     }
 
@@ -351,6 +351,34 @@
 
 
 
+    function buttonSalvaOnClick() {
+        console.log("buttonSalvaOnClick");
+        let check = true;
 
+        if (check === false) {
+            return;
+        }
+
+        let selectedText;
+        if ($("#comboRegione").val() !== '') {
+            selectedText = $("#comboRegione").find(":selected").text();
+            $("#regione").val(selectedText);
+
+        }
+
+        if ($("#comboProvincia").val() !== '') {
+            selectedText = $("#comboProvincia").find(":selected").text();
+            $("#provincia").val(selectedText);
+        }
+
+        if ($("#comboComune").val() !== '') {
+            selectedText = $("#comboComune").find(":selected").text();
+            $("#comune").val(selectedText);
+        }
+
+
+
+        $("form").submit();
+    }
    
 </script>

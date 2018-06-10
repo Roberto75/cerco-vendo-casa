@@ -420,13 +420,13 @@ namespace MyWebApplication.Controllers
             model.comboComuni = null;
             model.comboProvince = null;
 
-            return RedirectToAction("CreateStep2", "Immobiliare", model);
+            return RedirectToAction("CreateStep2", "Immobiliare", model.immobile);
         }
 
 
         [Authorize]
         [HttpGet]
-        public ActionResult CreateStep2(Models.CreateModel model)
+        public ActionResult CreateStep2(Annunci.Models.Immobile model)
         {
             //model.comboProvince = new List<MyManagerCSharp.Models.MyItem>();
             //model.comboComuni = new List<MyManagerCSharp.Models.MyItem>();
@@ -507,6 +507,9 @@ namespace MyWebApplication.Controllers
                 return RedirectToAction("Create", "Immobiliare", model);
             }
 
+
+            Debug.WriteLine("longitude: " + model.longitude);
+            Debug.WriteLine("latitude: " + model.latitude);
 
             if (!ModelState.IsValid)
             {

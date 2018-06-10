@@ -6,6 +6,7 @@ using System.Web;
 using System.Diagnostics;
 using MyUsers;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace MyWebApplication.Controllers
 {
@@ -18,7 +19,13 @@ namespace MyWebApplication.Controllers
         {
             base.Initialize(requestContext);
 
-            if (Session["MySessionData"] != null)
+
+            if (User.Identity.IsAuthenticated && Session != null && Session["MySessionData"] == null)
+            {
+                FormsAuthentication.SignOut();
+            }
+
+            if (Session != null && Session["MySessionData"] != null)
             {
                 MySessionData = (Session["MySessionData"] as MyManagerCSharp.MySessionData);
             }

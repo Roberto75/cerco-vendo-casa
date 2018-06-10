@@ -35,9 +35,11 @@ namespace UnitTestProject
         [TestMethod]
         public void Encrypt()
         {
-            _encrypt(@"cerco-vendo-casa.it");
+            //_encrypt(@"cerco-vendo-casa.it");
 
-            _encrypt("password");
+            //_encrypt("password");
+
+            _encrypt("");
         }
 
 
