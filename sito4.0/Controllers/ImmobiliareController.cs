@@ -146,7 +146,7 @@ namespace MyWebApplication.Controllers
                 if (User.Identity.IsAuthenticated)
                 {
                     //if ((User.Identity as MyUsers.MyCustomIdentity).UserId != immobile.userId)
-                    if (MySessionData.UserId != immobile.userId)
+                    if (MySessionData != null && MySessionData.UserId != immobile.userId)
                     {
                         //se non si tratta di un mio annuncio ...
                         _manager.annuncioAddClick(id);
@@ -1192,8 +1192,9 @@ namespace MyWebApplication.Controllers
                 //    _manager.insertPhoto(folder & IO.Path.GetFileName(AsyncFileUpload1.FileName), "", _externalId, CType(Session("SessionData"), MyManager.SessionData).getUserId)
                 //End If
 
-                m.insertPhoto(folder + System.IO.Path.GetFileName(MyFile.FileName), "", (long)annuncioId, (User.Identity as MyUsers.MyCustomIdentity).UserId);
+                //m.insertPhoto(folder + System.IO.Path.GetFileName(MyFile.FileName), "", (long)annuncioId, (User.Identity as MyUsers.MyCustomIdentity).UserId);
 
+                m.insertPhoto(folder + System.IO.Path.GetFileName(MyFile.FileName), "", (long)annuncioId, MySessionData.UserId);
 
 
             }
@@ -1237,5 +1238,36 @@ namespace MyWebApplication.Controllers
             model.messaggio = "Operazione conlusa con successo";
             return Json(model);
         }
+
+
+        [HttpPost]
+        public JsonResult DeleteImage(long? id)
+        {
+            if (id == null)
+            {
+                throw new ArgumentNullException("id");
+            }
+
+            Debug.WriteLine(String.Format("ExternalId: {0}", id));
+
+            Annunci.PhotoManager m = new Annunci.PhotoManager(_manager.mGetConnection());
+
+            try
+            {
+                m.mOpenConnection();
+                m.deletePhoto((long)id, Server.MapPath("~"));
+            }
+            finally
+            {
+                m.mCloseConnection();
+            }
+
+
+            MyWebApplication.Models.JsonMessageModel model = new Models.JsonMessageModel();
+            model.esito = "Success";
+            model.messaggio = "Operazione conlusa con successo";
+            return Json(model);
+        }
+
     }
 }

@@ -6,6 +6,7 @@ using System.Web.UI;
 
 using System.Web.UI.WebControls;
 using MyManagerCSharp;
+using Annunci;
 
 namespace MyWebApplication.Tasks
 {
@@ -13,7 +14,9 @@ namespace MyWebApplication.Tasks
     {
 
 
-        private string _pathXmlFile = "~/Public/RevoAgent/RevoAgent.xml";
+        //private string _pathXmlFile = "~/Public/RevoAgent/RevoAgent.xml";
+        private string _pathXmlFile = "~/Public/RevoAgent/Test01.xml";
+
         private string _pathCategorieXML = "~/Public/RevoAgent/categorie.xml";
         private string _pathLogFile = "~/Public/RevoAgent/RevoAgent.log";
         private string _pathLogFileException = "~/Public/RevoAgent/RevoAgentException.log";
@@ -58,7 +61,9 @@ namespace MyWebApplication.Tasks
             forceUpdate = false;
 
             bool executeDownload;
-            executeDownload = true;
+            //executeDownload = true;
+            executeDownload = false;
+
 
             try
             {
@@ -106,7 +111,7 @@ namespace MyWebApplication.Tasks
                 //'*** EMAIL ***
 
 
-                MyManagerCSharp.MailMessageManager mail = new MyManagerCSharp.MailMessageManager(System.Configuration.ConfigurationManager.AppSettings["application.url"], System.Configuration.ConfigurationManager.AppSettings["application.name"]);
+                ImmobiliareMailMessageManager mail = new ImmobiliareMailMessageManager(System.Configuration.ConfigurationManager.AppSettings["application.url"], System.Configuration.ConfigurationManager.AppSettings["application.name"]);
                 if (isTestMode)
                 {
                     mail.Subject = "Test task import RevoAgent";

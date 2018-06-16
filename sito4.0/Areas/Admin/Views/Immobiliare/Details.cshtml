@@ -4,7 +4,7 @@
     Layout = "~/Areas/Admin/Views/Shared/MasterPageAdminMobile.cshtml";
 }
 
-<h2>Details: @Model.Utente.userId</h2>
+<h2>Details: <a href="@Url.Action("Details","Users", new { id = Model.Utente.userId })">@Model.Utente.userId</a></h2>
 
 <div class="ui-grid-a">
     <div class="ui-block-a">
@@ -30,6 +30,7 @@
         <div class="ui-bar ui-bar-a">Data Stato:</div>
         <div class="ui-bar ui-bar-a">Stato ID:</div>
         <div class="ui-bar ui-bar-a">Nota:</div>
+        <div class="ui-bar ui-bar-a">Ultimo annuncio pubblicato:</div>
     </div>
     <div class="ui-block-b">
         <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.externalId)</div>
@@ -37,6 +38,7 @@
         <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.dateStato)</div>
         <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.statoId.ToString())</div>
         <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.nota)</div>
+        <div class="ui-bar ui-bar-c">Data pubblicazion + AnnuncioId </div>
     </div>
 </div>
 

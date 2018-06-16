@@ -9,61 +9,73 @@
 
 <p>In questa pagina puoi modificare il testo del tuo annuncio, aggiungere delle <b>photo</b>  e visualizzare le trattative in corso.</p>
 
-<div data-role="tabs" id="tabs">
-    <div data-role="navbar">
-        <ul>
-            <li><a href="#tab-1" data-ajax="false">Info</a></li>
-            <li><a href="#tab-2" data-ajax="false">Click & Prezzo</a></li>
-            <li><a href="#tab-3" data-ajax="false">Trattative</a></li>
-            <li><a href="#tab-4" data-ajax="false">Descrizione</a></li>
-            <li><a href="#tab-5" data-ajax="false">Photo</a></li>
-        </ul>
-    </div>
-    <div id="tab-1" class="ui-body-d ui-content">
+
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item"><a href="#tab-1" id="tab-1-tab" class="nav-link active" role="tab" data-toggle="tab" aria-controls="tab-1" aria-selected="true">Info</a></li>
+    <li class="nav-item"><a href="#tab-2" id="tab-2-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="tab-2" aria-selected="false">Click & Prezzo</a></li>
+    <li class="nav-item"><a href="#tab-3" id="tab-3-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="tab-3" aria-selected="false">Trattative</a></li>
+    <li class="nav-item"><a href="#tab-4" id="tab-4-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="tab-4" aria-selected="false">Descrizione</a></li>
+    <li class="nav-item"><a href="#tab-5" id="tab-5-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="tab-5" aria-selected="false">Photo</a></li>
+</ul>
+
+
+<div class="tab-content mb-3 mt-3" id="myTabContent">
+    <div id="tab-1" class="tab-pane fade show active" role="tabpanel" aria-labelledby="tab-1-tab">
         @{Html.RenderPartial("TabInfoImmobile", Model.immobile);}
     </div>
-    <div id="tab-2" class="ui-body-d ui-content">
-        <h3>Statistiche sui click </h3>
-        <p>In questa pagina puoi monitare il numero di volte che viene visualizzato il tuo annuncio.</p>
-        <p>Hai la possibilità di azzerare il contatore parziale.</p>
+    <div id="tab-2" class="tab-pane fade" role="tabpanel" aria-labelledby="tab-2">
 
-        <ul data-role="listview" data-count-theme="c" data-inset="true">
-            <li data-icon="false"><a href="#">Contatore Totale <span class="ui-li-count">@Model.immobile.countClick</span></a></li>
-            <li data-icon="false"><a href="#">Contatore Parziale <span id="contatoreParziale" class="ui-li-count">@Model.immobile.countClickParziale</span></a></li>
-            <li data-icon="false"><a href="#">L&#39;ultimo click è stato eseguito il : <span class="ui-li-count">@Model.immobile.dateLastClick.ToShortDateString()</span></a></li>
-        </ul>
+        <div class="card mb-3">
+            <div class="card-header">Statistiche sui click</div>
+            <div class="card-body">
+                <p>In questa pagina puoi monitare il numero di volte che viene visualizzato il tuo annuncio.</p>
+                <p>Hai la possibilità di azzerare il contatore parziale.</p>
 
-        @using (Html.BeginForm("ResetContatore", "Immobiliare", FormMethod.Post, new { id = "MyFormResetContatore" }))
-        {
-            @Html.AntiForgeryToken()
-            <input type ="hidden" name ="annuncioId" value ="@Model.immobile.immobileId" />  
-            <input type="button" value="Reset del contatore parziale" data-inline="true" data-mini="true" onclick="javascript: MyAsyncReset();" />
-        }
+                <p class="badge badge-pill badge-info">Contatore Totale <span class="badge badge-light">@Model.immobile.countClick</span></p>
+                <h2 class="badge badge-pill badge-warning">Contatore Parziale <span class="badge badge-light" id="contatoreParziale">@Model.immobile.countClickParziale</span></h2>
+                <p class="badge badge-pill badge-info">L&#39;ultimo click è stato eseguito il <span class="badge badge-light">@MyHelper.decodeNull(Model.immobile.dateLastClick)</span></p>
 
 
-        <h3>Aggiorna il prezzo</h3>
-        <p>In questa sezione hai la possibilià di <b>aggiornare il prezzo</b> del tuo annuncio.</p>
-        <p>Questa modifica viene notificata solo gli utenti in trattativa, tramite un messaggio email.</p>
-        @using (Html.BeginForm("UpdatePrezzo", "Immobiliare", FormMethod.Post, new { id = "MyFormUpdatePrezzo" }))
-        {
-            @Html.AntiForgeryToken()
-            
-            <label>Prezzo attuale € @Model.immobile.prezzo.ToString("N2")</label>
-           
-            
-            <div data-role="fieldcontain">
-                <label for="nuovoPrezzo">Nuovo valore (nel seguente formato: 12345,00) €:</label>
-                <input type="number" id="nuovoPrezzo" name="nuovoPrezzo" pattern="[0-9]+([,\.][0-9]+)?"  required="required" step="0.01" min="0" value="@Model.immobile.prezzo.ToString("N2").Replace(".", "").Replace(",", ".")" />
+                @using (Html.BeginForm("ResetContatore", "Immobiliare", FormMethod.Post, new { id = "MyFormResetContatore" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="annuncioId" value="@Model.immobile.immobileId" />
+                    <input type="button" class="btn btn-primary float-right" value="Reset del contatore parziale" onclick="javascript: MyAsyncReset();" />
+                }
             </div>
-                
-            <input type ="hidden" name ="annuncioId" value ="@Model.immobile.immobileId" />
-            <input type="submit" value="Modifica il prezzo" data-inline="true" data-mini="true" onclick="return updatePrezzo();" />
-        }
+        </div>
+
+        <div class="card">
+            <div class="card-header">Aggiorna il prezzo</div>
+            <div class="card-body">
+                <p>In questa sezione hai la possibilià di <b>aggiornare il prezzo</b> del tuo annuncio.</p>
+                <p>Questa modifica viene notificata solo gli utenti in trattativa, tramite un messaggio email.</p>
+                @using (Html.BeginForm("UpdatePrezzo", "Immobiliare", FormMethod.Post, new { id = "MyFormUpdatePrezzo" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <label>Prezzo attuale € @Model.immobile.prezzo.ToString("N2")</label>
+
+
+                    <div data-role="fieldcontain">
+                        <label for="nuovoPrezzo">Nuovo valore (nel seguente formato: 12345,00) €:</label>
+                        <input type="number" id="nuovoPrezzo" name="nuovoPrezzo" pattern="[0-9]+([,\.][0-9]+)?" required="required" step="0.01" min="0" value="@Model.immobile.prezzo.ToString("N2").Replace(".", "").Replace(",", ".")" />
+                    </div>
+
+                    <input type="hidden" name="annuncioId" value="@Model.immobile.immobileId" />
+                    <input type="submit" class="btn btn-primary float-right" value="Modifica il prezzo" onclick="return updatePrezzo();" />
+                }
+            </div>
+        </div>
     </div>
-    <div id="tab-3" class="ui-body-d ui-content">
+
+
+    <div id="tab-3" class="tab-pane fade" role="tabpanel" aria-labelledby="tab-3-tab">
         <h3>Trattative in corso con altri utenti</h3>
     </div>
-    <div id="tab-4" class="ui-body-d ui-content">
+
+    <div id="tab-4" class="tab-pane fade" role="tabpanel" aria-labelledby="tab-4-tab">
         <p>La modifica del testo del annuncio viene notificata a tutti gli utenti in trattativa, tramite un messaggio email.</p>
 
 
@@ -78,15 +90,16 @@
 
             using (Html.BeginForm("UpdateNota", "Immobiliare", FormMethod.Post, new { id = "MyFormUpdateNota" }))
             {
-            @Html.AntiForgeryToken()
-            <textarea name="nota" id="nota">@Model.immobile.nota  </textarea>
-
-            <input type ="hidden" name ="annuncioId" value ="@Model.immobile.immobileId" />               
-            <input type="submit" value="Modifica la nota" data-inline="true" data-mini="true" onclick="return confirm('Tutti gli utenti in trattativa con questo annuncio verranno notificati della modifica tramite un messaggio email. Confermare la modifica?')" />
+                @Html.AntiForgeryToken()
+                <textarea name="nota" id="nota">@Model.immobile.nota  </textarea>
+                <br />
+                <input type="hidden" name="annuncioId" value="@Model.immobile.immobileId" />
+                <input type="submit" value="Modifica la nota" class="btn btn-primary float-right" onclick="return confirm('Tutti gli utenti in trattativa con questo annuncio verranno notificati della modifica tramite un messaggio email. Confermare la modifica?')" />
             }
         }
     </div>
-    <div id="tab-5" class="ui-body-d ui-content">
+
+    <div id="tab-5" class="tab-pane fade" role="tabpanel" aria-labelledby="tab-5-tab">
         <h3>Photo</h3>
         @if (Model.immobile.sourceId > 0)
         {
@@ -94,32 +107,36 @@
         }
         else
         {
-            
+
             <p>Clicca sul bottone per aggiungere una nuova immagine: </p>
             <p>
                 Le immagini con dimensione maggiore di @MyWebApplication.Controllers.ImmobiliareController.MaxWidthImage x @MyWebApplication.Controllers.ImmobiliareController.MaxHeightImage (WxH) verranno automaticamente ridimensionate.
-    <br />
+                <br />
                 Sono ammessi file con estenzione Gif, Jpeg e Png.
             </p>
 
-   
+
 
             <div id="MyGalleryEdit">
                 @{
-            MyWebApplication.Models.GalleryModel modelGallery = new MyWebApplication.Models.GalleryModel();
-            modelGallery.photos = Model.photos;
-            modelGallery.externalId = Model.immobile.immobileId;
+                    MyWebApplication.Models.GalleryModel modelGallery = new MyWebApplication.Models.GalleryModel();
+                    modelGallery.photos = Model.photos;
+                    modelGallery.externalId = Model.immobile.immobileId;
 
-            Html.RenderPartial("~/Views/Shared/GalleryEdit.cshtml", modelGallery);
+                    Html.RenderPartial("~/Views/Shared/GalleryEdit.cshtml", modelGallery);
                 }
             </div>
-        }
+                    }
     </div>
 </div>
 
 
 
-<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+
+
+
+
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 <script type="text/javascript">
     tinymce.init({
         mode: "exact",
@@ -130,9 +147,9 @@
 
 
 
-<div data-role="controlgrup" data-type="horizontal" data-mini="true">
-    <a href="@Url.Action("MyAnnunci", "Immobiliare")" data-role="button" data-inline="true">Torna all'elenco</a>
-</div>
+
+<a class="btn btn-secondary" href="@Url.Action("MyAnnunci", "Immobiliare")">Torna all'elenco</a>
+
 
 
 
@@ -147,7 +164,7 @@
             $.post('@Url.Action("ResetContatore", "Immobiliare")', data, function (risposta) {
                 //alert("Risposta: " + risposta.esito);
                 if (risposta.esito == "Success") {
-                   // alert("Risposta: " + risposta.esito);
+                    // alert("Risposta: " + risposta.esito);
                     $("#contatoreParziale").text("0");
                 }
             });
@@ -156,7 +173,7 @@
 
 
     function updatePrezzo() {
-       // alert("updatePrezzo" + isNaN(parseFloat($("#nuovoPrezzo").val())));
+        // alert("updatePrezzo" + isNaN(parseFloat($("#nuovoPrezzo").val())));
 
         if (isNaN(parseFloat($("#nuovoPrezzo").val()))) {
             alert("Fomato non corretto. Es: 1234,00");
@@ -168,14 +185,14 @@
 
 
         var messaggio;
-        messaggio = "Nuovo importo: " + num.replace(".",",") + '\n\r';
+        messaggio = "Nuovo importo: " + num.replace(".", ",") + '\n\r';
 
-        if (!confirm( messaggio + 'Tutti gli utenti in trattativa con questo annuncio verranno notificati della modifica tramite un messaggio email. Confermare la modifica?')) {
+        if (!confirm(messaggio + 'Tutti gli utenti in trattativa con questo annuncio verranno notificati della modifica tramite un messaggio email. Confermare la modifica?')) {
             return false;
         }
 
         $("#nuovoPrezzo").val(num);
-        
+
         return true;
     }
 </script>

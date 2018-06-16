@@ -3,123 +3,155 @@
 @{
     System.IO.FileInfo fi;
     string temp;
+    int conta = 0;
 }
 
-<div id="Gallery">
+<button type="button" class="btn btn-info" onclick="javascript:MyAsyncUpdate();">Aggiorna</button>
 
-    <ul data-role="listview" data-split-icon="delete" data-split-theme="d" data-inset="true">
-        @foreach (Annunci.Models.MyPhoto p in Model.photos)
-        {
-            System.Diagnostics.Debug.WriteLine("Path : " + Server.MapPath(p.Path));
 
-            if (p.Path.StartsWith("http:"))
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#MyPopupDialog">
+    Aggiungi una photo <i class="fa fa-plus fa-fw"></i>
+</button>
+
+
+<br />
+<div id="MyGalleryEdit">
+    <table class="table table-bordered mt-3">
+        <tbody>
+
+            @foreach (Annunci.Models.MyPhoto p in Model.photos)
             {
-            <li><a href="@p.Path" data-lightbox="gallery" title="@p.Note ">
-                <img src="@p.Path" alt="@p.Note"  /></a>
-                <a href="#">Delete</a>
+                conta++;
+                System.Diagnostics.Debug.WriteLine("Path : " + p.Path);
 
-            </li>
-        
-            }
-            else
-            {
-                fi = new System.IO.FileInfo(Server.MapPath(p.Path));
-                if (fi.Exists)
+                if (p.Path.StartsWith("http:"))
                 {
-                    //verifico che ci sia la thumbnail
-                    if (System.IO.File.Exists(fi.DirectoryName + System.IO.Path.DirectorySeparatorChar + "thumbnail_" + fi.Name))
-                    {
-                        temp = p.Path.Replace(fi.Name, "thumbnail_" + fi.Name);
-                    }
-                    else
-                    {
-                        temp = p.Path;
-                    }
-            
-            <li>
-                <a href="@Url.Content(p.Path)" data-lightbox="gallery">
-                    <img src="@Url.Content(temp)" alt="@p.Note" /></a>
-                <a href="#" onclick="javascript:MyDeleteAsync('@p.PhotoId')" >Delete</a>
+                    <tr>
+                        <td class="align-middle">@conta</td>
+                        <td>
+                            <a href="@p.Path" data-lightbox="gallery">
+                                <img src="@p.Path" alt="@p.Note" />
+                            </a>
+                        </td>
+                        <td class="align-middle" style="width:10em">
+                            <button class="btn btn-warning" disabled>Delete <i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
 
-            </li>
                 }
                 else
                 {
-            <li><a href="#">
-                <img src="@Url.Content("~/Content/Images/Shared/unavailable.jpg")" alt="Immagine non disponibile" width="120" height="120" /></a>
-                <a href="javascript:MyDeleteAsync('@p.PhotoId')">Delete</a>
-            </li>
-         
+                    fi = new System.IO.FileInfo(Server.MapPath(p.Path));
+                    if (fi.Exists)
+                    {
+                        //verifico che ci sia la thumbnail
+                        if (System.IO.File.Exists(fi.DirectoryName + System.IO.Path.DirectorySeparatorChar + "thumbnail_" + fi.Name))
+                        {
+                            temp = p.Path.Replace(fi.Name, "thumbnail_" + fi.Name);
+                        }
+                        else
+                        {
+                            temp = p.Path;
+                        }
+
+                        <tr>
+                            <td class="align-middle">@conta</td>
+                            <td>
+                                <a href="@Url.Content(p.Path)" data-lightbox="gallery">
+                                    <img src="@Url.Content(temp)" alt="@p.Note" />
+                                </a>
+                            </td>
+                            <td class="align-middle" style="width:10em">
+                                <button class="btn btn-warning" onclick="javascript:MyDeleteAsync('@p.PhotoId')">Delete <i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td class="align-middle">@conta</td>
+                            <td>
+                                <a href="#">
+                                    <img src="@Url.Content("~/Content/Images/Shared/unavailable.jpg")" alt="Immagine non disponibile" width="120" height="120" />
+                                </a>
+                            </td>
+                            <td class="align-middle" style="width:10em">
+                                <button class="btn btn-warning" onclick="javascript:MyDeleteAsync('@p.PhotoId')">Delete <i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    }
                 }
             }
-        }
-    </ul>
-</div>
 
-<div data-role="controlgrup" data-type="horizontal" data-mini="true">
-
-    <a href="#" data-role="button" data-inline="true" onclick="javascript:MyAsyncUpdate();">Aggiorna</a>
-
-    <a href="#MyPopupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="plus">Aggiungi una photo</a>
+        </tbody>
+    </table>
 </div>
 
 
 
-<div data-role="popup" id="MyPopupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width: 400px;" class="ui-corner-all">
-    <div data-role="header" data-theme="a" class="ui-corner-top">
-        <h1>Aggiungi una photo</h1>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="MyPopupDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Aggiungi una photo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3>Selezionale un'immagine</h3>
+                @using (Html.BeginForm("AddImage", "Immobiliare", FormMethod.Post, new { id = "MyFormUpload", enctype = "multipart/form-data" }))
+                {
+                    <input type="file" name="MyFile" id="MyFile" value="">
+
+                    <input type="hidden" name="annuncioId" value="@Model.externalId" />
+
+                    <span style="color: red; visibility: hidden;" id="MyResponseMessage">messaggio</span>
+                    <br />
+
+                    <div id="percent">0%</div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                <button type="button" class="btn btn-primary" onclick="javascript: MyAsyncUpload()">Upload</button>
+            </div>
+        </div>
     </div>
-    <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
-        <h3 class="ui-title">Selezionale un'immagine</h3>
-
-        @using (Html.BeginForm("AddImage", "Immobiliare", FormMethod.Post, new { id = "MyFormUpload", enctype = "multipart/form-data" }))
-        {
-            <input type="file" name="MyFile" id="MyFile" value="">
-           
-            <input type ="hidden" name ="annuncioId" value ="@Model.externalId" />  
-            
-            <span style="color: red; visibility: hidden;" id="MyResponseMessage">messaggio</span>
-            <br />
-            
-            <a href="#" data-role="button" data-inline="true" data-mini="true" data-rel="back" data-theme="c">Annulla</a>
-            <input type="submit" value="Upload" data-inline="true" data-mini="true" onclick="javascript: MyAsyncUpload()" />
-            
-            <div id="percent">0%</div>
-        }
-
-        
-
-
-    </div>
 </div>
 
 
+<script src="@Url.Content("~/Content/js/jquery.form-3.51.js")"></script>
 
-<script src="http://malsup.github.com/jquery.form.js"></script>
 <script type="text/javascript">
 
+    $(document).ready(function () {
+        $('#MyPopupDialog').on('hidden.bs.modal', function (e) {
+            MyAsyncUpdate();
+        })
+
+    });
+
     function MyDeleteAsync(id) {
-        //alert("MyDeleteAsync: " + id);
-
-        //$.get("/Gallery/Delete/"+id, 
-        //     function (data) {
-        //         alert("data: " + data.esito);
-        //     }
-        //    );
-
-        $.post("/Gallery/Delete/" + id,
+        console.log("MyDeleteAsync: " + id);
+        $.post("@(Url.Action("DeleteImage","Immobiliare") + "/")" + id,
              function (data) {
                  //alert("data: " + data.esito);
 
                  if (data.esito == "Success") {
                      MyAsyncUpdate();
                  }
-             }
-            );
+             });
     }
 
 
     function MyAsyncUpload() {
+        console.log("MyAsyncUpload");
+
         //var MyData = $('#MyFormUpload').serialize();
 
         //alert("MyAsyncUpload");
@@ -129,7 +161,7 @@
 
 
 
-       @*  $.ajax({
+        @*  $.ajax({
             url: "@Url.Action("AddImage", "Immobiliare")",
             type: "POST",
             data: MyData,
@@ -166,27 +198,29 @@
                     $("#MyResponseMessage").html(obj.messaggio);
                     $("#MyResponseMessage").css('visibility', 'visible');
                 } else {
-                    $("#MyPopupDialog").popup("close");
-                    MyAsyncUpdate();
+
+                    $("#MyPopupDialog").modal('hide');
+                    //MyAsyncUpdate();
                 }
 
             }
         };
 
         $('#MyFormUpload').ajaxForm(options);
-
+        $('#MyFormUpload').submit();
     }
 
 
 
 
     function MyAsyncUpdate() {
-        //alert("MyAsyncUpdate");
+
 
         $.get('@Url.Action("MyAnnuncio", "Immobiliare", new { id = Model.externalId })', function (data) {
             // alert("MyGalleryEdit" + data);
+            console.log("MyAsyncUpdate: " + data);
             $('#MyGalleryEdit').html(data);
-            $('#MyGalleryEdit').trigger('create');
+            // $('#MyGalleryEdit').trigger('create');
         });
     }
 

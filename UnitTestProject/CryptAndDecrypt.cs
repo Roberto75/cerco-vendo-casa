@@ -115,6 +115,6 @@ namespace UnitTestProject
             Debug.WriteLine(String.Format("Decrypted from base64String: {0}", roundtrip));
 
         }
-    
-}
+
+    }
 }

@@ -14,7 +14,7 @@
 </script>
 
 
-<h2>Utente: @Model.Utente.login (id: @Model.Utente.userId)</h2>
+<h2>Utente: @Model.Utente.login (id: <a href="@Url.Action("Details","Immobiliare", new { id = Model.Utente.userId })">@Model.Utente.userId</a> )</h2>
 
 <div id="tabs">
 
