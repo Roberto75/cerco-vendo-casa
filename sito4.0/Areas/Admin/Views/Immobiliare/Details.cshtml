@@ -38,7 +38,13 @@
         <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.dateStato)</div>
         <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.statoId.ToString())</div>
         <div class="ui-bar ui-bar-c">@MyHelper.decodeNull(Model.Utente.nota)</div>
-        <div class="ui-bar ui-bar-c">Data pubblicazion + AnnuncioId </div>
+        <div class="ui-bar ui-bar-c">@if (Model.lastAnnuncio == null) {
+            @:N/A
+        }else
+        {
+            @Model.lastAnnuncio.dataInserimento;   @Model.lastAnnuncio.immobileId;
+        }
+         </div>
     </div>
 </div>
 

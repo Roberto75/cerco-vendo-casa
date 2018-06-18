@@ -95,6 +95,9 @@ namespace MyWebApplication.Areas.Admin.Controllers
                 model.ContaAnnunciByStato = manager.countAnnunciByStato(id);
                 model.ContaTrattativeByStato = manager.countTrattativeByStato(id);
 
+                //
+                model.lastAnnuncio = manager.getLastImmobilePublisched(id);
+
             }
             finally
             {

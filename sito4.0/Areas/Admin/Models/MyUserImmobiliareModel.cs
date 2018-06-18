@@ -9,7 +9,11 @@ namespace MyWebApplication.Areas.Admin.Models
     {
 
         public Annunci.Models.MyUser Utente { get; set; }
-       // public List<string> SourceDisponibili { get; set; }
+
+
+        public Annunci.Models.Immobile lastAnnuncio { get; set; }
+
+        // public List<string> SourceDisponibili { get; set; }
         //public List<string> StatiDisponibili { get; set; }
 
         public System.Collections.Hashtable ContaAnnunciByStato { get; set; }
