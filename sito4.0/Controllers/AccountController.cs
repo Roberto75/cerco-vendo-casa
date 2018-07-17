@@ -140,11 +140,11 @@ namespace MyWebApplication.Controllers
 
                     if (u.customerId == 0)
                     {
-                        pathImage = "~/Images/immobiliare/_privato.gif";
+                        pathImage = "~/Content/Images/immobiliare/_privato.gif";
                     }
                     else
                     {
-                        pathImage = "~/Images/immobiliare/_agenzia.gif";
+                        pathImage = "~/Content/Images/immobiliare/_agenzia.gif";
                     }
                 }
 

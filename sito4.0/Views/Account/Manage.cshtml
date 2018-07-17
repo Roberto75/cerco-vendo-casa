@@ -22,31 +22,43 @@
 
 
 
-<ul data-role="listview" data-inset="true">
-    <li>
-        <a href="#changeImageProfile" data-rel="popup" data-position-to="window" data-transition="pop">
-            <img src="@Url.Content(Model.pathImageProfile)">
-            <h2> Modifica l'immagine del tuo profilo</h2>
-            <p>
-                Scegli un'immagine da associare al tuo account.
-                Le immagini con dimensione maggiore di 80x80(WxH) verranno automaticamente ridimensionate.
-            </p>
-        </a>
-    </li>
-
-</ul>
+<h2>Cambia immagine del tuo profilo</h2>
 
 
-<div data-role="popup" id="changeImageProfile" data-theme="d" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
-    <h3>Seleziona un file:</h3>
-    @using (Html.BeginForm("Upload", "Account", FormMethod.Post, new { id = "MyForm", enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
-        <label for="file">File:</label>
-        <input type="file" name="file" id="file" value="">
+<img src="@Url.Content(Model.pathImageProfile)">
 
-        <a href="index.html" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>
-        <input type="submit" value="Upload" data-inline="true" data-mini="true" />
+<br />
 
-    }
+<button type="button" class="btn btn-secondary"> <i class="fa fa-trash fa-fw"></i> Rimuovi immagine</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changeImageProfile"> <i class="fa fa-edit fa-fw"></i> Carica foto</button>
+
+
+<div class="modal fade" id="changeImageProfile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Carica una foto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Scegli un'immagine da associare al tuo account.
+                    Le immagini con dimensione maggiore di 80x80(WxH) verranno automaticamente ridimensionate.
+                </p>
+                @using (Html.BeginForm("Upload", "Account", FormMethod.Post, new { id = "MyForm", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <label for="file">File:</label>
+                    <input type="file" name="file" id="file" value="">
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Upload</button>
+            </div>
+        </div>
+    </div>
+
 </div>
