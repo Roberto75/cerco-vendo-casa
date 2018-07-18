@@ -420,6 +420,8 @@ namespace MyWebApplication.Controllers
             model.comboComuni = null;
             model.comboProvince = null;
 
+            Debug.WriteLine("MQ: " + model.immobile.MQ);
+
             return RedirectToAction("CreateStep2", "Immobiliare", model.immobile);
         }
 

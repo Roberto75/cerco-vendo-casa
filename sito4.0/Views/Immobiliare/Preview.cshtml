@@ -18,56 +18,59 @@
 
     Html.RenderPartial("TabInfoImmobile", Model);
 
-    
+
     <h2>Nota</h2>
     <div>
         <p class="testo">@Html.Raw(WebUtility.HtmlDecode(Model.nota))</p>
     </div>
-    
-    <div data-role="controlgrup" data-type="horizontal" data-mini="true">
-        <input type="submit" name="MyAction" value="Indietro" data-inline="true" />
-        <input type="submit" name="MyAction" value="Conferma" data-inline="true" />
-    </div>
 
-    
-    <input type="hidden" name="categoria"           value="@Model.categoria" />
-    <input type="hidden" name="immobile"            value="@Model.immobile" />
-    <input type="hidden" name="MQ"                  value="@Model.MQ" />
-    <input type="hidden" name="prezzo"              value="@Model.prezzo" />
-    <input type="hidden" name="classeEnergetica"    value="@Model.classeEnergetica" />
-    <input type="hidden" name="piano"               value="@Model.piano" />
-    <input type="hidden" name="pianiTotali"         value="@Model.pianiTotali" /> 
-    <input type="hidden" name="ascensore"           value="@Model.ascensore" />
-    <input type="hidden" name="anno"                value="@Model.anno" />
-    <input type="hidden" name="speseCondominiali"   value="@Model.speseCondominiali" />
-    <input type="hidden" name="portiere"            value="@Model.portiere" />
-    <input type="hidden" name="statoImmobile"       value="@Model.statoImmobile" />
-    <input type="hidden" name="occupazione"         value="@Model.occupazione" />
-    <input type="hidden" name="regioneId"           value="@Model.regioneId" />
-    <input type="hidden" name="provinciaId"         value="@Model.provinciaId" />
-    <input type="hidden" name="comuneId"            value="@Model.comuneId" />
-    <input type="hidden" name="regione"             value="@Model.regione" />
-    <input type="hidden" name="provincia"           value="@Model.provincia" />
-    <input type="hidden" name="comune"              value="@Model.comune" />
-    <input type="hidden" name="indirizzo"           value="@Model.indirizzo" />
-    
-    <input type="hidden" name="nota"                value="@Model.nota" />
-    
-    <input type="hidden" name="cucina"              value="@Model.cucina" />  
-    <input type="hidden" name="salone"              value="@Model.salone" /> 
-    <input type="hidden" name="camereDaLetto"       value="@Model.camereDaLetto" />   
-    <input type="hidden" name="camerette"           value="@Model.camerette" />   
-    <input type="hidden" name="bagni"               value="@Model.bagni" />
-    <input type="hidden" name="terrazzi"            value="@Model.terrazzi" />
-    <input type="hidden" name="balconi"             value="@Model.balconi" />
-    <input type="hidden" name="giardinoMq"          value="@Model.giardinoMq" />
-    <input type="hidden" name="cantina"             value="@Model.cantina" />
-    <input type="hidden" name="soffitta"            value="@Model.soffitta" />
-    <input type="hidden" name="postoAuto"           value="@Model.postoAuto" />
-    <input type="hidden" name="box"                 value="@Model.box" />
-    <input type="hidden" name="riscaldamento"       value="@Model.riscaldamento" />
-    <input type="hidden" name="climatizzato"        value="@Model.climatizzato" />
-    
-    
-    
+
+
+
+
+    <input class="btn btn-secondary" type="submit" name="MyAction" value="Indietro" />
+    <input class="btn btn-primary" type="submit" name="MyAction" value="Conferma" />
+
+
+
+        <input type="hidden" name="categoria" value="@Model.categoria" />
+        <input type="hidden" name="immobile" value="@Model.immobile" />
+        <input type="hidden" name="MQ" value="@Model.MQ" />
+        <input type="hidden" name="prezzo" value="@Model.prezzo" />
+        <input type="hidden" name="classeEnergetica" value="@Model.classeEnergetica" />
+        <input type="hidden" name="piano" value="@Model.piano" />
+        <input type="hidden" name="pianiTotali" value="@Model.pianiTotali" />
+        <input type="hidden" name="ascensore" value="@Model.ascensore" />
+        <input type="hidden" name="anno" value="@Model.anno" />
+        <input type="hidden" name="speseCondominiali" value="@Model.speseCondominiali" />
+        <input type="hidden" name="portiere" value="@Model.portiere" />
+        <input type="hidden" name="statoImmobile" value="@Model.statoImmobile" />
+        <input type="hidden" name="occupazione" value="@Model.occupazione" />
+        <input type="hidden" name="regioneId" value="@Model.regioneId" />
+        <input type="hidden" name="provinciaId" value="@Model.provinciaId" />
+        <input type="hidden" name="comuneId" value="@Model.comuneId" />
+        <input type="hidden" name="regione" value="@Model.regione" />
+        <input type="hidden" name="provincia" value="@Model.provincia" />
+        <input type="hidden" name="comune" value="@Model.comune" />
+        <input type="hidden" name="indirizzo" value="@Model.indirizzo" />
+
+        <input type="hidden" name="nota" value="@Model.nota" />
+
+        <input type="hidden" name="cucina" value="@Model.cucina" />
+        <input type="hidden" name="salone" value="@Model.salone" />
+        <input type="hidden" name="camereDaLetto" value="@Model.camereDaLetto" />
+        <input type="hidden" name="camerette" value="@Model.camerette" />
+        <input type="hidden" name="bagni" value="@Model.bagni" />
+        <input type="hidden" name="terrazzi" value="@Model.terrazzi" />
+        <input type="hidden" name="balconi" value="@Model.balconi" />
+        <input type="hidden" name="giardinoMq" value="@Model.giardinoMq" />
+        <input type="hidden" name="cantina" value="@Model.cantina" />
+        <input type="hidden" name="soffitta" value="@Model.soffitta" />
+        <input type="hidden" name="postoAuto" value="@Model.postoAuto" />
+        <input type="hidden" name="box" value="@Model.box" />
+        <input type="hidden" name="riscaldamento" value="@Model.riscaldamento" />
+        <input type="hidden" name="climatizzato" value="@Model.climatizzato" />
+
+
+
 }
