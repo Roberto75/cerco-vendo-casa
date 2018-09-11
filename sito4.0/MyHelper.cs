@@ -130,7 +130,7 @@ public static class MyHelper
 
     #endregion
 
-   
+
 
 
     public static HtmlString decodeNumeroStanze(int? value)
@@ -572,7 +572,26 @@ public static class MyHelper
     }
 
 
+    public static HtmlString getComboSiNo(string selectedValue, string id, string nome, bool isRequired)
+    {
+        string temp;
+        string required = "";
 
+        if (isRequired)
+        {
+            required = "required=\"required\"";
+        }
+
+        temp = String.Format("<select id=\"{0}\" name=\"{1}\" class=\"form-control mb-3\"   {2}  >", id.Replace(".", "_"), nome, required);
+
+        temp += "<option value=\"-1\" " + (String.IsNullOrEmpty(selectedValue) ? "selected=\"selected\"" : "") + " >---</option>";
+        temp += "<option value=\"1\" " + ((selectedValue == "1") ? "selected=\"selected\"" : "") + " >Si</option>";
+        temp += "<option value=\"0\" " + ((selectedValue == "0") ? "selected=\"selected\"" : "") + " >No</option>";
+
+        temp += "</select>";
+
+        return new HtmlString(temp);
+    }
 
 
     public static HtmlString getComboTipoImmobile(Annunci.Models.Immobile.TipoImmobile? value)

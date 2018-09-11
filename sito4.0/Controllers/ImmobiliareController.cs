@@ -334,6 +334,7 @@ namespace MyWebApplication.Controllers
             model.comboRegioni = regioniProvinceComuniManager.getComboRegioni();
 
             model.immobile = new Annunci.Models.Immobile();
+            model.immobile.giardinoMq = 0;
 
             Debug.WriteLine(String.Format("Categoria: {0}", model.immobile.categoria));
             Debug.WriteLine(String.Format("Tipo annuncio: {0}", model.immobile.immobile));
