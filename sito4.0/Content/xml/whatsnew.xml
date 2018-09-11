@@ -8,8 +8,8 @@
   
   
   <release number="4.0.0.0" data="13/05/2018">
-    <item data="13/05/2018"     owner="Rutigliano"  type="bug" >
-      Passaggio a Bosstrap 4.1.0
+    <item data="13/05/2018"     owner="Rutigliano"  type="changes" >
+      Passaggio a Bosstrap 4.1.3
     </item>
   </release>
   
