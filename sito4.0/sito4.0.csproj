@@ -254,6 +254,7 @@
     <Content Include="Content\Images\logoTrovaCD.gif" />
     <Content Include="Content\Images\logoTrovalibro468x60.gif" />
     <Content Include="Content\Images\logo_cerco-vendo-casa.gif" />
+    <Content Include="Content\Images\logo_cerco-vendo-casa.png" />
     <Content Include="Content\Images\logo_entra.gif" />
     <Content Include="Content\Images\logo_svelenati.gif" />
     <Content Include="Content\Images\logo_trova-libro.gif" />
@@ -1027,10 +1028,6 @@
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Users\TabInfoAccount.cshtml" />
     <Content Include="Areas\Admin\Views\Users\TabInfoAnagrafica.cshtml" />
-    <Content Include="Public\RevoAgent\RevoAgent.log" />
-    <Content Include="Public\RevoAgent\RevoAgentException.log" />
-    <Content Include="Public\RevoAgent\Test.log" />
-    <Content Include="Public\RevoAgent\TestException.log" />
     <None Include="Properties\PublishProfiles\Temp.pubxml" />
     <Content Include="Views\Shared\MasterPageMaterialDesign.cshtml" />
     <Content Include="Views\TestMaterial\Index.cshtml" />
