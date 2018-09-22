@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using MyManagerCSharp;
 using Annunci;
+using System.Diagnostics;
 
 namespace MyWebApplication.Tasks
 {
@@ -14,8 +15,10 @@ namespace MyWebApplication.Tasks
     {
 
 
-        //private string _pathXmlFile = "~/Public/RevoAgent/RevoAgent.xml";
-        private string _pathXmlFile = "~/Public/RevoAgent/Test01.xml";
+        private string _pathXmlFile = "~/Public/RevoAgent/RevoAgent.xml";
+        //private string _pathXmlFile = "~/Public/RevoAgent/Test01.xml";
+
+        private string _pathXmlFileMD5 = "~/Public/RevoAgent/RevoAgent.md5";
 
         private string _pathCategorieXML = "~/Public/RevoAgent/categorie.xml";
         private string _pathLogFile = "~/Public/RevoAgent/RevoAgent.log";
@@ -61,8 +64,8 @@ namespace MyWebApplication.Tasks
             forceUpdate = false;
 
             bool executeDownload;
-            //executeDownload = true;
-            executeDownload = false;
+            executeDownload = true;
+            //executeDownload = false;
 
 
             try
@@ -98,7 +101,28 @@ namespace MyWebApplication.Tasks
                 System.Threading.Thread.Sleep(5000);
 
 
+                //22/09/2018 calcolo MD5 del file per verifcare se ci sono modifiche rispetto al caricamento precedente
+                System.IO.FileInfo fi = new System.IO.FileInfo(Server.MapPath(_pathXmlFile));
+                string md5 = SecurityManager.getMD5Hash(fi);
+                Debug.WriteLine("md5: " + md5);
 
+                System.IO.FileInfo fiMD5 = new System.IO.FileInfo(Server.MapPath(_pathXmlFileMD5));
+                string md5Prcedente = "";
+                if (fiMD5.Exists)
+                {
+                    md5Prcedente = FileManager.readTextFile(fiMD5);
+                }
+
+
+                if (md5Prcedente == md5)
+                {
+                    _logInfo = "I file XML ha lo stesso MD5 del caricamento precedente";
+                    MyManagerCSharp.MailManager.send(new MyManagerCSharp.MyException(_logInfo));
+                    return false;
+                }
+
+                //sostituisco il contenuto del file con il nuovo MD5
+                FileManager.writeTextFile(fiMD5, md5);
 
 
 
