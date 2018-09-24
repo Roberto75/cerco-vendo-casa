@@ -6,7 +6,8 @@ Imports MyManagerCSharp
 Public Class RevoAgent
     Implements IDisposable
 
-    Private _urlAnnunci As String = "http://revo1.revoagent.com/portali/cvc.xml"
+    'Private _urlAnnunci As String = "http://revo1.revoagent.com/portali/cvc.xml"
+    Private _urlAnnunci As String = "http://partner.miogest.com/040_cvc.xml"
     Public _documentXML As System.Xml.XmlDocument
     Private _temp As String
 
