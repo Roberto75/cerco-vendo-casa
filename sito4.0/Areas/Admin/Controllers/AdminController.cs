@@ -19,7 +19,7 @@ namespace MyWebApplication.Areas.Admin.Controllers
             //model.version = fvi.FileVersion;
 
             model.versionMyWebApplication = typeof(MyWebApplication.MvcApplication).Assembly.GetName().Version.ToString();
-            model.versionImmobiliareCSharp = typeof(Annunci.ImmobiliareManager).Assembly.GetName().Version.ToString();
+          //  model.versionImmobiliareCSharp = typeof(Annunci.ImmobiliareManager).Assembly.GetName().Version.ToString();
             model.versionImmobiliareVb = typeof(ImmobiliareVb.RevoAgent).Assembly.GetName().Version.ToString();
             model.versionMyManagerCSharp = typeof(MyManagerCSharp.ManagerDB).Assembly.GetName().Version.ToString();
             model.versionMyUsers = typeof(MyUsers.UserManager).Assembly.GetName().Version.ToString();

@@ -156,7 +156,7 @@
                 @foreach (Annunci.Models.MyPhoto p in ViewBag.photos)
                 {
 
-                    if (p.Path.StartsWith("http:"))
+                    if (p.Path.StartsWith("http:")|| p.Path.StartsWith("https:"))
                     {
                         <li>
                             <a href="@p.Path" data-lightbox="gallery" title="@p.Note ">

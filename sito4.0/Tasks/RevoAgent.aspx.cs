@@ -116,15 +116,15 @@ namespace MyWebApplication.Tasks
 
                 if (md5Prcedente == md5)
                 {
-                    _logInfo = "I file XML ha lo stesso MD5 del caricamento precedente";
-                    MyManagerCSharp.MailManager.send(new MyManagerCSharp.MyException(_logInfo));
+                    _logInfo = "I file XML ha lo stesso MD5 del caricamento precedente: " + md5;
+                    _logInfo += "ImmobiliareVb ver." + typeof(ImmobiliareVb.RevoAgent).Assembly.GetName().Version.ToString(); 
+                    MailManager.send(new MyManagerCSharp.MyException(_logInfo));
                     return false;
                 }
 
                 //sostituisco il contenuto del file con il nuovo MD5
                 FileManager.writeTextFile(fiMD5, md5);
-
-
+                
 
                 _logInfo = manager._processXML(Server.MapPath(_pathXmlFile), isTestMode, forceUpdate);
 
