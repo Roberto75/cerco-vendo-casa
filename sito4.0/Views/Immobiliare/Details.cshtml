@@ -45,20 +45,21 @@
 
 
 
-<script>
+<script type="text/javascript">
 
     var map = null;
 
-    $(document).on("pageinit", function () {
-        $("#tabs").tabs();
+    $(document).ready(function () {
+        console.log("document ready");
+
 
         @if (Model.latitude > 0)
         {
 
-            @:$("#ui-id-3").on("click" , function(){
+          //  @:$("#ui-id-3").on("click" , function(){
 
                     @:if(map == null){
-                                        //@:alert("show");
+                         @:console.log("show map");
 
                         @:var center = new google.maps.LatLng(@Model.latitude.ToString().Replace(",", ".") , @Model.longitude.ToString().Replace(",", "."));
 
@@ -70,7 +71,7 @@
 
                     @:}
 
-            @:});
+//            @:});
 
         }
         else
