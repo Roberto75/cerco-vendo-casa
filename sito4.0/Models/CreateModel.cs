@@ -9,7 +9,7 @@ namespace MyWebApplication.Models
     {
         public Annunci.Models.Immobile immobile { get; set; }
 
-     
+
         public List<MyManagerCSharp.Models.MyItem> comboRegioni { get; set; }
         public List<MyManagerCSharp.Models.MyItem> comboProvince { get; set; }
         public List<MyManagerCSharp.Models.MyItem> comboComuni { get; set; }
@@ -18,6 +18,10 @@ namespace MyWebApplication.Models
         {
             comboProvince = new List<MyManagerCSharp.Models.MyItem>();
             comboComuni = new List<MyManagerCSharp.Models.MyItem>();
+
+            immobile = new Annunci.Models.Immobile();
+            immobile.giardinoMq = 0;
+
         }
     }
 }

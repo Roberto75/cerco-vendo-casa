@@ -332,9 +332,19 @@ namespace MyWebApplication.Controllers
         public ActionResult Create(Models.CreateModel model)
         {
             model.comboRegioni = regioniProvinceComuniManager.getComboRegioni();
+            
+            if (model.immobile.regioneId != null)
+            {
+                model.comboProvince = regioniProvinceComuniManager.getComboProvince((int)model.immobile.regioneId);
+            }
 
-            model.immobile = new Annunci.Models.Immobile();
-            model.immobile.giardinoMq = 0;
+            if (model.immobile.provinciaId != null)
+            {
+                model.comboComuni = regioniProvinceComuniManager.getComboComuni(model.immobile.provinciaId);
+            }
+
+            //model.immobile = new Annunci.Models.Immobile();
+            //model.immobile.giardinoMq = 0;
 
             Debug.WriteLine(String.Format("Categoria: {0}", model.immobile.categoria));
             Debug.WriteLine(String.Format("Tipo annuncio: {0}", model.immobile.immobile));
@@ -423,13 +433,15 @@ namespace MyWebApplication.Controllers
 
             Debug.WriteLine("MQ: " + model.immobile.MQ);
 
-            return RedirectToAction("CreateStep2", "Immobiliare", model.immobile);
-        }
+            //return RedirectToAction("CreateStep2", "Immobiliare", model);
 
+            return View("CreateStep2", model);
+        }
+        /*
 
         [Authorize]
         [HttpGet]
-        public ActionResult CreateStep2(Annunci.Models.Immobile model)
+        public ActionResult CreateStep2(Models.CreateModel model)
         {
             //model.comboProvince = new List<MyManagerCSharp.Models.MyItem>();
             //model.comboComuni = new List<MyManagerCSharp.Models.MyItem>();
@@ -455,8 +467,8 @@ namespace MyWebApplication.Controllers
 
             return View(model);
         }
-
-
+        */
+        /*
         [Authorize]
         [HttpPost]
         [ActionName("CreateStep2")]
@@ -478,7 +490,9 @@ namespace MyWebApplication.Controllers
 
             if (Request["MyAction"] == "Indietro")
             {
-                return RedirectToAction("Create", "Immobiliare", model);
+
+                return View("Create", model);
+                //return RedirectToAction("Create", "Immobiliare", model);
             }
 
             if (!ModelState.IsValid)
@@ -487,33 +501,15 @@ namespace MyWebApplication.Controllers
             }
 
             return RedirectToAction("Preview", "Immobiliare", model); ;
-        }
+        }*/
 
         [Authorize]
         [HttpPost]
-        public ActionResult Preview(Annunci.Models.Immobile model)
+        public ActionResult Preview(Models.CreateModel model)
         {
 
-            if (String.IsNullOrEmpty(Request["MyAction"]))
-            {
-                return RedirectToAction("Error", "Home");
-            }
-
-            Debug.WriteLine("Request[\"MyAction\"] " + Request["MyAction"]);
-
-            if (Request["MyAction"] != "Indietro" && Request["MyAction"] != "Avanti")
-            {
-                return RedirectToAction("Error", "Home");
-            }
-
-            if (Request["MyAction"] == "Indietro")
-            {
-                return RedirectToAction("Create", "Immobiliare", model);
-            }
-
-
-            Debug.WriteLine("longitude: " + model.longitude);
-            Debug.WriteLine("latitude: " + model.latitude);
+            Debug.WriteLine("longitude: " + model.immobile.longitude);
+            Debug.WriteLine("latitude: " + model.immobile.latitude);
 
             if (!ModelState.IsValid)
             {
@@ -532,15 +528,15 @@ namespace MyWebApplication.Controllers
             }
 
             // PREVIEW
-            model.dataInserimento = DateTime.Now;
+            model.immobile.dataInserimento = DateTime.Now;
             //   model.login = (User.Identity as MyUsers.MyCustomIdentity).Login;
-            model.login = MySessionData.Login;
+            model.immobile.login = MySessionData.Login;
 
             //Debug.WriteLine("Nota:" + Request["nota"]);
             //Debug.WriteLine("Nota:" + model.nota);
 
 
-            return View("Preview", model);
+            return View("Preview", model.immobile);
         }
 
 
@@ -551,22 +547,7 @@ namespace MyWebApplication.Controllers
         {
             Debug.WriteLine("MyAction: " + Request["MyAction"]);
 
-            // Controllo sul parametro MyAction
-            if (String.IsNullOrEmpty(Request["MyAction"]))
-            {
-                return RedirectToAction("Error", "Home");
-            }
-
-            if (Request["MyAction"] != "Indietro" && Request["MyAction"] != "Conferma")
-            {
-                return RedirectToAction("Error", "Home");
-            }
-
-            if (Request["MyAction"] == "Indietro")
-            {
-                return RedirectToAction("CreateStep2", "Immobiliare", model);
-            }
-
+           
 
             //Controllo sul Modello
             if (!ModelState.IsValid)
@@ -579,6 +560,9 @@ namespace MyWebApplication.Controllers
 
             //Debug.WriteLine("Nota:" + Request["nota"]);
             //Debug.WriteLine("Nota:" + model.nota);
+
+            Debug.WriteLine("longitude: " + model.longitude);
+            Debug.WriteLine("latitude: " + model.latitude);
 
             try
             {

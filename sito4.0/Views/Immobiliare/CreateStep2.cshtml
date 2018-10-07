@@ -1,4 +1,4 @@
-﻿@model Annunci.Models.Immobile
+﻿@model MyWebApplication.Models.CreateModel
 @{
     ViewBag.Title = "Cerco Vendo Casa: Inserimento di un nuovo immobile - Step 2";
     Layout = "~/Views/Shared/MasterPageMobile.cshtml";
@@ -17,146 +17,142 @@
 
 
 
-    <h3>Note</h3>
+<h3>Note</h3>
 
-    <div data-role="fieldcontain">
-        <textarea name="nota" id="nota">@Model.nota</textarea>
-    </div>
-
-
-
-    <h3>Mappa</h3>
-    <p>L'inserimento del campo "Indirizzo" consente di posizionare l'immobile su una mappa.</p>
-
-    <p>
-        Se per qualche motivo non desideri geolocalizzare il tuo immobile, non valorizzare il campo Indirizzo.
-    </p>
-
-
-    <p>
-        Prova a digitare l indirizzo, ad esempio "Via Mario Rossi" oppure "Piazza Verdi" e <b>clicca su Cerca su GoogleMaps</b>. Se la geolocalizzazione è corretta
-        clicca su "Avanti" altrimenti correggi o cancella la mappa.
-    </p>
-    <p>
-        Nel caso di vie molto lunghe, è possibile spostare il punto sulla mappa, aggiungingendo il numero civico.
-        Esempio "Via Mario Rossi 45".
-    </p>
-    <p>
-        Per questione di privacy, non è consigliato inserire il numero civico corretto, basta inserirne uno nelle vicinanze.
-    </p>
+<div data-role="fieldcontain">
+    <textarea name="immobile.nota" id="nota">@Model.immobile.nota</textarea>
+</div>
 
 
 
+<h3>Mappa</h3>
+<p>L'inserimento del campo "Indirizzo" consente di posizionare l'immobile su una mappa.</p>
 
-    <input type="hidden" name="regioneId" value="@Model.regioneId" />
-    <input type="hidden" name="provinciaId" value="@Model.provinciaId" />
-    <input type="hidden" name="comuneId" value="@Model.comuneId" />
+<p>
+    Se per qualche motivo non desideri geolocalizzare il tuo immobile, non valorizzare il campo Indirizzo.
+</p>
 
-    <input type="hidden" name="regione" value="@Model.regione" />
-    <input type="hidden" name="provincia" value="@Model.provincia" />
-    <input type="hidden" name="comune" value="@Model.comune" />
 
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="regione">Regione:</label>
-                <input type="text" class="form-control" id="regione" value="@Model.regione" disabled="disabled" readonly="">
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="provincia">Provincia:</label>
-                <input type="text" class="form-control" id="provincia" value="@Model.provincia" disabled="disabled" readonly="">
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="comune">Comune:</label>
-                <input type="text" class="form-control" id="comune" value="@Model.comune" disabled="disabled" readonly="">
-            </div>
+<p>
+    Prova a digitare l indirizzo, ad esempio "Via Mario Rossi" oppure "Piazza Verdi" e <b>clicca su Cerca su GoogleMaps</b>. Se la geolocalizzazione è corretta
+    clicca su "Avanti" altrimenti correggi o cancella la mappa.
+</p>
+<p>
+    Nel caso di vie molto lunghe, è possibile spostare il punto sulla mappa, aggiungingendo il numero civico.
+    Esempio "Via Mario Rossi 45".
+</p>
+<p>
+    Per questione di privacy, non è consigliato inserire il numero civico corretto, basta inserirne uno nelle vicinanze.
+</p>
+
+
+
+
+<input type="hidden" name="immobile.regioneId" value="@Model.immobile.regioneId" />
+<input type="hidden" name="immobile.provinciaId" value="@Model.immobile.provinciaId" />
+<input type="hidden" name="immobile.comuneId" value="@Model.immobile.comuneId" />
+
+<input type="hidden" name="immobile.regione" value="@Model.immobile.regione" />
+<input type="hidden" name="immobile.provincia" value="@Model.immobile.provincia" />
+<input type="hidden" name="immobile.comune" value="@Model.immobile.comune" />
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="regione">Regione:</label>
+            <input type="text" class="form-control" id="regione" value="@Model.immobile.regione" disabled="disabled" readonly="">
         </div>
     </div>
-
-
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="cap">C.A.P.:</label>
-                <input type="text" class="form-control" name="cap" id="cap" value="@Model.cap">
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="indirizzo">Zona/Quartiere:</label>
-                <input type="text" class="form-control" name="quartiere" id="quartiere" value="@Model.quartiere">
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="indirizzo">Indirizzo:</label>
-                <input type="text" class="form-control" name="indirizzo" id="indirizzo" value="@Model.indirizzo">
-            </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="provincia">Provincia:</label>
+            <input type="text" class="form-control" id="provincia" value="@Model.immobile.provincia" disabled="disabled" readonly="">
         </div>
     </div>
-
-    <input type="button" class="btn btn-secondary" value="Elimina la mappa" onclick="removeAddress()" />
-    <input type="button" class="btn btn-primary" value="Cerca su GoogleMaps" onclick="searchAddress()" />
-
-
-        <br />
-            <div id="map_canvas" class="mt-3" style="width: 100%; height: 300px"></div>
-            <br />
-
-
-            <input type="submit" class="btn btn-secondary" name="MyAction" value="Indietro" />
-            <input type="submit" class="btn btn-primary" name="MyAction" value="Avanti" />
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="comune">Comune:</label>
+            <input type="text" class="form-control" id="comune" value="@Model.immobile.comune" disabled="disabled" readonly="">
+        </div>
+    </div>
+</div>
 
 
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="cap">C.A.P.:</label>
+            <input type="text" class="form-control" name="immobile.cap" id="cap" value="@Model.immobile.cap">
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="indirizzo">Zona/Quartiere:</label>
+            <input type="text" class="form-control" name="immobile.quartiere" id="quartiere" value="@Model.immobile.quartiere">
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="indirizzo">Indirizzo:</label>
+            <input type="text" class="form-control" name="immobile.indirizzo" id="indirizzo" value="@Model.immobile.indirizzo">
+        </div>
+    </div>
+</div>
+
+<input type="button" class="btn btn-secondary" value="Elimina la mappa" onclick="removeAddress()" />
+<input type="button" class="btn btn-primary" value="Cerca su GoogleMaps" onclick="searchAddress()" />
 
 
+<br />
+<div id="map_canvas" class="mt-3" style="width: 100%; height: 300px"></div>
+<br />
 
 
-            <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-            <script type="text/javascript">
-                tinymce.init({
-                    selector: "textarea",
-                    encoding: "xml"
-                });
-            </script>
+<input type="button" class="btn btn-secondary" onclick="indietroOnClick()" value="Indietro" />
+<input type="button" class="btn btn-primary" onclick="avantiOnClick()" value="Anvanti" />
 
 
-            <input type="hidden" name="latitude" id="latitude" value="@Model.latitude" />
-            <input type="hidden" name="longitude" id="longitude" value="@Model.longitude" />
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: "textarea",
+        encoding: "xml"
+    });
+</script>
 
 
-            <input type="hidden" name="categoria" value="@Model.categoria" />
-            <input type="hidden" name="immobile" value="@Model.immobile" />
-            <input type="hidden" name="MQ" value="@Model.MQ" />
-            <input type="hidden" name="prezzo" value="@Model.prezzo" />
-            <input type="hidden" name="classeEnergetica" value="@Model.classeEnergetica" />
-            <input type="hidden" name="piano" value="@Model.piano" />
-            <input type="hidden" name="pianiTotali" value="@Model.pianiTotali" />
-            <input type="hidden" name="ascensore" value="@Model.ascensore" />
-            <input type="hidden" name="anno" value="@Model.anno" />
-            <input type="hidden" name="speseCondominiali" value="@Model.speseCondominiali" />
-            <input type="hidden" name="portiere" value="@Model.portiere" />
-            <input type="hidden" name="statoImmobile" value="@Model.statoImmobile" />
-            <input type="hidden" name="occupazione" value="@Model.occupazione" />
+<input type="hidden" name="immobile.latitude" id="latitude" value="@Model.immobile.latitude" />
+<input type="hidden" name="immobile.longitude" id="longitude" value="@Model.immobile.longitude" />
 
-            <input type="hidden" name="cucina" value="@Model.cucina" />
-            <input type="hidden" name="salone" value="@Model.salone" />
-            <input type="hidden" name="camereDaLetto" value="@Model.camereDaLetto" />
-            <input type="hidden" name="camerette" value="@Model.camerette" />
-            <input type="hidden" name="bagni" value="@Model.bagni" />
-            <input type="hidden" name="terrazzi" value="@Model.terrazzi" />
-            <input type="hidden" name="balconi" value="@Model.balconi" />
-            <input type="hidden" name="giardinoMq" value="@Model.giardinoMq" />
-            <input type="hidden" name="cantina" value="@Model.cantina" />
-            <input type="hidden" name="soffitta" value="@Model.soffitta" />
-            <input type="hidden" name="postoAuto" value="@Model.postoAuto" />
-            <input type="hidden" name="box" value="@Model.box" />
-            <input type="hidden" name="riscaldamento" value="@Model.riscaldamento" />
-            <input type="hidden" name="climatizzato" value="@Model.climatizzato" />
+
+<input type="hidden" name="immobile.categoria" value="@Model.immobile.categoria" />
+<input type="hidden" name="immobile.immobile" value="@Model.immobile.immobile" />
+<input type="hidden" name="immobile.MQ" value="@Model.immobile.MQ" />
+<input type="hidden" name="immobile.prezzo" value="@Model.immobile.prezzo" />
+<input type="hidden" name="immobile.classeEnergetica" value="@Model.immobile.classeEnergetica" />
+<input type="hidden" name="immobile.piano" value="@Model.immobile.piano" />
+<input type="hidden" name="immobile.pianiTotali" value="@Model.immobile.pianiTotali" />
+<input type="hidden" name="immobile.ascensore" value="@Model.immobile.ascensore" />
+<input type="hidden" name="immobile.anno" value="@Model.immobile.anno" />
+<input type="hidden" name="immobile.speseCondominiali" value="@Model.immobile.speseCondominiali" />
+<input type="hidden" name="immobile.portiere" value="@Model.immobile.portiere" />
+<input type="hidden" name="immobile.statoImmobile" value="@Model.immobile.statoImmobile" />
+<input type="hidden" name="immobile.occupazione" value="@Model.immobile.occupazione" />
+
+<input type="hidden" name="immobile.cucina" value="@Model.immobile.cucina" />
+<input type="hidden" name="immobile.salone" value="@Model.immobile.salone" />
+<input type="hidden" name="immobile.camereDaLetto" value="@Model.immobile.camereDaLetto" />
+<input type="hidden" name="immobile.camerette" value="@Model.immobile.camerette" />
+<input type="hidden" name="immobile.bagni" value="@Model.immobile.bagni" />
+<input type="hidden" name="immobile.terrazzi" value="@Model.immobile.terrazzi" />
+<input type="hidden" name="immobile.balconi" value="@Model.immobile.balconi" />
+<input type="hidden" name="immobile.giardinoMq" value="@Model.immobile.giardinoMq" />
+<input type="hidden" name="immobile.cantina" value="@Model.immobile.cantina" />
+<input type="hidden" name="immobile.soffitta" value="@Model.immobile.soffitta" />
+<input type="hidden" name="immobile.postoAuto" value="@Model.immobile.postoAuto" />
+<input type="hidden" name="immobile.box" value="@Model.immobile.box" />
+<input type="hidden" name="immobile.riscaldamento" value="@Model.immobile.riscaldamento" />
+<input type="hidden" name="immobile.climatizzato" value="@Model.immobile.climatizzato" />
 
 }
 
@@ -167,9 +163,23 @@
 
 <script type="text/javascript">
 
+
+    function indietroOnClick() {
+        console.log("indietroOnClick");
+        $("#MyForm").attr('action', '@Url.Action("Create")');
+        $("#MyForm").attr("method", "get");
+        $("#MyForm").submit();
+    }
+
+    function avantiOnClick() {
+        console.log("avantiOnClick");
+        $("#MyForm").submit();
+    }
+
     var geocoder = null;
     var map = null;
     var address = null;
+
 
     function removeAddress() {
         document.getElementById("indirizzo").value = '';
