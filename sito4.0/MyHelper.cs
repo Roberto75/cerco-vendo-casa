@@ -486,7 +486,7 @@ public static class MyHelper
 
     #region "Combo Box"
 
-    public static HtmlString getComboEnum<TEnum>(TEnum allValues, string selectedValue, string nome, bool isRequired)
+    public static HtmlString getComboEnum<TEnum>(TEnum allValues, string selectedValue, string id, string nome, bool isRequired)
     {
 
         //Debug.WriteLine(String.Format("selectedValue: {0}", selectedValue));
@@ -508,7 +508,7 @@ public static class MyHelper
 
         //data-inline=\"true\" 
 
-        temp = String.Format("<select id=\"{0}\" name=\"{1}\"    class=\"form-control\" {2}  >", nome.Replace(".", "_"), nome, required);
+        temp = String.Format("<select id=\"{0}\" name=\"{1}\"    class=\"form-control\" {2}  >", id.Replace(".", "_"), nome, required);
 
         temp += "<option value=\"\">---</option>";
 
@@ -541,7 +541,7 @@ public static class MyHelper
 
 
 
-    public static HtmlString getComboNumeroStanze(string selectedValue, string nome, bool isRequired)
+    public static HtmlString getComboNumeroStanze(string selectedValue, string id, string nome, bool isRequired)
     {
 
         string temp;
@@ -554,7 +554,7 @@ public static class MyHelper
         }
 
 
-        temp = String.Format("<select id=\"{0}\" name=\"{1}\" class=\"form-control mb-3\"   {2}  >", nome.Replace(".", "_"), nome, required);
+        temp = String.Format("<select id=\"{0}\" name=\"{1}\" class=\"form-control mb-3\"   {2}  >", id.Replace(".", "_"), nome, required);
 
         temp += "<option value=\"\" " + (String.IsNullOrEmpty(selectedValue) ? "selected=\"selected\"" : "") + " >---</option>";
 

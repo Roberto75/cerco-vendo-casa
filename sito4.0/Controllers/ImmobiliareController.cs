@@ -209,6 +209,10 @@ namespace MyWebApplication.Controllers
             {
                 _manager.mCloseConnection();
             }
+
+            Debug.WriteLine("Climatizzato: " + immobile.climatizzato);
+            Debug.WriteLine("speseCondominiali: " + immobile.speseCondominiali);
+
             return View(immobile);
         }
 
@@ -432,7 +436,8 @@ namespace MyWebApplication.Controllers
             model.comboProvince = null;
 
             Debug.WriteLine("MQ: " + model.immobile.MQ);
-
+            Debug.WriteLine("Stato: " + model.immobile.statoImmobile);
+            Debug.WriteLine("Camere da letto: " + model.immobile.camereDaLetto);
             //return RedirectToAction("CreateStep2", "Immobiliare", model);
 
             return View("CreateStep2", model);
@@ -545,9 +550,10 @@ namespace MyWebApplication.Controllers
         [HttpPost]
         public ActionResult Insert(Annunci.Models.Immobile model)
         {
-            Debug.WriteLine("MyAction: " + Request["MyAction"]);
+            
+            Debug.WriteLine("Climatizzato: " + model.climatizzato);
+            Debug.WriteLine("speseCondominiali: " + model.speseCondominiali);
 
-           
 
             //Controllo sul Modello
             if (!ModelState.IsValid)

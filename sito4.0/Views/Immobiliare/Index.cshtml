@@ -263,13 +263,13 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="filter.immobile">Tipo di immmobile:</label>
-                    @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoImmobile), Model.filter.immobile.ToString(), "filter.immobile", false)
+                    @MyHelper.getComboEnum(default(Annunci.Models.Immobile.TipoImmobile), Model.filter.immobile.ToString(), "filter.immobile", "filter.immobile", false)
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="filter.categoria">Categoria:</label>
-                    @MyHelper.getComboEnum(default(Annunci.Models.Immobile.Categorie), Model.filter.categoria.ToString(), "filter.categoria", false)
+                    @MyHelper.getComboEnum(default(Annunci.Models.Immobile.Categorie), Model.filter.categoria.ToString(), "filter.categoria", "filter.categoria", false)
                 </div>
             </div>
         </div>
