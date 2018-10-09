@@ -9,7 +9,7 @@
     <dd class="col-sm-3 col-6">@Html.DisplayFor(model => model.immobile)</dd>
 
     <dt class="col-sm-3 col-6">Mq</dt>
-    <dd class="col-sm-3 col-6">@Model.MQ.ToString("N")</dd>
+    <dd class="col-sm-3 col-6">@Model.MQ.ToString("N0")</dd>
     <dt class="col-sm-3 col-6">Prezzo</dt>
     <dd class="col-sm-3 col-6">@Model.prezzo.ToString("C")</dd>
 
@@ -43,7 +43,7 @@
     <dt class="col-sm-3 col-6">Anno costruzione</dt>
     <dd class="col-sm-3 col-6">@MyHelper.decodeNull(Model.anno)</dd>
     <dt class="col-sm-3 col-6">Spese condominiali</dt>
-    <dd class="col-sm-3 col-6">@MyHelper.decodeNull(Model.speseCondominiali)</dd>
+    <dd class="col-sm-3 col-6">@(Model.speseCondominiali==null?"N/A": ((decimal)Model.speseCondominiali).ToString("C"))</dd>
 
 
     <!--  -->
@@ -52,6 +52,10 @@
     <dd class="col-sm-3 col-6">@MyHelper.decodeEnum(Model.cucina.ToString())</dd>
     <dt class="col-sm-3 col-6">Camere da letto</dt>
     <dd class="col-sm-3 col-6">@MyHelper.decodeNumeroStanze(Model.camereDaLetto)</dd>
+    <dt class="col-sm-3 col-6">Salone</dt>
+    <dd class="col-sm-3 col-6">@MyHelper.decodeEnum(Model.salone.ToString())</dd>
+    <dt class="col-sm-3 col-6">Camerette</dt>
+    <dd class="col-sm-3 col-6">@MyHelper.decodeNumeroStanze(Model.camerette)</dd>
     <dt class="col-sm-3 col-6">Bagni</dt>
     <dd class="col-sm-3 col-6">@MyHelper.decodeNumeroStanze(Model.bagni)</dd>
     <dt class="col-sm-3 col-6">Terrazzi</dt>
@@ -63,10 +67,7 @@
     <dt class="col-sm-3 col-6">Riscaldamento</dt>
     <dd class="col-sm-3 col-6">@MyHelper.decodeEnum(Model.riscaldamento.ToString())</dd>
 
-    <dt class="col-sm-3 col-6">Salone</dt>
-    <dd class="col-sm-3 col-6">@MyHelper.decodeEnum(Model.salone.ToString())</dd>
-    <dt class="col-sm-3 col-6">Camerette</dt>
-    <dd class="col-sm-3 col-6">@MyHelper.decodeNumeroStanze(Model.camerette)</dd>
+   
     <dt class="col-sm-3 col-6">Giardino mq</dt>
     <dd class="col-sm-3 col-6">@MyHelper.decodeNull(Model.giardinoMq)</dd>
     <dt class="col-sm-3 col-6">Balconi</dt>
