@@ -961,7 +961,7 @@ STEP1:
                 dt = managerLocal.getEmailUtentiInTrattativa(Long.Parse(row("annuncio_id").ToString))
                 If dt.Rows.Count > 0 Then
 
-                    Dim mail As New Annunci.ImmobiliareMailMessageManager(System.Configuration.ConfigurationManager.AppSettings("application.url"), System.Configuration.ConfigurationManager.AppSettings("application.name"))
+                    Dim mail As New Annunci.ImmobiliareMailMessageManager(System.Configuration.ConfigurationManager.AppSettings("application.name"), System.Configuration.ConfigurationManager.AppSettings("application.url"))
 
 
                     'Dim mail As New MyManager.MailMessage(System.Configuration.ConfigurationManager.AppSettings("application.url"), System.Configuration.ConfigurationManager.AppSettings("application.name"))
@@ -971,14 +971,22 @@ STEP1:
 
                     If (dt.Rows.Count > 0) Then
                         For Each email As Data.DataRow In dt.Rows
-                            mail.Bcc(email("email").ToString)
+
+                            'Rel. 1.0.0.3 del 18/10/2018
+                            'mail.Bcc(email("email").ToString)
+
+                            Debug.WriteLine("to: " + email("email").ToString)
+
+                            mail.ToClearField()
+                            mail.To(email("email").ToString)
+
+                            'MY-DEBUGG
+                            mail.Bcc(System.Configuration.ConfigurationManager.AppSettings("mail.To.Ccn"))
+                            mail.send()
                         Next
 
-                        'MY-DEBUGG
-                        'mail._ToClearField()
-                        ' mail._To("roberto.rutigliano@gmail.com")
-                        mail.Bcc(System.Configuration.ConfigurationManager.AppSettings("mail.To.Ccn"))
-                        mail.send()
+                        'mail.Bcc(System.Configuration.ConfigurationManager.AppSettings("mail.To.Ccn"))
+                        'mail.send()
                     End If
                     'cancellazione logica
                     managerLocal.deleteAnnuncioLogic(Long.Parse(row("annuncio_id").ToString), "")
