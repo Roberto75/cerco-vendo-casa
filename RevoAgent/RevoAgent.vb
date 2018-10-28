@@ -955,45 +955,56 @@ STEP1:
         Try
             _dataTable = managerLocal.getAnnunciExternalBySourceAndStato(Annunci.Models.Immobile.TipoSourceId.RevoAgent, MyManager.MercatinoManager.StatoAnnuncio.DaCancellare)
 
-            For Each row As Data.DataRow In _dataTable.Rows
-
+            For Each annuncio As Data.DataRow In _dataTable.Rows
                 'prendo tutti gli utenti in trattativa
-                dt = managerLocal.getEmailUtentiInTrattativa(Long.Parse(row("annuncio_id").ToString))
+                dt = managerLocal.getEmailUtentiInTrattativa(Long.Parse(annuncio("annuncio_id").ToString))
+
                 If dt.Rows.Count > 0 Then
 
                     Dim mail As New Annunci.ImmobiliareMailMessageManager(System.Configuration.ConfigurationManager.AppSettings("application.name"), System.Configuration.ConfigurationManager.AppSettings("application.url"))
 
-
-                    'Dim mail As New MyManager.MailMessage(System.Configuration.ConfigurationManager.AppSettings("application.url"), System.Configuration.ConfigurationManager.AppSettings("application.name"))
-
                     mail.Subject = System.Configuration.ConfigurationManager.AppSettings("application.name") & " - Cancellazione annuncio"
-                    mail.Body = mail.getBodyCancellaAnnuncio(row("tipo").ToString & " " & row("comune").ToString & " " & row("indirizzo").ToString, "Immobiliare\MyTrattative")
+                    mail.Body = mail.getBodyCancellaAnnuncio(annuncio("tipo").ToString & " " & annuncio("comune").ToString & " " & annuncio("indirizzo").ToString, "Immobiliare\MyTrattative")
 
-                    If (dt.Rows.Count > 0) Then
-                        For Each email As Data.DataRow In dt.Rows
+                    For Each row As Data.DataRow In dt.Rows
 
-                            'Rel. 1.0.0.3 del 18/10/2018
-                            'mail.Bcc(email("email").ToString)
+                        'Rel. 1.0.0.3 del 18/10/2018
+                        'mail.Bcc(email("email").ToString)
 
-                            Debug.WriteLine("to: " + email("email").ToString)
+                        Debug.WriteLine("to: " + row("email").ToString)
 
-                            mail.ToClearField()
-                            mail.To(email("email").ToString)
+                        mail.ToClearField()
+                        mail.To(row("email").ToString)
 
-                            'MY-DEBUGG
-                            mail.Bcc(System.Configuration.ConfigurationManager.AppSettings("mail.To.Ccn"))
-                            mail.send()
-                        Next
+                        'MY-DEBUGG
+                        mail.Bcc(System.Configuration.ConfigurationManager.AppSettings("mail.To.Ccn"))
+                        mail.send()
 
-                        'mail.Bcc(System.Configuration.ConfigurationManager.AppSettings("mail.To.Ccn"))
-                        'mail.send()
-                    End If
+                        'Rel. 1.0.0.4 del 27/10/2018
+                        Dim annuncioDateDeleted As DateTime = DateTime.Parse(annuncio("date_deleted").ToString())
+                        'Se sono trascorsi più di 10 giorni dalla 
+                        Debug.WriteLine("[trattativa_id] " & row("trattativa_id").ToString())
+                        Debug.WriteLine("[date_added] della trattativa " & row("date_added").ToString())
+                        Debug.WriteLine("[date_deleted] dell'annuncio " & annuncioDateDeleted)
+
+                        'Se sono trascorsi più di 10 giorni dalla cancellezione dell'annuncio ... vuol dire che abbiamo inviato 10 email 
+                        Dim giorni As Long = DateDiff(DateInterval.Day, annuncioDateDeleted, Now)
+                        Debug.WriteLine("Giorni trarscorsi: " & giorni)
+                        'If (giorni > 10) Then
+                        ' managerLocal.deleteTrattativaLogic(Long.Parse(email("trattativa_id").ToString()), Long.Parse(email("user_id").ToString()))
+                        'End If
+
+                    Next
+
+                    'mail.Bcc(System.Configuration.ConfigurationManager.AppSettings("mail.To.Ccn"))
+                    'mail.send()
+
                     'cancellazione logica
-                    managerLocal.deleteAnnuncioLogic(Long.Parse(row("annuncio_id").ToString), "")
+                    managerLocal.deleteAnnuncioLogic(Long.Parse(annuncio("annuncio_id").ToString), "")
                 Else
 
                     'cancellazione fisica
-                    managerLocal.deleteAnnuncio(Long.Parse(row("annuncio_id").ToString), "")
+                    managerLocal.deleteAnnuncio(Long.Parse(annuncio("annuncio_id").ToString), "")
                 End If
             Next
 
