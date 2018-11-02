@@ -97,15 +97,15 @@
         tutelano la privacy e decidi se rilasciare il consenso al trattamento dei dati
         personali.
     </p>
-        <p>
-            Se lo farai, non solo potrai accedere ai servizi offerti da questo portale, ma
-            potrai anche ricevere informazioni personalizzate nella tua casella di posta
-            elettronica ed essere sempre aggiornato su tutti i nostri servizi e su eventuali
-            nuove offerte e promozioni.
-        </p>
+    <p>
+        Se lo farai, non solo potrai accedere ai servizi offerti da questo portale, ma
+        potrai anche ricevere informazioni personalizzate nella tua casella di posta
+        elettronica ed essere sempre aggiornato su tutti i nostri servizi e su eventuali
+        nuove offerte e promozioni.
+    </p>
 
 
-        <div class="card mt-3 mb-3" >
+        <div class="card mt-3 mb-3">
             <div class="card-header">
                 Informativa sulla privacy
             </div>
@@ -133,17 +133,17 @@
 
 
         <a class="btn btn-secondary" href="@Url.Action("Index","Home")">Annulla</a>
-            <button class="btn btn-primary" type="button" onclick="buttonSalvaOnClick()">Prosegui con la registrazione</button>
+        <button class="btn btn-primary" type="button" onclick="buttonSalvaOnClick()">Prosegui con la registrazione</button>
 
 }
 
 <script type="text/javascript">
 
     function tipoUtenza() {
-        //alert("tipoUtenza: " + $("#personaFisica").is(':checked'));
+        console.log("isPersonaFisica: " + $("#personaFisica").is(':checked'));
 
         if ($("#personaFisica").is(":checked")) {
-            //alert("a");
+            console.log("personaFisica");
             $("#LiRagioneSociale").hide();
             $("#LiNome").show();
             $("#LiCognome").show();
@@ -168,7 +168,7 @@
             //$("#cognome").prop('disabled', false);
 
         } else {
-            //alert("b");
+            console.log("Agenzia immobiliare");
             $("#LiRagioneSociale").show();
             $("#LiNome").hide();
             $("#LiCognome").hide();
@@ -199,21 +199,36 @@
         console.log("buttonSalvaOnClick");
         let check = true;
 
-        if ($("#nome").val().trim() === "") {
-            console.log("nome is null");
-            $("#nome").addClass("is-invalid");
-            check = false;
-        } else {
-            $("#nome").removeClass("is-invalid");
-        }
+        let isPersonaFisica = $("#personaFisica").is(':checked');
+        console.log("[isPersonaFisica] " + isPersonaFisica);
+
+        if (isPersonaFisica) {
+
+            if ($("#nome").val().trim() === "") {
+                console.log("nome is null");
+                $("#nome").addClass("is-invalid");
+                check = false;
+            } else {
+                $("#nome").removeClass("is-invalid");
+            }
 
 
-        if ($("#cognome").val().trim() === "") {
-            console.log("cognome is null");
-            $("#cognome").addClass("is-invalid");
-            check = false;
+            if ($("#cognome").val().trim() === "") {
+                console.log("cognome is null");
+                $("#cognome").addClass("is-invalid");
+                check = false;
+            } else {
+                $("#cognome").removeClass("is-invalid");
+            }
         } else {
-            $("#cognome").removeClass("is-invalid");
+
+            if ($("#ragioneSociale").val().trim() === "") {
+                console.log("ragioneSociale is null");
+                $("#ragioneSociale").addClass("is-invalid");
+                check = false;
+            } else {
+                $("#ragioneSociale").removeClass("is-invalid");
+            }
         }
 
         if ($("#login").val().trim() === "") {
@@ -223,6 +238,10 @@
         } else {
             $("#login").removeClass("is-invalid");
         }
+
+
+
+
 
         if ($("#email").val().trim() === "") {
             console.log("email is null");
@@ -238,6 +257,7 @@
             $('html, body').scrollTop($("#datiObbligatori").offset().top);
             return;
         }
+
         console.log("Privacy " + $("input[name='privacy']").attr("checked"));
         console.log("Privacy " + $("#privacy-si").is(":checked"));
 

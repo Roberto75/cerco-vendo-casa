@@ -8,7 +8,7 @@ Public Class ImmobiliareManager
 
     Private _mercatinoManager As MyManager.MercatinoManager
 
-    
+
 
     'Public Enum Categoria
     '    Affitto = 1000000
@@ -183,7 +183,7 @@ Public Class ImmobiliareManager
         Return insertAnnuncio(userId, True, 0, Date.MinValue)
     End Function
 
-    Public Function insertAnnuncio(ByVal userId As Long, test_mode As Boolean, myStato As MyManager.MercatinoManager.StatoAnnuncio, dateAdded As DateTime) As Long
+    Public Function insertAnnuncio(ByVal userId As Long, test_mode As Boolean, myStato As AnnunciManager.StatoAnnuncio, dateAdded As DateTime) As Long
 
         If _categoria = 0 OrElse IsNothing(_categoria) Then
             Throw New MyManager.ManagerException("La Categoria deve essere obbiligatoria")
@@ -195,7 +195,7 @@ Public Class ImmobiliareManager
         strSQL = "INSERT INTO ANNUNCIO ( FK_CATEGORIA_ID , MY_STATO"
         strSQLParametri = " VALUES ( " & _categoria
         If IsNothing(myStato) OrElse myStato = 0 Then
-            strSQLParametri &= ", '" & MyManager.MercatinoManager.StatoAnnuncio.Pubblicato.ToString() & "' "
+            strSQLParametri &= ", '" & AnnunciManager.StatoAnnuncio.Pubblicato.ToString() & "' "
         Else
             strSQLParametri &= ", '" & myStato.ToString() & "' "
         End If
@@ -538,16 +538,8 @@ Public Class ImmobiliareManager
 
 
     Public Function getAnnuncioByExternalId(ByVal externalId As String) As Data.DataTable
-        mStrSQL = "SELECT ANNUNCIO.*  " &
-                    " FROM ANNUNCIO " &
-                    " WHERE ( ANNUNCIO.date_deleted Is Null) And ANNUNCIO.EXTERNAL_ID = @EXTERNAL_ID "
-
-        Dim command As System.Data.Common.DbCommand
-        command = mConnection.CreateCommand()
-        command.CommandText = mStrSQL
-
-        mAddParameter(command, "@EXTERNAL_ID", externalId)
-        Return Me._fillDataSet(command).Tables(0)
+        Dim m As Annunci.AnnunciManager = New AnnunciManager(mConnection)
+        Return m.getAnnuncioByExternalId(externalId)
     End Function
 
 
@@ -580,7 +572,10 @@ Public Class ImmobiliareManager
 
 
     Public Function getEmailUtentiInTrattativa(ByVal annuncio_id As Long) As Data.DataTable
-        Return _mercatinoManager.getEmailUtentiInTrattativa(annuncio_id)
+        Dim m As Annunci.AnnunciManager = New AnnunciManager(mConnection)
+        Return m.getEmailUtentiInTrattativa(annuncio_id)
+
+        'Return _mercatinoManager.getEmailUtentiInTrattativa(annuncio_id)
     End Function
 
     Public Function getStatoTrattativa(ByVal trattativaId As Long) As MyManager.MercatinoManager.StatoTrattativa
@@ -588,7 +583,10 @@ Public Class ImmobiliareManager
     End Function
 
     Public Function deleteTrattativaLogic(ByVal trattativaId As Long, ByVal userId As Long) As Boolean
-        Return _mercatinoManager.deleteTrattativaLogic(trattativaId, userId)
+        Dim m As Annunci.AnnunciManager = New AnnunciManager(mConnection)
+        Return m.deleteTrattativaLogic(trattativaId, userId)
+
+        'Return _mercatinoManager.deleteTrattativaLogic(trattativaId, userId)
     End Function
 
     Public Function insertUser(ByVal userId As Long, ByVal nome As String, ByVal cognome As String, ByVal email As String, ByVal mylogin As String, ByVal customerId As Long) As Long
@@ -645,7 +643,7 @@ Public Class ImmobiliareManager
         Return Me.mExecuteScalar(mStrSQL)
     End Function
 
-    Public Function countAnnunci(ByVal userId As Long, stato As MercatinoManager.StatoAnnuncio) As Integer
+    Public Function countAnnunci(ByVal userId As Long, stato As AnnunciManager.StatoAnnuncio) As Integer
         mStrSQL = "SELECT count(*) FROM ANNUNCIO WHERE SOURCE_ID is null AND FK_USER_ID= " & userId &
             " AND MY_STATO ='" & stato.ToString & "' and DATE_DELETED IS NULL"
         Return Me.mExecuteScalar(mStrSQL)
@@ -695,20 +693,24 @@ Public Class ImmobiliareManager
 
 
 
-    Public Function updateStatoAnnunciBySourceIdAndStatoIniziale(sourceId As Models.Immobile.TipoSourceId, statoSource As MyManager.MercatinoManager.StatoAnnuncio, statoNew As MercatinoManager.StatoAnnuncio) As Integer
+    Public Function updateStatoAnnunciBySourceIdAndStatoIniziale(sourceId As Models.Immobile.TipoSourceId, statoSource As AnnunciManager.StatoAnnuncio, statoNew As AnnunciManager.StatoAnnuncio) As Integer
         mStrSQL = "UPDATE ANNUNCIO SET MY_STATO = '" & statoNew.ToString & "'"
         mStrSQL &= " WHERE EXTERNAL_ID is not null AND SOURCE_ID = " & sourceId & " AND MY_STATO = '" & statoSource.ToString & "' "
         Return mExecuteNoQuery(mStrSQL)
     End Function
 
 
-    Public Function updateStatoAnnunciBySourceId(sourceId As Models.Immobile.TipoSourceId, stato As MercatinoManager.StatoAnnuncio) As Integer
-        mStrSQL = "UPDATE ANNUNCIO SET MY_STATO = '" & stato.ToString & "'"
-        mStrSQL &= " WHERE EXTERNAL_ID is not null AND SOURCE_ID = " & sourceId
-        Return mExecuteNoQuery(mStrSQL)
+    Public Function updateStatoAnnunciBySourceId(sourceId As Models.Immobile.TipoSourceId, stato As Annunci.AnnunciManager.StatoAnnuncio) As Integer
+        Dim m As Annunci.AnnunciManager = New AnnunciManager(mConnection)
+        Return m.updateStatoAnnunciBySourceId(sourceId, stato)
+
+
+        'mStrSQL = "UPDATE ANNUNCIO SET MY_STATO = '" & stato.ToString & "'"
+        'mStrSQL &= " WHERE EXTERNAL_ID is not null AND SOURCE_ID = " & sourceId
+        'Return mExecuteNoQuery(mStrSQL)
     End Function
 
-    Public Function updateStatoAnnuncio(ByVal annuncioId As Long, stato As MercatinoManager.StatoAnnuncio) As Integer
+    Public Function updateStatoAnnuncio(ByVal annuncioId As Long, stato As AnnunciManager.StatoAnnuncio) As Integer
         mStrSQL = "UPDATE ANNUNCIO SET MY_STATO = '" & stato.ToString & "'"
         mStrSQL &= " WHERE ANNUNCIO_ID=" & annuncioId
         Return mExecuteNoQuery(mStrSQL)
@@ -890,7 +892,7 @@ Public Class ImmobiliareManager
         Return Me.mFillDataTable(mStrSQL)
     End Function
 
-    Public Function getAnnunciExternalBySourceAndStato(sourceId As Models.Immobile.TipoSourceId, stato As MyManager.MercatinoManager.StatoAnnuncio) As Data.DataTable
+    Public Function getAnnunciExternalBySourceAndStato(sourceId As Models.Immobile.TipoSourceId, stato As AnnunciManager.StatoAnnuncio) As Data.DataTable
         mStrSQL = "SELECT ANNUNCIO.*  " &
                     " FROM ANNUNCIO " &
                     " WHERE ( EXTERNAL_ID IS NOT NULL) And SOURCE_ID = " & sourceId & " AND MY_STATO = '" & stato.ToString() & "' "
@@ -899,11 +901,23 @@ Public Class ImmobiliareManager
     End Function
 
     Public Function deleteAnnuncioLogic(ByVal annuncioId As Long, ByVal absoluteServerPath As String) As Boolean
-        Return _mercatinoManager.deleteAnnuncioLogic(annuncioId, MercatinoManager.StatoAnnuncio.DaCancellare, absoluteServerPath)
+        Dim m As Annunci.AnnunciManager = New AnnunciManager(mConnection)
+        Return m.deleteAnnuncioLogic(annuncioId, AnnunciManager.StatoAnnuncio.Da_cancellare, absoluteServerPath)
+
+        'Return _mercatinoManager.deleteAnnuncioLogic(annuncioId, MercatinoManager.StatoAnnuncio.DaCancellare, absoluteServerPath)
     End Function
 
+    'Public Function deleteTrattativaLogicByAnnuncio(ByVal trattativaId As Long) As Boolean
+    'Dim m As Annunci.AnnunciManager = New AnnunciManager(mConnection)
+
+    'Return _mercatinoManager.deleteTrattativaLogicByAnnuncio(trattativaId)
+    'End Function
+
     Public Function deleteAnnuncio(ByVal annuncioId As Long, ByVal absoluteServerPath As String) As Boolean
-        Return _mercatinoManager.deleteAnnuncio(annuncioId, absoluteServerPath)
+        Dim m As Annunci.AnnunciManager = New AnnunciManager(mConnection)
+        Return m.deleteAnnuncio(annuncioId, absoluteServerPath)
+
+        'Return _mercatinoManager.deleteAnnuncio(annuncioId, absoluteServerPath)
     End Function
 
     Public Function deleteUser(ByVal userId As Long, ByVal absoluteServerPath As String) As Long

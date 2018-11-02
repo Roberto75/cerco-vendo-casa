@@ -12,6 +12,8 @@ Public Class RevoAgent
     Private _temp As String
 
     Private _manager As ImmobiliareManager
+
+
     Private _managerRegioneProvinciaComune As MyManager.RegioniProvinceComuniManager
     Private _managerLog As MyManager.LogManager
     'Private _managerPhoto As MyManager.PhotoManager
@@ -186,7 +188,10 @@ Public Class RevoAgent
         'cambio lo stato di tutti gli annunci
         If modeTest = False Then
             '  _manager.updateStatoAnnunciByUserId(Long.Parse(dt.Rows(0)("user_id").ToString), MyManager.MercatinoManager.StatoAnnuncio.DaCancellare, MyManager.ImmobiliareManager.SourceId.RevoAgent)
-            _manager.updateStatoAnnunciBySourceId(Annunci.Models.Immobile.TipoSourceId.RevoAgent, MyManager.MercatinoManager.StatoAnnuncio.DaCancellare)
+            _manager.updateStatoAnnunciBySourceId(Annunci.Models.Immobile.TipoSourceId.RevoAgent, Annunci.AnnunciManager.StatoAnnuncio.Da_cancellare)
+
+
+
         End If
 
 
@@ -562,7 +567,7 @@ Public Class RevoAgent
                             If _dataTable Is Nothing OrElse _dataTable.Rows.Count = 0 Then
                                 'insert
                                 '20/02/2012 inserisco l'annuncio con la data di modifica
-                                annuncioId = _manager.insertAnnuncio(userId, modeTest, MyManager.MercatinoManager.StatoAnnuncio.OffLine, dataModifica)
+                                annuncioId = _manager.insertAnnuncio(userId, modeTest, Annunci.AnnunciManager.StatoAnnuncio.OffLine, dataModifica)
 
                                 _contaRecordInseriti += 1
                             Else
@@ -646,7 +651,7 @@ Public Class RevoAgent
                                 End If
 
                                 If modeTest = False Then
-                                    _manager.updateStatoAnnuncio(annuncioId, MyManager.MercatinoManager.StatoAnnuncio.OffLine)
+                                    _manager.updateStatoAnnuncio(annuncioId, Annunci.AnnunciManager.StatoAnnuncio.OffLine)
                                 End If
                             End If
 
@@ -707,7 +712,7 @@ Public Class RevoAgent
 
                 '*** Pubblico gli annunci ****
                 Dim conta As Integer
-                conta = _manager.updateStatoAnnunciBySourceIdAndStatoIniziale(Annunci.Models.Immobile.TipoSourceId.RevoAgent, MyManager.MercatinoManager.StatoAnnuncio.OffLine, MyManager.MercatinoManager.StatoAnnuncio.Pubblicato)
+                conta = _manager.updateStatoAnnunciBySourceIdAndStatoIniziale(Annunci.Models.Immobile.TipoSourceId.RevoAgent, Annunci.AnnunciManager.StatoAnnuncio.OffLine, Annunci.AnnunciManager.StatoAnnuncio.Pubblicato)
                 _message &= String.Format("Sono stati pubblicati {0:N0} annunci", conta) & vbCrLf & vbCrLf
 
             End If
@@ -751,22 +756,22 @@ Public Class RevoAgent
             _dataTable = _manager.getAnnunciExternalBySource(Annunci.Models.Immobile.TipoSourceId.RevoAgent)
             _message &= "Totale annunci RevoAgent (EXTERNAL):" & _dataTable.Rows.Count & vbCrLf
 
-            _dataTable = _manager.getAnnunciExternalBySourceAndStato(Annunci.Models.Immobile.TipoSourceId.RevoAgent, MyManager.MercatinoManager.StatoAnnuncio.OffLine)
+            _dataTable = _manager.getAnnunciExternalBySourceAndStato(Annunci.Models.Immobile.TipoSourceId.RevoAgent, Annunci.AnnunciManager.StatoAnnuncio.OffLine)
             _message &= "Offline:" & _dataTable.Rows.Count & vbCrLf
 
-            _dataTable = _manager.getAnnunciExternalBySourceAndStato(Annunci.Models.Immobile.TipoSourceId.RevoAgent, MyManager.MercatinoManager.StatoAnnuncio.Pubblicato)
+            _dataTable = _manager.getAnnunciExternalBySourceAndStato(Annunci.Models.Immobile.TipoSourceId.RevoAgent, Annunci.AnnunciManager.StatoAnnuncio.Pubblicato)
             _message &= "Pubblicati:" & _dataTable.Rows.Count & vbCrLf
 
-            _dataTable = _manager.getAnnunciExternalBySourceAndStato(Annunci.Models.Immobile.TipoSourceId.RevoAgent, MyManager.MercatinoManager.StatoAnnuncio.DaCancellare)
+            _dataTable = _manager.getAnnunciExternalBySourceAndStato(Annunci.Models.Immobile.TipoSourceId.RevoAgent, Annunci.AnnunciManager.StatoAnnuncio.Da_cancellare)
             _message &= "DaCancellare:" & _dataTable.Rows.Count & vbCrLf
 
-            _dataTable = _manager.getAnnunciExternalBySourceAndStato(Annunci.Models.Immobile.TipoSourceId.RevoAgent, MyManager.MercatinoManager.StatoAnnuncio.ConclusoConSuccesso)
+            _dataTable = _manager.getAnnunciExternalBySourceAndStato(Annunci.Models.Immobile.TipoSourceId.RevoAgent, Annunci.AnnunciManager.StatoAnnuncio.Concluso_con_successo)
             _message &= "ConclusoConSuccesso:" & _dataTable.Rows.Count & vbCrLf
 
-            _dataTable = _manager.getAnnunciExternalBySourceAndStato(Annunci.Models.Immobile.TipoSourceId.RevoAgent, MyManager.MercatinoManager.StatoAnnuncio.OggettoNonPiuDisponibile)
+            _dataTable = _manager.getAnnunciExternalBySourceAndStato(Annunci.Models.Immobile.TipoSourceId.RevoAgent, Annunci.AnnunciManager.StatoAnnuncio.Oggetto_non_piu_disponibile)
             _message &= "OggettoNonPiuDisponibile:" & _dataTable.Rows.Count & vbCrLf
 
-            _dataTable = _manager.getAnnunciExternalBySourceAndStato(Annunci.Models.Immobile.TipoSourceId.RevoAgent, MyManager.MercatinoManager.StatoAnnuncio.Altro)
+            _dataTable = _manager.getAnnunciExternalBySourceAndStato(Annunci.Models.Immobile.TipoSourceId.RevoAgent, Annunci.AnnunciManager.StatoAnnuncio.Altro)
             _message &= "Altro:" & _dataTable.Rows.Count & vbCrLf
 
             Dim t As String
@@ -943,6 +948,7 @@ STEP1:
     Public Function deleteAnnunciDaCancellareByRevoAgent(ByRef managerLocal As ImmobiliareManager) As String
 
         Dim flag As Boolean = False
+        Dim messaggio As String = ""
 
 
         If managerLocal Is Nothing Then
@@ -953,13 +959,14 @@ STEP1:
 
         Dim dt As Data.DataTable
         Try
-            _dataTable = managerLocal.getAnnunciExternalBySourceAndStato(Annunci.Models.Immobile.TipoSourceId.RevoAgent, MyManager.MercatinoManager.StatoAnnuncio.DaCancellare)
+            _dataTable = managerLocal.getAnnunciExternalBySourceAndStato(Annunci.Models.Immobile.TipoSourceId.RevoAgent, Annunci.AnnunciManager.StatoAnnuncio.Da_cancellare)
 
             For Each annuncio As Data.DataRow In _dataTable.Rows
                 'prendo tutti gli utenti in trattativa
                 dt = managerLocal.getEmailUtentiInTrattativa(Long.Parse(annuncio("annuncio_id").ToString))
 
                 If dt.Rows.Count > 0 Then
+                    Debug.WriteLine("Ci sono " & dt.Rows.Count & " utenti in trattativa per l'annuncioId " & annuncio("annuncio_id").ToString)
 
                     Dim mail As New Annunci.ImmobiliareMailMessageManager(System.Configuration.ConfigurationManager.AppSettings("application.name"), System.Configuration.ConfigurationManager.AppSettings("application.url"))
 
@@ -973,6 +980,10 @@ STEP1:
 
                         Debug.WriteLine("to: " + row("email").ToString)
 
+                        If (row("email").ToString = "stefano.righini@gmail.com") Then
+                            Debug.WriteLine("Debugg stefano.righini@gmail.com")
+                        End If
+
                         mail.ToClearField()
                         mail.To(row("email").ToString)
 
@@ -981,26 +992,33 @@ STEP1:
                         mail.send()
 
                         'Rel. 1.0.0.4 del 27/10/2018
-                        Dim annuncioDateDeleted As DateTime = DateTime.Parse(annuncio("date_deleted").ToString())
-                        'Se sono trascorsi più di 10 giorni dalla 
                         Debug.WriteLine("[trattativa_id] " & row("trattativa_id").ToString())
                         Debug.WriteLine("[date_added] della trattativa " & row("date_added").ToString())
-                        Debug.WriteLine("[date_deleted] dell'annuncio " & annuncioDateDeleted)
 
-                        'Se sono trascorsi più di 10 giorni dalla cancellezione dell'annuncio ... vuol dire che abbiamo inviato 10 email 
-                        Dim giorni As Long = DateDiff(DateInterval.Day, annuncioDateDeleted, Now)
-                        Debug.WriteLine("Giorni trarscorsi: " & giorni)
-                        'If (giorni > 10) Then
-                        ' managerLocal.deleteTrattativaLogic(Long.Parse(email("trattativa_id").ToString()), Long.Parse(email("user_id").ToString()))
-                        'End If
+                        Dim annuncioDateDeleted As DateTime = Nothing
 
+                        If Not IsNothing(annuncio("date_deleted")) Then
+                            annuncioDateDeleted = DateTime.Parse(annuncio("date_deleted").ToString())
+                            Debug.WriteLine("[date_deleted] dell'annuncio " & annuncioDateDeleted)
+                            'Se sono trascorsi più di 10 giorni dalla cancellezione dell'annuncio ... vuol dire che abbiamo inviato 10 email 
+                            Dim giorni As Long = DateDiff(DateInterval.Day, annuncioDateDeleted, Now)
+                            Debug.WriteLine("Giorni trascorsi: " & giorni)
+                            If (giorni > 5) Then
+                                messaggio &= "Cancellazione della trattativa dopo " & giorni & " giorni"
+
+                                managerLocal.deleteTrattativaLogic(Long.Parse(annuncio("trattativa_id").ToString()), Long.Parse(annuncio("user_id").ToString()))
+                            End If
+                        End If
                     Next
 
                     'mail.Bcc(System.Configuration.ConfigurationManager.AppSettings("mail.To.Ccn"))
                     'mail.send()
 
                     'cancellazione logica
-                    managerLocal.deleteAnnuncioLogic(Long.Parse(annuncio("annuncio_id").ToString), "")
+                    If (IsNothing(annuncio("date_deleted"))) Then
+                        managerLocal.deleteAnnuncioLogic(Long.Parse(annuncio("annuncio_id").ToString), "")
+                    End If
+
                 Else
 
                     'cancellazione fisica
@@ -1015,7 +1033,9 @@ STEP1:
             End If
         End Try
 
-        Return "Sono stati cancellati " & _dataTable.Rows.Count & " annunci."
+        messaggio &= "Sono stati cancellati " & _dataTable.Rows.Count & " annunci."
+
+        Return messaggio
     End Function
 
     Private Function getCategoriaFromXML(tipoContratto As String, id As Integer) As String

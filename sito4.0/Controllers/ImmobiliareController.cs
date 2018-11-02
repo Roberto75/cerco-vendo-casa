@@ -10,7 +10,7 @@ namespace MyWebApplication.Controllers
 {
     public class ImmobiliareController : MyBaseController
     {
-        private Annunci.ImmobiliareManager _manager = new Annunci.ImmobiliareManager("immobiliare");
+        private Annunci.ImmobiliareManager manager = new Annunci.ImmobiliareManager("immobiliare");
 
         private MyManagerCSharp.RegioniProvinceComuniManager regioniProvinceComuniManager = new MyManagerCSharp.RegioniProvinceComuniManager("RegioniProvinceComuni");
 
@@ -28,7 +28,7 @@ namespace MyWebApplication.Controllers
 
 
 
-            _manager.mOpenConnection();
+            manager.mOpenConnection();
             try
             {
                 model.comboRegioni = regioniProvinceComuniManager.getComboRegioni();
@@ -42,11 +42,11 @@ namespace MyWebApplication.Controllers
                     model.comboComuni = regioniProvinceComuniManager.getComboComuni(model.filter.provinciaId);
                 }
 
-                _manager.getList(model);
+                manager.getList(model);
             }
             finally
             {
-                _manager.mCloseConnection();
+                manager.mCloseConnection();
             }
 
 
@@ -132,10 +132,10 @@ namespace MyWebApplication.Controllers
         public ActionResult Details(long id = 0)
         {
             Annunci.Models.Immobile immobile = null;
-            _manager.mOpenConnection();
+            manager.mOpenConnection();
             try
             {
-                immobile = _manager.getImmobile(id);
+                immobile = manager.getImmobile(id);
 
                 if (immobile == null)
                 {
@@ -149,18 +149,18 @@ namespace MyWebApplication.Controllers
                     if (MySessionData != null && MySessionData.UserId != immobile.userId)
                     {
                         //se non si tratta di un mio annuncio ...
-                        _manager.annuncioAddClick(id);
+                        manager.annuncioAddClick(id);
                     }
                 }
                 else
                 {
                     //nel caso di connessioni anonime non posso fare nulla
-                    _manager.annuncioAddClick(id);
+                    manager.annuncioAddClick(id);
                 }
 
 
                 // PHOTO
-                Annunci.PhotoManager photoManager = new Annunci.PhotoManager(_manager.mGetConnection());
+                Annunci.PhotoManager photoManager = new Annunci.PhotoManager(manager.mGetConnection());
                 List<Annunci.Models.MyPhoto> photos;
                 photos = photoManager.getMyPhotosIsNotPlanimetria(id);
                 Debug.WriteLine("Trovate {0} immagini", photos.Count);
@@ -207,7 +207,7 @@ namespace MyWebApplication.Controllers
             }
             finally
             {
-                _manager.mCloseConnection();
+                manager.mCloseConnection();
             }
 
             Debug.WriteLine("Climatizzato: " + immobile.climatizzato);
@@ -224,7 +224,7 @@ namespace MyWebApplication.Controllers
 
 
 
-            _manager.mOpenConnection();
+            manager.mOpenConnection();
 
             List<Annunci.Models.Immobile> risultato = new List<Annunci.Models.Immobile>();
 
@@ -234,7 +234,7 @@ namespace MyWebApplication.Controllers
             }
             finally
             {
-                _manager.mCloseConnection();
+                manager.mCloseConnection();
             }
 
 
@@ -336,7 +336,7 @@ namespace MyWebApplication.Controllers
         public ActionResult Create(Models.CreateModel model)
         {
             model.comboRegioni = regioniProvinceComuniManager.getComboRegioni();
-            
+
             if (model.immobile.regioneId != null)
             {
                 model.comboProvince = regioniProvinceComuniManager.getComboProvince((int)model.immobile.regioneId);
@@ -550,7 +550,7 @@ namespace MyWebApplication.Controllers
         [HttpPost]
         public ActionResult Insert(Annunci.Models.Immobile model)
         {
-            
+
             Debug.WriteLine("Climatizzato: " + model.climatizzato);
             Debug.WriteLine("speseCondominiali: " + model.speseCondominiali);
 
@@ -562,7 +562,7 @@ namespace MyWebApplication.Controllers
             }
 
 
-            _manager.mOpenConnection();
+            manager.mOpenConnection();
 
             //Debug.WriteLine("Nota:" + Request["nota"]);
             //Debug.WriteLine("Nota:" + model.nota);
@@ -574,11 +574,11 @@ namespace MyWebApplication.Controllers
             {
                 model.nota = HttpUtility.HtmlDecode(model.nota);
                 //  _manager.insertAnnuncio(model, (User.Identity as MyUsers.MyCustomIdentity).UserId);
-                _manager.insertAnnuncio(model, MySessionData.UserId);
+                manager.insertAnnuncio(model, MySessionData.UserId);
             }
             finally
             {
-                _manager.mCloseConnection();
+                manager.mCloseConnection();
             }
 
 
@@ -617,19 +617,20 @@ namespace MyWebApplication.Controllers
 
             try
             {
-                _manager.mOpenConnection();
+                manager.mOpenConnection();
 
                 Annunci.Models.Immobile immobile;
-                immobile = _manager.getImmobile(annuncioId);
+                immobile = manager.getImmobile(annuncioId);
 
                 model.annuncio = immobile;
 
                 if (quote != null)
                 {
                     Annunci.Models.Risposta risposta;
-                    risposta = _manager.getRisposta((long)quote);
+                    risposta = manager.getRisposta((long)quote);
                     model.testo = "<blockquote><hr/><b>" + risposta.login + "</b> scrive: </br></br>" + risposta.testo + "<hr/></blockquote>";
                     model.rispostaId = (long)quote;
+                    model.replyTo = risposta.login;
                 }
                 else
                 {
@@ -641,6 +642,9 @@ namespace MyWebApplication.Controllers
                     else
                     {
                         model.rispostaId = (long)rispostaId;
+                        Annunci.Models.Risposta risposta;
+                        risposta = manager.getRisposta((long)rispostaId);
+                        model.replyTo = risposta.login;
                     }
 
                 }
@@ -648,7 +652,7 @@ namespace MyWebApplication.Controllers
             }
             finally
             {
-                _manager.mCloseConnection();
+                manager.mCloseConnection();
             }
 
             return model;
@@ -677,37 +681,79 @@ namespace MyWebApplication.Controllers
                 return View(model);
             }
 
+            bool isOwner = true;
             if (ModelState.IsValid)
             {
-
                 try
                 {
-                    _manager.mOpenConnection();
-
-                    Annunci.TrattativaManager managerVb = new Annunci.TrattativaManager(_manager.mGetConnection());
+                    manager.mOpenConnection();
 
 
                     if (rispostaId == null || rispostaId == -1)
                     {
                         //' si tratta di una nuova trattativa!!
-                        trattativaId = _manager.insertTrattativa(annuncioId, userId);
-                        managerVb.rispondi((long)trattativaId, userId, testo);
+                        trattativaId = manager.insertTrattativa(annuncioId, userId);
+                        manager.rispondi((long)trattativaId, userId, testo);
                     }
                     else
                     {
-                        managerVb.rispondi((long)trattativaId, userId, testo, (long)rispostaId);
+                        manager.rispondi((long)trattativaId, userId, testo, (long)rispostaId);
+                    }
+
+
+                    isOwner = manager.isOwner(annuncioId, MySessionData.UserId);
+
+                    Annunci.Models.Immobile immobile;
+                    immobile = manager.getImmobile(annuncioId);
+
+                    //*** EMAIL ***
+                    System.Data.DataTable dt;
+                    dt = manager.getEmailReplyAnnnuncio((long)trattativaId);
+
+                    Annunci.Libri.LibriMailMessageManager mail = new Annunci.Libri.LibriMailMessageManager(System.Configuration.ConfigurationManager.AppSettings["application.name"], System.Configuration.ConfigurationManager.AppSettings["application.url"]);
+                    mail.Subject = System.Configuration.ConfigurationManager.AppSettings["application.name"] + " - Nuovo messaggio";
+                    mail.Body = mail.getBodyNuovoMessaggioReply((long)trattativaId, annuncioId, immobile.immobile.ToString(), String.Format("Immobiliare/Trattativa/{0}", trattativaId));
+
+                    if (isOwner)
+                    {
+                        mail.To(dt.Rows[0]["email"].ToString());
+                    }
+                    else
+                    {
+                        mail.To(dt.Rows[0]["email_owner"].ToString());
+                    }
+
+                    //MY-DEBUGG
+                    //' mail._ToClearField()
+                    //'mail._To("roberto.rutigliano@gmail.com")
+
+                    mail.Bcc(System.Configuration.ConfigurationManager.AppSettings["mail.To.Ccn"]);
+                    mail.send();
+
+
+                    //'l'inserimento di una nuova risposta comporta la notifica del messaggio
+                    //'ci passo l'id dell'utente per facilitare la ricerca 
+                    if (isOwner)
+                    {
+                        manager.notificaUser((long)trattativaId, long.Parse(dt.Rows[0]["user_id"].ToString()));
+                    }
+                    else
+                    {
+                        manager.notificaOwner((long)trattativaId, long.Parse(dt.Rows[0]["user_id_owner"].ToString()));
                     }
                 }
                 finally
                 {
-                    _manager.mCloseConnection();
+                    manager.mCloseConnection();
                 }
             }
 
-
-
-
-            return RedirectToAction("Details", new { id = annuncioId });
+            //return RedirectToAction("Details", new { id = annuncioId });
+            if (isOwner)
+            {
+                return RedirectToAction("MyAnnunci");
+            }
+            return RedirectToAction("MyTrattative");
         }
 
 
@@ -718,17 +764,17 @@ namespace MyWebApplication.Controllers
         {
 
 
-            _manager.mOpenConnection();
+            manager.mOpenConnection();
 
             List<Annunci.Models.Trattativa> risultato;
 
             try
             {
-                risultato = _manager.getListTrattative(MySessionData.UserId, Annunci.Models.Trattativa.TipoTrattativa.Immobile);
+                risultato = manager.getListTrattative(MySessionData.UserId, Annunci.Models.Trattativa.TipoTrattativa.Immobile);
             }
             finally
             {
-                _manager.mCloseConnection();
+                manager.mCloseConnection();
             }
 
 
@@ -743,45 +789,66 @@ namespace MyWebApplication.Controllers
         public ActionResult Trattativa(long? id)
         {
             Debug.WriteLine("trattativaId: " + id);
-
-
             Models.ModelTrattativa model = new Models.ModelTrattativa();
-
-
-
-            _manager.mOpenConnection();
-
-            Annunci.Models.Trattativa risultato;
+            
+            manager.mOpenConnection();
+                       
 
             try
             {
-                risultato = _manager.getTrattativa((long)id);
-
-                if (risultato != null)
+                model.trattativa = manager.getTrattativa((long)id);
+                if (model.trattativa == null)
                 {
-                    _manager.setRisposteFromTrattativa(risultato);
+                    return View("~/Views/Errors/NotAvailable.cshtml");
                 }
 
-                model.trattativa = risultato;
+                if (!manager.authorizeShowTrattativa(MySessionData.UserId, (long)id))
+                {
+                    return RedirectToAction("NotAuthorized", "Errors");
+                }
 
-                model.immobile = _manager.getImmobile(risultato.annuncioId);
+
+                manager.setRisposteFromTrattativa(model.trattativa);
+
+                model.immobile = manager.getImmobile(model.trattativa.annuncioId);
+
+                if (model.immobile == null)
+                {
+                    //vuol dire che l'annuncio è stato rimosso ... 
+                    //return View("NotAvailable");
+
+                    // il controllo lo faccio sulla VIEW così visualizzo i pulsanti corretti
+                }
+
+                //Verifico se l'utente che ha inserito la risposta sia il prorietario dell'annuncio
+                bool isOwner;
+                isOwner = manager.isOwner(model.trattativa.annuncioId, MySessionData.UserId);
+
+                if (isOwner)
+                {
+                    manager.updateNotificaLetturaRispostaOwner((long)id);
+                }
+                else
+                {
+                    manager.updateNotificaLetturaRispostaUser((long)id);
+                }
 
             }
             finally
             {
-                _manager.mCloseConnection();
+                manager.mCloseConnection();
             }
 
+            if (TempData["AREA"] != null && TempData["AREA"].ToString() == "Admin")
+            {
+                return View("~/Areas/Admin/Views/Annunci/Trattativa.cshtml", model);
+            }
 
             return View(model);
         }
 
 
-
-
-
-
-
+        
 
 
         #endregion
@@ -791,7 +858,7 @@ namespace MyWebApplication.Controllers
 
         public ActionResult MyAnnunci()
         {
-            _manager.mOpenConnection();
+            manager.mOpenConnection();
 
             List<Annunci.Models.Immobile> risultato;
 
@@ -811,9 +878,9 @@ namespace MyWebApplication.Controllers
                 //}
 
 
-                risultato = _manager.getListAnnunci(MySessionData.UserId);
+                risultato = manager.getListAnnunci(MySessionData.UserId);
 
-                Annunci.AnnunciManager annuncioManager = new Annunci.AnnunciManager(_manager.mGetConnection());
+                Annunci.AnnunciManager annuncioManager = new Annunci.AnnunciManager(manager.mGetConnection());
                 long numeroRisposte;
                 foreach (Annunci.Models.Immobile i in risultato)
                 {
@@ -824,7 +891,7 @@ namespace MyWebApplication.Controllers
             }
             finally
             {
-                _manager.mCloseConnection();
+                manager.mCloseConnection();
             }
 
             ViewData["hashtableRisposte"] = hashtableRisposte;
@@ -840,10 +907,10 @@ namespace MyWebApplication.Controllers
             model = new Models.UpdateModel();
 
             Annunci.Models.Immobile immobile = null;
-            _manager.mOpenConnection();
+            manager.mOpenConnection();
             try
             {
-                immobile = _manager.getImmobile(id);
+                immobile = manager.getImmobile(id);
 
                 if (immobile == null)
                 {
@@ -856,7 +923,7 @@ namespace MyWebApplication.Controllers
                 }
 
                 // PHOTO
-                Annunci.PhotoManager photoManager = new Annunci.PhotoManager(_manager.mGetConnection());
+                Annunci.PhotoManager photoManager = new Annunci.PhotoManager(manager.mGetConnection());
 
                 List<Annunci.Models.MyPhoto> photos;
                 photos = photoManager.getMyPhotosIsNotPlanimetria(id);
@@ -875,7 +942,7 @@ namespace MyWebApplication.Controllers
             }
             finally
             {
-                _manager.mCloseConnection();
+                manager.mCloseConnection();
             }
 
             model.immobile = immobile;
@@ -899,9 +966,9 @@ namespace MyWebApplication.Controllers
             Annunci.Models.Immobile immobile;
             try
             {
-                _manager.mOpenConnection();
+                manager.mOpenConnection();
 
-                immobile = _manager.getImmobile((long)annuncioId);
+                immobile = manager.getImmobile((long)annuncioId);
                 if (immobile == null)
                 {
                     return HttpNotFound();
@@ -911,7 +978,7 @@ namespace MyWebApplication.Controllers
             }
             finally
             {
-                _manager.mCloseConnection();
+                manager.mCloseConnection();
             }
 
 
@@ -979,20 +1046,20 @@ namespace MyWebApplication.Controllers
             try
             {
 
-                _manager.mOpenConnection();
+                manager.mOpenConnection();
 
-                if (_manager.updateAnnuncioDescrizione((long)annuncioId, nota, false) > 0)
+                if (manager.updateAnnuncioDescrizione((long)annuncioId, nota, false) > 0)
                 {
 
                     System.Data.DataTable dt;
-                    dt = _manager.getEmailUtentiInTrattativa((long)annuncioId);
+                    dt = manager.getEmailUtentiInTrattativa((long)annuncioId);
 
 
                     if (dt.Rows.Count > 0)
                     {
 
                         Annunci.Models.Immobile i;
-                        i = _manager.getImmobile((long)annuncioId);
+                        i = manager.getImmobile((long)annuncioId);
 
                         Annunci.ImmobiliareMailMessageManager mail = new Annunci.ImmobiliareMailMessageManager(System.Configuration.ConfigurationManager.AppSettings["application.name"], System.Configuration.ConfigurationManager.AppSettings["application.url"]);
                         mail.Subject = System.Configuration.ConfigurationManager.AppSettings["application.name"] + " - Modifica annuncio";
@@ -1011,7 +1078,7 @@ namespace MyWebApplication.Controllers
             }
             finally
             {
-                _manager.mCloseConnection();
+                manager.mCloseConnection();
             }
 
             return RedirectToAction("MyAnnuncio", new { id = annuncioId });
@@ -1046,20 +1113,20 @@ namespace MyWebApplication.Controllers
             try
             {
 
-                _manager.mOpenConnection();
+                manager.mOpenConnection();
 
-                if (_manager.updateAnnuncioPrezzo((long)annuncioId, (decimal)dNuovoPrezzo, false) > 0)
+                if (manager.updateAnnuncioPrezzo((long)annuncioId, (decimal)dNuovoPrezzo, false) > 0)
                 {
 
                     System.Data.DataTable dt;
-                    dt = _manager.getEmailUtentiInTrattativa((long)annuncioId);
+                    dt = manager.getEmailUtentiInTrattativa((long)annuncioId);
 
 
                     if (dt.Rows.Count > 0)
                     {
 
                         Annunci.Models.Immobile i;
-                        i = _manager.getImmobile((long)annuncioId);
+                        i = manager.getImmobile((long)annuncioId);
 
                         Annunci.ImmobiliareMailMessageManager mail = new Annunci.ImmobiliareMailMessageManager(System.Configuration.ConfigurationManager.AppSettings["application.name"], System.Configuration.ConfigurationManager.AppSettings["application.url"]);
                         mail.Subject = System.Configuration.ConfigurationManager.AppSettings["application.name"] + " - Modifica annuncio";
@@ -1078,7 +1145,7 @@ namespace MyWebApplication.Controllers
             }
             finally
             {
-                _manager.mCloseConnection();
+                manager.mCloseConnection();
             }
 
             return RedirectToAction("MyAnnuncio", new { id = annuncioId });
@@ -1218,12 +1285,12 @@ namespace MyWebApplication.Controllers
 
             try
             {
-                _manager.mOpenConnection();
-                _manager.resetContatoreParziale((long)annuncioId);
+                manager.mOpenConnection();
+                manager.resetContatoreParziale((long)annuncioId);
             }
             finally
             {
-                _manager.mCloseConnection();
+                manager.mCloseConnection();
             }
 
             Models.JsonMessageModel model = new Models.JsonMessageModel();
@@ -1243,7 +1310,7 @@ namespace MyWebApplication.Controllers
 
             Debug.WriteLine(String.Format("ExternalId: {0}", id));
 
-            Annunci.PhotoManager m = new Annunci.PhotoManager(_manager.mGetConnection());
+            Annunci.PhotoManager m = new Annunci.PhotoManager(manager.mGetConnection());
 
             try
             {

@@ -5,9 +5,17 @@
   type => changes
  -->
 
+  <release number="4.0.0.2" data="02/11/2018">
+    <item data="01/11/2018"     owner="Rutigliano"  type="bug" >
+      Fix registrazione di una Agenzia Immobiliare
+    </item>
+    <item data="02/11/2018"     owner="Rutigliano"  type="bug" >
+      Fix RevoAgent
+    </item>
+  </release>
 
   <release number="4.0.0.1" data="09/10/2018">
-    <item data="09/10/2018"     owner="Rutigliano"  type="changes" >
+    <item data="09/10/2018"     owner="Rutigliano"  type="bug" >
       Fix dettaglio annuncio
     </item>
   </release>
