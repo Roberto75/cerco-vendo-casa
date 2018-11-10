@@ -1006,7 +1006,8 @@ STEP1:
                             If (giorni > 5) Then
                                 messaggio &= "Cancellazione della trattativa dopo " & giorni & " giorni"
 
-                                managerLocal.deleteTrattativaLogic(Long.Parse(annuncio("trattativa_id").ToString()), Long.Parse(annuncio("user_id").ToString()))
+                                managerLocal.deleteTrattativaLogic(Long.Parse(row("trattativa_id").ToString()), Long.Parse(row("user_id").ToString()))
+
                             End If
                         End If
                     Next
