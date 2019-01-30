@@ -10,27 +10,54 @@ namespace MyWebApplication.Controllers
 {
     public class ImmobiliareController : MyBaseController
     {
-        private Annunci.ImmobiliareManager manager = new Annunci.ImmobiliareManager("immobiliare");
-
-        private MyManagerCSharp.RegioniProvinceComuniManager regioniProvinceComuniManager = new MyManagerCSharp.RegioniProvinceComuniManager("RegioniProvinceComuni");
-
-
+       
         public const int MaxWidthImage = 500;
         public const int MaxHeightImage = 500;
 
         public const int WidthThumbnail = 200;
         public const int HeightThumbnail = 200;
 
+        private const string SESSSION_FILTER_SEARCH = "SearchImmobiliareModel";
+
+        private Annunci.ImmobiliareManager manager = new Annunci.ImmobiliareManager("immobiliare");
+
+        private MyManagerCSharp.RegioniProvinceComuniManager regioniProvinceComuniManager = new MyManagerCSharp.RegioniProvinceComuniManager("RegioniProvinceComuni");
+
+
+
         [AllowAnonymous]
         public ActionResult Index(Annunci.Models.SearchImmobili model)
         {
-            readRequestParameters(ref model);
+           // readRequestParameters(ref model);
 
 
 
-            manager.mOpenConnection();
+            if (Request.HttpMethod.ToString() == "GET" && Session[SESSSION_FILTER_SEARCH] != null && Request.UrlReferrer != null
+               && Request.UrlReferrer.LocalPath.IndexOf("/Libri/TestiScolastici") == -1
+               //&& Request.UrlReferrer.LocalPath.IndexOf("/Libri/Details") == -1
+               && Request.UrlReferrer.LocalPath != "/Libri/Categorie")
+            {
+                model = (Session[SESSSION_FILTER_SEARCH] as Annunci.Models.SearchImmobili );
+                //model.filter = (Session[SESSSION_FILTER_SEARCH] as Annunci.Libri.Models.Libro);
+                Debug.WriteLine("Leggo i parametri di ricerca dalla sessione ...");
+                Debug.WriteLine("Filtro Days: " + model.days);
+            }
+
+
+            if (model.filter == null)
+            {
+                model.filter = new Annunci.Models.Immobile();
+            }
+
+
+            Debug.WriteLine("Regione: " + model.filter.regioneId);
+            Debug.WriteLine("Provincia: " + model.filter.provinciaId);
+            Debug.WriteLine("Comune: " + model.filter.comuneId);
+
             try
             {
+                manager.mOpenConnection();
+
                 model.comboRegioni = regioniProvinceComuniManager.getComboRegioni();
                 if (model.filter.regioneId != null)
                 {
@@ -83,7 +110,8 @@ namespace MyWebApplication.Controllers
             //    model.categoria = int.Parse(Categoria);
             //}
 
-            Session["SearchModel"] = model;
+            Session[SESSSION_FILTER_SEARCH] = model;
+            //Session["SearchModel"] = model;
             return View(model);
         }
 
