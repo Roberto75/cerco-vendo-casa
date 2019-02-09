@@ -42,6 +42,10 @@ namespace MyWebApplication.Models
         [Display(Name = "Confirm new password")]
         //   [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public string carattariConsentiti { get; set; }
+        public string catatteriVietati { get; set; }
+
     }
 
     public class LogOnModel

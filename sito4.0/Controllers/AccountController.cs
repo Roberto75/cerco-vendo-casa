@@ -30,7 +30,7 @@ namespace MyWebApplication.Controllers
         private int _maxWidth = 80;
         private int _maxHeight = 80;
 
-        private MyUsers.UserManager _manager = new MyUsers.UserManager("utenti");
+        private MyUsers.UserManager manager = new MyUsers.UserManager("utenti");
 
 
         // This action handles the form POST and the upload
@@ -106,12 +106,12 @@ namespace MyWebApplication.Controllers
         [Authorize]
         public ActionResult Manage()
         {
-            _manager.mOpenConnection();
+            manager.mOpenConnection();
             Models.ManageModel model = new Models.ManageModel();
             MyUsers.Models.MyUser u = null;
             try
             {
-                u = _manager.getUser(MySessionData.UserId);
+                u = manager.getUser(MySessionData.UserId);
 
                 if (u == null)
                 {
@@ -130,7 +130,7 @@ namespace MyWebApplication.Controllers
                 {
                     model.customerId = -1;
                 }
-                
+
                 string pathImage;
                 pathImage = "~/public/UserFiles/" + u.login + "/photo.gif";
 
@@ -154,7 +154,7 @@ namespace MyWebApplication.Controllers
             }
             finally
             {
-                _manager.mCloseConnection();
+                manager.mCloseConnection();
             }
 
             return View(model);
@@ -192,12 +192,12 @@ namespace MyWebApplication.Controllers
 
                 long userId;
 
-                _manager.mOpenConnection();
+                manager.mOpenConnection();
 
                 try
                 {
                     string ip = HttpContext.Request.UserHostAddress;
-                    userId = _manager.isAuthenticated(model.UserName.Trim(), model.Password.Trim(), ip);
+                    userId = manager.isAuthenticated(model.UserName.Trim(), model.Password.Trim(), ip);
 
                     if (userId != -1)
                     {
@@ -249,7 +249,7 @@ namespace MyWebApplication.Controllers
                         }
 
 
-                        MyManagerCSharp.Log.LogUserManager log = new MyManagerCSharp.Log.LogUserManager(_manager.mGetConnection());
+                        MyManagerCSharp.Log.LogUserManager log = new MyManagerCSharp.Log.LogUserManager(manager.mGetConnection());
 
                         if (TempData["AREA"] != null && TempData["AREA"].ToString() == "Mobile")
                         {
@@ -263,7 +263,7 @@ namespace MyWebApplication.Controllers
 
                         /** SESSIONE **/
                         MyManagerCSharp.MySessionData session = new MyManagerCSharp.MySessionData(userId);
-                        session.Login = _manager.getLogin(userId);
+                        session.Login = manager.getLogin(userId);
                         //   session.Roles = manager.getRoles(userId);
                         // session.Profili = manager.getProfili(userId);
                         // session.Groups = manager.getGroupSmall(userId);
@@ -312,7 +312,7 @@ namespace MyWebApplication.Controllers
                 }
                 finally
                 {
-                    _manager.mCloseConnection();
+                    manager.mCloseConnection();
                 }
 
                 //MyUsers.SimpleSessionPersister.Username = model.UserName;
@@ -395,22 +395,22 @@ namespace MyWebApplication.Controllers
             long userId;
             string passwordGenerata = "";
 
-            _manager.mOpenConnection();
+            manager.mOpenConnection();
 
             MyUsers.Models.MyUser u = null;
 
             try
             {
-                userId = _manager.getUserIdFromLoginAndEmail(model.Login, model.Email);
+                userId = manager.getUserIdFromLoginAndEmail(model.Login, model.Email);
 
                 if (userId == -1)
                 {
                     ModelState.AddModelError("", "La Login o l'email inserite non sono corrette");
                     return View(model);
                 }
-                passwordGenerata = _manager.resetPassword(userId);
+                passwordGenerata = manager.resetPassword(userId);
 
-                u = _manager.getUser(userId);
+                u = manager.getUser(userId);
             }
             catch (MyManagerCSharp.MyException ex)
             {
@@ -419,14 +419,15 @@ namespace MyWebApplication.Controllers
             }
             finally
             {
-                _manager.mCloseConnection();
+                manager.mCloseConnection();
             }
 
 
             if (u != null)
             {
 
-                MyManagerCSharp.MailMessageManager mail = new MyManagerCSharp.MailMessageManager(System.Configuration.ConfigurationManager.AppSettings["application.url"], System.Configuration.ConfigurationManager.AppSettings["application.name"]);
+                //MyManagerCSharp.MailMessageManager mail = new MyManagerCSharp.MailMessageManager(System.Configuration.ConfigurationManager.AppSettings["application.url"], System.Configuration.ConfigurationManager.AppSettings["application.name"]);
+                Annunci.ImmobiliareMailMessageManager mail = new Annunci.ImmobiliareMailMessageManager(System.Configuration.ConfigurationManager.AppSettings["application.url"], System.Configuration.ConfigurationManager.AppSettings["application.name"]);
 
                 mail.Subject = System.Configuration.ConfigurationManager.AppSettings["application.name"] + " - Generazione Nuova Password";
 
@@ -445,14 +446,21 @@ namespace MyWebApplication.Controllers
             }
 
 
-            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("Index", "Home");
+            return View("ResetPasswordCompleted", (object)u.email);
+
         }
+
 
 
         [Authorize]
         public ActionResult ChangePassword()
         {
             ChangePasswordModel model = new ChangePasswordModel();
+
+            model.carattariConsentiti = PasswordManager.PASSWORD_CHARS_SPECIAL;
+            model.catatteriVietati = PasswordManager.PASSWORD_CHARS_SPECIAL_DENY;
+
             return View(model);
         }
 
@@ -462,29 +470,37 @@ namespace MyWebApplication.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //ModelState.AddModelError("", "Login o email errati");
+                model.carattariConsentiti = PasswordManager.PASSWORD_CHARS_SPECIAL;
+                model.catatteriVietati = PasswordManager.PASSWORD_CHARS_SPECIAL_DENY;
                 return View(model);
             }
 
 
-            //MyUsers.UserManager manager = new UserManager("utenti");
-            _manager.mOpenConnection();
-
+            MyUsers.Models.MyUser utente = null;
 
             try
             {
+                manager.mOpenConnection();
+
+                utente = manager.getUser(MySessionData.UserId);
+                if (utente == null)
+                {
+                    throw new MyException("utente non trovato: " + MySessionData.UserId);
+                }
+
                 long test;
-                test = _manager.isAuthenticated((User.Identity as MyCustomIdentity).Login, model.OldPassword);
+                test = manager.isAuthenticated(MySessionData.Login, model.OldPassword);
 
-
-                if (test != (User.Identity as MyCustomIdentity).UserId)
+                if (test != MySessionData.UserId)
                 {
                     ModelState.AddModelError("", "Verificare la password inserita");
+                    model.carattariConsentiti = PasswordManager.PASSWORD_CHARS_SPECIAL;
+                    model.catatteriVietati = PasswordManager.PASSWORD_CHARS_SPECIAL_DENY;
                     return View(model);
                 }
 
+                manager.updatePassword(MySessionData.UserId, model.NewPassword);
 
-                _manager.updatePassword((User.Identity as MyCustomIdentity).UserId, model.NewPassword);
             }
             catch (MyManagerCSharp.MyException ex)
             {
@@ -494,16 +510,51 @@ namespace MyWebApplication.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", ex.Message);
+                    //errore non gestito!!
+                    string messaggioDiErrore = "Errore durante la procedura di login. Contattare l'amministratore di sistema.";
+                    sendMailExceptionAsync(ex, messaggioDiErrore);
+
+                    ModelState.AddModelError("", messaggioDiErrore);
                 }
+                model.carattariConsentiti = PasswordManager.PASSWORD_CHARS_SPECIAL;
+                model.catatteriVietati = PasswordManager.PASSWORD_CHARS_SPECIAL_DENY;
                 return View(model);
             }
             finally
             {
-                _manager.mCloseConnection();
+                manager.mCloseConnection();
             }
 
-            return RedirectToAction("Index", "Home");
+
+            if (utente != null)
+            {
+                Annunci.ImmobiliareMailMessageManager mail = new Annunci.ImmobiliareMailMessageManager(System.Configuration.ConfigurationManager.AppSettings["application.name"], System.Configuration.ConfigurationManager.AppSettings["application.url"]);
+                mail.Subject = System.Configuration.ConfigurationManager.AppSettings["application.name"] + " - Modifica password";
+
+                //MY-DEBUGG
+                if (!String.IsNullOrEmpty(System.Configuration.ConfigurationManager.AppSettings["mail.To.Ccn"]))
+                {
+                    mail.Bcc(System.Configuration.ConfigurationManager.AppSettings["mail.To.Ccn"]);
+                }
+
+
+                mail.Body = mail.getBodyUpdatePassword(utente.nome, utente.cognome, MyManagerCSharp.MailMessageManager.Lingua.IT);
+
+                try
+                {
+                    mail.To(utente.email.Trim());
+                    mail.send();
+                }
+                catch (Exception ex)
+                {
+                    sendMailExceptionAsync(ex, "Errore durante l'invio della mail per Modifica password con email: " + utente.email + " - login: " + utente.login);
+                }
+
+            }
+
+
+            //return RedirectToAction("Index", "Home");
+            return RedirectToAction("Manage");
         }
 
 
@@ -568,10 +619,10 @@ namespace MyWebApplication.Controllers
                 // Attempt to register the user
                 try
                 {
-                    _manager.mOpenConnection();
+                    manager.mOpenConnection();
 
                     long userId;
-                    userId = _manager.getUserIdFromLogin(model.login);
+                    userId = manager.getUserIdFromLogin(model.login);
 
                     if (userId != -1)
                     {
@@ -585,7 +636,7 @@ namespace MyWebApplication.Controllers
                     //Se si tratta di un'agenzia ....
                     if (model.tipoUtenza == "A")
                     {
-                        MyUsers.CustomerManager customerManager = new MyUsers.CustomerManager(_manager.mGetConnection());
+                        MyUsers.CustomerManager customerManager = new MyUsers.CustomerManager(manager.mGetConnection());
 
                         MyUsers.Models.MyCustomer c = new MyUsers.Models.MyCustomer();
                         c.ragioneSociale = model.ragioneSociale;
@@ -614,7 +665,7 @@ namespace MyWebApplication.Controllers
                     }
 
 
-                    newUserID = _manager.insert(u);
+                    newUserID = manager.insert(u);
 
 
                     if (newUserID != -1)
@@ -673,7 +724,7 @@ namespace MyWebApplication.Controllers
                             //'**********************************
                             //'*** Generazione nuova password ***
                             string passwordGenerata;
-                            passwordGenerata = _manager.resetPassword(newUserID);
+                            passwordGenerata = manager.resetPassword(newUserID);
                             mail.Subject = System.Configuration.ConfigurationManager.AppSettings["application.name"] + " - Generazione Nuova Password";
                             mail.Body = mail.getBodyResetPassword(model.nome, model.cognome, passwordGenerata, MyManagerCSharp.MailMessageManager.Lingua.IT);
                             mail.send();
@@ -729,7 +780,7 @@ namespace MyWebApplication.Controllers
                 }
                 finally
                 {
-                    _manager.mCloseConnection();
+                    manager.mCloseConnection();
                 }
             }
 
