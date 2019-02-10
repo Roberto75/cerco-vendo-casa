@@ -9,6 +9,9 @@
     <item data="10/11/2018"     owner="Rutigliano"  type="bug" >
       FIX reset password
     </item>
+    <item data="10/11/2018"     owner="Rutigliano"  type="bug" >
+      FIX filtro Agenzia-Privato
+    </item>
   </release>
 
   <release number="4.0.0.4" data="30/01/2019">

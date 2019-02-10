@@ -10,7 +10,7 @@ namespace MyWebApplication.Controllers
 {
     public class ImmobiliareController : MyBaseController
     {
-       
+
         public const int MaxWidthImage = 500;
         public const int MaxHeightImage = 500;
 
@@ -28,7 +28,7 @@ namespace MyWebApplication.Controllers
         [AllowAnonymous]
         public ActionResult Index(Annunci.Models.SearchImmobili model)
         {
-           // readRequestParameters(ref model);
+            // readRequestParameters(ref model);
 
 
 
@@ -37,7 +37,7 @@ namespace MyWebApplication.Controllers
                //&& Request.UrlReferrer.LocalPath.IndexOf("/Libri/Details") == -1
                && Request.UrlReferrer.LocalPath != "/Libri/Categorie")
             {
-                model = (Session[SESSSION_FILTER_SEARCH] as Annunci.Models.SearchImmobili );
+                model = (Session[SESSSION_FILTER_SEARCH] as Annunci.Models.SearchImmobili);
                 //model.filter = (Session[SESSSION_FILTER_SEARCH] as Annunci.Libri.Models.Libro);
                 Debug.WriteLine("Leggo i parametri di ricerca dalla sessione ...");
                 Debug.WriteLine("Filtro Days: " + model.days);
@@ -53,7 +53,33 @@ namespace MyWebApplication.Controllers
             Debug.WriteLine("Regione: " + model.filter.regioneId);
             Debug.WriteLine("Provincia: " + model.filter.provinciaId);
             Debug.WriteLine("Comune: " + model.filter.comuneId);
+            Debug.WriteLine("TipoAnnuncio: " + model.TipoAnnuncio);
 
+            Debug.WriteLine("FORM " + Request.Form["TipoAnnnuncio"]);
+
+
+
+            if (Request.Form["TipoAnnnuncio"] != null)
+            {
+                 model.TipoAnnuncio.Clear();
+
+                    if (Request.Form["TipoAnnnuncio"].Contains("Privato"))
+                    {
+                        model.TipoAnnuncio.Add(Annunci.Models.SearchImmobili.EnumTipoAnnuncio.Privato);
+                    }
+
+                    if (Request.Form["TipoAnnnuncio"].Contains("Agenzia"))
+                    {
+                        model.TipoAnnuncio.Add(Annunci.Models.SearchImmobili.EnumTipoAnnuncio.Agenzia);
+                    }
+                    
+            }
+
+
+
+
+            //Debug.WriteLine("TipoAnnuncioAgenzia: " + model.TipoAnnuncioAgenzia);
+            //Debug.WriteLine("TipoAnnuncioPrivato: " + model.TipoAnnuncioPrivato);
             try
             {
                 manager.mOpenConnection();
@@ -248,7 +274,7 @@ namespace MyWebApplication.Controllers
         public ActionResult GetMap(Annunci.Models.SearchImmobili model)
         {
 
-            readRequestParameters(ref model);
+            // readRequestParameters(ref model);
 
 
 
@@ -342,18 +368,18 @@ namespace MyWebApplication.Controllers
 
                 if (Request.Form["TipoAnnnuncio"] != null)
                 {
-                    model.TipoAnnuncio.Clear();
+                   // model.TipoAnnuncio.Clear();
 
-                    if (Request.Form["TipoAnnnuncio"].Contains("Privato"))
-                    {
-                        model.TipoAnnuncio.Add(Annunci.Models.SearchImmobili.EnumTipoAnnuncio.Privato);
-                    }
+                    /*    if (Request.Form["TipoAnnnuncio"].Contains("Privato"))
+                        {
+                            model.TipoAnnuncio.Add(Annunci.Models.SearchImmobili.EnumTipoAnnuncio.Privato);
+                        }
 
-                    if (Request.Form["TipoAnnnuncio"].Contains("Agenzia"))
-                    {
-                        model.TipoAnnuncio.Add(Annunci.Models.SearchImmobili.EnumTipoAnnuncio.Agenzia);
-                    }
-
+                        if (Request.Form["TipoAnnnuncio"].Contains("Agenzia"))
+                        {
+                            model.TipoAnnuncio.Add(Annunci.Models.SearchImmobili.EnumTipoAnnuncio.Agenzia);
+                        }
+                        */
                 }
             }
         }
@@ -818,9 +844,9 @@ namespace MyWebApplication.Controllers
         {
             Debug.WriteLine("trattativaId: " + id);
             Models.ModelTrattativa model = new Models.ModelTrattativa();
-            
+
             manager.mOpenConnection();
-                       
+
 
             try
             {
@@ -876,7 +902,7 @@ namespace MyWebApplication.Controllers
         }
 
 
-        
+
 
 
         #endregion

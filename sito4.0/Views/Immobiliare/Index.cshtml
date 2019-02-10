@@ -200,7 +200,13 @@
     </button>
 
 
+
+
+
+
     <div class="collapse mt-3" id="collapseFilter">
+
+
 
         <div class="row">
             <div class="col-md-4">
@@ -211,7 +217,7 @@
                         <option value="">---</option>
                         @foreach (MyManagerCSharp.Models.MyItem item in Model.comboRegioni)
                         {
-                        <option value="@item.Value" @(item.Value == Model.filter.regioneId.ToString() ? "selected" : "")>@item.Text</option>
+                            <option value="@item.Value" @(item.Value == Model.filter.regioneId.ToString() ? "selected" : "")>@item.Text</option>
                         }
                     </select>
                     <input type="hidden" id="regione" name="filter.regione" />
@@ -225,7 +231,7 @@
                         <option value="">---</option>
                         @foreach (MyManagerCSharp.Models.MyItem item in Model.comboProvince)
                         {
-                        <option value="@item.Value" @(item.Value == Model.filter.provinciaId ? "selected" : "")>@item.Text</option>
+                            <option value="@item.Value" @(item.Value == Model.filter.provinciaId ? "selected" : "")>@item.Text</option>
                         }
                     </select>
                     <input type="hidden" id="provincia" name="filter.provincia" />
@@ -239,7 +245,7 @@
                         <option value="">---</option>
                         @foreach (MyManagerCSharp.Models.MyItem item in Model.comboComuni)
                         {
-                        <option value="@item.Value" @(item.Value == Model.filter.comuneId ? "selected" : "")>@item.Text</option>
+                            <option value="@item.Value" @(item.Value == Model.filter.comuneId ? "selected" : "")>@item.Text</option>
                         }
                     </select>
                     <input type="hidden" id="comune" name="filter.comune" />
@@ -318,28 +324,21 @@
 
 
 
+
+
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend style="font-size: initial; font-weight: initial;">Tipo di annuncio:</legend>
 
-                        @foreach (var value in Enum.GetValues(typeof(Annunci.Models.SearchImmobili.EnumTipoAnnuncio)))
-                {
-                    //System.Diagnostics.Debug.WriteLine("{0,3}     {1}", (int)value, ((Annunci.Models.SearchModel.EnumTipoAnnuncio)value));
+                        <input name="TipoAnnnuncio" id="tipoAnnnuncioA" type="checkbox" value="Agenzia" @((Model.TipoAnnuncio.Contains(Annunci.Models.SearchImmobili.EnumTipoAnnuncio.Agenzia)) ? "checked" : "") />
+                        <label for="tipoAnnnuncioA">Agenzia</label>
+                        
 
-                    if (Model.TipoAnnuncio.Contains((Annunci.Models.SearchImmobili.EnumTipoAnnuncio)value))
-                    {
-                        chk = true;
-                    }
-                    else
-                    {
-                        chk = false;
-                    }
+                        <input name="TipoAnnnuncio" id="tipoAnnnuncioP" type="checkbox" value="Privato" @((Model.TipoAnnuncio.Contains(Annunci.Models.SearchImmobili.EnumTipoAnnuncio.Privato)) ? "checked" : "") />
+                        <label for="tipoAnnnuncioP">Privato</label>
 
-                    <input name="TipoAnnnuncio" id="TipoAnnnuncio @value" type="checkbox" @((chk) ? "checked" : "") value="@((Annunci.Models.SearchImmobili.EnumTipoAnnuncio)value)" />
-                    <label for="TipoAnnnuncio @value">@((Annunci.Models.SearchImmobili.EnumTipoAnnuncio)value)</label>
-                        }
                     </fieldset>
                 </div>
             </div>
@@ -413,13 +412,13 @@
                         wGrid.Column("date_added", header: "Data", format: p=>p.DataInserimento.ToShortDateString(), canSort :true),
                         wGrid.Column("Categoria" , "Categoria", canSort :false),
                         wGrid.Column ("Prezzo","Prezzo" , format: @<text> @item.prezzo.ToString("C")</text>, canSort : true) ,
-                        wGrid.Column ("MQ", canSort : true),
-                        wGrid.Column ("Dati", "Dati", format: item => MyHelper.getDatiImmobile((Annunci.Models.Immobile) @item.Value) , canSort : false) ,
-                        wGrid.Column ("Localita", "Localita", format: item =>  MyHelper.getLocalitaImmobileVerticale((Annunci.Models.Immobile) @item.Value) , canSort : false) ,
-                        wGrid.Column ("Photo", "Photo", format: item =>  MyHelper.getPhotoImmobile(@item.immobileId) , canSort : false) ,
-                        wGrid.Column ("Dettagli","Dettagli", format: @<text><a data-role="button" data-theme="a" data-icon="info" data-iconpos="right" href="@Url.Action("Details", "Immobiliare", new {id=item.immobileId})">Info</a></text>, canSort : false)
-                        }
-                )
+                                                                                                    wGrid.Column ("MQ", canSort : true),
+                                                                                                    wGrid.Column ("Dati", "Dati", format: item => MyHelper.getDatiImmobile((Annunci.Models.Immobile) @item.Value) , canSort : false) ,
+                                                                                                    wGrid.Column ("Localita", "Localita", format: item =>  MyHelper.getLocalitaImmobileVerticale((Annunci.Models.Immobile) @item.Value) , canSort : false) ,
+                                                                                                    wGrid.Column ("Photo", "Photo", format: item =>  MyHelper.getPhotoImmobile(@item.immobileId) , canSort : false) ,
+                                                                                                    wGrid.Column ("Dettagli","Dettagli", format: @<text><a data-role="button" data-theme="a" data-icon="info" data-iconpos="right" href="@Url.Action("Details", "Immobiliare", new {id=item.immobileId})">Info</a></text>, canSort : false)
+                                                                                                                                                                                                                                                                                           }
+                                                                                                                                                                                                                                                                                   )
 
 
             @{Html.RenderPartial("Paging", Model);}
@@ -428,9 +427,9 @@
 
         </div>
 
-                    }
+    }
 
-                }
+}
 
 
 
@@ -468,6 +467,10 @@
         $("#autore").val("");
         $("#isbn").val("");
         $("#radio-tutti").prop("checked", true);
+
+        $("#tipoAnnnuncioA").prop("checked", true);
+        $("#tipoAnnnuncioP").prop("checked", true);
+
         $("#comboTipo").val("");
         $("#comboCategoria").val("").change();
         //$("#comboSubCategoria").val("");
