@@ -93,7 +93,7 @@
     <Content Include="App_Data\forum.mdb" />
     <Content Include="App_Data\immobiliare.mdb" />
     <Content Include="App_Data\log.mdb" />
-    <Content Include="App_Data\RegioniProvinceComuni.mdb" />
+    <Content Include="App_Data\RegioniProvinceComuni-20190220.mdb" />
     <Content Include="App_Data\rubrica.mdb" />
     <Content Include="App_Data\utenti.mdb" />
     <Content Include="Content\Images\1dot.gif" />
