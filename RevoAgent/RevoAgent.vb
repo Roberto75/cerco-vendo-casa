@@ -289,7 +289,7 @@ Public Class RevoAgent
                                 ._sourceId = Annunci.Models.Immobile.TipoSourceId.RevoAgent
                                 ._externalId = node.Item("AgenziaId").FirstChild.Value & "-" & node.Item("AnnuncioId").FirstChild.Value
 
-                                If ._externalId = "1593-363" _
+                                If ._externalId = "570-1580" _
                                         OrElse ._externalId = "1593-366" _
                                         OrElse ._externalId = "1593-367" Then
                                     Dim debugg As String
@@ -342,16 +342,51 @@ Public Class RevoAgent
                                     '._provinciaId = Long.Parse(dt.Rows(0)("id").ToString)
                                     ._provinciaId = dt.Rows(0)("id").ToString
 
-                                    dt = _managerRegioneProvinciaComune.getComuneByCodiceISTAT(node.Item("Cod_Istat").FirstChild.Value)
-                                    If dt.Rows.Count <> 1 Then
-                                        Throw New MyManager.ManagerException("Codice ISTAT non valido: " & node.Item("Cod_Istat").FirstChild.Value)
+
+                                    If Not (node.Item("Cod_Istat").FirstChild Is Nothing) Then
+                                        'ricerca del comune tramite codice istat
+                                        dt = _managerRegioneProvinciaComune.getComuneByCodiceISTAT(node.Item("Cod_Istat").FirstChild.Value)
+                                        If dt.Rows.Count <> 1 Then
+                                            Throw New MyManager.ManagerException("Codice ISTAT non valido: " & node.Item("Cod_Istat").FirstChild.Value)
+                                        End If
+
+                                    Else
+                                        'ricerca tramite il nome
+                                        Debug.WriteLine("Citta " & node.Item("Citta").FirstChild.Value)
+
+                                        dt = _managerRegioneProvinciaComune.getComuneByValore(node.Item("Citta").FirstChild.Value)
+
+                                        If dt.Rows.Count = 0 Then
+                                            Throw New MyManager.ManagerException("Comune non trovato: " & node.Item("Citta").FirstChild.Value)
+                                        End If
+
+                                        If dt.Rows.Count > 1 Then
+                                            Throw New MyManager.ManagerException("Comune non valido: " & node.Item("Citta").FirstChild.Value)
+                                        End If
+
                                     End If
 
                                     ._comune = dt.Rows(0)("valore").ToString
                                     '._comuneId = Long.Parse(dt.Rows(0)("id").ToString)
                                     ._comuneId = dt.Rows(0)("id").ToString
 
-                                    If node.Item("Citta").FirstChild.Value <> ._comune Then
+                                    If ._comune = "Casciana Terme" Then
+                                        ._comune = "Casciana Terme Lari"
+                                    ElseIf ._comune = "Crespina" Then
+                                        ._comune = "Crespina Lorenzana"
+                                    ElseIf ._comune = "Lonato del Garda" Then
+                                        node.Item("Citta").FirstChild.Value = "Lonato del Garda"
+                                    End If
+
+                                    '24/02/2019
+                                    'ci sono diversi casi come questi allora faccio un confronto sostituendo - con ''
+                                    'ElseIf ._comune = "Ronzo-Chienis" Then
+                                    '._comune = "Ronzo Chienis"
+                                    'ElseIf ._comune = "Uggiate-Trevano" Then
+                                    '   ._comune = "Uggiate Trevano"
+                                    'ElseIf ._comune = "Calatafimi-Segesta" Then
+                                    '   ._comune = "Calatafimi Segesta"
+                                    If node.Item("Citta").FirstChild.Value.Replace("-", " ") <> ._comune.Replace("-", " ") Then
                                         _message &= "Warning: " & node.Item("Citta").FirstChild.Value & " <> " & ._comune & " (codice istat: " & ._comuneId & ") " & vbCrLf
                                     End If
 
